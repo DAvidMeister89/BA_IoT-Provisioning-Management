@@ -1,4 +1,6 @@
 CoAP
 MQTT
 HTTP
+Websockets
 XMPP
+LWM2M
