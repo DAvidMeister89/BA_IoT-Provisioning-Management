@@ -10,6 +10,7 @@
 *.fot
 *.cb
 *.cb2
+documentation.pdf
 
 ## Intermediate documents:
 *.dvi
@@ -22,4 +23,3 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
-documentation.pdf
