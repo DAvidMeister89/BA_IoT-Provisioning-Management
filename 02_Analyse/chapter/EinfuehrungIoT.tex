@@ -6,6 +6,7 @@ Mit \glqq Internet of Things\grqq{} (IoT) wird eine andere Philosophie verfolgt.
 \subsection{Smart Objects}
 Smart Objects oder auch \glqq Things\grqq{} ergänzen das herkömmliche Internet um eine Vielzahl neuartiger Teilnehmer. Man ist versucht, die mit dem Internet erschaffene virtuelle Welt mit Objekten der tatsächlichen \glqq echten\grqq{} Welt zu verbinden. Der Begriff \glqq Smart\grqq{} ist seit der Erscheinung des iPhones weltweit bekannt. Er beschreibt die Fähigkeit eines Objekts mit dem Internet zu kommunizieren. 
 
+
 Während Smartphones oder Smart-TVs noch als herkömmliche Internet Terminals angesehen werden können, so erweitern die Smart Objects das bisherige Internet um eine neue Art von Teilnehmer. Smart Objects lassen sich wie folgt beschreiben:
 \begin{itemize}
 \item	haben eine physikalische Repräsentation mit Eigenschaften wie Form und Grösse
@@ -19,11 +20,24 @@ Während Smartphones oder Smart-TVs noch als herkömmliche Internet Terminals an
 Der letzte Punkt in der oberen Definition beschreibt den tatsächlichen Unterschied zu herkömmlichen Devices im Internet. Konzeptionell liegt bei IoT der Fokus mehr auf Daten und Informationen von physikalischen Objekten als bei Punkt-zu-Punkt Kommunikation von Terminals \cite{MiorandiSicariPellegriniChlamtac12}.
 
 \section{Einsatzgebiete}
-''Internet of Things'' hat extrem viele Einsatzmöglichkeiten und wir stehen erst am Anfang. Es werden immer neue Einsatzbereich entdeckt und vorhandene erweitert und optimiert. Um die Einsatzmöglichkeiten aufzuzeigen, wird hier das Beispiel ''Gesundheitsvorsorge'' genauer gezeigt.
-\subsection{Zuhause}
-\subsection{Beim Doktor}
+Das ''Internet of Things'' hat viele Einsatzmöglichkeiten und wir stehen erst am Anfang. Es werden immer neue Einsatzbereich entdeckt und vorhandene optimiert und erweitert. Um die Einsatzmöglichkeiten aufzuzeigen, wird hier das Beispiel ''Gesundheitsvorsorge'' genauer gezeigt.
+\subsection{Allgemein}
+Die Gesundheitsvorsorge ist ein riesiger Bereich, welche alle Menschen betrifft und enorme Kosten verursacht. Heutzutage wird noch sehr viel per Hand gemacht. In naher Zukunft wird sich das ändern und das Internet der Dinge wird immer wichtiger, um die bestmögliche Behandlung jedes Patienten sicherzustellen.
+\subsection{Patient}
+Es beginnt bereits mit dem Patient, welcher noch keine Beschwerden hat. Hierfür gibt es bereits mehrere Fitnessgeräre, welche das Gewicht überwachen, die Schritte mitzählen oder den Puls über den gesamten Tag messen.
 \subsection{Im Spital}
 \subsection{•}
+
+Fall Detection
+Medical Fridges
+Sportsmen Care
+Patients Surveillance / Remote monitoring of patient’s health statistics
+Ultraviolet Radiation
+Remote device configuration and tuning
+Hospital asset management
+Predictive device maintenance
+
+
 \section{Sensortypen}
 Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es gibt viele verschiedene Typen von Sensoren, welche unterschiedlichste Daten liefern und man muss daher wissen, wie man mit dem jeweiligen Sensortyp umgeht. 
 \begin{figure}[H]
@@ -31,30 +45,115 @@ Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es g
 \includegraphics[scale=0.35]{images/sensors.jpg}
 \caption{Sensortypen\cite{SensorImage}}
 \end{figure}
-\subsection{Temperature}
-Temperatursensoren werden in vielen Gebieten eingesetzt. Häufig wird dieser Sensortyp zur Überwachung von Gebäuden eingesetzt, oder hilft bei maschinell hergestellten Esswaren, die richtige Temperatur zu halten. Auch kann ein Bauer diese Sensoren verwenden, um die Bodentemperatur zu Überwachen. So kann man effizienter und gewinnbringender Arbeiten, ohne selber Messungen durchzuführen. 
-\subsection{Acceleration/Tilt}
+
+
+\subsection{Temperature}%DONE
+Temperatursensoren werden in vielen Gebieten eingesetzt. Häufig wird dieser Sensortyp zur Überwachung von Gebäuden eingesetzt, oder hilft bei maschinell hergestellten Esswaren, die richtige Temperatur zu halten. Auch kann ein Bauer diese Sensoren verwenden, um die Bodentemperatur zu Überwachen. So kann man effizienter und gewinnbringender Arbeiten, ohne selber Messungen durchzuführen.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Smarte Heizungsteuerungen in einem Haushalt
+\item	Wetterstationen
+\end{itemize}
+
+
+\subsection{Acceleration/Tilt}%DONE
 Beschleunigungs- und Lagesensoren hat wohl jeder in seiner Hosentasche. Nahezu alle neuen Smartphones haben solche eingebaut. Auch in der Autoindustrie findet man solche sehr häufig. Durch solche Sensoren kann man viele Verschiedene Daten erhalten. So kann man zum Beispiel Bewegungsprofile einer Person erstellen und den Fitnesslevel bestimmen.
-\subsection{Acoustic/Sound/Vibration}
-Nicht nur in der Musikbranche sind Akustik- und Soundsensoren sehr wichtig. So wird auch der Lärm in einem Gebiet oder in einer Stadt gemessen, um Verbesserungen der Lebensqualität zu erreichen. Sehr wichtig sind auch die Vibrationssensoren, welche wichtige Daten zu Unterwassererdbeben senden. So können Tsunamis immer früher erkannt werden und retten Leben. 
-\subsection{Chemical/Gas}
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Schrittzähler (z.B in Smart Watches)
+\end{itemize}
+
+
+\subsection{Acoustic/Sound/Vibration}%DONE
+Nicht nur in der Musikbranche sind Akustik- und Soundsensoren sehr wichtig. So wird auch der Lärm in einem Gebiet oder in einer Stadt gemessen, um Verbesserungen der Lebensqualität zu erreichen. Sehr wichtig sind auch die Vibrationssensoren, welche wichtige Daten zu Unterwassererdbeben senden. So können Tsunamis immer früher erkannt werden und retten Leben.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Erdbebenwarnsysteme
+\item	Sprachsteuerungen
+\end{itemize}
+
+
+\subsection{Chemical/Gas}%DONE
 Chemikaliensensoren werden häufig in den Städten mit viel Verkehrsaufkommen eingesetzt. Dadurch wird die Luftqualität bestimmt. Auch in Laboren ist dies ein wichtiger Sensor, um die Qualität oder Reinheit von Gasen zu messen.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Smart City Luftüberwachung
+\item	Überwachung von gasbetriebenen Geräten
+\end{itemize}
+
+
 \subsection{Electric/Magnetic}
+Magnetische Sensoren könnten in verschiedenen Geräten verbaut werden. Zum Beispiel smarte Türschlösser könnten via solchen Sensoren geschlossen oder geöffnet werden. Auch Elektrizitätswerke können diverser solche Sensoren verwenden, um die Systeme zu überwachen.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Smarte Schlösser
+\item	Stromüberwachung
+\end{itemize}
 
-\subsection{Flow}
+
+\subsection{Flow}%DONE
 Für die Überwachung von Flüssen oder Wasserleitungen werden Flusssensoren verwendet. So können zum Beispiel Wasserversorger den Verbrauch jedes Haushalts über das Internet messen lassen und müssen nicht vor Ort die Zähler ablesen. Oder auch für die Überwachung von Flüssen kann dieser Sensor verwendet werden. So wird man bei zu schnellen und zu vielem Wasser vor Überschwemmungen gewarnt.
-\subsection{Force/Load/Torque/Strain/Pressure}
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Smarte Wasserversorgungen
+\item	Überschwemmungsschutz
+\end{itemize}
 
-\subsection{Humidity/Moisture}
+
+\subsection{Force/Load/Torque/Strain/Pressure}%DONE
+Im Fitnessbereich gibt es schon seit Jahren mehrere Körperwaagen, welche solche Sensoren verwenden. Man wird gewogen und gleichzeitig sendet das Gerät allerlei Daten an den Cloud-Dienst. Auch Parksysteme oder automatische Wiegesysteme in Lagern sind Beispiele, welche bereits im Einsatz sind. Diese Sensoren sind vielfältig einsetzbar.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Wiegesysteme/Körperwaage
+\item	Parksysteme
+\end{itemize}
+
+
+\subsection{Humidity/Moisture}%DONE
 Ein wichtiger Bestandteil der Luftqualität ist auch die Luftfeuchtigkeit. Diese wird mit diesem Typ gemessen. So können Smart Buildings die Luftfeuchtigkeit laufend messen und immer wieder optimieren. Auch in der Landwirtschaft kann so eine Automation eingeführt werden, damit die Erde immer optimal bewässert ist.
-\subsection{Leaks/Levels}
-Lecks- und Levelsensoren sind zum Beispiel in der Landwirtschaft notwendig. Die Landwirtschaft benötigt  viel Wasser und man möchte unnötige Lecks vermeiden. Ein weiterer wichtiger Einsatzbereich ist die Überwachung von Flüssigkeitsständen, zum Beispiel bei Staudämmen oder in Lagersystemen.
-\subsection{Machine Vision / Optical Ambient Light}
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Bewässerungsanlagen
+\item	Pflanzensensoren
+\end{itemize}
 
-\subsection{Motion/Velocity/Displacement}
 
-\subsection{Position/Presence/Proximity}
+\subsection{Leaks/Levels}%DONE
+Lecks- und Levelsensoren sind zum Beispiel in der Landwirtschaft notwendig. Die Landwirtschaft benötigt  viel Wasser und man möchte unnötige Lecks vermeiden. Ein weiterer wichtiger Einsatzbereich ist die Überwachung von Flüssigkeitsständen, zum Beispiel bei Staudämmen oder in Lagersystemen.\\
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Leitungsüberwachungen
+\item	Lagerverwaltungen
+\end{itemize}
+
+
+\subsection{Machine Vision / Optical Ambient Light}%DONE
+Machine Vision ist ein immer wichtig werdender Sensor. Durch diese kann man den Dingen das Sehen ''lehren''. So sind automatische Eintrittkontrollen möglich. Auch in den SmartCars kommen diese Sensoren zum Einsatz. Da werden durch die Sensoren die Fussgänger, die Fahrbahn oder auch andere Autos erkannt. Bei Optical Ambient Light geht es um Sensoren, welche die Umgebungsbeleuchtung messen und diese Optimal anpassen. So gibt es schon mehrere smarte Leuchtmittel, welche so über das Internet eingestellt werden können.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	SmartCars
+\item	Eintrittskontrollen
+\end{itemize}
+
+
+\subsection{Motion/Velocity/Displacement}%DONE
+Bewegungsensoren sind praktische Helfer bei Sicherheitssystemen. Eine zentrale Überwachung von mehreren Gebäuden ist so problemlos möglich. Bei der Pflege von Rollstuhlfahrer wäre zum Beispiel auch eine Falldetektion möglich. Das zentrale Pflegezentrum hätte so eine schnelle Meldung über Unfälle und könnte mehrere Personen überwachen und betreuen.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Sicherheitsanlagen
+\item	Verkehrsüberwachung
+\end{itemize}
+
+
+\subsection{Position/Presence/Proximity}%DONE
 Immer wichtiger wird auch dieser Typ von Sensoren. Durch die Bestimmung von Distanzen oder der Position in einem Raum, ergeben sich viele Einsatzmöglichkeiten. Ein bekanntes Beispiel ist der Abstandssensor bei Autos, um Parkschäden oder Auffahrunfälle zu vermeiden. Oder auch die Gebäudeüberwachung profitiert durch solche Sensoren, da man mehrere Gebäude zentral Überwachen kann.
+\subsubsection{Bespielgeräte}
+\begin{itemize}
+\item	Smarte Parkhäuse
+\item	SmartCars
+\end{itemize}
+
+
 \section{Kommunikation}
 \subsection{HTTP}
 \subsection{Weitere Protokolle}
