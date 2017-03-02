@@ -23,3 +23,7 @@ documentation.pdf
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+
+*.bbl
+*.blg
