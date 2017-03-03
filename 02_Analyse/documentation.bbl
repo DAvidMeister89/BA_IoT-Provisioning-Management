@@ -1,5 +1,19 @@
 \begin{thebibliography}{1}
 
+\bibitem{IoTOverview}
+micrium.com.
+\newblock Devices \& networks.
+\newblock
+  https://www.micrium.com/wp-content/uploads/2014/03/internet-of-things.png,
+  2017.
+
+\bibitem{IoTWSN}
+micrium.com.
+\newblock Devices \& networks.
+\newblock
+  https://www.micrium.com/wp-content/uploads/2014/03/wireless-sensor-network.png,
+  2017.
+
 \bibitem{MiorandiSicariPellegriniChlamtac12}
 Daniele Miorandi, Sabrina Sicari, Francesco~De Pellegrini, and Imrich Chlamtac.
 \newblock Internet of things: Vision, applications and research challenges.

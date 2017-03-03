@@ -46,7 +46,6 @@ Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es g
 \caption{Sensortypen\cite{SensorImage}}
 \end{figure}
 
-
 \subsection{Temperature}%DONE
 Temperatursensoren werden in vielen Gebieten eingesetzt. Häufig wird dieser Sensortyp zur Überwachung von Gebäuden eingesetzt, oder hilft bei maschinell hergestellten Esswaren, die richtige Temperatur zu halten. Auch kann ein Bauer diese Sensoren verwenden, um die Bodentemperatur zu Überwachen. So kann man effizienter und gewinnbringender Arbeiten, ohne selber Messungen durchzuführen.
 \subsubsection{Bespielgeräte}
@@ -160,7 +159,32 @@ Internet of Things verbindet Objekte aus der realen Welt miteinander. Um Objekte
 Um unterschiedliche Bedürfnisse abzudecken, sind verschiedene Arten der Kommunikation entstanden. Die mit Sensoren ausgestatteten Geräte können sich in ihrer Weise, mit dem Internet zu kommunizieren stark unterscheiden.
 
 \subsection{Modelle}
-
+\subsubsection{Device-to-Device}
+Beim Device-to-Device Kommunikationsmodell kommunizieren mehrere Teilnehmer direkt miteinander (Peer-to-Peer). In diesem Szenario kommunizieren unterschiedliche Glühbirnen drahtlos mit einem Lichtschalter. Kommunikation mit dem Internet ist nicht zwingend notwendig. Eine grosse Herausforderung besteht darin, dass mehrere Teilnehmer unterschiedlicher Hersteller miteinander interagieren können. Dazu müssen die Teilnehmer denselben Protokoll-Stack implementieren. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-device.png}
+\caption{Device-to-Device Kommunikation}
+\end{figure}
+\subsubsection{Device-to-Cloud}
+Die Gerätehersteller bieten für ihre End-User Cloud-Dienste im Internet an. Die Sensorgeräte kommunizieren direkt End-to-End über TCP/IP mit dem jeweiligen Cloud-Dienst. Die Benutzer können über eine Mobile App oder eine Webseite auf die jeweiligen Sensordaten zugreifen. Häufig wird aufgrund proprietärer Kommunikationsprotokolle ein Vendor-lock-in betrieben. Dies erschwert die Interoperabilität von Sensoren unterschiedlicher Hersteller \caption{RoseEldridgeChapin15}.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-cloud.png}
+\caption{Device-to-Cloud Kommunikation}
+\end{figure}
+\subsubsection{Device-to-Gateway}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-gateway.png}
+\caption{Device-to-Gateway Kommunikation}
+\end{figure}
+\subsubsection{Back-End Data-Sharing}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/backend-data-sharing.png}
+\caption{Backend-Data-Sharing Kommunikation}
+\end{figure}
 \subsection{Architektur}
 Man könnte ein IoT System in vier wichtige Gruppen unterteilen: [micrium]
 \begin{itemize}
@@ -169,9 +193,11 @@ Man könnte ein IoT System in vier wichtige Gruppen unterteilen: [micrium]
 \item das Internet
 \item Back-End Services (z.B. Cloud Services)
 \end{itemize}
-\\
+\begin{figure}[H]
+\centering
 \includegraphics[scale=0.8]{images/iot_system_overview_by_micrium.PNG}
-\\
+\caption{IoT Systemübersicht\cite{IoTOverview}}
+\end{figure}
 Grundsätzlich scheint die Architektur vertraut. Smart Objects kommunizieren über ein lokales Netzwerk mit Diensten im Internet.
 
 Bisher konnten Geräte wie Laptops, PCs und Smartphones beinahe einheitlich mit dem Internet verbunden werden; entweder verkabelt über Ethernet oder drahtlos über ein lokales WLAN oder mobile Netze wie UMTS und LTE. Die Endgeräte verfügten jeweils über viel Rechenleistung, Speicher und ein leistungsfähiges Betriebssystem mit einem vollständig implementierten TCP/IP Stack. 
@@ -179,9 +205,9 @@ Bisher konnten Geräte wie Laptops, PCs und Smartphones beinahe einheitlich mit 
 In einem IoT System muss man von einer grossen Anzahl an Geräten mit Sensoren ausgehen. Diese Geräte verfügen meist über eine extrem niedrige Bandbreite, wenig Speicher und Rechenleistung [youtube].
 \subsection{Wireless Sensor Netzwerke}
 Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich verstreut sind, bietet sich ein Wireless Sensor Network (WSN) an. In einem WSN werden die Sensoren nicht direkt mit dem Internet verbunden. Die Daten werden drahtlos von Teilnehmer zu Teilnehmer versendet. Muss ein Datenpaket in ein entferntes Netzwerk wie das Internet, so wird ein Gateway oder Edge Node benötigt.
-\\
+\begin{figure}[H]
+\centering
 \includegraphics[scale=0.8]{images/iot_wsn_lan_overview_by_micrium.PNG}
-\\
+\caption{IoT WSN\cite{IoTWSN}}
+\end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
-\section{Security Aspekte}
-
