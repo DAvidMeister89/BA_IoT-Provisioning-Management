@@ -19,9 +19,7 @@ Während Smartphones oder Smart-TVs noch als herkömmliche Internet Terminals an
 
 Der letzte Punkt in der oberen Definition beschreibt den tatsächlichen Unterschied zu herkömmlichen Devices im Internet. Konzeptionell liegt bei IoT der Fokus mehr auf Daten und Informationen von physikalischen Objekten als bei Punkt-zu-Punkt Kommunikation von Terminals \cite{MiorandiSicariPellegriniChlamtac12}.
 
-
 \newpage
-
 
 \section{Einsatzgebiete}
 Das ''Internet of Things'' hat viele Einsatzmöglichkeiten und wir stehen erst am Anfang. Es werden immer neue Einsatzbereich entdeckt und vorhandene optimiert und erweitert. Um die Einsatzmöglichkeiten aufzuzeigen, wird hier das Beispiel ''Gesundheitsvorsorge'' genauer gezeigt.
@@ -157,41 +155,8 @@ Immer wichtiger wird auch dieser Typ von Sensoren. Durch die Bestimmung von Dist
 \item	SmartCars
 \end{itemize}
 
-
-\section{Kommunikation}
-Internet of Things verbindet Objekte aus der realen Welt miteinander. Um Objekte aus der Realität in die virtuelle Welt zu transformieren, werden Sensoren verwendet. Es gilt nun, diese Sensoren mit dem Internet zu verbinden.
-
-Um unterschiedliche Bedürfnisse abzudecken, sind verschiedene Arten der Kommunikation entstanden. Die mit Sensoren ausgestatteten Geräte können sich in ihrer Weise, mit dem Internet zu kommunizieren stark unterscheiden.
-
-\subsection{Modelle}
-\subsubsection{Device-to-Device}
-Beim Device-to-Device Kommunikationsmodell kommunizieren mehrere Teilnehmer direkt miteinander (Peer-to-Peer). In diesem Szenario kommunizieren unterschiedliche Glühbirnen drahtlos mit einem Lichtschalter. Kommunikation mit dem Internet ist nicht zwingend notwendig. Eine grosse Herausforderung besteht darin, dass mehrere Teilnehmer unterschiedlicher Hersteller miteinander interagieren können. Dazu müssen die Teilnehmer denselben Protokoll-Stack implementieren. 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.8]{images/device-to-device.png}
-\caption{Device-to-Device Kommunikation}
-\end{figure}
-\subsubsection{Device-to-Cloud}
-Die Gerätehersteller bieten für ihre End-User Cloud-Dienste im Internet an. Die Sensorgeräte kommunizieren direkt End-to-End über TCP/IP mit dem jeweiligen Cloud-Dienst. Die Benutzer können über eine Mobile App oder eine Webseite auf die jeweiligen Sensordaten zugreifen. Häufig wird aufgrund proprietärer Kommunikationsprotokolle ein Vendor-lock-in betrieben. Dies erschwert die Interoperabilität von Sensoren unterschiedlicher Hersteller \cite{RoseEldridgeChapin15}.
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.8]{images/device-to-cloud.png}
-\caption{Device-to-Cloud Kommunikation}
-\end{figure}
-\subsubsection{Device-to-Gateway}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.8]{images/device-to-gateway.png}
-\caption{Device-to-Gateway Kommunikation}
-\end{figure}
-\subsubsection{Back-End Data-Sharing}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.8]{images/backend-data-sharing.png}
-\caption{Backend-Data-Sharing Kommunikation}
-\end{figure}
-\subsection{Architektur}
-Man könnte ein IoT System in vier wichtige Gruppen unterteilen: [micrium]
+\section{Architektur}
+Man könnte ein IoT System in vier wichtige Gruppen unterteilen: [IoTOverview]
 \begin{itemize}
 \item Dinge (things)
 \item das lokale Netzwerk
@@ -216,3 +181,47 @@ Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich 
 \caption{IoT WSN\cite{IoTWSN}}
 \end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
+
+
+\section{Kommunikationsmodelle}
+Internet of Things verbindet Objekte aus der realen Welt miteinander. Um Objekte aus der Realität in die virtuelle Welt zu transformieren, werden Sensoren verwendet. Es gilt nun, diese Sensoren mit dem Internet zu verbinden.
+
+Um unterschiedliche Bedürfnisse abzudecken, sind verschiedene Arten der Kommunikation entstanden. Die mit Sensoren ausgestatteten Geräte können sich in ihrer Weise, mit dem Internet zu kommunizieren stark unterscheiden.
+
+\subsection{Device-to-Device}
+Beim Device-to-Device Kommunikationsmodell kommunizieren mehrere Teilnehmer direkt miteinander (Peer-to-Peer). In diesem Szenario kommunizieren unterschiedliche Glühbirnen drahtlos mit einem Lichtschalter. Kommunikation mit dem Internet ist nicht zwingend notwendig. Eine grosse Herausforderung besteht darin, dass mehrere Teilnehmer unterschiedlicher Hersteller miteinander interagieren können. Dazu müssen die Teilnehmer denselben Protokoll-Stack implementieren. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-device.png}
+\caption{Device-to-Device Kommunikation}
+\end{figure}
+\subsection{Device-to-Cloud}
+Die Gerätehersteller bieten für ihre End-User Cloud-Dienste im Internet an. Die Sensorgeräte kommunizieren direkt End-to-End über TCP/IP mit dem jeweiligen Cloud-Dienst. Die Benutzer können über eine Mobile App oder eine Webseite auf die jeweiligen Sensordaten zugreifen. Häufig wird aufgrund proprietärer Kommunikationsprotokolle ein Vendor-lock-in betrieben. Dies erschwert die Interoperabilität von Sensoren unterschiedlicher Hersteller \cite{RoseEldridgeChapin15}.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-cloud.png}
+\caption{Device-to-Cloud Kommunikation}
+\end{figure}
+\subsection{Device-to-Gateway}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/device-to-gateway.png}
+\caption{Device-to-Gateway Kommunikation}
+\end{figure}
+\subsection{Back-End Data-Sharing}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/backend-data-sharing.png}
+\caption{Backend-Data-Sharing Kommunikation}
+\end{figure}
+
+\section{Kommunikationsprotokolle}
+
+\subsection{Request/Response}
+\subsubsection{HTTP}
+\subsubsection{CoAP}
+\subsubsection{LWM2M}
+\subsection{Publish/Subscribe}
+\subsubsection{MQTT}
+\subsubsection{AMQP}
+\subsubsection{XMPP}
