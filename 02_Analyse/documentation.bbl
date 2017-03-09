@@ -20,6 +20,20 @@ Daniele Miorandi, Sabrina Sicari, Francesco~De Pellegrini, and Imrich Chlamtac.
 \newblock http://www.sciencedirect.com/science/article/pii/S1570870512000674,
   2012.
 
+\bibitem{Obermaier14}
+Dominik Obermaier.
+\newblock Internet der dinge: Leichtgewichtiges messaging.
+\newblock
+  https://www.informatik-aktuell.de/betrieb/netzwerke/internet-der-dinge-protokolle-verfahren-und-integration-von-mqtt.html,
+  2014.
+
+\bibitem{Obermaier15}
+Dominik Obermaier.
+\newblock Iot-protokolldschungel – ein wegweiser.
+\newblock
+  https://www.informatik-aktuell.de/betrieb/netzwerke/iot-protokolldschungel-ein-wegweiser.html,
+  2015.
+
 \bibitem{SensorImage}
 Postscapes.
 \newblock Internet of things infographic.
@@ -38,5 +52,11 @@ Karen Rose, Scott Eldridge, and Lyman Chapin.
 \newblock
   https://www.internetsociety.org/sites/default/files/ISOC-IoT-Overview-20151221-en.pdf,
   2015.
+
+\bibitem{ReqRes}
+servicedesignpatterns.com.
+\newblock Request/response.
+\newblock http://www.servicedesignpatterns.com/Images/RequestResponse.jpg,
+  2011.
 
 \end{thebibliography}
