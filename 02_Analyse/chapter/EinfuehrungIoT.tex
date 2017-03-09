@@ -24,19 +24,23 @@ Der letzte Punkt in der oberen Definition beschreibt den tatsächlichen Untersch
 \section{Einsatzgebiete}
 Das ''Internet of Things'' hat viele Einsatzmöglichkeiten und wir stehen erst am Anfang. Es werden immer neue Einsatzbereich entdeckt und vorhandene optimiert und erweitert. Um die Einsatzmöglichkeiten aufzuzeigen, wird hier das Beispiel ''Gesundheitsvorsorge'' genauer gezeigt.
 \subsection{Allgemein}
-Die Gesundheitsvorsorge ist ein riesiger Bereich, welche alle Menschen betrifft und enorme Kosten verursacht. Heutzutage wird noch sehr viel manuell erledigt. In naher Zukunft wird sich das ändern und das Internet der Dinge wird immer wichtiger, um die bestmögliche Behandlung jedes Patienten sicherzustellen. IoT bringt noch viele weitere Verbesserungen und in Zukunft werden immer neue Einsatzgebiete gefunden. Hier wird nur ein kleiner Teil beschrieben. 
-\subsection{Im Alltag}
+Die Gesundheitsvorsorge ist ein riesiger Bereich, welche alle Menschen betrifft und enorme Kosten verursacht. Heutzutage wird noch sehr viel per Hand gemacht. In naher Zukunft wird sich das ändern und das Internet der Dinge wird immer wichtiger, um die bestmögliche Behandlung jedes Patienten sicherzustellen.
+\subsection{Patient}
 \subsubsection{Selbstüberwachung}
-In den letzten paar Jahre ist die Selbstüberwachung zu einem riesigen Thema geworden. Firmen wie Apple oder Fitbit haben diesen Bereich stark gefördert. So gibt es heute schon für mehrere Körperdatensensoren, die alles Überwachen. Ein Beispiel dafür sind die Smartwatches. Diese können bereits heute den Puls rund um die Uhr überwachen oder sie zählen die Schritte mit. So kann jeder sein eigenes Fitnessprofil von sich erstellen.
-Ein weiteres Beispiel findet man bei Patienten, welche Medikamente verabreicht bekommen. Da Medikamente häufig vergessen werden, gibt es kluge Medikamentenspender, welche den Patienten benachrichtigen, wenn dieser die Medikamente nicht genommen hat.
+In den letzten paar Jahre ist die Selbstüberwachung zu einem riesigen Thema geworden. Firmen wie Apple oder Fitbit haben diesen Bereich stark gefördert. So gibt es heute schon für mehrere Körperdaten Sensoren, die alles Überwachen. Ein Beispiel dafür sind die Smartwatches, welche den Puls, die gelaufenen Schritte oder auch 
+Sportsmen Care
 \subsubsection{Fernüberwachung}
-Neben der Selbstüberwachung gibt es auch noch die Fernüberwachung. Dabei wird der Patient vom Pflegepersonal überwacht und bei kritischen Situationen kann sofort gehandelt werden. Für Rollstuhlfahrer oder Senioren gibt es zum Beispiel ein Falldetektor. Falls der Patient umfällt, reagiert der Sensor und meldet diesen Unfall direkt an das Pflegepersonal. So kann schnell reagiert und dem Patienten geholfen werden. Auch das Überwachen der Patientenwerte kann so über das Internet sichergestellt werden. Durch eine kontinuierlich Abfrage der Werte, ist die Reaktionszeit enorm kleiner, als beim manuellen messen. Hierfür benötigt man Pflegepersonal vor Ort.
+Patients Surveillance / Remote monitoring of patient’s health statistics
 \subsection{Im Spital}
 \subsubsection{Patientenzimmer}
-Durch die komplette Überwachung des Patienten in seinem Zimmer, verkürzt sich die Reaktionszeit enorm. Der Patient wird zwar schon überwacht, aber durch die Anbindung an das Internet wären weitere Verbesserungen möglich. So kann man bei gewissen Problemen nicht nur das Pflegepersonal alarmieren, sondern zum Beispiel auch direkt benötigtes Personal aus anderen Spitälern anordnen. Auch könnte man die Messdaten aus der Fernüberwachung mit der aus dem Patientenzimmer verknüpfen und so ein besseres Patientenbild erstellen. Der Patient wäre so lückenlos überwacht und bei Problemen wären die Daten sehr hilfreich.
 \subsubsection{Infrastruktur}
-In Spitälern werden viele verschiedenen Geräte eingesetzt, welche momentan noch nicht miteinander kommunizieren. Durch die Verknüpfung der Geräte könnte man die Daten verschiedener Geräte miteinander kombinieren und vergleichen, um ein besseres Bild erstellen zu können. Oder auch die Wartung würde viel einfacher werden. Aus der Ferne werden alle Geräte inventarisiert, gewartet und überwacht. So wird bei einem Fehler sofort der Techniker gerufen, damit ein defektes Gerät sofort wieder Einsatzbereit gemacht wird. 
-\newpage
+Remote device configuration and tuning
+Fall Detection
+Predictive device maintenance
+\subsubsection{Logistik}
+Hospital asset management
+
+
 \section{Sensortypen}
 Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es gibt viele verschiedene Typen von Sensoren, welche unterschiedlichste Daten liefern und man muss daher wissen, wie man mit dem jeweiligen Sensortyp umgeht. 
 \begin{figure}[H]
@@ -263,48 +267,7 @@ Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSN's
 
 \subsubsection{LWM2M}
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 6c59b36... Einsatzgebiet und Publish/Subscribe Protokolle
 \subsection{Publish/Subscribe}
-Beim Publish/Subscriber Pattern gibt es einen Sender (Publisher) und einen Empfänger (Subscriber). Der Empfänger hört auf gewisse Themen (Topics). Dies kann nur ein Thema sein oder auch viele Verschiedene. Der Sender kategorisiert seine Nachrichten in Themen und sendet diese zu den jeweiligen Empfänger. Der Sender und der Empfänger wissen aber nichts voneinander. Sie senden oder hören nur im Netzwerk, ob eine für sie interessante Nachricht angekommen ist. Durch die einfache Verknüpfung von Publisher und Subscriber, eignet sich dieses Verfahren sehr gut im IoT-Bereich. Die Sensoren sind die Publisher, sie liefern zum Beispiel Temperaturdaten in die richtige Kategorie. Alle Server/Clouddienste, welche sich für Temperaturdaten interessieren, können auf dieses Kategorie hören. Durch die einfache Handhabung, skaliert dieses Pattern sehr gut.
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.65]{images/publishsubscribe.png}
-\caption{Publish and Subscribe Pattern\cite{PublishSubscribePattern}}
-\end{figure}
 \subsubsection{MQTT}
-MQTT (Message Queue Telemetry Transport) ist ein von IBM entwickeltes Protokoll. Es ist ein speziell für IoT entwickeltes Protokoll um Machine-to-Machine Kommunikation herzustellen. Bei dem Protokoll wurde speziell auch ein schlankes Design geachtet. So ist die kleinst Mögliche Nachricht 2 Byte gross. Wie auch bei AMQO wird ein Broker verwendet. Der Sensor ''Published'' seine Daten mit einem Topic und den Daten an den Broker. Dieser sendet die Nachricht an alle, welche sich auf das gewünschte Topic Subscribed haben. Durch das schlanke Design, gibt es natürlich auch Nachteile. Aber bei kleinen und einfachen Systemen ist MQTT ein beliebtes Protokoll.
 \subsubsection{AMQP}
-AMQP (Advanced Message Queuing Protocol) ist ein bekanntes und viel eingesetztes Protokoll. Das binäre Netzwerkprotokoll wird von vielen grossen Firmen entwickelt, wie zum Beispiel Microsoft oder auch Cisco. Die Sensoren senden die Nachrichten an einen Message Broker, welcher die Nachricht in die richtige Queue schiebt. Nun können sich die Dienste an der Queue anmelden und die Nachrichten konsumieren. Dabei gibt es die Möglichkeit Topics zu setzen, um Kategorien einzuführen. Es können jeder Nachricht auch noch Attribute hinzugefügt werden, wie zum Beispiel Name oder Durability. Durch den grossen Funktionsumfang des Protokolls ist es natürlich auch schwieriger einzurichten und die minimale Paketgrösse wächst damit auch. Die kleinstmögliche Paketgrösse ist 60 Byte.
 \subsubsection{XMPP}
-XMPP (Extensible Messaging and Presence Protocol) wurde speziell für das Internet der Dinge erweitert, um den Anforderungen gerecht zu werden. XMPP gibt es schon seit mehreren Jahren und wurde in vielen Chatprogrammen eingesetzt. Auch heute findet man das Protokoll beim Facebook-Messenger wieder. Mit der IoT-Erweiterung/Anpassung will man nun nicht mehr Menschen miteinander verknüpfen, sondern Dinge. Bei XMPP wird kein Broker, sondern ein zentraler Server verwendet. Dieser soll allerlei verschiedene Geräte miteinander verbinden. Dieses Protokoll wird häufig für das Remote Management von Konsumergeräten verwendet.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
