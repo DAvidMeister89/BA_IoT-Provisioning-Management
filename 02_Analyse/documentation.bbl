@@ -1,5 +1,12 @@
 \begin{thebibliography}{1}
 
+\bibitem{PublishSubscribePattern}
+Gregor Hohpe and Bobby Woolf.
+\newblock Enterprise integration patterns.
+\newblock
+  http://www.enterpriseintegrationpatterns.com/img/PublishSubscribeSolution.gif,
+  2011.
+
 \bibitem{IoTOverview}
 micrium.com.
 \newblock Devices \& networks.
