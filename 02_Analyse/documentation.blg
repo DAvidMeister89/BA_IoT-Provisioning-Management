@@ -1,11 +1,9 @@
-This is BibTeX, Version 0.99d (TeX Live 2016/Arch Linux)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2016/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: documentation.aux
 The style file: plain.bst
 A level-1 auxiliary file: chapter/EinfuehrungIoT.aux
 Database file #1: quellen/lit.bib
-<<<<<<< HEAD
-<<<<<<< HEAD
 You've used 11 entries,
             2118 wiz_defined-function locations,
             555 strings with 5721 characters,
@@ -47,89 +45,3 @@ warning$ -- 0
 while$ -- 22
 width$ -- 13
 write$ -- 112
-=======
-You've used 7 entries,
-            2118 wiz_defined-function locations,
-            536 strings with 5211 characters,
-and the built_in function-call counts, 1677 in all, are:
-= -- 155
-> -- 82
-< -- 0
-+ -- 33
-- -- 26
-* -- 70
-:= -- 290
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 34
-chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 49
-empty$ -- 155
-format.name$ -- 26
-if$ -- 359
-int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 0
-newline$ -- 38
-num.names$ -- 14
-pop$ -- 62
-preamble$ -- 1
-purify$ -- 27
-quote$ -- 0
-skip$ -- 50
-stack$ -- 0
-substring$ -- 35
-swap$ -- 7
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 28
-warning$ -- 0
-while$ -- 14
-width$ -- 8
-write$ -- 72
->>>>>>> 6c59b36... Einsatzgebiet und Publish/Subscribe Protokolle
-=======
-You've used 7 entries,
-            2118 wiz_defined-function locations,
-            536 strings with 5211 characters,
-and the built_in function-call counts, 1677 in all, are:
-= -- 155
-> -- 82
-< -- 0
-+ -- 33
-- -- 26
-* -- 70
-:= -- 290
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 34
-chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 49
-empty$ -- 155
-format.name$ -- 26
-if$ -- 359
-int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 0
-newline$ -- 38
-num.names$ -- 14
-pop$ -- 62
-preamble$ -- 1
-purify$ -- 27
-quote$ -- 0
-skip$ -- 50
-stack$ -- 0
-substring$ -- 35
-swap$ -- 7
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 28
-warning$ -- 0
-while$ -- 14
-width$ -- 8
-write$ -- 72
->>>>>>> 6c59b36... Einsatzgebiet und Publish/Subscribe Protokolle
