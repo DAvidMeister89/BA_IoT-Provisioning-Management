@@ -1,11 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{PublishSubscribePattern}
-Gregor Hohpe and Bobby Woolf.
-\newblock Enterprise integration patterns.
-\newblock
-  http://www.enterpriseintegrationpatterns.com/img/PublishSubscribeSolution.gif,
-  2011.
+\bibitem{RFC7252}
+IETF.
+\newblock The constrained application protocol (coap).
+\newblock https://tools.ietf.org/html/rfc7252, 2014.
 
 \bibitem{IoTOverview}
 micrium.com.
@@ -65,5 +63,10 @@ servicedesignpatterns.com.
 \newblock Request/response.
 \newblock http://www.servicedesignpatterns.com/Images/RequestResponse.jpg,
   2011.
+
+\bibitem{Shelby14}
+Zach Shelby.
+\newblock Constrained application protocol (coap) tutorial.
+\newblock https://www.youtube.com/watch?v=4bSr5x5gKvA, 2014.
 
 \end{thebibliography}
