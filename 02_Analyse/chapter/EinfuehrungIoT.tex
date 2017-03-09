@@ -35,8 +35,10 @@ Neben der Selbstüberwachung gibt es auch noch die Fernüberwachung. Dabei wird 
 \subsubsection{Patientenzimmer}
 Durch die komplette Überwachung des Patienten in seinem Zimmer, verkürzt sich die Reaktionszeit enorm. Der Patient wird zwar schon überwacht, aber durch die Anbindung an das Internet wären weitere Verbesserungen möglich. So kann man bei gewissen Problemen nicht nur das Pflegepersonal alarmieren, sondern zum Beispiel auch direkt benötigtes Personal aus anderen Spitälern anordnen. Auch könnte man die Messdaten aus der Fernüberwachung mit der aus dem Patientenzimmer verknüpfen und so ein besseres Patientenbild erstellen. Der Patient wäre so lückenlos überwacht und bei Problemen wären die Daten sehr hilfreich.
 \subsubsection{Infrastruktur}
-In Spitälern werden viele verschiedenen Geräte eingesetzt, welche momentan noch nicht miteinander kommunizieren. Durch die Verknüpfung der Geräte könnte man die Daten verschiedener Geräte miteinander kombinieren und vergleichen, um ein besseres Bild erstellen zu können. Oder auch die Wartung würde viel einfacher werden. Aus der Ferne werden alle Geräte inventarisiert, gewartet und überwacht. So wird bei einem Fehler sofort der Techniker gerufen, damit ein defektes Gerät sofort wieder Einsatzbereit gemacht wird. 
+In Spitälern werden viele verschiedenen Geräte eingesetzt, welche momentan noch nicht miteinander kommunizieren. Durch die Verknüpfung der Geräte könnte man die Daten verschiedener Geräte miteinander kombinieren und vergleichen, um ein besseres Bild erstellen zu können. Oder auch die Wartung würde viel einfacher werden. Aus der Ferne werden alle Geräte inventarisiert, gewartet und überwacht. So wird bei einem Fehler sofort der Techniker gerufen, damit ein defektes Gerät sofort wieder Einsatzbereit gemacht wird.
+ 
 \newpage
+
 \section{Sensortypen}
 Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es gibt viele verschiedene Typen von Sensoren, welche unterschiedlichste Daten liefern und man muss daher wissen, wie man mit dem jeweiligen Sensortyp umgeht. 
 \begin{figure}[H]
@@ -151,6 +153,8 @@ Immer wichtiger wird auch dieser Typ von Sensoren. Durch die Bestimmung von Dist
 \item	SmartCars
 \end{itemize}
 
+\newpage
+
 \section{Architektur}
 Man könnte ein IoT System in vier wichtige Gruppen unterteilen: [IoTOverview]
 \begin{itemize}
@@ -178,6 +182,7 @@ Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich 
 \end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
 
+\newpage
 
 \section{Kommunikationsmodelle}
 Internet of Things verbindet Objekte aus der realen Welt miteinander. Um Objekte aus der Realität in die virtuelle Welt zu transformieren, werden Sensoren verwendet. Es gilt nun, diese Sensoren mit dem Internet zu verbinden.
@@ -213,6 +218,8 @@ Sobald sich die Sensordaten auf einem Server befinden können diese auf bekannte
 \caption{Backend-Data-Sharing Kommunikation}
 \end{figure}
 
+\newpage
+
 \section{IoT Kommunikationsprotokolle}
 Seit der Entstehung des Internets werden für unterschiedliche Aufgaben Kommunikationsprotokolle entwickelt. Eine grosse Herausforderung war stets die Interoperabilität zwischen Geräten unterschiedlicher Hersteller. Standardisierungsgremien wie die International Standards Organization (ISO) und die Internet Engineering Task Force (IETF) haben in den vergangenen Jahrzehnten Richtlinien und Standardisierung von Kommunikationsprotokollen veröffentlicht. 
 
@@ -238,7 +245,7 @@ Aufgrund seiner hohen Verbreitung, Standardisierung und Unterstützung ist HTTP 
 In der Version 1, respektive 1.1 gibt es mit HTTP keine Möglichkeit, echte Push-Meldungen zu versenden. Bei Push-Meldungen sendet der Server eine Response (besser: Nachricht) an den Client ohne vorgängigen Request. In der Version 2 von HTTP sind echte Push-Meldungen vorgesehen, jedoch gibt es wenige Implementation und Erfahrungswerte damit.
 \subsubsection{CoAP}
 Das Constrained Application Protocol (CoAP) implementiert wie HTTP das Request/Response Pattern \cite{Obermaier15}. Mit CoAP existiert ein massgeschneidertes IoT-Protokoll, welches nach dem REST Paradigma konzipiert wurde. HTTP ist schwergewichtig, hat einen grossen Overhead und generiert damit hohe Datenmengen. Ausserdem ist vor jeder Session den für TCP benötigten 3-Way Handshake nötig. 
-
+ 
 CoAP wurde entwickelt, um diesen Schwächen von HTTP entgegenzuwirken. Bei sogenannten Low-Power and Lossy Networks (LLN's) sind die Nodes im Vergleich zu herkömmlichen Computersystemen sehr eingeschränkt, was die Verwendung von HTTP schwierig gestaltet. CoAP bietet grundsätzlich folgende Features:\cite{RFC7252}
 \begin{itemize}
 \item Request/Response Kommunikation zwischen Endpoints	
@@ -251,29 +258,16 @@ CoAP wurde entwickelt, um diesen Schwächen von HTTP entgegenzuwirken. Bei sogen
 \item UDP als Transportprotokoll
 \item Asynchroner Nachrichtenaustausch
 \end{itemize}
-
+ 
 CoAP kann Peer-to-Peer zwischen Devices eingesetzt werden, aber auch zwischen Device und Service oder zwischen Device und einem Proxy.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{images/coap_architecture.png}
 \caption{CoAP Architektur \cite{Shelby14}}
 \end{figure}
-
-<<<<<<< HEAD
+  
 Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSN's eingesetzt \cite{Obermaier15}. 
 
-\subsubsection{LWM2M}
-
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 8c1f587... Kommunikation, Anforderungen, Req/Res & HTTP
-=======
-Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSN's eingesetzt \citep{Obermaier15}. 
->>>>>>> parent of ad25de8... CoAP
 \subsection{Publish/Subscribe}
 Beim Publish/Subscriber Pattern gibt es einen Sender (Publisher) und einen Empfänger (Subscriber). Der Empfänger hört auf gewisse Themen (Topics). Dies kann nur ein Thema sein oder auch viele Verschiedene. Der Sender kategorisiert seine Nachrichten in Themen und sendet diese zu den jeweiligen Empfänger. Der Sender und der Empfänger wissen aber nichts voneinander. Sie senden oder hören nur im Netzwerk, ob eine für sie interessante Nachricht angekommen ist. Durch die einfache Verknüpfung von Publisher und Subscriber, eignet sich dieses Verfahren sehr gut im IoT-Bereich. Die Sensoren sind die Publisher, sie liefern zum Beispiel Temperaturdaten in die richtige Kategorie. Alle Server/Clouddienste, welche sich für Temperaturdaten interessieren, können auf dieses Kategorie hören. Durch die einfache Handhabung, skaliert dieses Pattern sehr gut.
 \begin{figure}[H]

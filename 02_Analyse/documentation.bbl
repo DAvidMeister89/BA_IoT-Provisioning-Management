@@ -1,16 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{PublishSubscribePattern}
+Gregor Hohpe and Bobby Woolf.
+\newblock Enterprise integration patterns.
+
 \bibitem{RFC7252}
 IETF.
 \newblock The constrained application protocol (coap).
 \newblock https://tools.ietf.org/html/rfc7252, 2014.
-
-\bibitem{PublishSubscribePattern}
-Gregor Hohpe and Bobby Woolf.
-\newblock Enterprise integration patterns.
-\newblock
-  http://www.enterpriseintegrationpatterns.com/img/PublishSubscribeSolution.gif,
-  2011.
 
 \bibitem{IoTOverview}
 micrium.com.
