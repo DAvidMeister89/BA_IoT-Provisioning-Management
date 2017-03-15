@@ -17,6 +17,13 @@ IETF.
 \newblock The constrained application protocol (coap).
 \newblock https://tools.ietf.org/html/rfc7252, 2014.
 
+\bibitem{MonTypes}
+Sheetal Kumbhar.
+\newblock Getting ready for iot monitoring.
+\newblock
+  http://www.iot-now.com/2016/11/17/55128-getting-ready-for-iot-monitoring,
+  YEAR =.
+
 \bibitem{IoTOverview}
 micrium.com.
 \newblock Devices \& networks.
@@ -57,6 +64,20 @@ Dominik Obermaier.
 \newblock
   https://www.informatik-aktuell.de/betrieb/netzwerke/iot-protokolldschungel-ein-wegweiser.html,
   2015.
+
+\bibitem{MaintenIoTDef}
+Jeff O'Brien.
+\newblock Improve maintenance with the internet of things.
+\newblock http://www.reliableplant.com/Read/29962/internet-improve-maintenance,
+  YEAR =.
+
+\bibitem{SecOverview}
+Angela Orebaugh.
+\newblock Internet der dinge: Was zu tun ist, um iot-security realität werden
+  zu lassen.
+\newblock
+  http://www.searchsecurity.de/meinung/Internet-der-Dinge-Was-zu-tun-ist-um-IoT-Security-Realitaet-werden-zu-lassen,
+  YEAR =.
 
 \bibitem{MonZiele}
 John Pardey.
