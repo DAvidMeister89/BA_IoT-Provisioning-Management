@@ -5,6 +5,19 @@ International~Data Corporation.
 \newblock Connecting the iot: The road to success.
 \newblock http://www.idc.com/infographics/IoT, 2015.
 
+\bibitem{IoTDiscovery10}
+Dominique Guinard, Vlad Trifa, Stamatis Karnouskos, Patrik Spiess, and Domnic
+  Savio.
+\newblock Interacting with the soa-based internet of things: Discovery, query,
+  selection, and on-demand provisioning of web services.
+\newblock http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5416674, 2010.
+
+\bibitem{IoTSecurityChallenges}
+Tobias Heer, Oscar Garcia-Morchon, René Hummen, Sye~Loong Keoh, Sandeep~S.
+  Kumar, and KlausWehrle.
+\newblock Security challenges in the ip-based internet of things.
+\newblock https://link.springer.com/article/10.1007/s11277-011-0385-5, 2011.
+
 \bibitem{PublishSubscribePattern}
 Gregor Hohpe and Bobby Woolf.
 \newblock Enterprise integration patterns.
