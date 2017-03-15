@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{IDC15}
+International~Data Corporation.
+\newblock Connecting the iot: The road to success.
+\newblock http://www.idc.com/infographics/IoT, 2015.
+
 \bibitem{PublishSubscribePattern}
 Gregor Hohpe and Bobby Woolf.
 \newblock Enterprise integration patterns.
@@ -24,6 +29,13 @@ micrium.com.
 \newblock Devices \& networks.
 \newblock
   https://www.micrium.com/wp-content/uploads/2014/03/wireless-sensor-network.png,
+  2017.
+
+\bibitem{IoTMgmtAzure}
+Microsoft.
+\newblock Overview of device management with iot hub.
+\newblock
+  https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-management-overview,
   2017.
 
 \bibitem{MiorandiSicariPellegriniChlamtac12}
