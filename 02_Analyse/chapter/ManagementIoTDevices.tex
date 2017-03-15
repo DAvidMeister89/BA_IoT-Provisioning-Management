@@ -20,9 +20,14 @@ In der Monitoringphase sollen die Zustände der Devices überwacht werden. Ziel 
 \subsubsection{Retire}
 Am Ende des Lebenszyklus sollen Geräte geordnet aus dem System entfernt werden. Dabei gilt es den Prozess bestmöglich zu automatisieren und allfällige Vorschriften betreffend Datensicherheit und Datenschutz zu beachten. Andere Systeme wie das Inventar könnten ebenfalls in diesem Prozess beteiligt sein.
 \section{Device Management Aufgaben}
-
 \subsection{Provisionierung und Authentisierung}
+IoT Devices sollten vor der produktiven Nutzung in einem definierten Prozess bereitgestellt werden. In einem ersten Schritt muss ein Device mit einem Netzwerk verbunden werden. Es ist weitgehend bekannt, dass eine grosse Vielfalt an Devices existieren. Manche von ihnen enthalten ein einfaches User Interface, andere nicht. So unterscheidet sich das Ausrollen von IoT Geräten von herkömmlichen PC's und Laptops.  
+
+Ein neues IoT Device im System kontaktiert entweder seinen lokalen Gateway oder direkt einen Server über TCP/IP. Das System kann nun das neue Device aufnehmen und weitere Aufgaben wie beispielsweise das Laden der Konfiguration oder das Speichern von Geräteinformationen veranlassen. Netzwerke mit IoT Devices sind sehr dynamisch. Es werden häufig neue Teilnehmer aufgenommen oder alte Teilnehmer entfernt. Tools, welche diese Prozesse automatisieren sind stark gefragt. Devices sollen sich selbständig an Netzwerken anmelden können und sich bei zuständigen Servern für weitere Anweisungen registrieren (Zero Touch Provisioning). Solche Discovery Mechanismen sind für zukünftige Anwendungen essentiell \cite{IoTDiscovery10}.
+
+Mit dem Prozess der automatischen Registrierung an Netzwerken und Systemen sind Fragen der Sicherheit verbunden. Man möchte selbstverständlich die Zugriffe in Netzwerke und Systeme korrekt authentisieren und autorisieren. Sicheres Bootstrapping von IoT Devices umfasst neben Authentisierung und Autorisierung auch die Übertragung von Security Parametern für die Ausführung von vertrauenswürdigen Operationen \cite{IoTSecurityChallenges}.
 \subsection{Konfiguration}
+
 \subsection{Monitoring und Diagnose}
 \subsubsection{Was ist Monitoring?}
 Bei all den Millionen Devices ist ein Monitoring unerlässlich. Ohne ein ausgeklügeltes Monitoring kann die Überwachung von so vielen Devices sehr schnell chaotisch enden. Daher muss das Monitoring gut durchdacht sein, um sein Ziel nicht zu verfehlen. Doch was ist unser Ziel mit dem Monitoring? \newline\newline
