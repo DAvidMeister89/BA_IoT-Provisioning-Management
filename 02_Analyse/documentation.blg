@@ -5,49 +5,46 @@ The style file: plain.bst
 A level-1 auxiliary file: chapter/EinfuehrungIoT.aux
 A level-1 auxiliary file: chapter/ManagementIoTDevices.aux
 Database file #1: quellen/lit.bib
-I was expecting an "="---line 69 of file quellen/lit.bib
- : <<<<<<< 
- :         HEAD
-I'm skipping whatever remains of this entry
-You've used 12 entries,
+Warning--I didn't find a database entry for "IDC15"
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            560 strings with 5858 characters,
-and the built_in function-call counts, 2706 in all, are:
-= -- 251
-> -- 117
+            568 strings with 6069 characters,
+and the built_in function-call counts, 2929 in all, are:
+= -- 275
+> -- 124
 < -- 0
-+ -- 49
-- -- 36
-* -- 99
-:= -- 463
-add.period$ -- 35
-call.type$ -- 12
-change.case$ -- 54
++ -- 52
+- -- 38
+* -- 106
+:= -- 502
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 58
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 84
-empty$ -- 265
-format.name$ -- 36
-if$ -- 585
+cite$ -- 13
+duplicate$ -- 91
+empty$ -- 287
+format.name$ -- 38
+if$ -- 635
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 13
 missing$ -- 0
-newline$ -- 62
-num.names$ -- 24
-pop$ -- 102
+newline$ -- 68
+num.names$ -- 26
+pop$ -- 110
 preamble$ -- 1
-purify$ -- 42
+purify$ -- 45
 quote$ -- 0
-skip$ -- 87
+skip$ -- 91
 stack$ -- 0
-substring$ -- 61
-swap$ -- 12
+substring$ -- 66
+swap$ -- 13
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
+type$ -- 52
 warning$ -- 0
-while$ -- 24
-width$ -- 14
-write$ -- 119
-(There was 1 error message)
+while$ -- 26
+width$ -- 15
+write$ -- 132
+(There was 1 warning)
