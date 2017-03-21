@@ -21,7 +21,27 @@ In der Monitoringphase sollen die Zustände der Devices überwacht werden. Ziel 
 Am Ende des Lebenszyklus sollen Geräte geordnet aus dem System entfernt werden. Dabei gilt es den Prozess bestmöglich zu automatisieren und allfällige Vorschriften betreffend Datensicherheit und Datenschutz zu beachten. Andere Systeme wie das Inventar könnten ebenfalls in diesem Prozess beteiligt sein.
 \section{Device Management Aufgaben}
 \subsection{Provisionierung und Authentisierung}
-IoT Devices sollten vor der produktiven Nutzung in einem definierten Prozess bereitgestellt werden. In einem ersten Schritt muss ein Device mit einem Netzwerk verbunden werden. Es ist weitgehend bekannt, dass eine grosse Vielfalt an Devices existieren. Manche von ihnen enthalten ein einfaches User Interface, andere nicht. So unterscheidet sich das Ausrollen von IoT Geräten von herkömmlichen PC's und Laptops.  
+Bevor neue Devices produktiv genutzt werden können, müssen sie entweder manuell, oder automatisch provisioniert werden. Beim Device Provisioning muss ein Gerät in einen Zustand gebracht werden, in dem es für eine oder mehrere vorgesehene Personen erreichbar respektive verfügbar ist.
+
+\paragraph{Notwendige Schritte}So unterschiedlich die Geräte im Netzwerk und Internet auch sein können, so haben sie abstrakt gesehen die selben Schritte zu durchlaufen um für die produktive Nutzung Verfügbar zu werden:
+\begin{itemize}
+\item ein Device muss physisch am vorgesehenen Ort platziert werden,
+\item die Stromversorgung (Stromnetz, Batterie, Akku) für das Gerät muss sichergestellt werden
+\item das Device muss gestartet werden
+\item eine Initialkonfiguration muss geladen werden
+\item die Netzwerk- respektive Internetverbindung muss hergestellt werden
+\end{itemize}
+Ab dem Zeitpunkt der Erreichbarkeit des Netzwerks unterscheiden sich manuelles und automatisches Provisioning. Beim manuellen Provisioning greift der User oder Administrator entweder direkt über ein grafisches User Interface auf das Gerät zu und nimmt weitere Einstellungen vor oder er verbindet sich über das Netzwerk auf eine Benutzeroberfläche des Geräts. Beim automatischen Provisioning meldet sich das Device über das Netzwerk an einem Controller respektive einer Management Instanz.
+
+\paragraph{Authentisierung} Bei einem Eintritt in ein bestehendes System, in diesem Falle die Bereitstellung eines neuen Devices, muss sich das Gerät am System authentisieren. Aus Sicherheitsgründen möchte man sicherstellen, dass die Zugriffe in das System kontrolliert werden. Es gibt verschiedene Möglichkeiten der Authentisierung:
+\begin{itemize}
+\item Authentisierung durch Wissen (z.B. Passwort, PIN, Challenge)
+\item Authentisierung durch Besitz (z.B. RFID-Chip, Zertifikat, One Time Pin)
+\item Authentisierung durch biometrische Merkmale (z.B. Fingerprint, Handvene)
+\end{itemize}
+Nicht alle Verfahren eignen sich für die Authentisierung von Devices. Ein Gerät selbst verfügt über keine biometrischen Merkmale, höchstens der Benutzer, welcher versucht das Gerät bereitzustellen. Ein Shared Secret in Form eines Passworts oder eine Chain-of-Trust mit Zertifikaten eignen sich für die Device Authentisierung gut. 
+
+\paragraph{IoT Provisioning} IoT Devices sollten vor der produktiven Nutzung in einem definierten Prozess bereitgestellt werden. In einem ersten Schritt muss ein Device mit einem Netzwerk verbunden werden. Es ist weitgehend bekannt, dass eine grosse Vielfalt an Devices existieren. Manche von ihnen enthalten ein einfaches User Interface, andere nicht. So unterscheidet sich das Ausrollen von IoT Geräten von herkömmlichen PC's und Laptops indem man nicht direkt über das geräteeigene UI Einstellungen vornehmen kann.  
 
 Ein neues IoT Device im System kontaktiert entweder seinen lokalen Gateway oder direkt einen Server über TCP/IP. Das System kann nun das neue Device aufnehmen und weitere Aufgaben wie beispielsweise das Laden der Konfiguration oder das Speichern von Geräteinformationen veranlassen. Netzwerke mit IoT Devices sind sehr dynamisch. Es werden häufig neue Teilnehmer aufgenommen oder alte Teilnehmer entfernt. Tools, welche diese Prozesse automatisieren sind stark gefragt. Devices sollen sich selbständig an Netzwerken anmelden können und sich bei zuständigen Servern für weitere Anweisungen registrieren. Solche Discovery Mechanismen sind für zukünftige Anwendungen essentiell \cite{IoTDiscovery10}.
 
