@@ -270,6 +270,9 @@ Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSN's
 
 \subsection{Publish/Subscribe}
 Beim Publish/Subscriber Pattern gibt es einen Sender (Publisher) und einen Empfänger (Subscriber). Der Empfänger hört auf gewisse Themen (Topics). Dies kann nur ein Thema sein oder auch viele Verschiedene. Der Sender kategorisiert seine Nachrichten in Themen und sendet diese zu den jeweiligen Empfänger. Der Sender und der Empfänger wissen aber nichts voneinander. Sie senden oder hören nur im Netzwerk, ob eine für sie interessante Nachricht angekommen ist. Durch die einfache Verknüpfung von Publisher und Subscriber, eignet sich dieses Verfahren sehr gut im IoT-Bereich. Die Sensoren sind die Publisher, sie liefern zum Beispiel Temperaturdaten in die richtige Kategorie. Alle Server/Clouddienste, welche sich für Temperaturdaten interessieren, können auf dieses Kategorie hören. Durch die einfache Handhabung, skaliert dieses Pattern sehr gut.
+
+In der folgenden Grafik sieht man das Publish and Subscribe Pattern. Der Publisher hat eine ''Address Changed'' Message in den Channel geschickt. Nun erhalten alle Subscriber, welche dem Channel folgen, diese Nachricht und verarbeiten sie.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.65]{images/publishsubscribe.png}
@@ -280,7 +283,7 @@ MQTT (Message Queue Telemetry Transport) ist ein von IBM entwickeltes Protokoll.
 
 Der Hauptverwendungszweck von MQTT ist vorallem der Austausch von Daten zwischen Geräten und Server (D2S).\cite{ProtPubSub} Da das Protokoll für die D2D Konnektivität entwickelt wurde, wird es auch in diesem Bereich eingesetzt. Das heisst die Vorteile liegen in Netzen mit vielen kleinen Geräten, welche wenig Kommunizieren und sich als Kollektion sehen.\cite{ProtPubSubReason}
 
-Wie auch bei AMQP wird ein Broker verwendet. Der Sensor ''Published'' seine Daten mit einem Topic und den Daten an den Broker. Dieser sendet die Nachricht an alle, welche sich auf das gewünschte Topic Subscribed haben. Durch das schlanke Design, gibt es natürlich auch Nachteile. Aber bei kleinen und einfachen Systemen ist MQTT ein beliebtes Protokoll.
+Bei MQTT wird ein Broker verwendet. Der Sensor ''published'' seine Daten mit einem Topic und den Daten an den Broker. Dieser sendet die Nachricht an alle, welche sich auf das gewünschte Topic Subscribed haben. Durch das schlanke Design, gibt es natürlich auch Nachteile. Aber bei kleinen und einfachen Systemen ist MQTT ein beliebtes Protokoll.
 \subsubsection{AMQP}
 AMQP (Advanced Message Queuing Protocol) ist ein bekanntes und viel eingesetztes Protokoll. Das binäre Netzwerkprotokoll wird von vielen grossen Firmen\cite{ProtPubSubReason} entwickelt, wie zum Beispiel Microsoft oder auch Cisco. Momentan ist die Version 1.0 seit 2010 als aktuellen Standard im Einsatz.
 
@@ -293,28 +296,3 @@ XMPP (Extensible Messaging and Presence Protocol) wurde speziell für das Intern
 XMPP ist das beste Protokoll um Geräte mit Menschen zu verbinden. Dies ist eine Spezialform des Geräte zu Server Pattern (D2S). \cite{ProtPubSub} XMPP sollte dann verwendet werden, wenn die Geschwindigkeit und der Prozessor nicht wichtig sind, wenn das Gerät immer verbunden sein soll und wenn nur wenige Konnektivitätspunke in einem grossen Bereich vorhanden sind.\cite{ProtPubSubReason}
 
 Bei XMPP wird kein Broker, sondern ein zentraler Server verwendet. Dieser soll allerlei verschiedene Geräte miteinander verbinden. Dieses Protokoll wird häufig für das Remote Management von Konsumergeräten verwendet.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
