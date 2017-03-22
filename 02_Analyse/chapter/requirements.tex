@@ -1,1 +1,78 @@
 \chapter{Requirements}
+\section{Allgemeine Beschreibung}
+\subsection{Produktperspektive}
+Mit Internet of Things sind eine Vielzahl neuartige Devices entstanden. Während in herkömmlichen Netzwerken hauptsächlich Personal Computer, Notebooks, Server usw. verwaltet werden mussten, so bringen IoT Devices den IT-Abteilungen neue Herausforderungen. Zum einen dürfte die Anzahl Geräte gegenüber herkömmlichen Computer deutlich ansteigen, zum anderen sind IoT Devices in Sachen Funktionalität und Rechenleistung, sowie auch der Netzwerkbandbreite deutlich beschränkt. 
+
+Mit <insert Application Name here> soll eine Management Applikation bereitgestellt werden, um eine Vielzahl unterschiedlicher IoT Devices administrieren zu können. 
+\subsection{Produkfunktionen}
+<insert Application Name here> soll den Benutzern erlauben, IoT Geräte zu verwalten. Die Aufgaben reichen vom Erfassen und Discovery von Devices über die Konfigurationsverwaltung und Softwareverteilung bis zu Backup und Restore. Ausserdem sollen Management-relevante Kommandos auf Devices ausgeführt- und Security Aspekte beachtet werden. Die Details zu den Produktfunktionen sind den Use Cases zu entnehmen.
+
+\subsection{Benutzer Charakteristik}
+Zielpersonen sind Netzwerk Engineers, System Administratoren und weitere Informatiker mit Tätigkeit im Netzwerkbereich. Es werden solide Grundkenntnisse in IP-Netzwerken sowie Kenntnisse der verwendeten Netzwerk Devices vorausgesetzt. 
+\subsection{Einschränkungen}
+Evtl. Browser Einschränkungen, müsste nach Prototyp nochmals definiert werden
+\section{Use Cases}
+\subsection{Use Cases Diagramm}
+%\includegraphics[scale=0.52]{figures/UseCase_Diagram}
+\subsection{Aktoren}
+Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Zu testende Netzwerkdevices agieren als technische Aktoren in diesem System.
+\subsection{Beschreibungen (Brief)}
+\subsubsection{Device discover}
+Der User möchte einzelne oder mehrere Tests erstellen. Damit dies möglich ist, sind drei weitere Use Cases nötig.
+\subsubsection{Device erfassen}
+bla
+\subsubsection{Device CRUD}
+bla
+\subsubsection{Device abfragen}
+blabla
+\subsubsection{Konfiguration speichern}
+blabla
+\subsubsection{Konfiguration verteilen}
+blabla
+\subsubsection{Konfiguration anzeigen}
+blabla
+\subsubsection{Software speichern}
+blabla
+\subsubsection{Software verteilen}
+blabla
+\subsubsection{Device sichern}
+blabla
+\subsubsection{Device restoren}
+blabla
+\subsubsection{Device authentisieren}
+blabla
+\subsubsection{Schlüssel verwalten}
+blabla
+\subsubsection{Zertifikate speichern}
+blabla
+\subsubsection{Zertifikate verteilen}
+blabla
+\subsubsection{Device Kommandos ausführen}
+blabla
+
+\section{Nichtfunktionale Anforderungen}
+In diesem Kapitel behandeln wir die nichtfunktionalen Anforderungen an das Projekt. Wir behandeln Aspekte und Anforderungen aus den Bereichen Qualität, Schnittstellen und Randbedingungen.
+\subsection{Qualität}
+Bei der Softwarequalität stützen wir uns auf die ISO/IEC 9126 Norm. Es werden die Merkmale Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit und Übertragbarkeit aufgeführt.
+\subsubsection{Funktionalität}
+Netzwerkdevices können von vielen unterschiedlichen Herstellern kommen. Diese Hersteller verwenden unterschiedliche Syntax und Ausgabeformate. Um die Funktionalität best möglich sicherzustellen, wird die Herstellerunterstützung vorerst stark eingeschränkt. Vorgesehen sind vorerst Cisco Netzwerkdevices und Linux Hosts.
+\subsubsection{Zuverlässigkeit}
+Tests sind wichtig und nützlich, jedoch nicht Business kritisch bei einem möglichen Ausfall. Es muss vor allem darauf geachtet werden, dass bei ssh Verbindungen ein sauberes Exception Handling implementiert wird, falls beim Verbindungsaufbau oder bei abgesetzten Kommandos etwas schief geht. Es müssen für gewisse Tests auch Timeouts eingeplant werden, damit das Programm nicht unendlich lange blockieren kann.
+\subsubsection{Benutzbarkeit}
+Wir möchten ein schmales User Interface auf Konsolen Ebene bieten. Der Anwender muss über Kenntnisse auf der Linux bash verfügen. Mittels eingebauter Hilfe soll es versierten Benutzern möglich sein, die Software zu verwenden.
+\subsubsection{Effizienz}
+Die Effizienz ist sehr stark von den getesteten Devices und den abgesetzten Kommandos abhängig. 
+\subsubsection{Wartbarkeit}
+Eigene Test Cases sollen mit den notwendigen Kenntnissen selbst ergänzt werden können. Command-Mapping und Outputs müssen bekannt sein, dann ist eine Erweiterung des Funktionsumfangs der Test Cases denkbar.
+\subsubsection{Übertragbarkeit}
+Die Übertragbarkeit auf andere Plattformen oder Hersteller ist schwierig und vorerst nicht vorgesehen.
+
+\subsection{Schnittstellen}
+\subsubsection{Benutzerschnittstellen}
+Die Steuerung des Programms ist mittels Tastatur über die Linux bash vorgesehen.
+
+\subsubsection{Netzwerkschnittstellen}
+Im Programm können alle Devices verwendet werden, welche über ein lokales Netzwerkinterface erreichbar sind.
+
+\subsection{Sicherheit}
+Um auf Devices verbinden zu können, muss man sich auf diesen authentifizieren. Administrator Zugänge müssen deshalb best möglichst geschützt sein. Die Übertragung muss verschlüsselt sein (ssh) und die Passwörter dürfen, wenn überhaupt, nur mittels sicherem Hashverfahren abgelegt werden.
