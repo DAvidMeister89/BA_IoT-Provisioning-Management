@@ -564,24 +564,23 @@ In diesem Kapitel behandeln wir die nichtfunktionalen Anforderungen an das Proje
 \subsection{Qualität}
 Bei der Softwarequalität stützen wir uns auf die ISO/IEC 9126 Norm. Es werden die Merkmale Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit und Übertragbarkeit aufgeführt.
 \subsubsection{Funktionalität}
-Netzwerkdevices können von vielen unterschiedlichen Herstellern kommen. Diese Hersteller verwenden unterschiedliche Syntax und Ausgabeformate. Um die Funktionalität best möglich sicherzustellen, wird die Herstellerunterstützung vorerst stark eingeschränkt. Vorgesehen sind vorerst Cisco Netzwerkdevices und Linux Hosts.
+IoT Devices können von vielen unterschiedlichen Herstellern kommen. Devices können somit sehr unterschiedliche Attribute enthalten. Ebenfalls können sich die Art der Kommunikation und unterstützte Netzwerkprotokolle unterscheiden. Um die Funktionalität best möglich sicherzustellen, wird die Herstellerunterstützung vorerst stark eingeschränkt.
 \subsubsection{Zuverlässigkeit}
-Tests sind wichtig und nützlich, jedoch nicht Business kritisch bei einem möglichen Ausfall. Es muss vor allem darauf geachtet werden, dass bei ssh Verbindungen ein sauberes Exception Handling implementiert wird, falls beim Verbindungsaufbau oder bei abgesetzten Kommandos etwas schief geht. Es müssen für gewisse Tests auch Timeouts eingeplant werden, damit das Programm nicht unendlich lange blockieren kann.
-\subsubsection{Benutzbarkeit}
-Wir möchten ein schmales User Interface auf Konsolen Ebene bieten. Der Anwender muss über Kenntnisse auf der Linux bash verfügen. Mittels eingebauter Hilfe soll es versierten Benutzern möglich sein, die Software zu verwenden.
-\subsubsection{Effizienz}
-Die Effizienz ist sehr stark von den getesteten Devices und den abgesetzten Kommandos abhängig. 
-\subsubsection{Wartbarkeit}
-Eigene Test Cases sollen mit den notwendigen Kenntnissen selbst ergänzt werden können. Command-Mapping und Outputs müssen bekannt sein, dann ist eine Erweiterung des Funktionsumfangs der Test Cases denkbar.
-\subsubsection{Übertragbarkeit}
-Die Übertragbarkeit auf andere Plattformen oder Hersteller ist schwierig und vorerst nicht vorgesehen.
+Eine Managementplattform von IoT Devices ist nicht realtime-kritisch. Für die Provisionierung, Fehlersuche oder Updateprozesse kann sie aber durchaus notwendig sein. Da die Applikation über das Internet erreichbar ist, muss die Applikationssicherheit gewährleistet sein. Eine Kompromittierung der Management Plattform könnte die gesamte IoT Landschaft eines Unternehmens beeinträchtigen. 
 
+Durch die vielseitigen Aufgaben muss auf die Parallelität geachtet werden. Es werden durchaus zeitintensive Tasks ausgeführt welche potenziell die Applikation über längere Zeit blockieren könnten.
+\subsubsection{Benutzbarkeit}
+Um eine einfache Bedienung zu gewährleisten soll eine einfache und zweckmässige Benutzeroberfläche zur Verfügung gestellt werden.
+\subsubsection{Effizienz}
+Die Effizienz hängt stark von den IoT Devices und deren Internetbandbreite und Rechenleistung ab. 
+\subsubsection{Wartbarkeit}
+Sämtliche Teile der Software sollen möglichst modular und lose gekoppelt aufgebaut werden. Eine Management Applikation für IoT könnte potenziell sehr umfangreich sein und eine Weiterentwicklung muss in Betracht gezogen werden. 
+\subsubsection{Übertragbarkeit}
+Die Applikation soll für Clients über gängige Web Browser zugänglich sein. Deshalb sollte eine Übertragbarkeit auf verschiedene Clientsysteme keine Probleme darstellen.
 \subsection{Schnittstellen}
 \subsubsection{Benutzerschnittstellen}
-Die Steuerung des Programms ist mittels Tastatur über die Linux bash vorgesehen.
-
+Die Steuerung des Programms ist über eine grafische Weboberfläche vorgesehen. Tastatur und Maus sind notwendig.
 \subsubsection{Netzwerkschnittstellen}
-Im Programm können alle Devices verwendet werden, welche über ein lokales Netzwerkinterface erreichbar sind.
-
+Um die Applikation zu bedienen benötigt der Client einen funktionierenden Internetanschluss. Die Applikation selbst muss ebenfalls über einen Internetzugang verfügen und die nötigen Kommunikationsports müssen geöffnet sein.
 \subsection{Sicherheit}
-Um auf Devices verbinden zu können, muss man sich auf diesen authentifizieren. Administrator Zugänge müssen deshalb best möglichst geschützt sein. Die Übertragung muss verschlüsselt sein (ssh) und die Passwörter dürfen, wenn überhaupt, nur mittels sicherem Hashverfahren abgelegt werden.
+Als eingeloggter Benutzer könnte man viel Schaden am IoT System verursachen. Man könnte beispielsweise Geräte herunterfahren oder mit bösartiger Malware austatten. Es gilt unbedingt die Grundregeln der Informationssicherheit einzuhalten. Sämtliche Zugriffe sollen autorisiert- und vertrauliche Informationen verschlüsselt übertragen werden.
