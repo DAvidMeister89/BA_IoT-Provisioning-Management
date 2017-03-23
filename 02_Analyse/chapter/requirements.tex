@@ -13,9 +13,13 @@ Zielpersonen der Applikation sind Betreiber von IoT Devices. Dies können im Ent
 Evtl. Browser Einschränkungen und bestimmte Use Cases, müsste nach Prototyp nochmals definiert werden
 \section{Use Cases}
 \subsection{Use Cases Diagramm}
-%\includegraphics[scale=0.52]{figures/UseCase_Diagram}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.425]{images/use_case_diagram.png}\caption{Use Case Diagramm}
+\end{figure}
 \subsection{Aktoren}
 Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
+\newpage
 \subsection{Beschreibungen (Casual)}
 \subsubsection{Benutzer CRUD}
 \mbox{}
@@ -24,10 +28,26 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \textbf{ID} & 01\\ \hline 
  \textbf{Name} & Benutzer CRUD\\ \hline 
  \textbf{Beschreibung} & Benutzerverwaltung der Applikation\\ \hline 
- \textbf{Preconditions} & Applikation gestartet\\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer ist registriert \newline
+  \tabitem Benutzer ist eingeloggt \\ \hline 
+ \textbf{Postconditions} & 
+ \tabitem Änderungen gespeichert
+ \\ \hline
+ \textbf{Main Success Scenario} &
+ \textbf{Create:}\newline
+  1. UC 01: Benutzer registrieren \newline
+ \textbf{Read:}\newline
+  1. Benutzer lässt Userdaten anzeigen \newline
+ \textbf{Update:}\newline
+  1. Benutzer lässt Userdaten anzeigen \newline
+  2. Benutzer verändert Attribute\newline
+  3. Benutzer speichert Änderungen\newline
+ \textbf{Delete:}\newline
+  1. Benutzer wird gelöscht \\ 
+ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
 
 \subsubsection{Device erfassen}
