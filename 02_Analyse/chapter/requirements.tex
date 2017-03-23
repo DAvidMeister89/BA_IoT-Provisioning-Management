@@ -29,11 +29,12 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \textbf{Name} & Benutzer CRUD\\ \hline 
  \textbf{Beschreibung} & Benutzerverwaltung der Applikation\\ \hline 
  \textbf{Preconditions} & 
-  \tabitem Applikation gestartet \newline
-  \tabitem Benutzer ist registriert \newline
-  \tabitem Benutzer ist eingeloggt \\ \hline 
+   \tabitem Applikation gestartet \newline
+   \tabitem Benutzer ist registriert \newline
+   \tabitem Benutzer ist eingeloggt 
+  \\ \hline 
  \textbf{Postconditions} & 
- \tabitem Änderungen gespeichert
+  \tabitem Änderungen gespeichert
  \\ \hline
  \textbf{Main Success Scenario} &
  \textbf{Create:}\newline
@@ -56,24 +57,50 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 02\\ \hline 
  \textbf{Name} & Device erfassen \\ \hline 
- \textbf{Beschreibung} & Der Benutzer möchte ein IoT Device finden. Entsprechende IoT Devices sollen dem Benutzer zur Adoption aufgelistet werden. \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Der Benutzer möchte ein Device manuell hinzufügen. Der Endpunkt ist dem Benutzer bekannt. 
+ \\ \hline 
+ \textbf{Preconditions} & 
+   \tabitem Applikation gestartet \newline
+   \tabitem Benutzer eingeloggt \newline
+   \tabitem Device Endpunkt ist dem Benutzer bekannt
+  \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Falls ein Gerät gefunden wird, wird es angezeigt 
+  \\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer öffnet Device Erfassung \newline
+  2. Benutzer gibt Device Endpunkt ein \newline
+  3. Benutzer startet Suchvorgang \newline
+  4. Anfrage wird an Device gesendet \newline
+  5. Antwort vom Device wird angezeigt
+ \\ \hline 
+ \textbf{Extensions} & 
+  5.a Timeout Fehlermeldung wird dem Benutzer angezeigt 
+  \\ \hline 
 \end{longtable}
-
+\newpage
 \subsubsection{Device finden}
 \mbox{}
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
  \textbf{ID} & 03\\ \hline 
  \textbf{Name} & Device finden\\ \hline 
- \textbf{Beschreibung} & Der Benutzer möchte ein IoT Device manuell hinzufügen. Der Endpunkt ist dem Benutzer bekannt. \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Der Benutzer möchte ein- oder meherere Devices finden. Endpunkt des Devices ist dem Benutzer unbekannt. Gefundene Devices sollen dem Benutzer aufgelistet werden. \\ \hline 
+ \textbf{Preconditions} &  
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Gefundene Devices werden dem Benutzer angezeigt 
+ \\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer öffnet Device Discovery \newline
+  2. System listet eingegangene Anfragen von Devices auf \newline
+  3. Benutzer wählt gewünschte Devices aus  
+ \\ \hline 
+ \textbf{Extensions} &  
+  2.a System zeigt Fehlermeldung an
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Device assoziieren}
@@ -82,11 +109,19 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 04\\ \hline 
  \textbf{Name} & Device assoziieren \\ \hline 
- \textbf{Beschreibung} & Der Benutzer möchte ein- oder mehrere IoT Device(s) verwalten. Dazu muss er das gefundene Device in das System adoptieren. \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Der Benutzer möchte ein Device verwalten. Dazu muss er das gefundene Device in das System adoptieren.   \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt \newline
+  \tabitem Mindestens 1 Device gefunden 
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Assoziation zu gefundemen Device erstellt 
+ \\ \hline 
+ \textbf{Main Success Scenario} &
+  1. Benutzer erstellt Assoziation von gefundenen Devices (UC 02 / UC 03)
+ \\ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
  
 \subsubsection{Device CRUD}
@@ -95,11 +130,27 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 05\\ \hline 
  \textbf{Name} & Device CRUD\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Deviceverwaltung der Applikation\\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Änderungen gespeichert 
+ \\ \hline 
+ \textbf{Main Success Scenario} &
+ \textbf{Create:}\newline
+  1. UC 04: Device assoziieren \newline
+ \textbf{Read:}\newline
+  1. Attribute eines Devices anzeigen \newline
+ \textbf{Update:}\newline
+  1. Benutzer lässt Device Attribute anzeigen \newline
+  2. Benutzer verändert Attribute\newline
+  3. Benutzer speichert Änderungen\newline
+ \textbf{Delete:}\newline
+  1. Device Assoziation wird gelöscht 
+  \\ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
  
 \subsubsection{Device abfragen}
@@ -108,11 +159,24 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 06\\ \hline 
  \textbf{Name} & Device abfragen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Gewünschte Parameter und Attribute werden vom Device abgefragt\\ \hline 
+ \textbf{Preconditions} &  
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt 
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Antwort vom Device oder Fehlermeldung wird angezeigt 
+ \\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer wählt Device aus \newline
+  2. Benutzer startet Abfrage \newline
+  3. System sendet Anfrage an Device \newline
+  4. System speichert Antwort (UC 05: Device CRUD)
+ \\ \hline 
+ \textbf{Extensions} & 
+  1.a Benutzer wählt mehrere Devices aus \newline
+  3.a System sendet Anfragen an mehrere Devices
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Konfiguration speichern}
@@ -121,11 +185,19 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 07\\ \hline 
  \textbf{Name} & Konfiguration speichern\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} &  Konfigurationen von beliebigen Devices können im System gespeichert werden\\ \hline 
+ \textbf{Preconditions} &
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt \newline
+  \tabitem Konfigurationsfile für Benutzer zugänglich   
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Konfigurationsfile im System gespeichert
+ \\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer lädt Konfigurationsfile in System 
+ \\ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
  
 \subsubsection{Konfiguration verteilen}
@@ -134,11 +206,23 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 08\\ \hline 
  \textbf{Name} & Konfiguration verteilen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Konfigurationen können an Devices versendet werden.\\ \hline 
+ \textbf{Preconditions} &  
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt
+  \tabitem Konfiguration im System vorhanden 
+ \\ \hline 
+ \textbf{Postconditions} & Konfiguration an Device geschickt\\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer wählt Device aus \newline
+  2. Benutzer wählt Konfiguration aus \newline
+  3. Benutzer versendet Konfiguration \newline
+  4. System zeigt Antwort des Devices an 
+ \\ \hline 
+ \textbf{Extensions} &
+  1.a Benutzer wählt mehrere Device aus
+  4.a System zeigt Antworten mehrerer Devices an
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Konfiguration anzeigen}
@@ -147,11 +231,20 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 09\\ \hline 
  \textbf{Name} & Konfiguration anzeigen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Konfigurationsdetails im System können angesehen werden\\ \hline 
+ \textbf{Preconditions} &  
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt \newline
+  \tabitem Konfiguration im System vorhanden 
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Konfigurationsdetails angezeigt 
+ \\ \hline 
+ \textbf{Main Success Scenario} &  
+  1. Benutzer wählt Konfiguration aus \newline
+  2. System zeigt Konfiguration an 
+ \\ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
  
 \subsubsection{Software speichern}
@@ -160,11 +253,19 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 10\\ \hline 
  \textbf{Name} & Software speichern\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Spezifische Software oder Firmware für Devices können im System gespeichert werden.\\ \hline 
+ \textbf{Preconditions} &
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer eingeloggt \newline
+  \tabitem Softwarefile für Benutzer zugänglich 
+ \\ \hline 
+ \textbf{Postconditions} & 
+  \tabitem Softwarefile im System gespeichert
+ \\ \hline 
+ \textbf{Main Success Scenario} &
+  1. Benutzer lädt Softwarefile in System
+ \\ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable}
  
 \subsubsection{Software verteilen}
