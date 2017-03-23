@@ -173,11 +173,31 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 11\\ \hline 
  \textbf{Name} & Software verteilen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Jedes Device hat einen gewissen Softwarestand. Dieser kann durch neue Software ersetzt oder gepached werden. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \\ \hline
+ \textbf{Postconditions} & 
+  \tabitem Gerät besitzt den neuen Softwarestand
+  \tabitem Gerät ist funktionstüchtig
+ \\ \hline 
+ \textbf{Main Success Scenario} &
+  1. Benutzer selektiert das betreffende Device aus. \newline
+  2. ''Update ausliefern'' wird ausgewählt\newline
+  3. Softwarestände für das Device werden angezeigt\newline
+  4. Softwarestand wird selektiert\newline
+  5. ''Sind Sie sich sicher?''-Abfrage wird angezeigt\newline
+  6. Updatevorgang wird gestartet\newline
+  7. Device Feedback anzeigen
+ \\ \hline 
+ \textbf{Extensions} &
+  1.a Benutzer selektiert mehrere Geräte. \newline
+  3.a Fehlermeldung, da kein Softwarestand vorhanden sind\newline
+  5.a Abfrage wird verneint -> Vorgang wird abgebrochen\newline
+  7.a Timeout wird erreicht.\newline
+  7.b Fehlermeldungen zu der Wiederherstellung wird angezeigt.  
+  \\ \hline 
  \end{longtable}
  
 \subsubsection{Device sichern}
@@ -186,11 +206,30 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 12\\ \hline 
  \textbf{Name} & Device sichern\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Von den Devices können Sicherung gemacht werden, welche den Software- sowie den Konfigurationsstand beinhalten. Diese Sicherungen werden gespeichert und abgelegt. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \\ \hline
+ \textbf{Postconditions} & 
+  \tabitem Sicherung des Gerätes sind gespeichert
+  \tabitem Sicherung sind valid
+ \\ \hline 
+ \textbf{Main Success Scenario} &
+  1. Benutzer selektiert das betreffende Device aus. \newline
+  2. ''Device sichern'' wird ausgewählt\newline
+  3. Die Sicherung wird benannt und ein Datum wird vergeben
+  4. ''Sind Sie sich sicher?''-Abfrage wird angezeigt\newline
+  5. Sicherungsvorgang wird gestartet\newline
+  6. Device Feedback anzeigen
+ \\ \hline 
+ \textbf{Extensions} &
+  1.a Benutzer selektiert mehrere Geräte. \newline
+  3.a Fehlermeldung wird angezeigt, da der gleiche Name schon vorhanden ist\newline
+  4.a Abfrage wird verneint -> Vorgang wird abgebrochen\newline
+  6.a Timeout wird erreicht.\newline
+  6.b Fehlermeldungen zu der Wiederherstellung wird angezeigt.  
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Device wiederherstellen}
@@ -199,11 +238,32 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 13\\ \hline 
  \textbf{Name} & Device wiederherstellen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Das Device muss wiederhergestellt werden. Dadurch wird ein Software- sowie Konfigurationsstand auf das Device geschrieben. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \\ \hline
+ \textbf{Postconditions} &
+  \tabitem Das Gerät funktioniert korrekt\newline
+  \tabitem Das Gerät hat den richtigen Softwarestand\newline
+  \tabitem Das Gerät hat die richtige Konfiguration
+  \\ \hline 
+ \textbf{Main Success Scenario} & 
+  1. Benutzer selektiert das betreffende Device aus. \newline
+  2. ''Device wiederherstellen'' wird ausgewählt\newline
+  3. Backups für das Device werden angezeigt\newline
+  4. Backup wird selektiert\newline
+  5. ''Sind Sie sich sicher?''-Abfrage wird angezeigt\newline
+  6. Wiederherstellungsvorgang wird gestartet\newline
+  7. Device Feedback anzeigen
+ \\ \hline 
+ \textbf{Extensions} &
+  1.a Benutzer selektiert mehrere Geräte. \newline
+  3.a Fehlermeldung, da keine Backups vorhanden sind\newline
+  5.a Abfrage wird verneint -> Vorgang wird abgebrochen\newline
+  7.a Timeout wird erreicht.\newline
+  7.b Fehlermeldungen zu der Wiederherstellung wird angezeigt. 
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Device authentisieren}
@@ -212,24 +272,61 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 14\\ \hline 
  \textbf{Name} & Device authentisieren\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Alle Devices müssen beim Erstellen authentisiert werden. Dazu werden die Logindaten eingegeben und es wird eine Verbindung zum Gerät erstellt. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst \\ \hline
+ \textbf{Postconditions} & 
+ \tabitem Device ist erreichbar \newline
+ \tabitem Device ist authentisiert \newline
+ \tabitem Authentisierungsdaten sind gespeichert \\ \hline
+ \textbf{Main Success Scenario} &
+  1. Device wird ausgewählt \newline
+  2. Logindaten werden eingegeben\newline
+  3. Der Verbindungsaufbau wird gemacht\newline
+  4. Feedback des Devices\newline
+  5. Speicherung der Authentisierungsdaten
+ \\ \hline 
+ \textbf{Extensions} &
+  1.a Device wird durch UC 02: Device erstellen erfasst\newline
+  1.b Device wird durch UC 03: Device finden erfasst\newline
+  4.a Timeout\newline
+  4.b Fehlermeldung des Devices anzeigen
+ \\ \hline 
  \end{longtable}
  
-\subsubsection{Schlüssel verwalten}
+\subsubsection{Schlüssel CRUD}
 \mbox{}
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
  \textbf{ID} & 14.1\\ \hline 
  \textbf{Name} & Schlüssel verwalten\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Alle Schlüssel (Z.B Username und Passwort) können verwaltet werden. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \\ \hline
+ \textbf{Postconditions} & 
+ \tabitem Schlüssel sind richtig abgespeichert \\ \hline
+ \textbf{Main Success Scenario} &
+ \textbf{Create:}\newline
+  1. UC 15.2: Device authentisieren \newline
+ \textbf{Read:} \newline
+  1. Device wird ausgewählt \newline
+  2. Schlüssel anzeigen wird gewählt  \newline
+  3. Schlüsseldaten werden angezeigt \newline
+ \textbf{Update:}\newline
+  1. Device wird ausgewählt \newline
+  2. Schlüssel anzeigen wird gewählt  \newline
+  3. Schlüsseldaten werden angepasst \newline
+  4. Schlüsseldaten werden abgespeichert \newline
+ \textbf{Delete:}\newline
+  1. Schlüsseldaten werden gelöscht \\
+ \hline 
+ \textbf{Extensions} &
+ Read/Update 2.a Admin Verifizierung
+ \\ \hline 
  \end{longtable}
  
 \subsubsection{Zertifikate verteilen}
@@ -238,11 +335,25 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 14.2\\ \hline 
  \textbf{Name} & Zertifikate verteilen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Zertifikate werden auf die jeweiligen Devices verteilt. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \newline
+  \tabitem Zertifikate sind im richtigen Format vorhanden \\ \hline
+ \textbf{Postconditions} & 
+ \tabitem Zertifikate befinden sich auf den Devices \newline
+ \tabitem Zuteilung von Device-Zertifikat ist im Management hinterlegt \\ \hline
+ \textbf{Main Success Scenario} &
+  1. Benutzer selektiert das betreffende Device aus. \newline
+  2. Der Benutzer wählt ''Zertifikat verteilen'' \newline
+  3. Das gewünschte Zertifikat wird ausgewählt und bestätigt \newline
+  4. Das Zertifikat wird an das Devices gesendet \newline
+  5. Feedback anzeigen \\ \hline
+ \textbf{Extensions} & 
+ 1.a Benutzer selektiert mehrere Geräte. \newline
+ 5.a Fehlermeldungen werden angezeigt. \newline
+ 5.b Timeout wird erreicht. \\ \hline 
  \end{longtable}
  
 \subsubsection{Zertifikate CRUD}
@@ -251,25 +362,59 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
  \hline
  \textbf{ID} & 14.3\\ \hline 
  \textbf{Name} & Zertifikate CRUD\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+ \textbf{Beschreibung} & Alle Zertifikate werden zentral verwaltet. Diese Zertifikate stammen von den Sensoren, damit man das Vertrauen überprüfen kann. \\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar
+  \\ \hline 
+ \textbf{Postconditions} & 
+ \tabitem Zertifikate sind gespeichert \newline
+ \tabitem Veraltete Zertifikate sind gelöscht
+ \\ \hline
+ \textbf{Main Success Scenario} &
+ \textbf{Create:}\newline
+  1. UC 15.2: Zertifikate verteilen \newline
+ \textbf{Read:} \newline
+  1. Zertifikate werden von Device angefordert \newline
+  2. Zertifikat wird auf Gültigkeit geprüft  \newline
+  3. Zertifikat wird in der Datenbank gespeichert \newline
+ \textbf{Update:}\newline
+  1. Neues Zertifikat wird vom Device angefordert \newline
+  2. Zertifikat wird auf Gültigkeit geprüft  \newline
+  3. Zertifikat wird in der Datenbank gespeichert \newline
+ \textbf{Delete:}\newline
+  1. Zertifikat wird gelöscht \\
+ \hline 
+ \textbf{Extensions} & -\\ \hline 
  \end{longtable} 
- 
-\subsubsection{Device Kommandos ausführen}
+
+\subsubsection{Kommandos ausführen}
 \mbox{}
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
- \textbf{ID} & 15\\ \hline 
- \textbf{Name} & Device Kommandos ausführen\\ \hline 
- \textbf{Beschreibung} & • \\ \hline 
- \textbf{Preconditions} & • \\ \hline 
- \textbf{Postconditions} & • \\ \hline 
- \textbf{Main Success Scenario} & • \\ \hline 
- \textbf{Extensions} & • \\ \hline 
+  \textbf{ID} & 16\\ \hline 
+ \textbf{Name} & Kommandos ausführen\\ \hline 
+ \textbf{Beschreibung} & Dem Gerät werden Kommandos, wie zum Beispiel ''Reboot'' oder ''Shutdown'', gesendet.\\ \hline 
+ \textbf{Preconditions} & 
+  \tabitem Applikation gestartet\newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Devices sind erfasst und erreichbar \\ \hline 
+ \textbf{Postconditions} & 
+ \tabitem Kommandos sind ausgeführt \newline
+ \tabitem Device Feedback
+ \\ \hline
+ \textbf{Main Success Scenario} &
+  1. Benutzer selektiert das betreffende Device aus. \newline
+  2. Das auszuführende Kommando wird gewählt/eingegeben \newline
+  3. Das Kommando wird an alle ausgewählten Devices gesendet \newline
+  4. Devicefeedback wird angezeigt. \\ \hline 
+ \textbf{Extensions} &
+ 1.a Benutzer selektiert mehrere Geräte. \newline
+ 4.a Fehlermeldungen zu dem Kommando werden angezeigt. \newline
+ 4.b Timeout wird erreicht. \\ \hline 
 \end{longtable}
+
 
 
  
