@@ -8,21 +8,23 @@ Mit <insert Application Name here> soll eine Management Applikation bereitgestel
 <insert Application Name here> soll den Benutzern erlauben, IoT Geräte zu verwalten. Die Aufgaben reichen vom Erfassen und Discovery von Devices über die Konfigurationsverwaltung und Softwareverteilung bis zu Backup und Restore. Ausserdem sollen Management-relevante Kommandos auf Devices ausgeführt- und Security Aspekte beachtet werden. Die Details zu den Produktfunktionen sind den Use Cases zu entnehmen.
 
 \subsection{Benutzer Charakteristik}
-Zielpersonen sind Netzwerk Engineers, System Administratoren und weitere Informatiker mit Tätigkeit im Netzwerkbereich. Es werden solide Grundkenntnisse in IP-Netzwerken sowie Kenntnisse der verwendeten Netzwerk Devices vorausgesetzt. 
+Zielpersonen der Applikation sind Betreiber von IoT Devices. Dies können im Enterprise Umfeld IT-Mitarbeiter in operationeller Funktion-, oder auch Softwareentwickler für IoT Applikationen sein. Heimanwender können bei entsprechenden Kenntnissen ebenfalls zur Zielgruppe gehören. Es werden solide Grundkenntnisse in TCP/IP Netzwerken sowie Verständnis der verwendeten IoT Architekturen und Devices vorausgesetzt. 
 \subsection{Einschränkungen}
-Evtl. Browser Einschränkungen, müsste nach Prototyp nochmals definiert werden
+Evtl. Browser Einschränkungen und bestimmte Use Cases, müsste nach Prototyp nochmals definiert werden
 \section{Use Cases}
 \subsection{Use Cases Diagramm}
 %\includegraphics[scale=0.52]{figures/UseCase_Diagram}
 \subsection{Aktoren}
-Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Zu testende Netzwerkdevices agieren als technische Aktoren in diesem System.
+Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor.
 \subsection{Beschreibungen (Brief)}
-\subsubsection{Device discover}
-Der User möchte einzelne oder mehrere Tests erstellen. Damit dies möglich ist, sind drei weitere Use Cases nötig.
+\subsubsection{discover Device}
+Der Benutzer möchte ein IoT Device finden. Entsprechende IoT Devices sollen dem Benutzer zur Adoption aufgelistet werden. 
 \subsubsection{Device erfassen}
-bla
+Der Benutzer möchte ein IoT Device manuell hinzufügen. Der Endpunkt ist dem Benutzer bekannt. 
+\subsubsection{Assoziation erstellen}
+Der Benutzer möchte ein- oder mehrere IoT Device(s) verwalten. Dazu muss er das gefundene Device in das System adoptieren. 
 \subsubsection{Device CRUD}
-bla
+
 \subsubsection{Device abfragen}
 blabla
 \subsubsection{Konfiguration speichern}
