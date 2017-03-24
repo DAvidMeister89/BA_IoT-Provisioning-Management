@@ -17,6 +17,34 @@ Eventuelle Einschränkungen werden in der Designphase noch genauer spezifiziert.
 \centering
 \includegraphics[scale=0.425]{images/use_case_diagram.png}\caption{Use Case Diagramm}
 \end{figure}
+\newpage
+\subsection{Priorisierung}
+Da die Umsetzung aller Use Cases den Rahmen einer Bachelorarbeit sprengen würde, wurden die diese wie folgt priorisiert:
+\begin{center}
+\begin{longtable}{| p{5.5cm} | p{3cm} |}
+\hline
+\textbf{Use Case} & \textbf{Priorität}\\ \hline
+UC 01: Benutzer registrieren     & Optional \\ \hline
+UC 02: Benutzer CRUD	         & Optional \\ \hline 
+UC 03: Device erfassen           & Pflicht \\ \hline 
+UC 04: Device finden             & Pflicht \\ \hline 
+UC 05: Device assoziieren        & Pflicht \\ \hline 
+UC 06: Device CRUD               & Pflicht \\ \hline 
+UC 07: Device abfragen           & Pflicht \\ \hline 
+UC 08: Konfig speichern          & Pflicht \\ \hline 
+UC 09: Konfig verteilen          & Optional \\ \hline 
+UC 10: Konfig anzeigen           & Pflicht \\ \hline 
+UC 11: Software speichern        & Pflicht \\ \hline 
+UC 12: Software verteilen        & Optional \\ \hline 
+UC 13: Device sichern            & Optional \\ \hline 
+UC 14: Device wiederherstellen   & Optional \\ \hline 
+UC 15: Device authentisieren     & Optional \\ \hline 
+UC 15.1: Schlüssel CRUD          & Pflicht \\ \hline 
+UC 15.2: Zertifikat verteilen    & Optional \\ \hline 
+UC 15.3: Zertifikat CRUD         & Pflicht \\ \hline 
+UC 16: Kommando ausführen        & Pflicht \\ \hline 
+\end{longtable}
+\end{center}
 \subsection{Aktoren}
 Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Dieser bewirtschaftet die Applikation und verwaltet alle Devices und Benutzer. Als Sekundärer Aktor werden die einzelnen Devices gezählt.
 \newpage
@@ -551,27 +579,27 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
 \end{longtable}
 \newpage
 \section{Nichtfunktionale Anforderungen}
-In diesem Kapitel behandeln wir die nichtfunktionalen Anforderungen an das Projekt. Wir behandeln Aspekte und Anforderungen aus den Bereichen Qualität, Schnittstellen und Randbedingungen.
+In diesem Kapitel werden die nicht funktionalen Anforderungen des Projekt aufgezeigt. Wir behandeln Aspekte und Anforderungen aus den Bereichen Qualität, Schnittstellen und Randbedingungen.
 \subsection{Qualität}
-Bei der Softwarequalität stützen wir uns auf die ISO/IEC 9126 Norm. Es werden die Merkmale Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit und Übertragbarkeit aufgeführt.
+Bei der Softwarequalität stützen wir uns auf die ISO/IEC 9126 Norm. Es werden die Merkmale Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit und Übertragbarkeit aufgeführt. 
 \subsubsection{Funktionalität}
-IoT Devices können von vielen unterschiedlichen Herstellern kommen. Devices können somit sehr unterschiedliche Attribute enthalten. Ebenfalls können sich die Art der Kommunikation und unterstützte Netzwerkprotokolle unterscheiden. Um die Funktionalität best möglich sicherzustellen, wird die Herstellerunterstützung vorerst stark eingeschränkt.
+IoT Devices können von vielen unterschiedlichen Herstellern kommen. Devices können somit sehr unterschiedliche Attribute enthalten. Ebenfalls können sich die Art der Kommunikation und unterstützte Netzwerkprotokolle unterscheiden. Um die Funktionalität bestmöglich sicherzustellen, wird die Herstellerunterstützung vorerst stark eingeschränkt.
 \subsubsection{Zuverlässigkeit}
-Eine Managementplattform von IoT Devices ist nicht realtime-kritisch. Für die Provisionierung, Fehlersuche oder Updateprozesse kann sie aber durchaus notwendig sein. Da die Applikation über das Internet erreichbar ist, muss die Applikationssicherheit gewährleistet sein. Eine Kompromittierung der Management Plattform könnte die gesamte IoT Landschaft eines Unternehmens beeinträchtigen. 
+Eine Managementplattform von IoT Devices ist nicht Realtime-kritisch. Bei einem Ausfall der Managementplattform, würde das nicht zu einem Schwerwiegenden Problem führen, da die Geräte trotzdem weiterarbeiten könnten. Für die Provisionierung, Fehlersuche oder Updateprozesse ist das Managementtool aber unerlässlich
 
-Durch die vielseitigen Aufgaben muss auf die Parallelität geachtet werden. Es werden durchaus zeitintensive Tasks ausgeführt welche potenziell die Applikation über längere Zeit blockieren könnten.
+Durch die vielseitigen Aufgaben muss auf die Parallelität geachtet werden. Es werden durchaus zeitintensive Tasks ausgeführt, welche potenziell die Applikation über längere Zeit blockieren könnten.
 \subsubsection{Benutzbarkeit}
-Um eine einfache Bedienung zu gewährleisten soll eine einfache und zweckmässige Benutzeroberfläche zur Verfügung gestellt werden.
+Um eine simple Bedienung zu gewährleisten soll eine einfache und zweckmässige Benutzeroberfläche zur Verfügung gestellt werden.
 \subsubsection{Effizienz}
-Die Effizienz hängt stark von den IoT Devices und deren Internetbandbreite und Rechenleistung ab. 
+Die Effizienz hängt stark von den IoT Devices, deren Internetbandbreite und Rechenleistung ab.
 \subsubsection{Wartbarkeit}
-Sämtliche Teile der Software sollen möglichst modular und lose gekoppelt aufgebaut werden. Eine Management Applikation für IoT könnte potenziell sehr umfangreich sein und eine Weiterentwicklung muss in Betracht gezogen werden. 
+Sämtliche Teile der Software sollen möglichst modular und lose gekoppelt aufgebaut werden. Eine Management-Applikation für IoT könnte potenziell sehr umfangreich sein und eine Weiterentwicklung muss in Betracht gezogen werden. Auch muss der gesamte Codeumfang verständlich sein oder mit allfälligen Kommentaren/Dokumentationen beschrieben sein.
 \subsubsection{Übertragbarkeit}
-Die Applikation soll für Clients über gängige Web Browser zugänglich sein. Deshalb sollte eine Übertragbarkeit auf verschiedene Clientsysteme keine Probleme darstellen.
+Die Applikation soll für Clients über gängige Webbrowser zugänglich sein. Deshalb sollte eine Übertragbarkeit auf verschiedene Clientsysteme keine Probleme darstellen.
 \subsection{Schnittstellen}
 \subsubsection{Benutzerschnittstellen}
 Die Steuerung des Programms ist über eine grafische Weboberfläche vorgesehen. Tastatur und Maus sind notwendig.
 \subsubsection{Netzwerkschnittstellen}
 Um die Applikation zu bedienen benötigt der Client einen funktionierenden Internetanschluss. Die Applikation selbst muss ebenfalls über einen Internetzugang verfügen und die nötigen Kommunikationsports müssen geöffnet sein.
 \subsection{Sicherheit}
-Als eingeloggter Benutzer könnte man viel Schaden am IoT System verursachen. Man könnte beispielsweise Geräte herunterfahren oder mit bösartiger Malware austatten. Es gilt unbedingt die Grundregeln der Informationssicherheit einzuhalten. Sämtliche Zugriffe sollen autorisiert- und vertrauliche Informationen verschlüsselt übertragen werden.
+Da die Applikation über das Internet erreichbar ist, muss die Applikationssicherheit gewährleistet sein. Eine Kompromittierung der Management Plattform könnte die gesamte IoT Landschaft eines Unternehmens beeinträchtigen. Man könnte beispielsweise Geräte herunterfahren oder mit bösartiger Malware ausstatten. Es gilt unbedingt die Grundregeln der Informationssicherheit einzuhalten. Sämtliche Zugriffe sollen autorisiert- und vertrauliche Informationen verschlüsselt übertragen werden.
