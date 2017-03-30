@@ -1,13 +1,13 @@
 
 \chapter{Design}
 \section{Systemübersicht}
-%TODO Blabla
-
+In der folgenden Abbildung ist das System auf hoher Abstraktionsstufe zu sehen. Die Applikation ist über einen Web Browser bedienbar. Auf dem Management Server werden verschiedenstartige IoT Devices verwaltet. Der Management Server kommuniziert über TCP/IP mit den Devices.  
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{images/systemuebersicht.png}
-\caption{Klassendiagramm}
+\includegraphics[scale=0.6]{images/systemuebersicht.png}
+\caption{Systemübersicht}
 \end{figure}
+Der User kann seine IoT Devices entweder manuell erfassen, oder über ein Discovery ins System aufnehmen. Sobald ein Device im System ist, können hardware- und konfigurationsspezifische Parameter ausgelesen werden. Gemäss Use Case Analyse sind auch der Austausch von Dateien und das Absetzen von Kommandos vorgesehen. 
 \newpage
 
 \begin{landscape}
@@ -217,7 +217,7 @@ Im Presentation-Layer wird das MVC-Pattern umsetzt. Dazu wird ein Controller, ei
     {Packagename} & {Beschreibung}\\ \midrule
     Controller & Der Controller verwaltet alle Anfragen der View und bearbeitet das Model dementsprechend.\\       
     View & Die View bekommt von dem Model die Daten und Renderd dazu die jeweiligen Anzeigen. \\
-    Model & Im Model werden alle Daten gehalten, welche die View anzeigt. Nur der Controller hat direkten Zugriff auf diese Daten.
+    Model & Im Model werden alle Daten gehalten, welche die View anzeigt. Nur der Controller hat direkten Zugriff auf diese Daten. \\
     \bottomrule
     \end{tabular}
 \end{table}
