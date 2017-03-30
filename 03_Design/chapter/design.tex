@@ -229,7 +229,7 @@ Der Service-Layer beinhaltet alle Backend Klassen, welche für die Verarbeitung 
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{11cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
     Connect & Die Verbindungsklasse des Servicelayer stellt alle Verbindungen zu den Devices auf.  \\       
      Reader & Alle Daten von den jeweiligen Devices werden von der Reader-Klasse gelesen und an den Data-Layer weitergegeben.  \\       
@@ -247,7 +247,7 @@ Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benö
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{11cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
     Device & Device ist eine Datenklasse, welche alle Daten von einem Device beinhaltet.\\
     Credentials & Alle Zugriffsdaten der Devices sind in der Credentials-Klasse definiert. \\
@@ -264,37 +264,73 @@ Der Data-Layer hat eine Schnittstelle zu der Datenbank.
 \section{Architekturentscheidungen}
 In diesem Kapitel werden alle Architekturentscheidungen aufgelistet, welche das Front-End, Back-End, sowie die Datenbank betreffen
 \subsection{Front-End}
-%alternative Bootstrap, angularjs, react, hardcoded
+%alternative Bootstrap, angularjs, react, html + Templateengine
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
-  \textbf{Bereich} & 16\\ \hline 
- \textbf{Problemstellung} & l ''Reboot'' oder ''Shutdown'', gesendet.\\ \hline 
- \textbf{Motivation} &  \\ \hline
- \textbf{Alternativen} &  \\ \hline
- \textbf{Entscheidung} &
+  \textbf{Themengebiet} & Front-End\\ \hline 
+ \textbf{Problemstellung} & Mit welchem Tool soll das Front-End erstellt werden? \\ \hline 
+ \textbf{Motivation} &  Diese Entscheidung ist sekundär, da der Fokus nicht auf dem Front-End liegt. \\ \hline
+ \textbf{Varianten} & 
+ \tabitem Hardcoded mit Template-Engine \newline
+ \tabitem Bootstrap \newline
+ \tabitem React.js \newline
+ \tabitem Angular.js  \\ \hline
+ \textbf{Entscheidung} & Durch die einfache und schnelle Entwicklungsmöglichkeiten wurde Bootstrap gewählt. Angular.js und React.js benötigen eine zu hohe Einarbeitungszeit und sind daher weniger geeignet. Hardcoding mit einer Template-Enginge ist nicht geeignet, da sie einen sehr hohen Aufwand generieren würden, für eine so einfache Oberfläche.\\ \hline
 \end{longtable}
 
 \subsection{Back-End}
-%Alernativen Nodejs, Java Sp§ring, asp.net, play
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
-  \textbf{Bereich} & 16\\ \hline 
- \textbf{Problemstellung} & l ''Reboot'' oder ''Shutdown'', gesendet.\\ \hline 
- \textbf{Motivation} &  \\ \hline
- \textbf{Alternativen} &  \\ \hline
- \textbf{Entscheidung} &
+  \textbf{Bereich} & Server Back-End\\ \hline 
+ \textbf{Problemstellung} & Was für eine Back-End Technologie soll verwendet werden?\\ \hline 
+ \textbf{Motivation} & Diese Entscheidung ist zentral für die Architektur und Entwicklung des Systems. \\ \hline
+ \textbf{Alternativen} &
+ \tabitem Node.js \newline
+ \tabitem Spring Framework \newline
+ \tabitem ASP.Net \newline
+ \tabitem Play Framework \newline
+ \tabitem Ruby on Rails \newline
+ \tabitem Django \\ \hline
+ \textbf{Entscheidung} & Da die grössten Affinitäten bei Java lag, wurde das Spring Framework. Durch die angenehmen Sprachfeatures und dem objektorientierten Ansatz fiel die Entscheidung auf Spring Framework.\\ \hline
+\end{longtable}
+
+\subsection{Webserver}
+\begin{longtable}{| p{4cm} | p{11.7cm} |}
+ \hline
+  \textbf{Bereich} & Webserver\\ \hline 
+ \textbf{Problemstellung} & Was für ein Servlet-Container wird verwendet?\\ \hline 
+ \textbf{Motivation} & Diese Entscheidung ist weniger relevant, da der Servlet-Container einfach ersetzt werden kann. \\ \hline
+ \textbf{Alternativen} &
+ \tabitem Jetty \newline
+ \tabitem Tomcat \newline
+ \tabitem JBoss \\ \hline
+ \textbf{Entscheidung} & Es wurde Jetty als Servlet-Container gewählt, da er stabil und weit verbreitet ist. Eine einfache Anbindung an das Spring Framework ist auch möglich. Dazu gibt es schon Beispiele auf der Spring Website.\\ \hline
 \end{longtable}
 
 
 \subsection{Datenbanktechnologie}
-%Alernativen sql, nosql
 
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
-  \textbf{Bereich} & 16\\ \hline 
- \textbf{Problemstellung} & l ''Reboot'' oder ''Shutdown'', gesendet.\\ \hline 
- \textbf{Motivation} &  \\ \hline
- \textbf{Alternativen} &  \\ \hline
- \textbf{Entscheidung} & 
+  \textbf{Bereich} & Datenbanktechnologie\\ \hline 
+ \textbf{Problemstellung} & Wird eine SQL oder eine NoSQL Datenbank verwendet?\\ \hline 
+ \textbf{Motivation} &  Die Entscheidung ist weniger wichtig, da beide Varianten möglich wären, ohne grosse Nachteile.\\ \hline
+ \textbf{Alternativen} & 
+ \tabitem SQL \newline
+ \tabitem NoSQL \\ \hline
+ \textbf{Entscheidung} & Für dieses Projekt wurde NoSQL als Datenbanktechnologie gewählt. Viele Features von SQL werden bei diesem Projekt nicht benötigt. Auch sind die NoSQL-Datenbanken auf Skalierung ausgelegt, was bei einer solchen Applikation sicher wichtig ist.\\ \hline
 \end{longtable}
 
+\subsection{Datenbank}
+
+\begin{longtable}{| p{4cm} | p{11.7cm} |}
+ \hline
+  \textbf{Bereich} & Datenbank\\ \hline 
+ \textbf{Problemstellung} & Welcher Datenbank soll verwendet werden? \\ \hline 
+ \textbf{Motivation} &  Diese Entscheidung ist weniger wichtig, da es viele gute NoSQL Datenbanken gibt. Es muss aber auf den Featureumfang geachtet werden.\\ \hline
+ \textbf{Alternativen} & 
+ \tabitem Redis \newline
+ \tabitem MongoDB \newline
+ \tabitem CouchDB\\ \hline
+ \textbf{Entscheidung} & tbd  \\ \hline
+\end{longtable}
