@@ -8,7 +8,6 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{ngerman}
-\usepackage{cmbright}
 \usepackage[nottoc,numbib]{tocbibind}
 \usepackage{scrhack} 
 \usepackage{floatrow} 
@@ -27,7 +26,6 @@
 \usepackage{graphicx}
 \usepackage{pdflscape}
 \usepackage{pdfpages}
-\usepackage{pifont}
 \usepackage{rotating}
 \usepackage{soul}
 \usepackage{tabularx}
@@ -36,16 +34,32 @@
 \usepackage{xcolor,colortbl}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{booktabs}
+%
+% Font Settings
+%
+\usepackage{libertine}
+
 %
 % Settings
 %
+\titleformat{\chapter}{\Huge\mdseries}{\thechapter.}{1em}{}
+\titleformat{\section}{\LARGE\mdseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\Large\mdseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[runin]{\large\bfseries}{}{}{}
+
+
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\parskip}{5pt plus -10pt minus -5pt}
+\titlespacing*{\chapter}{0pt}{0pt}{15pt}
 \setlength{\emergencystretch}{3em}
-
+\bibliographystyle{plain}
 
 \setlist[itemize]{noitemsep, topsep=0pt}
+
+\newcommand{\tabitem}{\textbullet~~}
 
 %
 % Metainfos
@@ -71,7 +85,7 @@
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
 \newcommand{\inputlisting}[2][]{%
-  \lstinputlisting[caption={\texttt{\detokenize{#2}}},#1]{#2}%
+\lstinputlisting[caption={\texttt{\detokenize{#2}}},#1]{#2}%
 }
 
 %
@@ -109,7 +123,7 @@
   keywordstyle = \color{sh_keyword}\bfseries,
   commentstyle=\color{darkgreen}\itshape,
   captionpos=b,
-  %lineskip=-0.1em,
+  lineskip=-0.1em,
   showstringspaces=false,
   escapebegin={\lstsmallmath}, escapeend={\lstsmallmathend},
   breaklines=true, % breakatwhitespace=true,
