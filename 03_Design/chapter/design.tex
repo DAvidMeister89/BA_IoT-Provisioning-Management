@@ -1,4 +1,5 @@
 \chapter{Design}
+In diesem Kapitel wird die Software Architektur erarbeitet. Es soll sowohl die Problemdomäne abstrakt mittels Domänenmodell analysiert werden, als auch ein Klassendesign mittels Schichtendiagramm erarbeitet werden. Es werden geeignete Tools und Framework sowohl für Front-, als auch für das Backend erarbeitet. Es stehen verschiedene Technologien für die Datenpersistenz zur Verfügung, welche näher beleuchtet werden sollen.
 \section{Systemübersicht}
 In der folgenden Abbildung ist das System auf hoher Abstraktionsstufe zu sehen. Die Applikation ist über einen Web Browser bedienbar. Auf dem Management Server werden verschiedenstartige IoT Devices verwaltet. Der Management Server kommuniziert über TCP/IP mit den Devices. 
 \begin{figure}[H]
@@ -6,7 +7,9 @@ In der folgenden Abbildung ist das System auf hoher Abstraktionsstufe zu sehen. 
 \includegraphics[scale=0.6]{images/systemuebersicht.png}
 \caption{Systemübersicht}
 \end{figure}
-Der User kann seine IoT Devices entweder manuell erfassen, oder über ein Discovery ins System aufnehmen. Sobald ein Device im System ist, können hardware- und konfigurationsspezifische Parameter ausgelesen werden. Gemäss Use Case Analyse sind auch der Austausch von Dateien und das Absetzen von Kommandos vorgesehen. 
+Der User kann seine IoT Devices entweder manuell erfassen, oder über ein Discovery ins System aufnehmen. Sobald ein Device im System ist, können hardware- und konfigurationsspezifische Parameter ausgelesen werden. Gemäss Use Case Analyse sind auch der Austausch von Dateien und das Absetzen von Kommandos vorgesehen.
+
+Das Big Picture zeigt ein Deployment im Internet. Denkbar wäre sowohl die Bereitstellung mit einem eigenen Hosting, als auch in der Cloud bei einem Platform as a Service (PaaS) Anbieter. Benutzer der Management Applikation sollen über ein Web-GUI ihre IoT Devices administrieren können.
 \newpage
 
 \begin{landscape}
@@ -262,51 +265,54 @@ Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benö
 Der Data-Layer hat eine Schnittstelle zu der Datenbank.
 
 \section{Architekturentscheidungen}
-In diesem Kapitel werden alle Architekturentscheidungen aufgelistet, welche das Front-End, Back-End, sowie die Datenbank betreffen
-\subsection{Front-End}
-%alternative Bootstrap, angularjs, react, html + Templateengine
-\begin{longtable}{| p{4cm} | p{11.7cm} |}
- \hline
-  \textbf{Themengebiet} & Front-End\\ \hline 
- \textbf{Problemstellung} & Mit welchem Tool soll das Front-End erstellt werden? \\ \hline 
- \textbf{Motivation} &  Diese Entscheidung ist sekundär, da der Fokus nicht auf dem Front-End liegt. \\ \hline
- \textbf{Varianten} & 
- \tabitem Hardcoded mit Template-Engine \newline
- \tabitem Bootstrap \newline
- \tabitem React.js \newline
- \tabitem Angular.js  \\ \hline
- \textbf{Entscheidung} & Durch die einfache und schnelle Entwicklungsmöglichkeiten wurde Bootstrap gewählt. Angular.js und React.js benötigen eine zu hohe Einarbeitungszeit und sind daher weniger geeignet. Hardcoding mit einer Template-Enginge ist nicht geeignet, da sie einen sehr hohen Aufwand generieren würden, für eine so einfache Oberfläche.\\ \hline
-\end{longtable}
+In diesem Kapitel werden alle Architekturentscheidungen aufgelistet, welche das Front-End, Back-End, sowie die Datenbank betreffen. Für jeden dieser Bereiche wurden Kriterien erarbeitet. Die Auswahl geschieht aufgrund der Bewertung anhand dieser Kriterien.
 
 \subsection{Back-End}
+Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heutzutage existieren einige beliebte Frameworks um Web Applikationen zu erstellen. Die zu verwendende Programmiersprache ist bei vielen Frameworks ebenfalls unterschiedlich und sollte berücksichtigt werden.
+
+\subsubsection{Kriterien}
+\begin{itemize}
+\item Open-Source Lizenz
+\item Einfache Bedienung und schnelle Einarbeitung
+\item Gute Dokumentation und Unterstützung durch die Community
+\item Performance / Skalierbarkeit
+\item Libraries für IoT Kommunikationsprotokolle
+\item Kenntnisse der Programmiersprache
+\end{itemize}
+
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
-  \textbf{Bereich} & Server Back-End\\ \hline 
- \textbf{Problemstellung} & Was für eine Back-End Technologie soll verwendet werden?\\ \hline 
- \textbf{Motivation} & Diese Entscheidung ist zentral für die Architektur und Entwicklung des Systems. \\ \hline
- \textbf{Alternativen} &
- \tabitem Node.js \newline
- \tabitem Spring Framework \newline
- \tabitem ASP.Net \newline
- \tabitem Play Framework \newline
- \tabitem Ruby on Rails \newline
- \tabitem Django \\ \hline
- \textbf{Entscheidung} & Da die grössten Affinitäten bei Java lag, wurde das Spring Framework. Durch die angenehmen Sprachfeatures und dem objektorientierten Ansatz fiel die Entscheidung auf Spring Framework.\\ \hline
+  \textbf{Node.js} & Node.js ist eine Plattform für serverseitiges JavaScript. Das I/O-Handling ist event-driven und nicht-blockierend. Jeder Node.js Prozess ist single-threaded. Node.js hat viele Erweiterungsmodule wie z.B. Express um Web Applikationen zu erstellen. Für Web Applikationen ist Node.js mit Express besonders gut geeignet, da auf Client- und Serverseite mit JavaScript gearbeitet werden kann.\\ \hline 
+ \textbf{Spring MVC} & Spring MVC wird verwendet um dynamische Webseiten mit Java Servlets zu erstellen. Dependency Injection und aspektorientierte Programmierung sind ebenfalls unterstützt. Konfigurationen über XML und Java Annotations unterstützen den Entwickler beim Erstellen von MVC Web-Applikationen. Die Library-Unterstützung für IoT spezifische Kommunikationsprotokolle wie beispielsweise CoAP sind bei Java EE hervorragend.\\ \hline 
 \end{longtable}
 
-\subsection{Webserver}
+\newpage
+\subsection{Front-End}
+Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersichtliche Weise die Interaktion ermöglichen. Es sollen einerseits neue Geräte hinzugefügt werden, andererseits bestehende Geräte verwaltet oder überwacht werden. Potenziell könnten eine grosse Anzahl solcher IoT Devices vorliegen, weshalb diese übersichtlich gruppiert werden sollen.
+
+\subsubsection{Kriterien}
+\begin{itemize}
+\item Webbasierter Zugriff
+\item Responsive Web Design für unterschiedliche Bildschirmgrössen
+\item Open-Source Lizenz
+\item Einfache Bedienung und schnelle Einarbeitung
+\item Gute Dokumentation und Unterstützung durch die Community
+\end{itemize}
+
+\subsubsection{Varianten}
+Bei der Variantenauswahl wurden drei sich stark unterscheidende Ansätze gewählt. Grundsätzlich wären weitere Frameworkalternativen zu Bootstrap und Angular.js denkbar.
+
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
  \hline
-  \textbf{Bereich} & Webserver\\ \hline 
- \textbf{Problemstellung} & Was für ein Servlet-Container wird verwendet?\\ \hline 
- \textbf{Motivation} & Diese Entscheidung ist weniger relevant, da der Servlet-Container einfach ersetzt werden kann. \\ \hline
- \textbf{Alternativen} &
- \tabitem Jetty \newline
- \tabitem Tomcat \newline
- \tabitem JBoss \\ \hline
- \textbf{Entscheidung} & Es wurde Jetty als Servlet-Container gewählt, da er stabil und weit verbreitet ist. Eine einfache Anbindung an das Spring Framework ist auch möglich. Dazu gibt es schon Beispiele auf der Spring Website.\\ \hline
+  \textbf{Hardcoding} & Hardcoding des Frontends bringt wenige Vorteile. Sämtlicher HTML, CSS und JavaScript Code müsste von Hand geschrieben werden. Ein selber erstelltes responsives Layout mit CSS ist zwar möglich, aber aufwändig. Es müsste somit viel Zeit in das Layout und das Styling für ein ansprechendes Ergebnis investiert werden. Eine Cross-Browser Unterstützung ist ebenfalls schwierig.\\ \hline 
+ \textbf{Twitter Bootstrap} & Bootstrap von Twitter ist ein weit verbreitetes Framework für Webseiten. Responsive Layouts für unterschiedliche Bildschirmgrössen werden unterstützt. Elemente wie Buttons, Drop-Down Menüs und ähnliches werden von Bootstrap auf sehr einfache Weise bereitgestellt. Die JavaScript Funktionalitäten beschränken sich auf die Anzeige von UI Elementen. Falls JavaScript für die Programmierung der Applikation verwendet wird sollte ein weiteres Framework dafür verwendet werden.\\ \hline 
+ \textbf{Angular.js} & Angular.js ist ein bekanntes Framework für Single Page Applications (SPA) im MVC Stil. Angular.js ist TypeScript 2 basiert, hat Dependency Injection Mechanismen eingebaut, unterstützt 2-way Databinding und Unit Testing. Die Software Architektur ist Client-konzentriert, MVC passiert im Browser.\\ \hline
 \end{longtable}
 
+\subsubsection{Entscheidung}
+Durch die einfache und schnelle Entwicklungsmöglichkeiten wurde Bootstrap gewählt. Angular.js hat klare Vorteile bei der Erstellung von Single Page Applications. Nach jetztigen Erkenntnissen sind jedoch keine aufwändigen Funktionen clientseitig vorgesehen, Data-Binding scheint zum heutigen Zeitpunkt nicht notwendig. 
+
+Dem Projektteam ist Angular.js unbekannt und es müsste mit einer langen Einarbeitungszeit und anfänglich schlechter Code-Qualität gerechnet werden. Falls zu einem späteren Zeitpunkt weitere Anforderungen und Funktionen vorgesehen werden, wäre eine \glqq echte\grqq  Single Page Application mit Angular.js eine echte Alternative und könnte die \glqq einfache\grqq Variante mit Bootstrap von Twitter ergänzen oder ablösen.
 
 \subsection{Datenbanktechnologie}
 
