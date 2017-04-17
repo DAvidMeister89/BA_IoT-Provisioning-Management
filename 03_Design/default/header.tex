@@ -35,7 +35,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{titlesec}
-\usepackage{booktabs}
+\usepackage[procnames]{listings}
 %
 % Font Settings
 %
@@ -112,37 +112,35 @@
 % Code Listings
 %
 
-\usepackage{listings}
-\lstset {
-  frame=rlbt,
-  rulesepcolor=\color{black},
-  showspaces=false,showtabs=false,tabsize=2,
-  %numberstyle=\tiny,numbers=left,
-  basicstyle=\ttfamily\footnotesize,
-  stringstyle=\color{sh_string},
-  keywordstyle = \color{sh_keyword}\bfseries,
-  commentstyle=\color{darkgreen}\itshape,
-  captionpos=b,
-  lineskip=-0.1em,
-  showstringspaces=false,
-  escapebegin={\lstsmallmath}, escapeend={\lstsmallmathend},
-  breaklines=true, % breakatwhitespace=true,
-  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-  % postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}}
-}
+%%%%%%%%%%%%%%%%%JSON%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{black}
 
-\lstdefinelanguage{XML} {
-  basicstyle=\ttfamily\footnotesize,
-  morestring=[b]",
-  moredelim=[s][\bfseries\color{maroon}]{<}{\ },
-  moredelim=[s][\bfseries\color{maroon}]{</}{>},
-  moredelim=[l][\bfseries\color{maroon}]{/>},
-  moredelim=[l][\bfseries\color{maroon}]{>},
-  morecomment=[s]{<?}{?>},
-  morecomment=[s]{<!--}{-->},
-  commentstyle=\color{darkgreen},
-  stringstyle=\color{blue},
-  identifierstyle=\color{red}
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\fontsize{10}{12}\selectfont ,       
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
 }
-
-\lstnewenvironment{code}[1][]{ \lstset{language=Java,caption={[#1]{#1}}} }{} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
