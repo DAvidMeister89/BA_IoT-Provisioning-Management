@@ -59,7 +59,7 @@ Die Aufgaben des Konfigurationsmanagements sind immens wichtig. Bei fehlerhaften
 
 \subsection{Monitoring und Diagnose}
 \subsubsection{Was ist Monitoring?}
-Bei all den Millionen Devices ist ein Monitoring unerlässlich. Ohne ein ausgeklügeltes Monitoring kann die Überwachung von so vielen Devices sehr schnell chaotisch enden. Daher muss das Monitoring gut durchdacht sein, um sein Ziel nicht zu verfehlen. Doch was ist unser Ziel mit dem Monitoring?
+Beim Einsatz einer grossen Anzahl Devices ist ein Monitoring unerlässlich. Ohne ein ausgeklügeltes Monitoring kann die Überwachung von so vielen Devices sehr schnell chaotisch enden. Daher muss das Monitoring gut durchdacht sein, um sein Ziel nicht zu verfehlen. Doch was ist unser Ziel mit dem Monitoring?
 
 Das Hauptziel des Monitorings ist das proaktive Überwachen der Geräte. Dadurch verringert sich nicht nur die Zeit, die benötigt wird um den Fehler zu erkennen, sondern auch die benötigte Reparaturzeit. So kann die Uptime jedes Sensors möglichst gross gehalten werden und die Produktivität steigt. Ein weiteres Ziel ist das Erkennen von Muster. So können all die gesammelten Daten zusammengefügt werden und die Muster analysiert werden. Dies führt zu einer besseren Früherkennung und auch zu einem Know-How-Gewinn. So können zukünftige Probleme besser erkannt und schneller behoben oder sogar vermieden werden.\cite{MonZiele}
 
@@ -67,7 +67,7 @@ Nun gibt es aber neue Hindernisse bei der Überwachung von IoT-Sensoren. Nicht n
 \subsubsection{Monitoring im IoT-Bereich}
 Im Bereich IoT gibt es spezielle Anforderungen an das Monitoring. Durch die vielen Geräte und die dynamischen Netzwerke muss das Monitoring sehr Flexibel sein. Täglich werden neue Geräte eingeführt und alte entsorgt. Nicht nur der Austausch von Geräten ist mühselig, sondern auch der Standortwechsel. Die Geräte bewegen sich zum Teil und sind so in verschiedenen Netzwerken. Wenn hier kein sinnvolles System eingesetzt wird, häufen sich die fehlerhaften Meldungen und das Monitor wird ineffizient.
 
-Ein weiterer wichtiger Punkt bei IoT-Geräten, ist die Team Kollaboration. Ein einzelner Mitarbeiter hat nicht die Kapazität, alleine Millionen von Sensoren zu Überwachen und zu Warten. Zusätzlich kommen noch weitere Komponenten wie Gateways, Netzwerke oder Clouddienste dazu. Um allen Bereichen ein praktikables Monitoring bereit zu stellen, benötigt man viel Know-how und ein guter Umgang mit den erhaltenen Daten.
+Ein weiterer wichtiger Punkt bei IoT-Geräten ist die Team Kollaboration. Ein einzelner Mitarbeiter hat nicht die Kapazität, alleine tausende von Sensoren zu Überwachen und zu Warten. Zusätzlich kommen noch weitere Komponenten wie Gateways, Netzwerke oder Clouddienste dazu. Um allen Bereichen ein praktikables Monitoring bereit zu stellen, benötigt man viel Know-how und ein guter Umgang mit den erhaltenen Daten.
 
 Bei all den verschiedenen Geräten, stellt sich die Frage. Wie strikt muss die Überwachung eigentlich sein? Hier kann man das Ganze in zwei Bereiche unterteilen. Real-Time Monitoring und Non-Real-Time Monitoring. Die meisten Sensoren benötigen ganz klar kein Real-Time Monitoring. Die Sensoren wachen alle paar Minuten auf, messen die gewünschten Werte, senden diese an einen Gateway und legen sich wieder schlafen. Hier wäre ein Real-Time Monitoring nicht das richtige, da es zu vielen Fehlalarmen kommt. 
 
@@ -79,28 +79,28 @@ Wichtig ist daher die Verfügbarkeit der Sensoren. Spricht der Sensor immer wied
 
 \subsection{Maintenance und Update}
 \subsubsection{Was versteht man unter Maintenance und Update}
-Unter Maintenance versteht man die Wartung und das dazugehörige updaten der Geräte. Bei einer kleinen Anzahl von Geräten geht das vielleicht noch gut mit einer Excel-Liste, aber bei Millionen von Geräten wird es schnell unübersichtlich. Daher wird ein Maintanence Management benötigt.
+Unter Maintenance versteht man die Wartung und das dazugehörige Updaten der Geräte. Bei einer kleinen Anzahl von Geräten funktioniert dies vielleicht noch gut mit einer von Hand geführten Liste, aber bei hunderten oder gar tausenden von Geräten wird es schnell unübersichtlich. Daher wird ein Maintanence Management benötigt.
 
-Ein Bestandteil des Maintenance Management ist das Asset-Management. Hier werden alle Gerätedaten, Hanbücher, Garantien und andere relevanten Daten zum Gerät gespeichert.\cite{MainAsset} So hat man eine zentrale Verwaltung aller wichtigen Daten und kann effizienter arbeiten.
+Ein Bestandteil des Maintenance Managements ist das Asset-Management. Hier werden alle Gerätedaten, Hanbücher, Garantien und andere relevanten Daten zum Gerät gespeichert.\cite{MainAsset} So hat man eine zentrale Verwaltung aller wichtigen Daten und kann effizienter arbeiten.
 
-Alle heutigen Geräte werden mit einem Softwarestand ausgeliefert, bei denen noch Fehler vorhanden sein können. Oder auch die Technik wird ständig weiterentwickelt. Daher veröffentlicht der Gerätehersteller ständig neue Updates und Patches, um neue Funktionen und Sicherheitsupdates einzuspielen. Ohne ein Update-Management wäre diese Aufgabe für so viele Geräte unmöglich. Daher ist eine zentrale Verwaltung unbedingt nötig. 
+Heutige Geräte werden mit einem Softwarestand ausgeliefert, bei denen noch Fehler vorhanden sein könnten. Daher veröffentlicht der Gerätehersteller ständig neue Updates und Patches, um neue Funktionen und Sicherheitsupdates einzuspielen. Ohne ein Update-Management wäre diese Aufgabe für so viele Geräte unmöglich. Daher ist eine zentrale Verwaltung unbedingt nötig. 
 \subsubsection{Maintenance und Update im IoT-Bereich}
-Da es bei IoT-Geräten häufig um Sensoren handelt, welche auch an aussenbereichen platziert werden können, ist ein Wartungsmanagement sehr wichtig. Die Sensoren sind durch die Umwelt härteren Bedingungen ausgesetzt als ein normaler Computer oder Netzwerkgeräte.
+Da es bei IoT-Geräten häufig um Sensoren handelt, welche auch im freien Gelände platziert werden können, ist ein Wartungsmanagement sehr wichtig. Solche Sensoren sind durch die Umwelt härteren Bedingungen ausgesetzt als normale PCs oder Netzwerkgeräte.
 
 Ohne ein ausgereiftes Management, kann diese Menge aber nicht gewartet werden. So soll das Management eine Empfehlung geben, wann die Batterie auszutauschen ist, oder wann der Sensor nicht mehr die gewünschte Genauigkeit liefert. So weiss der Techniker genau, wann welche Sensoren/Geräte ausgetauscht werden müssen.
 
 Bei allfälligen Problemen mit einem IoT-Gerät gibt es ein grosses Problem. Das Gerät kann nicht kurz vom Strom genommen und neu gestartet werden. Der Sensor befindet sich vielleicht 50 Kilometer entfernt an einem schwer erreichbaren Ort. Dadurch muss die Managementumgebung die Wartungspläne auch an dieses Problem anpassen. 
 
-IoT Geräte sind Jahre, wen nicht sogar Jahrzehnte lang im Einsatz. Doch Hersteller können Konkurs gehen oder pflegen ein Produkt nicht weiter. Nun kann es zum Problem kommen, wenn ein Sensor keine Updates mehr erhält und schwerwiegende Sicherheitslücken vorhanden sind. Vor solchen Szenarien sollte man gewarnt werden, nicht das ein Sensor noch zum Einstiegspunkt für Hacker wird.
+IoT Geräte sollte jahrelang im Einsatz sein. Doch Hersteller könnten Konkurs gehen oder pflegen ein Produkt nicht weiter. Nun kann es zum Problem kommen, wenn ein Sensor keine Updates mehr erhält und schwerwiegende Sicherheitslücken vorhanden sind. Vor solchen Szenarien sollte man gewarnt werden, nicht das ein Sensor noch zum Einstiegspunkt für Hacker wird.
 
 Durch die vielen Software Updates bei der hohen Anzahl an Geräten, ist man ohne automatische Software Verteilung und Update Installation verloren. Von Hand kann diese hohe Anzahl an Geräten gar nicht mehr bewältigt werden. So gibt man pro Sensor den gewünschten Softwarestand frei und die Managementumgebung spielt diese automatisch auf die jeweiligen Sensoren. Bei Problemen wird der Administrator benachrichtigt und kann eingreifen.
 
 Updates sind im IoT-Bereich wichtig, da der Markt von Geräten regelrecht geflutet wird. Diese sind bei der Lieferung meist noch gar nicht ausgereift und können zum Sicherheitsproblem für Firmen werden. Wenn man nun nicht eine effiziente Updateumgebung besitzt, kann dies schnell zu einem grossen Problem werden.
 
-Bei der vielen Anzahl von Updates, darf man das Netzwerk nicht vernachlässigen. Bedenkt man, das die Netzwerke speziell für Low-Power ausgelegt sind, muss ein ausgeklügelter Updatemechanismus entwickelt werden. Was passiert wen das Update nicht Vollständig zum Gerät gelangt? Oder muss jedes Update an die einzelnen Sensoren geschickt werden, oder kann man ein Update von einem Knotenpunkt aus verteilen. Bei so vielen Geräten kann ein solches Netz schnell mal in die Knie gehen, wenn man allen Geräten gleichzeitig ein Update schickt.
+Bei der vielen Anzahl von Updates darf man das Netzwerk nicht vernachlässigen. Bedenkt man, das die Netzwerke speziell für Low-Power ausgelegt sind, muss ein ausgeklügelter Updatemechanismus entwickelt werden. Was passiert wen das Update nicht vollständig zum Gerät gelangt? Oder muss jedes Update an die einzelnen Sensoren geschickt werden, oder kann man ein Update von einem Knotenpunkt aus verteilen? Bei vielen Geräten könnte ein solches Netzwerk überlastet werden wenn man allen Geräten gleichzeitig ein Update schickt.
 \subsection{Security Management}
 \subsubsection{Was bedeutet Security Management?}
-Wenn man die Definition nach FCAPS nimmt, geht es bei dem Security Management zum Beispiel um Access Logs, Security Alarm/Event Reporting, Data Privacy, und Selective Resource Access. Wen man diese Punkte abgedeckt hat, hat man schon viel umgesetzt und ein relativ gutes Security Management. Hier sind nun die einzelnen Bereiche genauer erklärt.
+Wenn man die Definition nach FCAPS nimmt, geht es bei dem Security Management zum Beispiel um Access Logs, Security Alarm/Event Reporting, Data Privacy, und Selective Resource Access. Wenn man diese Punkte abgedeckt hat, hat man schon viel umgesetzt und ein relativ gutes Security Management. Hier sind nun die einzelnen Bereiche genauer erklärt.
 
 Access Logs sind eine hilfreiche Massnahme um bei bei Angriffen zu sehen, wer auf das System zugegriffen hat. Mehr Sicherheit schafft man mit Access Logs zwar nicht, aber dafür ist man in der Forensikanalyse dankbar um diese Informationen. Daher sollte man diese Information unbedingt in das Management einbauen. 
 
@@ -110,7 +110,7 @@ Nicht nur all die Systeme müssen den Datenschutz beachten, sondern auch die Man
 
 Die Access Rights gehören zu einem wichtigen Bestandteil des Security Managements. Bei jedem Gerät muss man genau definieren können, wer auf was Zugriff hat. Dies muss bei vielen Geräten möglichst vereinfacht werden. Man stelle sich vor, man müsste bei all seinen Sensoren jeden Einzeln konfigurieren. Dies wäre eine unmögliche Aufgabe.
 \subsubsection{Security Management im Bereich IoT}
-Sicherheit ist im IoT-Bereich in den letzten Jahren immer wichtiger geworden. Viele Hersteller wollen das Gerät so schnell wie möglich auf den Markt bringen und achten nicht auf die Sicherheit. Laut einer Studie von HP gab es bei den meisten Produkten schwerwiegende Sicherheitsbedenken.\cite{SecOverview} Doch das Security Management kann hier nur Ansatzweise helfen.
+Sicherheit ist im IoT-Bereich in den letzten Jahren immer wichtiger geworden. Viele Hersteller wollen das Gerät so schnell wie möglich auf den Markt bringen und achten nicht auf die Sicherheit. Laut einer Studie von HP gab es bei den meisten Produkten schwerwiegende Sicherheitsbedenken.\cite{SecOverview} Doch das Security Management kann hier nur ansatzweise helfen.
 
 Viele Geräte unterstützen gar keine grosse Sicherheitsfeatures, welche man in einem Management verwalten könnte. Doch man sollte möglichst viele Faktoren in das Security Management einbauen. Wie stellt man nun sicher, dass nur die Berechtigten Personen die Daten bekommen. Wie kann man bei all den Geräten sicher sein, dass keine Daten sonst wo abfliessen und in Fremde Hände geraten. Bei all den verschiedenen Hersteller wird es sicher keinen Standard geben, der für alle Geräte angewendet werden kann.
 
