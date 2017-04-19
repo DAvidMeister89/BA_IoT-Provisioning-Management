@@ -42,7 +42,7 @@ In Spitälern werden viele verschiedenen Geräte eingesetzt, welche momentan noc
 Beim Thema ''Internet of Things'' spielen die Sensoren eine zentrale Rolle. Es gibt viele verschiedene Typen von Sensoren, welche unterschiedlichste Daten liefern und man muss daher wissen, wie man mit dem jeweiligen Sensortyp umgeht. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{images/sensors.jpg}
+\includegraphics[scale=0.35]{../02_Analyse/images/sensors.jpg}
 \caption{Sensortypen\cite{SensorImage}}
 \end{figure}
 
@@ -164,7 +164,7 @@ Man könnte ein IoT System in vier wichtige Gruppen unterteilen: \cite{IoTNetwor
 \end{itemize}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/iot_system_overview_by_micrium.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/iot_system_overview_by_micrium.png}
 \caption{IoT Systemübersicht\cite{IoTOverview}}
 \end{figure}
 Grundsätzlich scheint die Architektur vertraut. Smart Objects kommunizieren über ein lokales Netzwerk mit Diensten im Internet.
@@ -178,7 +178,7 @@ Die Kommunikation erfolgt oft nicht vertikal der Architektur, sondern auch horiz
 Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich verstreut sind, bietet sich ein Wireless Sensor Network (WSN) an. In einem WSN werden die Sensoren nicht direkt mit dem Internet verbunden. Die Daten werden drahtlos von Teilnehmer zu Teilnehmer versendet. Muss ein Datenpaket in ein entferntes Netzwerk wie das Internet, so wird ein Gateway oder Edge Node benötigt.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/iot_wsn_lan_overview_by_micrium.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/iot_wsn_lan_overview_by_micrium.png}
 \caption{IoT WSN\cite{IoTWSN}}
 \end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
@@ -192,28 +192,28 @@ Um unterschiedliche Bedürfnisse abzudecken, sind verschiedene Arten der Kommuni
 Beim Device-to-Device Kommunikationsmodell kommunizieren mehrere Teilnehmer direkt miteinander (Peer-to-Peer). In diesem Szenario kommunizieren unterschiedliche Glühbirnen drahtlos mit einem Lichtschalter. Denkbar wären sämtliche Anwendungsgebiete aus dem \glqq Smart Home\grqq -Bereich. Kommunikation mit dem Internet ist nicht zwingend notwendig. Eine grosse Herausforderung besteht darin, dass mehrere Teilnehmer unterschiedlicher Hersteller miteinander interagieren können. Dazu müssen die Teilnehmer denselben Protokoll-Stack implementieren. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/device-to-device.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/device-to-device.png}
 \caption{Device-to-Device Kommunikation}
 \end{figure}
 \subsection{Device-to-Cloud}
 Die Gerätehersteller bieten für ihre End-User Cloud-Dienste im Internet an. Die Sensorgeräte kommunizieren direkt End-to-End über TCP/IP mit dem jeweiligen Cloud-Dienst. Die Benutzer können über eine Mobile App oder eine Webseite auf die jeweiligen Sensordaten zugreifen. Häufig wird aufgrund proprietärer Kommunikationsprotokolle ein Vendor-lock-in betrieben. Dies erschwert die Interoperabilität von Sensoren unterschiedlicher Hersteller \cite{RoseEldridgeChapin15}.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/device-to-cloud.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/device-to-cloud.png}
 \caption{Device-to-Cloud Kommunikation}
 \end{figure}
 \subsection{Device-to-Gateway}
 Anstatt einer Ende-zu-Ende Kommunikation zwischen Sensoren und Servern wird in diesem Modell ein Gateway zwischen diesen Komponenten eingesetzt. Sensoren kommunizieren somit nicht direkt mit einem Server. Auf diese Art und Weise können eine grosse Anzahl Sensoren mit Internetdiensten verbunden werden ohne dass die Sensoren selbst über einen direkten Internetzugriff verfügen. Der Gateway muss somit über eine Schnittstelle verfügen, damit Dienste im Internet indirekt mit den Sensoren kommunizieren können. Aus Sicht des Diensts ist es irrelevant, wie der Gateway mit den Sensoren kommuniziert.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/device-to-gateway.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/device-to-gateway.png}
 \caption{Device-to-Gateway Kommunikation}
 \end{figure}
 \subsection{Back-End Data-Sharing}
 Sobald sich die Sensordaten auf einem Server befinden, können diese auf bekannte Weise anderen zur Verfügung gestellt werden. Beispielsweise könnte man den Zustand eines Sensors als JSON Objekt über eine REST-Schnittstelle abfragen. Ein weiterer Serviceprovider muss somit nicht mehr direkt mit den Sensoren kommunizieren. Da Sensordevices oft über limitierte Möglichkeiten verfügen, grössere Datenmengen bereitzustellen, verringert man mit dieser Art der Kommunikation die Anzahl Abfragen auf den Sensordevices. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/backend-data-sharing.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/backend-data-sharing.png}
 \caption{Backend-Data-Sharing Kommunikation}
 \end{figure}
 
@@ -233,7 +233,7 @@ Weitere Anforderungen wären Realtime Kommunikation, Stromverbrauch, Sicherheit 
 Request/Response ist das wohl bekannteste Pattern. Ein Client fordert mittels eines Requests eine Response von einem Service an. Der Service hört auf einkommende Requests, verarbeitet diese und antwortet (Response) den aufrufenden Clients. Request/Response Kommunikation skaliert schlecht, deshalb sollte beim Versenden einer Meldung an viele Teilnehmer auf ein anderes Pattern zurückgegriffen werden. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/request-response.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/request-response.png}
 \caption{Request/Response Kommunikation \cite{ReqRes}}
 \end{figure}
 \subsubsection{HTTP}
@@ -261,7 +261,7 @@ CoAP wurde entwickelt, um diesen Schwächen von HTTP entgegenzuwirken. Bei sogen
 CoAP kann Peer-to-Peer zwischen Devices eingesetzt werden, aber auch zwischen Device und Service oder zwischen Device und einem Proxy.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{images/coap_architecture.png}
+\includegraphics[scale=0.8]{../02_Analyse/images/coap_architecture.png}
 \caption{CoAP Architektur \cite{Shelby14}}
 \end{figure}
   
@@ -274,7 +274,7 @@ In der folgenden Grafik sieht man das Publish and Subscribe Pattern. Der Publish
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{images/publishsubscribe.png}
+\includegraphics[scale=0.65]{../02_Analyse/images/publishsubscribe.png}
 \caption{Publish and Subscribe Pattern\cite{PublishSubscribePattern}}
 \end{figure}
 \subsubsection{MQTT}

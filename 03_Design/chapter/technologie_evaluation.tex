@@ -17,7 +17,7 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
 \hline
 \textbf{Node.js}\newline
-\includegraphics[width=0.25\columnwidth]{images/nodejs_logo.png} & Node.js ist eine Plattform für serverseitiges JavaScript. Das I/O-Handling ist event-driven und nicht-blockierend. Jeder Node.js Prozess ist single-threaded. Node.js hat viele Erweiterungsmodule wie z.B. Express um Web Applikationen zu erstellen. Für Web Applikationen ist Node.js mit Express besonders gut geeignet, da auf Client- und Serverseite mit JavaScript gearbeitet werden kann. Die Anzahl möglicher Verbindungen könnten trotz Single-Threading gut gehandled werden da die Anfragen asynchron mit einem Callback an die Devices gesendet werden, der aktive Thread würde somit nicht blockieren.
+\includegraphics[width=0.25\columnwidth]{../03_Design/images/nodejs_logo.png} & Node.js ist eine Plattform für serverseitiges JavaScript. Das I/O-Handling ist event-driven und nicht-blockierend. Jeder Node.js Prozess ist single-threaded. Node.js hat viele Erweiterungsmodule wie z.B. Express um Web Applikationen zu erstellen. Für Web Applikationen ist Node.js mit Express besonders gut geeignet, da auf Client- und Serverseite mit JavaScript gearbeitet werden kann. Die Anzahl möglicher Verbindungen könnten trotz Single-Threading gut gehandled werden da die Anfragen asynchron mit einem Callback an die Devices gesendet werden, der aktive Thread würde somit nicht blockieren.
 \newline
 \newline
 \textbf{Vorteile} \newline
@@ -31,7 +31,7 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \tabitem Interpretierte Skriptsprache \newline
 \tabitem Schwache Objektorientierung (kein Polymorphismus, Duck-Typing, etc.)\\ \hline
 \textbf{Spring MVC}\newline
-\includegraphics[width=0.25\columnwidth]{images/spring_logo.png}
+\includegraphics[width=0.25\columnwidth]{../03_Design/images/spring_logo.png}
 & Spring MVC wird verwendet um dynamische Webseiten mit Java Servlets zu erstellen. Dependency Injection und aspektorientierte Programmierung sind ebenfalls unterstützt. Konfigurationen über XML und Java Annotations unterstützen den Entwickler beim Erstellen von MVC Web-Applikationen. Die Library-Unterstützung für IoT spezifische Kommunikationsprotokolle wie beispielsweise CoAP sind bei Java EE hervorragend. Java unterstützt sowohl Multi-Threading, als auch non-blocking I/O. Gleichzeitige Verbindungen zu Devices könnten in eigene Threads ausgelagert werden, um nicht das gesamte Back-End zu blockieren.
 \newline
 \newline
@@ -63,7 +63,7 @@ Ausschlaggebend für die Auswahl von Spring MVC ist die zugrundeliegende Program
 Single Page Applications werden immer beliebter. Die Hauptidee besteht darin, eine Desktop-ähnliche User Experience zu bieten. Eine Webapplikation soll mit einem einzigen Page Load sämtich benötigter Code (HTML, JavaScript, CSS) erhalten\cite{HSRSPA}. Daten werden typischerweise aufgrund von User-Interaktionen dynamisch geladen. Diese Daten müssen von einem Back-End Server über ein API bereitgestellt werden.
 \begin{figure}[H]
 \center
-\includegraphics[scale=0.4]{images/single_page_application_lifecycle.png}\caption{Single Page Application Client Server Interaktion}\cite{MSDNSPA}
+\includegraphics[scale=0.4]{../03_Design/images/single_page_application_lifecycle.png}\caption{Single Page Application Client Server Interaktion}\cite{MSDNSPA}
 \end{figure}
 Die Logik, wann und wie diese Daten nachgeladen werden, liegen vollständig auf der Clientseite. Gegenüber serverseitigem Rendering sind bei Single Page Applications weniger oder gar keine Page Reloads mehr nötig. Die Rechenleistung, welche fürs Rendering benötigt wird, kann so auf die einzelnen Clients verteilt werden. Damit beim Nachladen der Daten das UI nicht blockiert, werden die Requests asynchron mit Callbacks an den Server gesendet. Sobald die neuen/aktualisierten Daten wieder beim Client eingetroffen sind, können diese verarbeitet werden.
 

@@ -6,7 +6,7 @@ Es soll sowohl die Problemdomäne abstrakt mittels Domänenmodell analysiert wer
 Die Applikation hat eine typische 3-Tier Architektur. Auf der Clientseite wird die Single Page Application im Webbrowser ausgeführt. Die Serverseite handelt die Daten und stellt sie der Clientseite zur Verfügung. Die Daten werden auf einer Datenbank persistiert.
 \begin{figure}[H]
 \center
-\includegraphics[scale=0.6]{images/architekturuebersicht}\caption{Architekturübersicht}
+\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Architekturübersicht}
 \end{figure}
 \subsubsection{Client}
 Die Clientseite wird als Single Page Application implementiert. Die Trennung zwischen Darstellung und Daten kann somit optimal vollzogen werden. Die Single-Page Applikation wird mittels dem evaluierten Aurelia Framework implementiert. Aurelia stellt die vom Server zur Verfügung gestellten Daten dar und ist zuständig für die Benutzerinteraktion und das Nachladen von neuen Daten. Da die MVC Komponenten sich beim Client befinden, wird ein häufiges Nachladen und serverseitiges Rendering verhindert. Dies hilft, um die Applikation auch bei mehreren Usern performant zu halten.
@@ -24,7 +24,7 @@ Als Datenbank wurde MongoDB evaluiert. Die Datenbank kann entweder auf dem gleic
 \subsection{Klassendiagramm}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{images/domainmodel.png}
+\includegraphics[width=1\textwidth]{../03_Design/images/domainmodel.png}
 \caption{Klassendiagramm}
 \end{figure}
 \end{landscape}
@@ -201,7 +201,7 @@ Zertifikatdatei-Datenklasse. Mit dieser Klasse werden Zertifikate in Objekte umg
 \section{Logische Architektur}
 \begin{figure} [H]
 	\begin{center}
-	\includegraphics[width=0.90\textwidth]{images/architektur.png}
+	\includegraphics[width=0.90\textwidth]{../03_Design/images/architektur.png}
 	\caption{Logische Architektur}
 	\end{center}
 \end{figure}

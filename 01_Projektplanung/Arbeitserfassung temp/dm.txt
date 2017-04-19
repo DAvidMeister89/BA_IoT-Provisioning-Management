@@ -1,4 +1,0 @@
-22.2.	Kickoff Meeting				dm	1
-23.2.	Dokumente, Github			dm	4
-24.2.	Jira, Recherche				dm	6
-28.2.   Recherche IoT Allg.			dm	6
