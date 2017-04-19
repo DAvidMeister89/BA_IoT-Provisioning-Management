@@ -1,20 +1,29 @@
-\input{default/documentinfo.tex}
-\input{default/header.tex}
+\input{../document_files/documentinfo}
+\input{../document_files/header}
 
 \begin{document}
-\input{default/titlepage.tex}
+\input{../document_files/titlepage}
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{1}
 \tableofcontents
 
 \part{Einführung}
-\include{chapter/projektplan}
+
 
 \part{Technischer Bericht}
-%\include{chapter/projektplan}
+\include{../02_Analyse/chapter/EinfuehrungIoT}
+\include{../02_Analyse/chapter/ManagementIoTDevices}
+\include{../02_Analyse/chapter/requirements}
+\include{../03_Design/chapter/technologie_evaluation}
+\include{../03_Design/chapter/architektur}
+\include{../03_Design/chapter/user_interface}
 
 \part{Anhang}
-%\include{chapter/projektplan}
+\include{../01_Projektplanung/chapter/projektplan}
 
 
+\bibliography{../document_files/lit}
+\newpage
+\listoffigures
+\newpage
 \end{document}
