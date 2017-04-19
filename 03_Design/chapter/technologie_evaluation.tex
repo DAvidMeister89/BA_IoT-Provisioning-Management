@@ -89,38 +89,50 @@ Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersicht
 \begin{itemize}
 \item Framework Grösse (beeinflusst Ladezeiten)
 \item Paint Performance
-\item Compliance (Standards, welche eingehalten werden)
+\item Standards Compliance (Standards, welche eingehalten werden)
 \item Separation (Trennung zwischen Daten und Presentation)
 \item Interoperabilität
+\item Einstiegsfreundlichkeit
 \end{itemize}
 
 \subsubsection{Varianten}
-Bei der Variantenauswahl standen Angular 2 und React.js zur Debatte. Diese beiden Frameworks sind mit Abstand am weitesten verbreitet und erfahren zur Zeit den grössten Hype.
+Für die Erstellung von Single Page Applications stehen viele Frameworks zur Verfügung. Für diese Arbeit wurden drei vielversprechende Technologien verglichen. Bei der Variantenauswahl standen Angular 2, React.js und Aurelia zur Debatte. Angular 2 und React.js sind mit Abstand am weitesten verbreitet. Aurelia wird in der Internet Community häufig als Alternative zu den bekannteren Frameworks genannt.
 
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
- \hline
-  \textbf{React.js} & React.js wurde von Facebook entwickelt. Es stellt eigentlich nur eine Library anstatt einem vollständigen Framework dar. React.js Applikationen werden in JSX geschrieben. \newline
-\textbf{Vorteile} \newline
-\tabitem Einfach zu lernen \newline
-\tabitem Performance (virtual DOM, schnelle Ladezeiten) \newline
-\textbf{Nachteile} \newline
-\tabitem Weniger Features (kein komplettes Framework) \newline
-   \\ \hline  
-  \textbf{Angular 2} & Angular 2 ist ein bekanntes Framework für Single Page Applications (SPA) im MVC Stil. Angular 2 ist TypeScript basiert, hat Dependency Injection Mechanismen eingebaut, unterstützt 2-way Databinding und Unit Testing. Die Software Architektur ist Client-konzentriert, MVC passiert im Browser. \newline
-\textbf{Vorteile} \newline
-\tabitem Libraries für Animationen, Routing, Component Development, Dependency Injection etc. \newline
-\tabitem Unit Testing support \newline
-\tabitem 2-way Data Binding \newline
-\textbf{Nachteile} \newline
-\tabitem Aufwändig zu lernen
-\tabitem Schlechtere Performance als React.js (DOM, 
-  \\ \hline
+\hline
+\textbf{React.js} & React.js wurde von Facebook entwickelt. Es stellt eigentlich nur eine Library anstatt einem vollständigen Framework dar. React konzentriert sich auf die View Komponente. Model und Controller Komponenten müssen selbst- oder mithilfe weiterer Libraries implementiert werden. React.js unterstützt one-way Data Binding. Um teure DOM-Manipulationen zu vermeiden, erstellt React.js einen virtuellen DOM. In diesem virtuellen DOM werden jeweils nur die Differenzen berechnet, der Browser kann somit effizienter geupdated werden. HTML wird um eine React-spezifische Grammatik erweitert. Dadurch wird die Wiederverwendbarkeit des Codes stark eingeschränkt, da sowohl der HTML, als auch der JavaScript Code mit React anders aussieht. \newline   
+\\ \hline  
+  \textbf{Angular 2} & Angular 2 ist ein bekanntes Framework für Single Page Applications im MVC Stil. Angular 2 ist TypeScript basiert, hat Dependency Injection Mechanismen eingebaut, unterstützt two-way Data Binding und Unit Testing. Die Software Architektur ist Client-konzentriert, MVC passiert komplett im Browser. Die strikte Trennung von Daten und Presentation ist bei Angular 2 nicht sehr gelungen, da implementationsspezifische Details der View ausserhalb dieser definiert werden müssen.Bei Angular 2 ist man praktisch zur Verwendung von TypeScript gezwungen. Die Grösse des Angular 2 Frameworks ist mit ca. 1MB unübertroffen. In der Community wird der Einstieg in das Framework als schwierig und aufwändig beschrieben.
+\\ \hline
+\textbf{Aurelia} & Aurelia ist wie Angular 2 ein vollständiges Framework für Single Page Applications. Wie auch Angular 2 werden bei Aurelia Dependency Injection, two-way Data Binding, Unit Testing und vieles mehr unterstützt. Aurelia ist bekannt dafür, die Web Standards am besten einzuhalten. Verglichen mit React.js und Angular 2 werden also keine custom HTML Tags, JSX oder ähnliches verwendet. Verglichen mit Angular 2 besitzt Aurelia nur etwa ein Drittel der Grösse mit Vergleichbaren Funktionalitäten. Der Einstieg in Aurelia wird als leicht beschrieben. 
+\\ \hline
 \end{longtable}
 
-\subsubsection{Entscheidung}
-Durch die einfache und schnelle Entwicklungsmöglichkeiten wurde Bootstrap gewählt. Angular hat klare Vorteile bei der Erstellung von Single Page Applications. Nach jetztigen Erkenntnissen sind jedoch keine aufwändigen Funktionen clientseitig vorgesehen, Data-Binding scheint zum heutigen Zeitpunkt nicht notwendig. 
+\subsubsection{Bewertung}
+Die jeweiligen Kriterien werden mit 1-3 Punkten bewertet, wobei 3 die höchste- und 1 die niedrigste Wertung bezeichnen. Die Punkteverteilung erfolgte aufgrund der Zusammenstellung von \cite{EisenbergYoutube}. 
 
-Dem Projektteam ist Angular unbekannt und es müsste mit einer langen Einarbeitungszeit und anfänglich schlechter Code-Qualität gerechnet werden. Falls zu einem späteren Zeitpunkt weitere Anforderungen und Funktionen vorgesehen werden, wäre eine \glqq echte\grqq  Single Page Application mit Angular eine echte Alternative und könnte die \glqq einfache\grqq  Variante mit Bootstrap von Twitter ergänzen oder ablösen.
+\begin{longtable}{| p{5.4cm} | p{3.4cm} | p{3.4cm} | p{3.4cm} |}
+\hline 
+ &\textbf{React.js} & \textbf{Angular 2} & \textbf{Aurelia}
+\\ \hline
+\textbf{Framework Grösse} & 3 & 1 & 2
+\\ \hline
+\textbf{Painting Performance} & 1 & 3 & 3
+\\ \hline
+\textbf{Standards Compliance} & 1 & 2 & 3
+\\ \hline
+\textbf{Separation} & 1 & 1 & 3
+\\ \hline
+\textbf{Interoperabilität} & 1 & 2 & 3
+\\ \hline
+\textbf{Einstiegsfreundlichkeit} & 3 & 1 & 2
+\\ \hline
+\textbf{Total} & \textbf{10} & \textbf{10} & \textbf{16} 
+\\ \hline
+\end{longtable}
+Die verwendete Quelle scheint zum einen voreingenommen, da der Ersteller selbst Entwickler bei Aurelia ist. Nach weiterem Überprüfen der Bewertungskriterien bei unabhängigeren Quellen scheinen die Vergleiche aber durchaus realistisch. Selbstverständlich dürfen diese nicht als Wahrheit angesehen werden und müssten für eine fundierte Bewertung selbst in separaten Studien verifiziert werden.
+\subsubsection{Entscheidung}
+Aufgrund der Bewertung wird Aurelia als Front-End Framework verwendet. Beim Entwicklerteam bestehen weder Erfahrungen im Umgang mit Aurelia, noch in der Entwicklung von Single Page Applications mit einem Framework. Grundsätzlich könnten wohl alle drei Frameworks zur Erreichung des Ziels beitragen. Aurelia besticht jedoch in der Einsteigerfreundlichkeit, der Einhaltung von Web Standards und der klaren Trennung von Daten und Darstellung.
 
 \newpage
 \section{Datenbanktechnologie}
