@@ -1,5 +1,5 @@
 \chapter{IoT Security}
-In diesem Kapitel sollen wichtige Aspekte der Security im IoT Umfeld erarbeitet werden. Verschiedene Bereiche in der Architektur und deren Herausforderungen bezüglich Security erfordern unterschiedliche Massnahmen. Die Aufzählungen und Beschreibungen der Sicherheitsaspekte sind bei weitem nicht vollständig.
+In diesem Kapitel sollen wichtige Aspekte der Security im IoT Umfeld erarbeitet werden. Verschiedene Bereiche in der Architektur und deren Herausforderungen bezüglich Security erfordern unterschiedliche Massnahmen. Es wird versucht, zentrale Aspekte hervorzuheben, eine umfassende Behandlung ist in diesem Rahmen jedoch nicht möglich.
 \section{Einführung}
 Sicherheit ist im IoT-Bereich in den letzten Jahren immer wichtiger geworden. Viele Hersteller wollen ihre Produkte schnellstmöglich auf den Markt bringen und Sicherheitsanforderungen zu wenig. Laut einer Studie von HP kamen bei den meisten Produkten schwerwiegende Sicherheitsbedenken auf.\cite{SecOverview} 
 
@@ -14,14 +14,16 @@ Es ist also ersichtlich, dass zu den herkömmlichen finanziellen Schäden bei Io
 
 \subsection{Grobübersicht}  
 Um eine möglichst übersichtliche Vorstellung von IoT Security zu erhalten, werden vier grobe Architekturbereiche einzeln behandelt. Jeder dieser Bereiche birgt eigene Gefahren und benötigt unterschiedliche Massnahmen um die Informationssicherheit zu gewähleisten.
-
+\begin{figure}[H]
+\centering
 \includegraphics[scale=0.8]{../02_Analyse/images/security_overview.png}
-
+\caption{Sicherheitszonen}
+\end{figure}
 \subsubsection{Device Networks}
 Device Netzwerke beinhalten die IoT Devices. Diese können sehr unterschiedlich aussehen. Denkbar wären Wireless Sensor Netzwerke (WSN), es könnten aber auch ''herkömmliche'', verkabelte Netzwerke sein. Die Heterogenität ist sehr gross, da nicht nur viele unterschiedliche Hersteller existieren, sondern auch die Arten der Kommunikation und die verwendeten Protokolle sich unterscheiden. 
 
 \subsubsection{IoT Cloud Services}
-IoT Devices selbst kommunizieren häufig über Cloud Services im Internet. Entweder stellen die Hersteller der Devices selbst Cloud Services zur Verfügung, oder die Unternehmen entwickelt eigene Applikationen. Auf der einen Seite kommunizieren die Server mit den IoT Devices oder deren Gateways, auf der anderen Seite werden die Services von End-Usern selbst benutzt. Sensordaten könnten auch über bereitgestellte API's von anderen Cloud Services konsumiert werden.
+IoT Devices selbst kommunizieren häufig über Cloud Services im Internet. Entweder stellen die Hersteller der Devices selbst Cloud Services zur Verfügung, oder die Unternehmen entwickeln eigene Applikationen. Auf der einen Seite kommunizieren die Server mit den IoT Devices oder deren Gateways, auf der anderen Seite werden die Services von End-Usern selbst benutzt. Sensordaten könnten auch über bereitgestellte API's von anderen Cloud Services konsumiert werden.
 
 \subsubsection{User Devices}
 Benutzer selbst kommunizieren in den seltensten Fällen direkt mit IoT Devices sondern über bereitgestellte Cloud Dienste. Häufige Devices sind PC's, Laptops und Mobilgeräte wie Smartphones oder Tablets.
@@ -47,23 +49,60 @@ Als Beispiel für die Verletzung dieses Aspekts kann man sich am besten ein verg
 In diesem Unterkapitel werden Gefahren und Herausforderungen in Netzwerken mit IoT Devices beschrieben.
 \subsection{Device Security}
 \subsubsection{Software Versionen}
-Ein wichtiger Aspekt für Unternehmen ist die Aktualität der verwendeten Software Versionen auf ihren IoT Devices. Wie heute üblich, wird Software häufig unfertig, mit Bugs und fehlenden Features, ausgeliefert. Nach der Installation muss also schon fest mit kommenden Updates gerechnet werden. Die Unternehmen müssen also über ihre Softwarestände in den IoT Systemen im Bilde sein und über die Möglichkeit von zeitnahen Updates verfügen. 
+Ein wichtiger Aspekt für Unternehmen ist die Aktualität der verwendeten Software Versionen auf ihren IoT Devices. Wie heute üblich, wird Software oft unfertig, mit Bugs und fehlenden Features ausgeliefert. Nach der Installation muss also schon fest mit kommenden Updates gerechnet werden. Die Unternehmen müssen also über ihre Softwarestände in den IoT Systemen im Bilde sein und über die Möglichkeit von zeitnahen Updates verfügen. 
 
 \subsubsection{Physischer Zugriff}
 Wie bei vielen anderen Geräten sollte auch bei IoT Devices der physische Zugang nur autorisierten Personen vorbehalten sein. Sonst könnte beispielsweise ein Sensor manipuliert werden, der falsche Daten liefert.
 
 \subsubsection{Authentifizierung und Autorisierung}
-Ein IoT Device sollte Zugriffe authentifizieren und autorisieren. Durch unbefugten Zugriff können entweder potenziell sensible Sensordaten gelesen werden. Ausserdem besteht die Möglichkeit, einem Botnetz beizutreten, was mit geschützten Zugriffen teilweise entschärft werden kann. Es sollten ausserdem Mechanismen vorgesehen werden, welche zuständige Personen bei zu häufigen Fehlversuchen benachrichtigen, da potenziell eine Attacke vorliegen könnte.
- 
-\subsection{Bootstrapping}
-In der Bootstrapping Phase betritt ein neues IoT Device ein bestehendes Netzwerk. Eine Security-Association (SA) zwischen dem IoT Device und dem Netzwerk, resp. deren Devices muss erstellt werden. Als Betreiber des Netzwerks muss man sicherstellen, dass nur vorgesehene Device beitreten können. Das IoT Device muss im Gegensatz dem Netzwerk vertrauen. Dies könnte beispielsweise mit vorinstallierten Schlüsseln oder Zertifikaten auf dem IoT Device umgesetzt werden.
-
-Im Gegensatz zu herkömmlichen Geräten, bei denen die Identität durch beispielsweise der Eingabe eines Passworts oder der Verteilung von Zertifikaten mittels einer PKI festgestellt werden kann, kommen bei IoT Geräten erschwerende Hürden hinzu. So könnten Devices beispielsweise über keine direkten Eingabemöglichkeiten-, oder zuwenig Rechenleistung für herkömmliche asymmetrische Kryptografie verfügen.
-%Bild über SA
+Da ein IoT Device über das Internet kommuniziert, sollten Zugriffe authentifiziert und autorisiert werden. Durch unbefugten Zugriff können entweder potenziell sensible Sensordaten gelesen werden. Ausserdem besteht die Möglichkeit, einem Botnetz beizutreten, was mit geschützten Zugriffen teilweise entschärft werden kann. Es sollten ausserdem Mechanismen vorgesehen werden, welche zuständige Personen bei zu häufigen Fehlversuchen benachrichtigen, da potenziell eine Attacke vorliegen könnte.
+ \newpage
 \subsection{Netzwerksicherheit}
+\subsubsection{Bootstrapping}
+In der Bootstrapping Phase betritt ein neues IoT Device ein bestehendes Netzwerk. Eine Security-Association (SA) zwischen dem IoT Device und dem Netzwerk, resp. deren Devices muss erstellt werden. Als Betreiber des Netzwerks muss man sicherstellen, dass nur vorgesehene Devices beitreten können, deshalb ist eine Authentisierung sehr wichtig. Das IoT Device muss im Gegensatz dem Netzwerk vertrauen. Ein Server kann über Protokolle wie beispielsweise EAP neue Devices authentisieren.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{../02_Analyse/images/deviceauthentication.png}
+\caption{Schema möglicher Deviceauthentisierung}
+\end{figure}
+Im Gegensatz zu herkömmlichen Geräten, bei denen die Identität beispielsweise durch die Eingabe eines Passworts oder der Verteilung von Zertifikaten mittels einer PKI festgestellt werden kann, kommen bei IoT Geräten erschwerende Hürden hinzu. \cite{IoTSecurityChallenges} So könnten Devices beispielsweise über keine direkten Eingabemöglichkeiten-, oder zuwenig Rechenleistung für herkömmliche asymmetrische Kryptografie verfügen.
 
+\subsubsection{Verschlüsselung}
+Weder das HTTP-, noch das CoAP-Protokoll haben eine eigene Verschlüsselung des Payloads vorgesehen. Seit langer Zeit wird für HTTP SSL, respektive TLS verwendet, um die Kommunikation zwischen zwei Devices zu verschlüsseln. TLS verschlüsselt die gesamten Pakete in der Applikationsschicht, Protokolle unterhalb der Applikationsschicht sind weiterhin im Klartext verfügbar. 
+
+IoT Devices arbeiten häufig mit CoAP anstatt HTTP. Wie in Kapitel (insert Reference here) beschrieben, arbeitet CoAP im Gegensatz zu HTTP mit UDP anstatt TCP. TLS selbst benötigt jedoch TCP als Transportprotokoll, weshalb sich dieses Verfahren also nicht für CoAP eignet.
+
+Aus diesen Gründen musste ein neues Verschlüsselungsprotokoll DTLS (Datagram Transport Layer Security) entwickelt werden, welches ''TLS'' über UDP ermöglicht. Die Unterschiede von TLS zu DTLS sind gering. Einfach betrachtet erledigen die Protokolle die gleichen Aufgaben.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{../02_Analyse/images/coap_dtls_diagram.png}
+\caption{DTLS Sequenz Diagramm} \cite{DTLSDiagram}
+\end{figure}
+\newpage
 \section{Cloud Services}
-\section{User Clients}
+In diesem Unterkapitel werden sicherheitsrelevante Aspekte für IoT Cloud Dienste behandelt. Neben den behandelten Themen müssen viele weitere Aspekte, welche für übrige Internetdienste gelten auch eingehalten werden.
+\subsection{Bedeutung}
+IoT Cloud Dienste kommunizieren mit Sensoren und empfangen deren Daten. IoT Cloud Applikationen steuern ganze Geschäftsprozesse, deshalb sind sie in diesem Umfeld oft business-kritisch. Cloud Services kommunizieren auf der einen Seite mit IoT Devices (M2M-Kommunikation), auf der anderen Seite mit End-User Devices.  
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{../02_Analyse/images/cloudservices.png}
+\caption{IoT Cloud Service Übersicht}
+\end{figure}
+
+Wie in der Einführung bereits erwähnt, können die Folgen von Ausfällen je nach Applikation sehr unterschiedlich sein. Eintrittswahrscheinlichkeiten und Schadensausmasse müssen in einer Risikoanalyse bewertet werden, damit geeignete Massnahmen getroffen werden können. So benötigen Patientensysteme in Spitälern weitaus mehr Sicherheitsmassnahmen als Pflanzenüberwachungssysteme in Gewächshäusern.
+
+\subsection{API Security}
+Kommunikation und Austausch von Daten mit Dritten erfolgen über bereitgestellte API's. Sämtliche API Zugriffe müssen zuerst authentifiziert werden, ansonsten können möglicherweise geheime Daten abgefragt-, oder gar fehlerhafte und schädliche Inputs eingegeben werden. Mittels Berechtigungen sollte festgelegt werden, wer auf welche Daten zugreifen darf.
+
+\subsection{Korrektheit}
+Je nach Sensitivität der Cloud Applikation müssen Softwareentwickler ein erhöhtes Augenmerk auf die Korrektheit der Software legen. Die Vergangenheit hat gezeigt, dass Softwarefehler wie falsches Exception Handling weitreichende Folgen haben können. Hängt beispielsweise eine ganze Produktionskette von der Cloud Applikation ab, so könnte ein Absturz innert kürzester Zeit einen sehr hohen finanziellen Schaden bedeuten. 
+
+\subsection{Verfügbarkeit}
+Wie bei herkömmlichen Servern muss auch bei Applikationsserver im IoT Bereich auf die Verfügbarkeit geachtet werden. Es gibt potenziell viele Vorfälle, welche die Verfügbarkeit beeinträchtigen könnten. Als wirksamste Methode empfiehlt sich eine redundante Auslegung der wichtigsten Komponenten.
+
+\section{User Devices}
+
 \section{Management Services}
 
 
