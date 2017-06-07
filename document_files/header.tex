@@ -108,6 +108,7 @@
 \definecolor{sh_keyword}{rgb}{0.37, 0.08, 0.25}
 \definecolor{sh_string}{rgb}{0.06, 0.10, 0.98}
 
+
 %
 % Code Listings
 %
@@ -118,6 +119,23 @@
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
 \colorlet{numb}{black}
+
+
+
+\lstdefinelanguage{xml} {
+  basicstyle=\ttfamily\fontsize{10}{10}\selectfont ,       
+  morestring=[b]",
+  moredelim=[s][\color{maroon}]{<}{\ },
+  moredelim=[s][\color{maroon}]{</}{>},
+  moredelim=[l][\color{maroon}]{/>},
+  moredelim=[l][\color{maroon}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{blue},
+  identifierstyle=\color{red}
+}
+
 
 \lstdefinelanguage{json}{
     basicstyle=\ttfamily\fontsize{10}{12}\selectfont ,       
