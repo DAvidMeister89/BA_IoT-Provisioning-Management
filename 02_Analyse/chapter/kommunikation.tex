@@ -141,6 +141,8 @@ XMPP ist das beste Protokoll um Geräte mit Menschen zu verbinden. Dies ist eine
 
 Bei XMPP wird kein Broker, sondern ein zentraler Server verwendet. Dieser soll allerlei verschiedene Geräte miteinander verbinden. Dieses Protokoll wird häufig für das Remote Management von Konsumergeräten verwendet.
 
+\newpage
+
 \section{LwM2M - Lightweight M2M}
 \subsection{Einführung}
 LwM2M ist ein speziell für IoT entwickeltes Management- und Messaging-Protokoll. Wie es der Name schon verrät, handelt es sich um ein M2M - Machine-to-Machine Protokoll. Bei LwM2M wird ein Client-Server-Modell umgesetzt. Dabei werden alle Daten per Request angefragt und als Response beantwortet.
@@ -161,8 +163,14 @@ Mit all diesen Möglichkeiten bietet LwM2M eine grosse Abdeckung an Technologien
 \caption{LwM2M Stack}
 \end{figure}
 
+\newpage
+
 \subsection{Client-Server Model}
-Die drei zentralen Bestandteil des Protokolls sind der Bootstrap-Server der LwM2M-Server und der LwM2M-Client. Der Bootstrap-Server ist für den Erstkontakt sowie die Erstkonfiguration zuständig. Die restliche Kommunikation läuft zwischen dem LwM2M-Server und dem LwM2M-Client. Ohne einen Bootstrap-Server kommunizieren die Geräte direkt mit dem LwM2M-Server.
+\begin{figure}[H]
+\includegraphics[scale=0.5]{images/lwm2m/server_client_model.png}
+\caption{Client-Server-Model}
+\end{figure}
+Die drei zentralen Bestandteil des Protokolls sind der Bootstrap-Server, der LwM2M-Server und der LwM2M-Client. Der Bootstrap-Server ist für den Erstkontakt sowie die Erstkonfiguration zuständig. Die restliche Kommunikation läuft zwischen dem LwM2M-Server und dem LwM2M-Client. Ohne einen Bootstrap-Server kommunizieren die Geräte direkt mit dem LwM2M-Server.
 \subsubsection{Client}
 Der Client kann viele verschiedene Formen annehmen. Ein Beispiel wäre eine Linux Installation auf einem Raspberry Pi, welche einen Java LwM2M Client gestartet hat. An dem Raspberry Pi kann man nun mehrere Sensoren, wie Temperatur, Druck, etc. anschliessen und diese über den Client steuern. Es kann sich aber auch nur um einen kleinen Chip mit Sensor handeln, welcher ein C LwM2M Client beinhaltet. Client Umsetzungen gibt es dabei in den Programmiersprachen C und Java.
 \subsubsection{Server}
@@ -183,29 +191,39 @@ Durch den Einsatz von Bootstraping nimmt man sich viel Managementarbeit ab und h
 \includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/server_client_model.png}
 \caption{Client-Server-Model}
 \end{figure}
-
 \subsection{Object Model}
-Eine klare Stärke des LwM2M-Protokolls sind die Object Models. Durch die Object Models werden alle Informationen eines Devices in einem strukturierten Model abgelegt, damit ein geregelter Zugriff auf alle Daten entsteht. Es wird zwischen Model und Ressource unterschieden. Eine Ressource ist zum Beispiel der Temperaturwert eines Temperatursensors. Eine zusätzliche Ressource könnte die dazugehörige Temperatureinheit sein. Mehrere solche Ressourcen werden zu einem Object Model zusammengefasst.
+Eine klare Stärke des LwM2M-Protokolls sind die Object Models. Durch die Object Models werden alle Informationen eines Devices in einem strukturierten Model abgelegt, damit ein geregelter Zugriff auf alle Daten entsteht. Es wird zwischen Object, Instance und Ressource unterschieden. Eine Ressource ist zum Beispiel der Temperaturwert eines Temperatursensors. Eine zusätzliche Ressource könnte die dazugehörige Temperatureinheit sein. Mehrere solche Ressourcen werden zu einem Object Model zusammengefasst. Ein Device kann aber auch mehrere Temperatursensoren besitzen und hat so mehrere Instanzen des gleichen Objects.
 
-\subsection{Aufbau}
-Jedes Object Model besitzt eine eindeutige Identifikationsnummer. Diese geht von 0-32768 und sind folgendermassen verteilt:
+Um nun die Information zugreifbar zu machen, bekommt sie eine URL mit den drei oben beschriebenen angaben. Diese kann wie folgt aussehen.
+%TODO Bild einfügen
+\begin{figure}[H]
+%\includegraphics[scale=0.5]{}
+\caption{Object Model URL}
+\end{figure}
+\subsubsection{Aufbau}
+\subsubsection{Object}
+Jedes Object besitzt eine eindeutige Identifikationsnummer. Diese geht von 0-32768 und ist folgendermassen verteilt:
 \begin{itemize}
 \item 0-1023: OMA-Label
 \item 1024-2047: Reserviert für zukünftige Benutzung
 \item 2048-10240: Registrierungen der Partnerfirmen
 \item 10241-32768: Individuelle Registrierungen durch Firmen oder Personen
 \end{itemize}
-Wenn man ein neues Model erstellen möchte, geht man auf die OMA-Seite und erfasst dieses im ''LWM2M Management Object Editor''. Pro neuem Modell muss man eine ID, Namen, ObjectVersion, LWM2MVersion, Object URN, Instances und Mandatory festlegen. Mit Instances gibt man an, ob ein Object pro Device mehrmals vorhanden sein darf.
+Wenn man ein neues Model erstellen möchte, geht man auf die OMA-Seite und erfasst dieses im ''LWM2M Management Object Editor''. Pro neuem Modell muss man eine Object ID, Namen, ObjectVersion, LWM2MVersion, Object URN, Instances und Mandatory festlegen. Mit Instances gibt man an, ob ein Object pro Device mehrmals vorhanden sein darf.
+\subsubsection{Instances}
+Wenn ein Object mehrmals vorhanden sein kann, wie zum Beispiel ein Temperaturobjekt, gibt es die Möglichkeit der Multiinstanz. Der mittlere Teil der URL nimmt dadurch nicht nur den Wert 0 an, sondern eine eindeutige ID pro Instanz.
 
-Pro Object Model können nun die Ressourcen hinzugefügt werden. Diese besitzen auch eine eindeutige Identifikationsnummer von 0 bis 32768. Hier gibt es folgende Unterteilung:
+\subsubsection{Ressource}
+Dem Object werden zum Schluss noch die Ressourcen hinzugefügt. Diese besitzen auch eine eindeutige Identifikationsnummer von 0 bis 32768. Hier gibt es folgende Unterteilung:
 \begin{itemize}
 \item 0-2047: Common Ressources
 \item 2048-26240: Reusable Ressources
 \item 26241-32768: Private Ressources
 \end{itemize}
+Jede Ressource hat vordefinierte Felder. Dazu gehören Name, Operations, MultipleInstances, Mandatory, Type, RangeEnumeration, Units und Description. Durch all diese Felder kann eine Ressource sehr genau beschrieben werden. Nicht alle Felder sind Pflicht, aber wichtig sind vorallem ID, Name und Operations und Type. Durch die Operations gibt man an, was mit dieser Ressource genau gemacht werden kann. Hier kann man zwischen Read, Write, Read-Write und Execute wählen.	Mit dem Type Feld gibt man den Type Informationstyp an, wie zum Beispiel String, Float oder Date.
+
 
 Durch all diese Standardisierten Objekte und Ressourcen kann man jede Information eines Gerätes beschreiben und es entstehen keine Kompatibilitätsprobleme.
-
 \subsubsection{Beispiel XML}
 Hier sieht man ein Beispiel von dem Object Model ''Device'' mit der Ressource ''0 - Manufacturer''. Das Object Model besitzt aber noch weitere Ressourcen, die andere Informationen eines Devices definieren.
 \begin{lstlisting}[%
@@ -235,49 +253,90 @@ language=xml]
 </LWM2M>
 \end{lstlisting}
 
+\subsubsection{Beispiel Client}
+Hier sieht man nun ein Beispielclient. Dies könnte eine kleine LED-Lampe sein, welche jedes LED separat steuern lässt. Dazu wurden die Objeke 3 und 3311 verwendet, welche bereits vorgefertigt bereitstehen. Da es mehrere LEDs gibt, werden auch mehrere Light Control Instanzen benötigt. Jede Instanz steuert so eine einzelne LED.
+Neben diesen drei Objekten könnten noch weitere vorhanden sein, wie zum Beispiel Firmware oder andere Sensorobjekte.
 \begin{figure}[H]
 \includegraphics[scale=0.65]{../02_Analyse/images/lwm2m/lwm2m_client.png}
 \caption{LwM2M Stack}
 \end{figure}
 
-xml
+\newpage
 
-Standarts + eigene
+\subsection{Features und Funktionen}
+LwM2M bietet vier Funktionen, um mit einem Device zu kommunizieren oder diesen zu konfigurieren. Bootstraping, Registration, Object / Ressource Access und Reporting. Es müssen aber nicht immer alle Funktionen eingesetzt werden. So kann auf Bootstraping und Reporting verzichtet werden, wenn man jedes Device von Hand vorkonfiguriert.
+\subsubsection{Bootstrapping - Allgemein}
+Wie oben bereits erwähnt, ist das ''factory bootstraping'' möglichst zu vermeiden. Durch die statisch hinterlegten Keys und Server-URLs muss man bei jeder Anpassung der Daten physischen Zugriff auf das Device haben. Dies ist ein Ansatz, der vielleicht bei normalen Computern noch funktioniert hat, aber dies funktioniert bei IoT-Geräten selten gut. Daher hat das LwM2M-Protokoll einen Bootstrap-Vorgang definiert.
 
-\section{Features und Funktionen}
 
-\subsection{Bootstrapping}
+Der Hersteller muss für das Bootstraping jedem Gerät ein Endpointname, sowie eine Bootstrap-URL hinterlegen. Alle anderen Informationen, werden beim Starten vom Bootstrap-Server geholt.
+Wichtige Einstellungen die der Bootstrap-Server verteilen kann sind unter anderen\cite{BootstrapFeatures}:
+\begin{itemize}
+\item Keys  und Zertifikate für DTLS
+\item Server URL
+\item SMS Security Parameter
+\item Kommunikationsparameter
+\item Access Control Lists
+\end{itemize}
+Durch den Einsatz von Bootstraping nimmt man sich viel Managementarbeit ab und hat ein einheitlicheres und besser verwaltetes Netzwerk von LwM2M-Server und Client.
+\subsubsection{Bootstrapping - Ablauf}
+Sobald ein Device gestartet wird, überprüft es seine Einstellungen. Es gibt zwei Zeitpunkte, an denen der Device einen Bootstrap-Server kontaktiert. Der erste ist, sobald der Device nur Bootstrap-Server Daten besitzt und keine LwM2M-Server Daten hinterlegt hat. Die zweite Möglichkeit ist, wenn der L2M2M-Server keine Antwort mehr gibt oder Authentifikation fehlgeschlagen meldet. Sobald dies geschieht, meldet sich der Device wieder beim Bootstrap-Server, um eine neue konfiguration zu erhalten.
+
+In der folgenden Grafik sieht man den Ablauf des Bootstrapings.
 \begin{figure}[H]
 \includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/bootstrap_diagram.png}
-\caption{LwM2M Stack\cite{LwM2MInterfaces}}
+\caption{LwM2M Bootstraping\cite{LwM2MInterfaces}}
 \end{figure}
-Pre-Configured, Server initial Bootstrap
+Als ersten Schritt sendet der Device eine Anfrage an den Bootstrap-Server. In dieser Anfrage gibt der Client sein Endpointname an. Durch diesen Endpointname weiss der Bootstrap-Server, welche Konfiguration für dieses Gerät vorgesehen ist. Der Server antwortet mit ''Valid''. Durch einen Delete Befehl auf die Root-URL löscht es die alten Konfigurationen. Danach werden durch einzelne PUTs alle wichtigen Daten auf das Gerät geschrieben.
 
-\subsection{Registration}
+Wenn der Server eine neue Konfiguration, wie zum Beispiel neues Schlüsselmaterial, verteilen möchte, löscht der LwM2M-Server durch einen Delete wieder die Root-URL auf dem Client. Dadurch meldet sich der Client wieder beim Bootstrap-Server, um die neuen Daten zu erhalten. Dies nennt man den  Server imitierte Bootstrap-Vorgang.
 
+\subsubsection{Registration - Allgemein}
+Wenn ein Client einen gültigen und erreichbaren LwM2M-Server hinterlegt hat, beginnt die Registrierungsphase. Bei der Registrierung wird dem Server bekanntgeben, welche Funktionen und Informationen der Client besitzt. Dies beinhaltet die Object Model URLs, Registrierungszeitpunkt, IP-Adresse, Port und noch weitere Angaben, die der Server von jedem Client benötigt. All diese Angaben werden vom Client immer wieder aktualisiert und an den Server gesendet. Dies geschieht meistens mehrmals pro Minute.
+
+\subsubsection{Registration - Ablauf}
 \begin{figure}[H]
-\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/registration_diagram.png}
+\includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/registration_diagram.png}
 \caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
-Resource discovery
-register, update, de-register
+Die Registrierung wird immer von einem Client aus gestartet. Dieser sendet seinem hinterlegtem LwM2M-Server einen POST mit all den relevanten Daten. Sobald diese gesendet wurden, wartet der Client auf eine Antwort. Der Server überprüft nun diese Daten und checkt auch gleichzeitig, ob der Client sich richtig authentifiziert hat. Wenn alle Daten passen, legt der Server eine Registrierung an und sendet dem Client die URL zu dieser Ressource. Der Client kann nun alle weiteren Daten an diese URL senden.
 
+Nach einer gewissen Zeit meldet der Client ein Update an den Server. Durch einen PUT auf die für ihn hinterlegte URL kann er die angepassten Daten an den Server senden. Dieser antwortet mit ''Changed'', falls alles in Ordnung ist.
 
-\subsection{Object / Resource Access}
+Wird ein Client heruntergefahren deregistriert sich dieser automatisch bei seinem Server. Dazu sendet der Client ein Delete auf seine Ressource auf dem Server und erhält ''Deleted'' als Antwort. 
+
+\newpage
+
+\subsubsection{Object / Ressource Access - Allgemein}
+Nach dem Registrieren kann der Server auf alle für ihn freigegebenen Daten zugreifen. Dies geschieht über drei definierten Anfragen Read, Write und Execute. Um neue Daten auf den Client zu senden, erlauben die Write und Execute Anfragen zusätzliche Daten. All diese Anfragen an den Client werden vom LwM2M-Server in ein CoAP Paket umgewandelt und so an den Client gesendet.
+\subsubsection{Object / Ressource Access - Ablauf}
+Alle drei Varianten laufen sehr ähnlich ab und der Initiator ist immer der Server. Der Client kann keine Reads oder Writes an den Server senden.
 \begin{figure}[H]
-\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/command_diagram.png}
+\includegraphics[scale=0.65]{../02_Analyse/images/lwm2m/command_diagram.png}
 \caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
+In der Grafik sieht man drei Beispielanfragen eines LwM2M-Servers.
 
-Management Objects and Resources
-CoAP Rest api
-read, write, execute, create, delete
+Die erste Anfrage ist ein Read-Request. Der Server sendet ein GET auf die gewünschte Ressource, in diesem Beispiel ist dies 3/1/0 und wartet auf den Response. Der Client überprüft nun seine ACLs und wenn der Server berechtigt ist, sendet der Client ein Response  mit den Content zurück. Wenn die Ressource nicht vorhanden oder der Server nicht berechtigt ist, erhält der Server einen anderen Response als Content. Dies könnte zum Beispiel ''Not Found'' sein, falls die Ressource nicht vorhanden ist.
 
-\subsection{Reporting}
+Der Write-Request ist sehr ähnlich aufgebaut. Anstelle eines GET-Requests sendet der Server ein PUT-Request. In diesem Request wird wieder die gewünschte Ressource-URL angesprochen und die zu schreibenden Daten werden direkt mit dem Request mitgesendet. Hier gibt der Client wieder mit ''Changed'' Antwort, falls alles in Ordnung ist.
 
+Auch der Execute funktioniert gleich wie die anderen zwei Requests. Anstelle von GET oder PUT wird hier ein POST verwendet. Die Antwort beinhaltet wie beim Write-Requests ein ''Changed'' Status, damit der Server weiss, dass alles funktioniert hat.
+
+\newpage
+
+\subsubsection{Reporting - Allgemein}
+LwM2M bietet neben den von Hand ausgeführten Read auch ein Observer an. Dieser wird mit dem Reporting Interface beschrieben. Reporting bietet dabei drei Funktionen. Observe, Notify und Cancel Observation. Mit dem Observe Befehl meldet sich ein Server beim Client und meldet sich an. Bei jeder Zustandsänderung der Ressource meldet sich der Client beim Server und sendet die neuen Daten an diesen Der Server kann so stetig wechselnde Daten sehr einfach überwachen, ohne die Ressource jedes mal von Hand upzudaten.
+\subsubsection{Reporting - Ablauf}
+Im Grunde wird hier ein normales Observer-Pattern umgesetzt. Der Server ist der Observer und der Client ist das Subject. Initiiert wird dieser Vorgang immer vom Server aus. 
 \begin{figure}[H]
-\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/report_diagram.png}
+\includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/report_diagram.png}
 \caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
-Observing
-observe,cancal observe,  notify
+Um eine Ressource zu Überwachen, sendet der Server ein GET-Request an die gewünschte Ressource-URL mit einem Observe Token. Direkt nach dem Anmelden des Observers meldet der Client den aktuellen Wert der Ressource mit einer Content Message ID und dem Observer Token.
+
+Bei jeder Änderung der Ressource erstellt der Client wieder ein neuer Response mit einer Changed Message ID und dem Token und sendet diese an alle Observer zurück.
+
+Möchte der Server die Ressource nicht länger Überwachen, sendet der Server ein Reset zurück. Dieser Reset beinhaltet die letzte Changed Message ID. Hier im Beispiel sieht man dies ganz am Schluss der Grafik. So meldet sich der Server ab und erhält keine weiteren Notifikationen.
+
+\subsection{Fazit}
