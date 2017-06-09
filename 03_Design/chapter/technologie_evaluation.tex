@@ -4,7 +4,7 @@ In diesem Kapitel werden relevante Technologien und Frameworks, welche das Front
 \section{Back-End}
 Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heutzutage existieren einige beliebte Frameworks um Web Applikationen zu erstellen. Die zu verwendende Programmiersprache ist bei vielen Frameworks ebenfalls unterschiedlich und sollte berücksichtigt werden.
 
-\subsubsection{Kriterien}
+\subsection{Kriterien}
 \begin{itemize}
 \item Open-Source
 \item Gute Dokumentation und Unterstützung durch die Community
@@ -48,102 +48,54 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \\ \hline 
 \end{longtable}
 
-\subsubsection{Skalierbarkeit}
+\subsection{Skalierbarkeit}
 Da potenziell viele Devices über die Applikation verwaltet werden könnten ist die Skalierbarkeit von grosser Bedeutung. Die Art der Verbindungen unterscheiden sich. Während die Anzahl gleichzeitiger Verbindungen über das Front-End zum Server (concurrent users) sehr gering sein wird, besteht die Möglichkeit, dass hunderte oder gar tausende IoT Devices verbunden sind.
 
 Es besteht jedoch nicht die Notwendigkeit, dass während der Nutzungsdauer alle diese Verbindungen aufgebaut und offen gehalten werden. Es ist damit zu rechnen, dass niemals mehr als 100 gleichzeitige Verbindungen zu unterschiedlichen Devices existieren. 
 
-\subsubsection{Entscheidung}
+\subsection{Entscheidung}
 Die Entscheidung fiel auf Spring MVC. Eine Implementation mittels Node.js und Express wäre ebenfalls denkbar, da alle Anforderungen und Restriktionen erfüllt werden könnten. Auch andere Frameworks wie Django oder Ruby on Rails würden ebenfalls in Frage kommen, wurden aber nicht berücksichtigt da keine oder nur kaum Vorkenntnisse beim Entwicklerteam vorhanden waren.
 
 Ausschlaggebend für die Auswahl von Spring MVC ist die zugrundeliegende Programmiersprache Java. Die Unterstützung von Klassen, Vererbung und Polymorphie sowie die grosse Unterstützung von Tools und Plugins ermöglichen eine angenehmere und übersichtlichere Entwicklung. Durch die Unterstützung mittels XML Konfigurationen und Java Annotations werden die Entwickler mit Spring MVC hervorragend unterstützt.
 
 \newpage
-\section{Single Page Application}
-Single Page Applications werden immer beliebter. Die Hauptidee besteht darin, eine Desktop-ähnliche User Experience zu bieten. Eine Webapplikation soll mit einem einzigen Page Load sämtich benötigter Code (HTML, JavaScript, CSS) erhalten\cite{HSRSPA}. Daten werden typischerweise aufgrund von User-Interaktionen dynamisch geladen. Diese Daten müssen von einem Back-End Server über ein API bereitgestellt werden.
-\begin{figure}[H]
-\center
-\includegraphics[scale=0.4]{../03_Design/images/single_page_application_lifecycle.png}\caption{Single Page Application Client Server Interaktion}\cite{MSDNSPA}
-\end{figure}
-Die Logik, wann und wie diese Daten nachgeladen werden, liegen vollständig auf der Clientseite. Gegenüber serverseitigem Rendering sind bei Single Page Applications weniger oder gar keine Page Reloads mehr nötig. Die Rechenleistung, welche fürs Rendering benötigt wird, kann so auf die einzelnen Clients verteilt werden. Damit beim Nachladen der Daten das UI nicht blockiert, werden die Requests asynchron mit Callbacks an den Server gesendet. Sobald die neuen/aktualisierten Daten wieder beim Client eingetroffen sind, können diese verarbeitet werden.
-
-\subsubsection{Vorteile}
-\begin{itemize}
-\item Performancevorteile
-\item Klare Trennung zwischen Logik und Darstellung
-\item Bessere User Experience möglich (keine Page Reloads)
-\end{itemize}
-\subsubsection{Nachteile}
-\begin{itemize}
-\item Keine Erfahrungen beim Entwicklerteam vorhanden
-\end{itemize}
-\subsubsection{Entscheidung}
-Die Vorteile von Single Page Applications gegenüber serverseitigem Rendering sind enorm. Bei mehreren Benutzern müsste bei serverseitigem Rendering häufiger Benutzeranfragen bearbeitet werden. Daten können serverseitig über eine klar definierte Schnittstelle bereitgestellt werden, eine saubere Trennung zwischen Business Logik und User Interface wäre problemlos möglich. 
-
-Durch diese Vorteile fällt die Entscheidung klar auf den Single Page Application Stil. Im nachfolgenden Kapitel wird ein geeignetes Framework evaluiert, um ein solches zu realisieren.  
-\newpage
 \section{Front-End}
-Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersichtliche Weise die Interaktion ermöglichen. Es sollen einerseits neue Geräte hinzugefügt werden, andererseits bestehende Geräte verwaltet oder überwacht werden. Potenziell könnten eine grosse Anzahl solcher IoT Devices vorliegen, weshalb diese übersichtlich gruppiert werden sollen. Im vorherigen Kapitel wurde entschieden, dass der Clientbereich im Single Page Application Stil entwickelt wird. In diesem Kapitel wird eine geeignete Technologie (Framework/Libraries) evaluiert. 
+Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersichtliche Weise die Interaktion ermöglichen. Es sollen einerseits neue Geräte hinzugefügt werden, andererseits bestehende Geräte verwaltet oder überwacht werden. Potenziell könnten eine grosse Anzahl solcher IoT Devices vorliegen, weshalb diese übersichtlich gruppiert werden sollen.
 
-\subsubsection{Kriterien}
+\subsection{Kriterien}
 \begin{itemize}
-\item Framework Grösse (beeinflusst Ladezeiten)
-\item Paint Performance
-\item Standards Compliance (Standards, welche eingehalten werden)
-\item Separation (Trennung zwischen Daten und Presentation)
-\item Interoperabilität
-\item Einstiegsfreundlichkeit
+\item Webbasierter Zugriff
+\item Responsive Web Design für unterschiedliche Bildschirmgrössen
+\item Open-Source Lizenz
+\item Einfache Bedienung und schnelle Einarbeitung
+\item Gute Dokumentation und Unterstützung durch die Community
 \end{itemize}
 
-\subsubsection{Varianten}
-Für die Erstellung von Single Page Applications stehen viele Frameworks zur Verfügung. Für diese Arbeit wurden drei vielversprechende Technologien verglichen. Bei der Variantenauswahl standen Angular 2, React.js und Aurelia zur Debatte. Angular 2 und React.js sind mit Abstand am weitesten verbreitet. Aurelia wird in der Internet Community häufig als Alternative zu den bekannteren Frameworks genannt.
+\subsection{Varianten}
+Bei der Variantenauswahl wurden drei sich stark unterscheidende Ansätze gewählt. Grundsätzlich wären weitere Frameworkalternativen zu Bootstrap und Angular.js denkbar.
 
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
-\hline
-\textbf{React.js} & React.js wurde von Facebook entwickelt. Es stellt eigentlich nur eine Library anstatt einem vollständigen Framework dar. React konzentriert sich auf die View Komponente. Model und Controller Komponenten müssen selbst- oder mithilfe weiterer Libraries implementiert werden. React.js unterstützt one-way Data Binding. Um teure DOM-Manipulationen zu vermeiden, erstellt React.js einen virtuellen DOM. In diesem virtuellen DOM werden jeweils nur die Differenzen berechnet, der Browser kann somit effizienter geupdated werden. HTML wird um eine React-spezifische Grammatik erweitert. Dadurch wird die Wiederverwendbarkeit des Codes stark eingeschränkt, da sowohl der HTML, als auch der JavaScript Code mit React anders aussieht. \newline   
-\\ \hline  
-  \textbf{Angular 2} & Angular 2 ist ein bekanntes Framework für Single Page Applications im MVC Stil. Angular 2 ist TypeScript basiert, hat Dependency Injection Mechanismen eingebaut, unterstützt two-way Data Binding und Unit Testing. Die Software Architektur ist Client-konzentriert, MVC passiert komplett im Browser. Die strikte Trennung von Daten und Presentation ist bei Angular 2 nicht sehr gelungen, da implementationsspezifische Details der View ausserhalb dieser definiert werden müssen.Bei Angular 2 ist man praktisch zur Verwendung von TypeScript gezwungen. Die Grösse des Angular 2 Frameworks ist mit ca. 1MB unübertroffen. In der Community wird der Einstieg in das Framework als schwierig und aufwändig beschrieben.
-\\ \hline
-\textbf{Aurelia} & Aurelia ist wie Angular 2 ein vollständiges Framework für Single Page Applications. Wie auch Angular 2 werden bei Aurelia Dependency Injection, two-way Data Binding, Unit Testing und vieles mehr unterstützt. Aurelia ist bekannt dafür, die Web Standards am besten einzuhalten. Verglichen mit React.js und Angular 2 werden also keine custom HTML Tags, JSX oder ähnliches verwendet. Verglichen mit Angular 2 besitzt Aurelia nur etwa ein Drittel der Grösse mit Vergleichbaren Funktionalitäten. Der Einstieg in Aurelia wird als leicht beschrieben. 
-\\ \hline
+ \hline
+  \textbf{Hardcoding} & Hardcoding des Frontends bringt wenige Vorteile. Sämtlicher HTML, CSS und JavaScript Code müsste von Hand geschrieben werden. Ein selber erstelltes responsives Layout mit CSS ist zwar möglich, aber aufwändig. Es müsste somit viel Zeit in das Layout und das Styling für ein ansprechendes Ergebnis investiert werden. Eine Cross-Browser Unterstützung ist ebenfalls schwierig.\\ \hline 
+ \textbf{Twitter Bootstrap} & Bootstrap von Twitter ist ein weit verbreitetes Framework für Webseiten. Responsive Layouts für unterschiedliche Bildschirmgrössen werden unterstützt. Elemente wie Buttons, Drop-Down Menüs und ähnliches werden von Bootstrap auf sehr einfache Weise bereitgestellt. Die JavaScript Funktionalitäten beschränken sich auf die Anzeige von UI Elementen. Falls JavaScript für die Programmierung der Applikation verwendet wird sollte ein weiteres Framework dafür verwendet werden.\\ \hline 
+ \textbf{Angular.js} & Angular.js ist ein bekanntes Framework für Single Page Applications (SPA) im MVC Stil. Angular.js ist TypeScript 2 basiert, hat Dependency Injection Mechanismen eingebaut, unterstützt 2-way Databinding und Unit Testing. Die Software Architektur ist Client-konzentriert, MVC passiert im Browser.\\ \hline
 \end{longtable}
 
-\subsubsection{Bewertung}
-Die jeweiligen Kriterien werden mit 1-3 Punkten bewertet, wobei 3 die höchste- und 1 die niedrigste Wertung bezeichnen. Die Punkteverteilung erfolgte aufgrund der Zusammenstellung von \cite{EisenbergYoutube}. 
+\subsection{Entscheidung}
+Durch die einfache und schnelle Entwicklungsmöglichkeiten wurde Bootstrap gewählt. Angular.js hat klare Vorteile bei der Erstellung von Single Page Applications. Nach jetztigen Erkenntnissen sind jedoch keine aufwändigen Funktionen clientseitig vorgesehen, Data-Binding scheint zum heutigen Zeitpunkt nicht notwendig. 
 
-\begin{longtable}{| p{5.4cm} | p{3.4cm} | p{3.4cm} | p{3.4cm} |}
-\hline 
- &\textbf{React.js} & \textbf{Angular 2} & \textbf{Aurelia}
-\\ \hline
-\textbf{Framework Grösse} & 3 & 1 & 2
-\\ \hline
-\textbf{Painting Performance} & 1 & 3 & 3
-\\ \hline
-\textbf{Standards Compliance} & 1 & 2 & 3
-\\ \hline
-\textbf{Separation} & 1 & 1 & 3
-\\ \hline
-\textbf{Interoperabilität} & 1 & 2 & 3
-\\ \hline
-\textbf{Einstiegsfreundlichkeit} & 3 & 1 & 2
-\\ \hline
-\textbf{Total} & \textbf{10} & \textbf{10} & \textbf{16} 
-\\ \hline
-\end{longtable}
-Die verwendete Quelle scheint zum einen voreingenommen, da der Ersteller selbst Entwickler bei Aurelia ist. Nach weiterem Überprüfen der Bewertungskriterien bei unabhängigeren Quellen scheinen die Vergleiche aber durchaus realistisch. Selbstverständlich dürfen diese nicht als Wahrheit angesehen werden und müssten für eine fundierte Bewertung selbst in separaten Studien verifiziert werden.
-\subsubsection{Entscheidung}
-Aufgrund der Bewertung wird Aurelia als Front-End Framework verwendet. Beim Entwicklerteam bestehen weder Erfahrungen im Umgang mit Aurelia, noch in der Entwicklung von Single Page Applications mit einem Framework. Grundsätzlich könnten wohl alle drei Frameworks zur Erreichung des Ziels beitragen. Aurelia besticht jedoch in der Einsteigerfreundlichkeit, der Einhaltung von Web Standards und der klaren Trennung von Daten und Darstellung.
+Dem Projektteam ist Angular.js unbekannt und es müsste mit einer langen Einarbeitungszeit und anfänglich schlechter Code-Qualität gerechnet werden. Falls zu einem späteren Zeitpunkt weitere Anforderungen und Funktionen vorgesehen werden, wäre eine \glqq echte\grqq  Single Page Application mit Angular.js eine echte Alternative und könnte die \glqq einfache\grqq Variante mit Bootstrap von Twitter ergänzen oder ablösen.
 
 \newpage
 \section{Datenbanktechnologie}
 Für die Persistierung der Objekte stehen zwei grundlegende Verfahren zur Verfügung. SQL (Structured Query Language) war über einen langen Zeitraum die Standardtechnologie für die Persistierung von Datenobjekten, mit NoSQL Technologien ist jedoch eine starke Alternative mit einigen Vorteilen gegenüber der herkömmlichen SQL Technologie entstanden.
 
-\subsubsection{SQL}
+\subsection{SQL}
 SQL basiert auf einem relationalen Datenmodell. Die Objeke werden auf Tabellen abgebildet. Eine Tabelle stellt somit ein Typ- und die Columns Felder dar. Mit SQL-Datenbanken wird ein stark normalisiertes Datenmodell ohne Redundanzen angestrebt. Mittels referenzieller Integrität (Fremdschlüsselwerte in Tabelle X müssen als Primärschlüsselwerte in Tabelle Y vorhanden sein) wird eine starke Datenkonsistenz gewährleistet. Ein Datensatz kann daher nur gelöscht werden, wenn keine Referenzen darauf zeigen. Mittels Joins von Tabellen können zusammenhängende Datensätze mit einem einzelnen Query abgefragt werden.
 
 Ein grosser Nachteil bei SQL ist das strikte Datenschema. Die Tabelle gibt genau vor, welche Columns für das Objekt existieren (müssen). Möchte man weitere Werte respektive Columns hinzufügen, so müsste das gesamte Schema der Tabelle angepasst werden (altering).
 
-\subsubsection{NoSQL}
+\subsection{NoSQL}
 Mit NoSQL werden die Daten als Key-Value Paare in einem strukturierten Format gespeichert. Häufig ist dies JSON (JavaScript Object Notation). Eine Collection steht für einen Typ von Daten und enthält entweder Key-Value Paare oder weitere Collections. Beziehungen zu anderen Objekten können auf zwei verschiedene Arten erfolgen; entweder als embedded Collection (Denormalisierung) oder mittels Referenz auf ein anderes Objekt.
 
 Ein grosser Vorteil ist das flexible Datenmodell. Wenn man sich beispielsweise ein persistiertes Device-Objekt anschaut, so könnte dies wie folgt aussehen:
@@ -180,7 +132,7 @@ Eine Graphendatenbank speichert Knoten und Kanten. Knoten sind Entitäten und Ka
 \\ \hline
 \end{longtable}
 
-\subsubsection{Entscheidung}
+\subsection{Entscheidung}
 NoSQL wurde als geeignetere Variante für die Speicherung der Objekte ausgewählt. Bei vielen unterschiedlichen Devicetypen muss davon ausgegangen werden, dass Änderungen respektive Ungleichheiten am Schema auftauchen werden. Ein starres, relationales Modell würde dies stark erschweren, da jedesmal mittels \glqq ALTER TABLE\grqq  das Schema geändert- und bestehende Datensätze angepasst werden müssten.
 
 Als NoSQL Implementation wurde \glqq mongoDB\grqq ausgewählt. MongoDB ist eine dokumentenorientierte Datenbank, welche Objekte im BSON Format abspeichert. Die Entitäten werden in sogenannten \glqq Collections\grqq  abgelegt. Attribute der Collections können einzeln abgefragt werden. Die Struktur der Collections ist flexibel, Attribute von Objekten innerhalb der Collections dürfen sich unterscheiden. MongoDB ist die zurzeit wohl am weitest verbreitete NoSQL Implementation, weshalb eine grosse Community und umfangreiche Online-Hilfen verfügbar sind.
