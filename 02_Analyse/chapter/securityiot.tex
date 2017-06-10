@@ -93,15 +93,30 @@ IoT Cloud Dienste kommunizieren mit Sensoren und empfangen deren Daten. IoT Clou
 Wie in der Einführung bereits erwähnt, können die Folgen von Ausfällen je nach Applikation sehr unterschiedlich sein. Eintrittswahrscheinlichkeiten und Schadensausmasse müssen in einer Risikoanalyse bewertet werden, damit geeignete Massnahmen getroffen werden können. So benötigen Patientensysteme in Spitälern weitaus mehr Sicherheitsmassnahmen als Pflanzenüberwachungssysteme in Gewächshäusern.
 
 \subsection{API Security}
-Kommunikation und Austausch von Daten mit Dritten erfolgen über bereitgestellte API's. Sämtliche API Zugriffe müssen zuerst authentifiziert werden, ansonsten können möglicherweise geheime Daten abgefragt-, oder gar fehlerhafte und schädliche Inputs eingegeben werden. Mittels Berechtigungen sollte festgelegt werden, wer auf welche Daten zugreifen darf.
+Kommunikation und Austausch von Daten erfolgen über bereitgestellte API's. Sämtliche API Zugriffe müssen zuerst authentifiziert werden, ansonsten können möglicherweise geheime Daten abgefragt-, oder gar fehlerhafte und schädliche Inputs eingegeben werden. Mittels Berechtigungen sollte festgelegt werden, wer auf welche Daten zugreifen darf. 
 
 \subsection{Korrektheit}
-Je nach Sensitivität der Cloud Applikation müssen Softwareentwickler ein erhöhtes Augenmerk auf die Korrektheit der Software legen. Die Vergangenheit hat gezeigt, dass Softwarefehler wie falsches Exception Handling weitreichende Folgen haben können. Hängt beispielsweise eine ganze Produktionskette von der Cloud Applikation ab, so könnte ein Absturz innert kürzester Zeit einen sehr hohen finanziellen Schaden bedeuten. 
+Je nach Sensitivität der Cloud Applikation müssen Softwareentwickler ein erhöhtes Augenmerk auf die Korrektheit der Software legen. Die Vergangenheit hat gezeigt, dass Softwarefehler wie falsches Exception Handling oder Race Conditions weitreichende Folgen haben können. Hängt beispielsweise eine ganze Produktionskette von der Cloud Applikation ab, so könnte ein Absturz innert kürzester Zeit einen sehr hohen finanziellen Schaden bedeuten. 
 
 \subsection{Verfügbarkeit}
 Wie bei herkömmlichen Servern muss auch bei Applikationsserver im IoT Bereich auf die Verfügbarkeit geachtet werden. Es gibt potenziell viele Vorfälle, welche die Verfügbarkeit beeinträchtigen könnten. Als wirksamste Methode empfiehlt sich eine redundante Auslegung der wichtigsten Komponenten.
 
 \section{User Devices}
+In diesem Unterkapitel werden Gefahren und Massnahmen für End User Devices behandelt. Über Geräte PC's, Notebooks, Tablets oder Smartphones werden IoT Services konsumiert. Für Unternehmen stellen sich seit dem ''bring-your-own-device''-Zeitalter die Herausforderung, dass nicht nur User Devices im Firmenbesitz auf interne Anwendungen zugreifen. Network Access Controll Systeme überprüfen Devices an einem Enforcement-Point diverse Attribute wie beispielsweise Virendefinitionen, bevor in den geschützten Bereich zugegriffen werden kann. Grundsätzlich unterscheiden sich die empfohlenen Security-Massnahmen für User Devices für IoT Anwendungen nicht von herkömmlichen Systemen, da potenzielle Schadensausmasse jedoch höher sind, sollten empfohlene Massnahmen konsequent umgesetzt werden.
+
+\subsection{Client Applikationen}
+Unterschiedliche Arten von Client Applikationen sind für IoT Anwendungen denkbar. Herkömmlich installierte Desktop-Programme für Windows Betriebssysteme verlieren an Bedeutung. Web- und Mobil-Applikationen haben in den letzten Jahren stark zugenommen. 
+
+Ein Benutzer muss sich an der Client-Anwendung authentisieren. Wie hinlänglich bekannt, muss die Authentifizierung an einem vorgesehenen Server stattfinden. Für sensitive Anwendungen sollten Multi-Faktor-Authentifizierungslösungen eingesetzt werden. Neuere Mobilgeräte und Notebooks verfügen häufig über Fingerabdruckscanner, es wären aber auch SMS-Tokens oder Smartcards als weitere Möglichkeit neben Passwörtern denkbar.
+
+Mobile Geräte werden oft verloren oder gestohlen. Sobald eine Session beendet wurde, sollte eine erneute Authentifizierung verlangt werden. Es sollte ein möglichst kurzes Session-Timeout gewählt werden, damit beim Vergessen des Logouts fremde Personen keinen Zugriff erhalten können.
+
+Viele Sicherheitsrelevante Überprüfungen von Anwendungen wie Input-Validierung müssen serverseitig implementiert werden, da man clientseitige Security-Checks leicht umgehen kann. Es gibt jedoch Angriffe wie Phishing oder DOM-basiertes Cross-Site-Scripting, welche selbst serverseitig nicht abgefangen werden können. 
+
+\subsection{Betriebssysteme}
+
+
+\subsection{Benutzersensibilisierung}
 
 \section{Management Services}
 
