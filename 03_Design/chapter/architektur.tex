@@ -1,21 +1,16 @@
- \chapter{Architektur}
+\chapter{Architektur}
 In diesem Kapitel wird die Software Architektur erarbeitet.  
 Es soll sowohl die Problemdomäne abstrakt mittels Domänenmodell analysiert werden, als auch ein Klassendesign mittels Schichtendiagramm erarbeitet werden.
 
-\section{Übersicht}
-Die Applikation hat eine typische 3-Tier Architektur. Auf der Clientseite wird die Single Page Application im Webbrowser ausgeführt. Die Serverseite handelt die Daten und stellt sie der Clientseite zur Verfügung. Die Daten werden auf einer Datenbank persistiert.
+\section{Systemübersicht}
+%TODO
+Bsdfsf
+
 \begin{figure}[H]
 \center
-\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Architekturübersicht}
+\includegraphics[scale=0.6]{../03_Design/images/systemuebersicht.png}\caption{Systemübersicht}
 \end{figure}
-\subsubsection{Client}
-Die Clientseite wird als Single Page Application implementiert. Die Trennung zwischen Darstellung und Daten kann somit optimal vollzogen werden. Die Single-Page Applikation wird mittels dem evaluierten Aurelia Framework implementiert. Aurelia stellt die vom Server zur Verfügung gestellten Daten dar und ist zuständig für die Benutzerinteraktion und das Nachladen von neuen Daten. Da die MVC Komponenten sich beim Client befinden, wird ein häufiges Nachladen und serverseitiges Rendering verhindert. Dies hilft, um die Applikation auch bei mehreren Usern performant zu halten.
-\subsubsection{Server}
-Das Back-End wird als JEE Server realisiert. Das Spring MVC Framework soll die Entwicklung vereinfachen. Die Serverkomponente ist für die Bereitstellung der Daten an den Client verantwortlich. Dafür muss sie die Kommunikation zu den IoT Devices sicherstellen um zum einen die gewünschten Informationen zu erhalten und zum anderen um weitere Aktionen gemäss Use Cases durchzuführen. Die Daten sollen über ein REST API den Clients zu Verfügung gestellt werden.
-\subsubsection{IoT Device}
-Das IoT Device stellt über einen Kommunikationsendpunkt Daten zur Vefügung. Sowohl das Kommunikationsprotokoll, als auch die Form der Daten können variieren. IoT Devices kommunizieren mit dem Management Server und niemals direkt mit den Clients.
-\subsubsection{Datenbank}
-Als Datenbank wurde MongoDB evaluiert. Die Datenbank kann entweder auf dem gleichen-, oder auf einem entfernten physischen Rechner gestartet werden. Die Datenbank persistiert die Informationen zu den managed Devices.
+
 \newpage
 
 
@@ -206,73 +201,122 @@ Zertifikatdatei-Datenklasse. Mit dieser Klasse werden Zertifikate in Objekte umg
 	\end{center}
 \end{figure}
 
+\newpage
 
 \subsection{Presentation Layer}
-Im Presentation-Layer wird das MVC-Pattern umsetzt. Dazu wird ein Controller, eine View sowie ein Model Package implementiert, welche alle Anfragen bearbeiten und anzeigen. Der Presentation-Layer liegt komplett auf der Clientseite.
+
+
+Im Presentation-Layer gibt es Web-Controller und Rest-Controller. Die Web-Controller liefern die HTML-Inhalte aus. Die Rest-Contoller liefern Daten im JSON-Format oder es werden Methoden aus dem Service Layer gestartet, um die Daten zu verarbeiten.
+
+
 \subsubsection{Packagestruktur}
+
+
 \begin{table}[H]
 \centering
     \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
     {Packagename} & {Beschreibung}\\ \midrule
-    Controller & Der Controller verwaltet alle Anfragen der View und bearbeitet das Model dementsprechend.\\       
-    View & Die View bekommt von dem Model die Daten und Renderd dazu die jeweiligen Anzeigen. \\
-    Model & Im Model werden alle Daten gehalten, welche die View anzeigt. Nur der Controller hat direkten Zugriff auf diese Daten. \\
+    webcontrollers & Alle HTML-Inhalte werden durch die Web-Controller ausgeliefert. Dazu werden die Daten aus dem Service-Layer geholt.\\       
+    restcontrollers & Die Rest-Controller führen Methoden auf dem Service-Layer aus und geben die Resultate als JSON zurück an den Client. \\
     \bottomrule
     \end{tabular}
 \end{table}
-\subsubsection{Schnittstellen}
-Der Presentation-Layer liegt separat auf dem Client, daher gibt es nur eine Schnittstelle über die Rest API auf den Server. Über dieses API werden alle Daten geholt und auf dem Client gerendert und angezeigt.
 
+\subsubsection{Klassenstruktur}
 
-
-\subsection{API Layer}
-Der oberste Layer auf der Backend Seite ist der API Layer. Dieser bietet alle wichtigen Schnittstellen an und bearbeitet die Anfragen. Dazu werden in den Controller Klassen die RequestMappings erstellt. Die Anfragen werden an den Service Layer gegeben, welche die Applikation Logik beinhaltet.
-\subsubsection{Packagestruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
-    {Packagename} & {Beschreibung}\\ \midrule
-    Controller & Der Controller verwaltet alle Anfragen vom dem Client Frontend und verarbeitet diese.\\       
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+     FrontWebController & Beinhaltet die Login, Logout und Home Routen.  \\       
+     GroupWebController & Liefert alle für Groups relevanten HTML-Inhalte aus. \\       
+     DeviceWebController & Liefert alle für Devices HTML-Inhalte aus.  \\       
+     DiscoveryWebController & Beinhaltet die Discovery Routen.  \\       
+     ConfigurationWebController & Beinhaltet die für die Configuration wichtigen Routen.  \\       
+     UserWebController & Liefert die User HTML-Inhalte aus. \\       
+     DeviceRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\       
+     GroupRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\       
+     ConfigurationRestController & Führt Service-Layer Methoden aus und liefert JSON Daten. \\       
+     UserRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\         
     \bottomrule
     \end{tabular}
 \end{table}
-\subsubsection{Schnittstellen}
-Der API Layer hat eine direkte Schnittstelle zum Service Layer. Alle Anfragen werden über diese Schnittstelle verarbeitet, damit das API sauber von der Datenverarbeitung getrennt ist. 
 
+\subsubsection{Schnittstellen}
+Der Presentation-Layer hat eine Schnittstelle zum Service-Layer. Alle Daten werden über den Service-Layer geholt und an den Service-Layer gegeben. So ist eine saubere Trennung zwischen Daten und Methoden sichergestellt. 
+
+\newpage
 
 \subsection{Service-Layer}
-Der Service-Layer beinhaltet die Backend Klassen, welche für die Verarbeitung der Daten zuständig ist. Hier werden alle Devices erfasst, verbunden und verwaltet. Dazu wird jedes gefundene Device auf der Datenbank hinterlegt. Bei einem Read und Write wird das Device aus dem Data Layer geholt und mit den neuen Daten aktualisiert.
+Der Service-Layer beinhaltet die Klassen, welche für die Verarbeitung der Daten zuständig ist. Hier werden alle Devices erfasst, verbunden und verwaltet. Dazu wird jedes gefundene Device auf der Datenbank hinterlegt. Bei einem Read, Write oder Execute wird das Device aus dem Data Layer geholt und mit den neuen Daten aktualisiert. Dabei wird hier zwischen Applikation-Services und LwM2M-Services unterschieden.
+
+\subsubsection{Packagestruktur}
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Packagename} & {Beschreibung}\\ \midrule
+    applicationservice & Dieses Package beinhaltet die Klassen, welche die Devices oder Groups erstellen, anpassen usw. \\       
+    lwm2mservices & Dieses Package beinhaltet alle Kommunikationsrelevanten Klassen, um mit den Devices Daten auszutauschen. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
     \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
-     IConnector & Die Verbindungsklasse des Servicelayer stellt alle Verbindungen zu den Devices auf.  \\       
-     IDiscovery & Der Listener horcht auf neue Devices und erfasst diese laufend auf dem Data-Layer  \\       
-     IHandler &  Der IHandler ist für die Read, Write, Observe und Execute Befehle zuständig.\\       
-     FileHandler &   Liest und schreibt alle File Objekte\\       
-     DeviceService &  Schnittstelle zum Data Layer. Liest und schreibt alle Device Objekte \\       
+     DeviceService & Holt und speichert die Devices von dem Data-Layer und verarbeitet die Änderungen  \\       
+     GroupService & Zugriff auf den Data-Layer. Liest und schreibt alle Groups.  \\       
+     ConfigurationService & Zugriff auf den Data-Layer. Liest und schreibt alle Configurationen.  \\  
+     UserService & Checkt bei den Logins und verarbeitet die User Schreib- und Lesevorgänge.  \\            
+     LocationService & Liest die Locations aus den Devices und gibt sie dem Controller weiter.  \\       
+     InfrastructureService & Infrastruktur-Methoden, wie zum Beispiel Server-Uptime.  \\       
+     LwM2MHandler & Beinhaltet alle Kommunikation zwischen Devices und dem Management Server.  \\       
+     LwM2MManagementServer & Der Server, welche die Befehle aufs Netzwerk schickt und empfängt.  \\       
     \bottomrule
     \end{tabular}
 \end{table}
 \subsubsection{Schnittstellen}
-Der Service-Layer hat eine Schnittstelle zum Data-Layer. Durch den Service-Layer werden die Datenobjekte erstellt, bearbeitet und ausgewertet. Der API Layer muss immer über den Service-Layer, um eine saubere Abtrennung der Schichten zu gewährleisten.
+Der Service-Layer hat eine Schnittstelle zum Data-Layer. Durch den Service-Layer werden die Datenobjekte erstellt, bearbeitet und ausgewertet. Der Presentation-Layer muss immer über den Service-Layer, um eine saubere Abtrennung der Schichten zu gewährleisten.
+
+\newpage
 
 \subsection{Data-Layer}
 Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benötigt werden. Diese werden von hier in die Datenbank geschrieben. Das Repository bietet die Datenbankmethoden an, um die Daten in die Datenbank zu speichern.
+
+\subsubsection{Packagestruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Packagename} & {Beschreibung}\\ \midrule
+    repositories & Zugriffsmethoden auf die Datenbank. Eigene sowie durch die Library ausgelieferte Methoden. \\       
+    \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
     \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
     Device & Device ist eine Datenklasse, welche alle Daten von einem Device beinhaltet.\\
-    Credentials & Alle Zugriffsdaten der Devices sind in der Credentials-Klasse definiert. \\
     DeviceGroup & In der Datenklasse DeviceGroup, werden alle Gruppen verwaltet, damit das Composite-Pattern umgesetzt werden kann.\\
-    Command & Alle Kommandos werden zentral in der Command-Datenklasse gespeichert.\\
-    FileEntitiy & In FileEntitiy wird das Grundgerüst für alle Dateien erstellt, damit diese in einer geeigneten Form in der Datenbank abgespeichert werden können.\\    
-    Repository & Schnittstelle zur Datenbank. Bietet die Datenbankmethonden, wie Insert, Delete, Find usw. an.\\     
+    ManagementUser & Datenklasse für die Loginbenutzer.\\
+    Configuration & Configuration Datenklasse, welche eine List von ConfigurationItems beinhaltet. \\
+    ConfigurationItem & Datenklasse für die einzelnen ConfigurationItems.\\
     \bottomrule
     \end{tabular}
 \end{table}
 \subsubsection{Schnittstellen}
-Da der Data Layer die unterste Schicht ist, gibt es nur eine Verbindung zur Datenbank.
+Da der Data-Layer die unterste Schicht ist, gibt es nur eine Verbindung zur Datenbank.
+
+\newpage
+
+\section{Deployment Diagramm}
+Die Applikation hat eine typische 3-Tier Architektur. Es wird ein Serverseitiges Templating verwendet. Alle Daten werden daher auf dem Server verarbeitet und als HTML an den Client gesendet. Die Daten werden in einer Datenbank persistiert.
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Deployment Diagramm}
+\end{figure}
