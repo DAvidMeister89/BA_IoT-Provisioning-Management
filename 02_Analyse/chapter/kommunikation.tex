@@ -159,7 +159,7 @@ Unterhalb der Verbindungsschicht können wieder viele verschiedene Technologien 
 
 Mit all diesen Möglichkeiten bietet LwM2M eine grosse Abdeckung an Technologien und kann vielseitig eingesetzt werden. 
 \begin{figure}[H]
-\includegraphics[scale=0.3]{images/lwm2m/stack.png}
+\includegraphics[scale=0.3]{../02_Analyse/images/lwm2m/stack.png}
 \caption{LwM2M Stack}
 \end{figure}
 
@@ -167,7 +167,7 @@ Mit all diesen Möglichkeiten bietet LwM2M eine grosse Abdeckung an Technologien
 
 \subsection{Client-Server Model}
 \begin{figure}[H]
-\includegraphics[scale=0.5]{images/lwm2m/server_client_model.png}
+\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/server_client_model.png}
 \caption{Client-Server-Model}
 \end{figure}
 Die drei zentralen Bestandteil des Protokolls sind der Bootstrap-Server, der LwM2M-Server und der LwM2M-Client. Der Bootstrap-Server ist für den Erstkontakt sowie die Erstkonfiguration zuständig. Die restliche Kommunikation läuft zwischen dem LwM2M-Server und dem LwM2M-Client. Ohne einen Bootstrap-Server kommunizieren die Geräte direkt mit dem LwM2M-Server.
@@ -178,10 +178,19 @@ Die Serverumsetzung ist sehr ähnlich wie die Clientumsetzung. Es wird auf einem
 \subsubsection{Management Server}
 Der Management Server klinkt sich nun beim LwM2M Server ein. Dieser Server kann direkt oder über ein Web API angesprochen werden. Je nach Implementierung gibt es beide Varianten. So könnte man mehrere Serverinstanzen zu einem Management Server hinzufügen, um alles zentral Verwalten zu können. Möchte man nun ein Gerät managen, schickt man einen Befehl an den zuständigen LwM2M Server und dieser leitet den Befehl nun an das Device weiter. Die Antwort wird danach bis zum Management Server zurückgegeben und ausgewertet. 
 \subsubsection{Bootstrap-Server}
-Um ein ''factory bootstrap'' zu vermeiden, hat LwM2M einen Bootstrap-Server. Dieser ist für die Erstkonfiguration Zuständig und macht die Devices variabler einsetzbar. Bootstraping wird im Kapitel Features und Funktionen genauer beschrieben.
-
-\newpage
-
+Um ein ''factory bootstrap'' zu vermeiden, hat LwM2M einen Bootstrap-Server. Dieser ist für die Erstkonfiguration Zuständig und macht die Geräte variabler einsetzbar. Auf der Grafik ist dieser nicht erfasst worden. Wichtige Einstellungen die der Bootstrap-Server verteilen kann sind unter anderen\cite{BootstrapFeatures}:
+\begin{itemize}
+\item Keys  und Zertifikate für DTLS
+\item Server URL
+\item SMS Security Parameter
+\item Kommunikationsparameter
+\item Access Control Lists
+\end{itemize}
+Durch den Einsatz von Bootstraping nimmt man sich viel Managementarbeit ab und hat ein einheitlicheres und besser verwaltetes Netzwerk von LwM2M-Server und Client.
+\begin{figure}[H]
+\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/server_client_model.png}
+\caption{Client-Server-Model}
+\end{figure}
 \subsection{Object Model}
 Eine klare Stärke des LwM2M-Protokolls sind die Object Models. Durch die Object Models werden alle Informationen eines Devices in einem strukturierten Model abgelegt, damit ein geregelter Zugriff auf alle Daten entsteht. Es wird zwischen Object, Instance und Ressource unterschieden. Eine Ressource ist zum Beispiel der Temperaturwert eines Temperatursensors. Eine zusätzliche Ressource könnte die dazugehörige Temperatureinheit sein. Mehrere solche Ressourcen werden zu einem Object Model zusammengefasst. Ein Device kann aber auch mehrere Temperatursensoren besitzen und hat so mehrere Instanzen des gleichen Objects.
 
@@ -248,7 +257,7 @@ language=xml]
 Hier sieht man nun ein Beispielclient. Dies könnte eine kleine LED-Lampe sein, welche jedes LED separat steuern lässt. Dazu wurden die Objeke 3 und 3311 verwendet, welche bereits vorgefertigt bereitstehen. Da es mehrere LEDs gibt, werden auch mehrere Light Control Instanzen benötigt. Jede Instanz steuert so eine einzelne LED.
 Neben diesen drei Objekten könnten noch weitere vorhanden sein, wie zum Beispiel Firmware oder andere Sensorobjekte.
 \begin{figure}[H]
-\includegraphics[scale=0.65]{images/lwm2m/lwm2m_client.png}
+\includegraphics[scale=0.65]{../02_Analyse/images/lwm2m/lwm2m_client.png}
 \caption{LwM2M Stack}
 \end{figure}
 
@@ -275,7 +284,7 @@ Sobald ein Device gestartet wird, überprüft es seine Einstellungen. Es gibt zw
 
 In der folgenden Grafik sieht man den Ablauf des Bootstrapings.
 \begin{figure}[H]
-\includegraphics[scale=0.5]{images/lwm2m/bootstrap_diagram.png}
+\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/bootstrap_diagram.png}
 \caption{LwM2M Bootstraping\cite{LwM2MInterfaces}}
 \end{figure}
 Als ersten Schritt sendet der Device eine Anfrage an den Bootstrap-Server. In dieser Anfrage gibt der Client sein Endpointname an. Durch diesen Endpointname weiss der Bootstrap-Server, welche Konfiguration für dieses Gerät vorgesehen ist. Der Server antwortet mit ''Valid''. Durch einen Delete Befehl auf die Root-URL löscht es die alten Konfigurationen. Danach werden durch einzelne PUTs alle wichtigen Daten auf das Gerät geschrieben.
@@ -287,8 +296,8 @@ Wenn ein Client einen gültigen und erreichbaren LwM2M-Server hinterlegt hat, be
 
 \subsubsection{Registration - Ablauf}
 \begin{figure}[H]
-\includegraphics[scale=0.4]{images/lwm2m/registration_diagram.png}
-\caption{LwM2M Registration\cite{LwM2MInterfaces}}
+\includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/registration_diagram.png}
+\caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
 Die Registrierung wird immer von einem Client aus gestartet. Dieser sendet seinem hinterlegtem LwM2M-Server einen POST mit all den relevanten Daten. Sobald diese gesendet wurden, wartet der Client auf eine Antwort. Der Server überprüft nun diese Daten und checkt auch gleichzeitig, ob der Client sich richtig authentifiziert hat. Wenn alle Daten passen, legt der Server eine Registrierung an und sendet dem Client die URL zu dieser Ressource. Der Client kann nun alle weiteren Daten an diese URL senden.
 
@@ -303,8 +312,8 @@ Nach dem Registrieren kann der Server auf alle für ihn freigegebenen Daten zugr
 \subsubsection{Object / Ressource Access - Ablauf}
 Alle drei Varianten laufen sehr ähnlich ab und der Initiator ist immer der Server. Der Client kann keine Reads oder Writes an den Server senden.
 \begin{figure}[H]
-\includegraphics[scale=0.65]{images/lwm2m/command_diagram.png}
-\caption{LwM2M Device Access\cite{LwM2MInterfaces}}
+\includegraphics[scale=0.65]{../02_Analyse/images/lwm2m/command_diagram.png}
+\caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
 In der Grafik sieht man drei Beispielanfragen eines LwM2M-Servers.
 
@@ -321,8 +330,8 @@ LwM2M bietet neben den von Hand ausgeführten Read auch ein Observer an. Dieser 
 \subsubsection{Reporting - Ablauf}
 Im Grunde wird hier ein normales Observer-Pattern umgesetzt. Der Server ist der Observer und der Client ist das Subject. Initiiert wird dieser Vorgang immer vom Server aus. 
 \begin{figure}[H]
-\includegraphics[scale=0.4]{images/lwm2m/report_diagram.png}
-\caption{LwM2M Reporting\cite{LwM2MInterfaces}}
+\includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/report_diagram.png}
+\caption{LwM2M Stack\cite{LwM2MInterfaces}}
 \end{figure}
 Um eine Ressource zu Überwachen, sendet der Server ein GET-Request an die gewünschte Ressource-URL mit einem Observe Token. Direkt nach dem Anmelden des Observers meldet der Client den aktuellen Wert der Ressource mit einer Content Message ID und dem Observer Token.
 
