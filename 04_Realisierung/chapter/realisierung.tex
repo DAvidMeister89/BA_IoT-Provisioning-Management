@@ -162,7 +162,34 @@ Sind Devices nicht mehr erreichbar, muss dies dem Benutzer mitgeteilt werden. Ha
 \subsubsection{Übersichtskarte}
 Auf dieser Übersichtskarte werden alle im Device gespeicherten Locations von IoT Devices angezeigt.
 
+\newpage
 \subsection{Discovery}
+Auf der Discovery Seite sieht der Benutzer alle registrierten Devices. Sämtliche Devices registrieren sich am LwM2M Server. Sind sie vom Benutzer noch nicht hinzugefügt worden, so erscheinen sie auf dieser Seite.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/discovery.png}
+\caption{Discovery}
+\end{figure}
+
+\subsubsection{Gefundene Devices}
+Ist ein Device vom Benutzer noch nicht hinzugefügt worden, besitzt das Attribut ''added'' den Wert ''false''. Nachdem der Benutzer das Device hinzugefügt hat, wird dem Device das Attribut ''added'' auf ''true'' gesetzt und erscheint deshalb nicht mehr.
+
+\subsubsection{Hinzufügen}
+Beim ''Add''-Button werden die selektierten Devices hinzugefügt. Es besteht die Möglichkeit, beim Hinzufügen eine Gruppe oder eine Initiale Konfiguration zu setzen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/discovery_addgroup.png}
+\caption{Discovery Gruppenauswahl}
+\end{figure}
+
+Die selektierten Werte in den Drop-Down-Listen werden dem Server beim Hinzufügen des Devices übergeben.
+
+\subsubsection{Refresh/Clear}
+Mit dem Refresh Button wird die Seite neu geladen, damit frisch registrierte Devices angezeigt werden. Der Clear Button leert die Liste von Devices. Melden sich die Devices zu einem späteren Zeitpunkt nochmals, so tauchen sie in dieser Ansicht wieder auf.
+
+
 \subsection{Devices und Groups}
 \subsection{Configuration}
 
