@@ -1,0 +1,322 @@
+\chapter{Architektur}
+In diesem Kapitel wird die Software Architektur erarbeitet.  
+Es soll sowohl die Problemdomäne abstrakt mittels Domänenmodell analysiert werden, als auch ein Klassendesign mittels Schichtendiagramm erarbeitet werden.
+
+\section{Systemübersicht}
+%TODO
+Bsdfsf
+
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.6]{../03_Design/images/systemuebersicht.png}\caption{Systemübersicht}
+\end{figure}
+
+\newpage
+
+
+\begin{landscape}
+\section{Klassenstruktur}
+\subsection{Klassendiagramm}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{../03_Design/images/domainmodel.png}
+\caption{Klassendiagramm}
+\end{figure}
+\end{landscape}
+\subsection{Klassenbeschreibungen}
+\subsubsection{Connector}
+Die Connector-Klasse ist für die Verbindung zu den Geräten zuständig. Sie behandelt die Authentisierung und stellt die Verbindung den anderen Klassen bereit. Dies ist eine zentrale Klassen, welche bei vielen Tätigkeiten benötigt wird.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule
+    connectToDevice() & Die Connect Methode, welche die Verbindung zu einem Device aufbaut. Bei der Verbindung wird dieser Klasse ein Device übergeben.\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{Discovery}
+Dies ist die Discovery-Klasse. Mit der Discovery-Klasse wird auf Geräte aus dem Netzwerk gehört und falls welche vorhanden sind, werden diese in der Datenbank eingefügt. Für die verschiedenen Protokolle gibt es verschiedene Implementationen
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule
+    listen() &  Die Methode wird beim Starten automatisch ausgeführt. Alle Anfragen werden verarbeitet und die neuen Geräte werden in der Datenbank abgelegt.\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\subsubsection{ConnectionHandler}
+Mit dem ConnectionHandler werden die Daten von den Devices abgefragt, geschrieben, überwacht und ausgeführt. Je nach Device wird eine andere Implementation der Read-Funktion bereitgestellt, damit alle gewünschten Protokolle unterstützt werden.
+\noindent \begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    read() & Read-Methode, welche die Daten vom gewünschten Device ausliest.\\
+    write() & Die write-Methode schickt die gewünschten Daten zum Device. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\subsubsection{DeviceService}
+Mit dem DeviceService wird eine Schnittstelle zum Data-Layer erstellt. Dieser Service ist für den kompletten Datenautausch zwischen den Schichten zuständig.\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule 
+    - & -
+   \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+
+\subsubsection{FileHandler}
+Der FileHandler ist für den Up- und Download zuständig. Er nimmt alle Dateien entgegen und speichert diese auf dem Server ab. Oder er holt eine Datei vom Server und lädt diese herunter, damit man sie mit dem Writer auf ein Device schicken kann.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule 
+    upload() & Mit dem Upload wird eine Datei vom Filesystem auf das Managementtool geladen. \\
+    download() & Durch den download, kann eine Datei vom Managementtool heruntergeladen werden. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Device}
+Device ist eine Datenklasse, welche alle Angaben eines Devices speichert. Jedes Device wird so in ein Objekt gespeichert.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    name & Gerätenamen \\
+    protocolType & Protokolltyp, wie zum Beispiel CoAP, Http usw. \\
+    authType & Authentifikationstyp wie zum Beispiel Passwort oder Zertifikat  \\
+    entpoint & Endpunkt-Adresse des Gerätes \\
+    credentials & Credentialobjekt, welches die Logindaten enthält
+\\    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{DeviceGroup}
+Durch die DeviceGroup-Klasse wird das Composite-Pattern umgesetzt. So können die Geräte individuell verschachtelt werden.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    name & Device Gruppen Namen\\
+    description & Beschreibung der Device Gruppe \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Credential}
+Credential-Klasse für die Devices. Durch diese Datenklasse werden alle Usernamen/Passwort kombinationen gehashed abgespeichert. Zusätzlich werden auch die jeweiligen Zertifikate hinterlegt.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    username & Benutzername des Devices \\
+    password & Devicepassword als Hash\\
+    certificate & Zertifikat als Datenblob\\
+    hash() & Hashmethode, damit die Passwörter nicht im Klartext gespeichert werden\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{Command}
+Mit der Command-Klasse werden alle benötigten Kommandos, wie zum Beispiel "Shutdown" usw. erfasst.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    command & Device-Kommando\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{File}
+Das Interface File, bestimmt die Methoden und Variablen, welche die Vererbten Klassen implementieren müssen.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    name & Name der abgelegten Datei\\
+    date & Datum\\ 
+    Version & Versionsstand der Software oder der Konfigurationsdatei\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{ConfigFile}
+Die ConfigFile-Klasse ist die Datenklasse für alle Konfigurationsdateien, damit diese in einer Datenbank angepassten Form gespeichert werden können. \begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    - & -\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\subsubsection{SoftwareFile}
+Diese Datenklasse ist das Objekt für eine Softwaredatei. So kann die Datei in der Datenbank erfasst werden.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    - & -\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\subsubsection{CertificateFile}
+Zertifikatdatei-Datenklasse. Mit dieser Klasse werden Zertifikate in Objekte umgewandelt, damit man sie in der Datenbank abspeichern kann.
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Eigenschaft} & {Beschreibung}\\ \midrule      
+    - & -\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\section{Logische Architektur}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.90\textwidth]{../03_Design/images/architektur.png}
+	\caption{Logische Architektur}
+	\end{center}
+\end{figure}
+
+\newpage
+
+\subsection{Presentation Layer}
+
+
+Im Presentation-Layer gibt es Web-Controller und Rest-Controller. Die Web-Controller liefern die HTML-Inhalte aus. Die Rest-Contoller liefern Daten im JSON-Format oder es werden Methoden aus dem Service Layer gestartet, um die Daten zu verarbeiten.
+
+
+\subsubsection{Packagestruktur}
+
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Packagename} & {Beschreibung}\\ \midrule
+    webcontrollers & Alle HTML-Inhalte werden durch die Web-Controller ausgeliefert. Dazu werden die Daten aus dem Service-Layer geholt.\\       
+    restcontrollers & Die Rest-Controller führen Methoden auf dem Service-Layer aus und geben die Resultate als JSON zurück an den Client. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Klassenstruktur}
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+     FrontWebController & Beinhaltet die Login, Logout und Home Routen.  \\       
+     GroupWebController & Liefert alle für Groups relevanten HTML-Inhalte aus. \\       
+     DeviceWebController & Liefert alle für Devices HTML-Inhalte aus.  \\       
+     DiscoveryWebController & Beinhaltet die Discovery Routen.  \\       
+     ConfigurationWebController & Beinhaltet die für die Configuration wichtigen Routen.  \\       
+     UserWebController & Liefert die User HTML-Inhalte aus. \\       
+     DeviceRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\       
+     GroupRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\       
+     ConfigurationRestController & Führt Service-Layer Methoden aus und liefert JSON Daten. \\       
+     UserRestController & Führt Service-Layer Methoden aus und liefert JSON Daten.  \\         
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Schnittstellen}
+Der Presentation-Layer hat eine Schnittstelle zum Service-Layer. Alle Daten werden über den Service-Layer geholt und an den Service-Layer gegeben. So ist eine saubere Trennung zwischen Daten und Methoden sichergestellt. 
+
+\newpage
+
+\subsection{Service-Layer}
+Der Service-Layer beinhaltet die Klassen, welche für die Verarbeitung der Daten zuständig ist. Hier werden alle Devices erfasst, verbunden und verwaltet. Dazu wird jedes gefundene Device auf der Datenbank hinterlegt. Bei einem Read, Write oder Execute wird das Device aus dem Data Layer geholt und mit den neuen Daten aktualisiert. Dabei wird hier zwischen Applikation-Services und LwM2M-Services unterschieden.
+
+\subsubsection{Packagestruktur}
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Packagename} & {Beschreibung}\\ \midrule
+    applicationservice & Dieses Package beinhaltet die Klassen, welche die Devices oder Groups erstellen, anpassen usw. \\       
+    lwm2mservices & Dieses Package beinhaltet alle Kommunikationsrelevanten Klassen, um mit den Devices Daten auszutauschen. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Klassenstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+     DeviceService & Holt und speichert die Devices von dem Data-Layer und verarbeitet die Änderungen  \\       
+     GroupService & Zugriff auf den Data-Layer. Liest und schreibt alle Groups.  \\       
+     ConfigurationService & Zugriff auf den Data-Layer. Liest und schreibt alle Configurationen.  \\  
+     UserService & Checkt bei den Logins und verarbeitet die User Schreib- und Lesevorgänge.  \\            
+     LocationService & Liest die Locations aus den Devices und gibt sie dem Controller weiter.  \\       
+     InfrastructureService & Infrastruktur-Methoden, wie zum Beispiel Server-Uptime.  \\       
+     LwM2MHandler & Beinhaltet alle Kommunikation zwischen Devices und dem Management Server.  \\       
+     LwM2MManagementServer & Der Server, welche die Befehle aufs Netzwerk schickt und empfängt.  \\       
+    \bottomrule
+    \end{tabular}
+\end{table}
+\subsubsection{Schnittstellen}
+Der Service-Layer hat eine Schnittstelle zum Data-Layer. Durch den Service-Layer werden die Datenobjekte erstellt, bearbeitet und ausgewertet. Der Presentation-Layer muss immer über den Service-Layer, um eine saubere Abtrennung der Schichten zu gewährleisten.
+
+\newpage
+
+\subsection{Data-Layer}
+Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benötigt werden. Diese werden von hier in die Datenbank geschrieben. Das Repository bietet die Datenbankmethoden an, um die Daten in die Datenbank zu speichern.
+
+\subsubsection{Packagestruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Packagename} & {Beschreibung}\\ \midrule
+    repositories & Zugriffsmethoden auf die Datenbank. Eigene sowie durch die Library ausgelieferte Methoden. \\       
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Klassenstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+    Device & Device ist eine Datenklasse, welche alle Daten von einem Device beinhaltet.\\
+    DeviceGroup & In der Datenklasse DeviceGroup, werden alle Gruppen verwaltet, damit das Composite-Pattern umgesetzt werden kann.\\
+    ManagementUser & Datenklasse für die Loginbenutzer.\\
+    Configuration & Configuration Datenklasse, welche eine List von ConfigurationItems beinhaltet. \\
+    ConfigurationItem & Datenklasse für die einzelnen ConfigurationItems.\\
+    \bottomrule
+    \end{tabular}
+\end{table}
+\subsubsection{Schnittstellen}
+Da der Data-Layer die unterste Schicht ist, gibt es nur eine Verbindung zur Datenbank.
+
+\newpage
+
+\section{Deployment Diagramm}
+Die Applikation hat eine typische 3-Tier Architektur. Es wird ein Serverseitiges Templating verwendet. Alle Daten werden daher auf dem Server verarbeitet und als HTML an den Client gesendet. Die Daten werden in einer Datenbank persistiert.
+\begin{figure}[H]
+\center
+\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Deployment Diagramm}
+\end{figure}
