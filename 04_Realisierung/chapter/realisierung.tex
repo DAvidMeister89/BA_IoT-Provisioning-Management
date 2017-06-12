@@ -328,6 +328,12 @@ Auf der rechten Seite werden Buttons für die unterstützen Aktionen angezeigt. 
 \subsection{Groups}
 In der Gruppenansicht stehen dem Benutzer viele Funktionen für die Verwaltung von Devices und Groups zur Verfügung. In der Map-Übersicht sind alle Devices ersichtlich.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/groups.png}
+\caption{Gruppenansicht}
+\end{figure}
+
 \subsubsection{Group Members}
 Gruppenmitglieder können unter ''Group Members'' verwaltet werden. 
 
@@ -343,23 +349,41 @@ Auf der rechten Seite sind die Mitglieder aufgelistet, sobald ''OK'' gedrückt w
 
 Diese Verwaltung wurde mit Hilfe der Bootstrap-Duallist-Box Library implementiert. 
 \subsubsection{Group Memberships}
-Die Mitgliedschaft 
+Die Mitgliedschaft der Gruppe wird über diesen Button verwaltet. Eine Gruppe kann nur über eine Gruppenzugehörigkeit gleichzeitig verfügen. Die Mitgliedschafsverwaltung wird ebenfalls über die Bootstrap-Duallist-Box Library implementiert.
 
 \subsubsection{Add New Child Group}
-
+Mit dieser Funktion kann der Gruppe eine neue Kindsgruppe hinzugefügt werden. Serverseitig wird überprüft, ob der Gruppenname bereits existiert.
 \subsubsection{Write Configuration}
-
-\subsubsection{Execute}
-
-\subsubsection{Write}
+Zuvor erstellte Konfigurationen können auf Gruppenebene verteilt werden. Alle definierten Schreiboperationen werden auf alle Nachfahren verteilt. Nach erfolgter Konfiguration erhält der Benutzer eine Response vom Server und wird über den Erfolg der Schreiboperationen benachrichtigt. Die Response wird auf dem Server generiert und dem Client im HTML Format ausgeliefert.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/groups.png}
-\caption{Gruppenansicht}
+\includegraphics[scale=0.6]{../04_Realisierung/images/userinterface/configresults.png}
+\caption{Konfigurationsantwort}
 \end{figure}
 
+\subsubsection{Execute}
+Execute Funktionen wie beispielsweise einen Neustart können auf Gruppenebene ausgeführt werden. Betroffen sind sämtliche Nachfahren der Gruppe. Execute Funktionen definieren sich in den XML-Models mit der Operation ''E''.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{../04_Realisierung/images/userinterface/execute.png}
+\caption{Execute}
+\end{figure}
+
+Nach der Auswahl des linken Felds (Object ID) wird eine Anfrage an den Server gesendet. Das mittlere und das rechte Feld werden aufgrund der Response vom Server dynamisch generiert.
+
+\subsubsection{Write}
+Die Write Funktion ist identisch zu der Write Configuration Funktion, mit dem einzigen Unterschied, nur ein Konfigurationselement zu senden. Es muss somit nicht eine Konfiguration erstellt werden, der zu beschreibende Wert kann direkt definiert werden.
+
+\subsection{User Management}
+In der Benutzerverwaltung kann der eingeloggte User Änderungen an benutzerspezifischen Attributen vornehmen. Momentan kann der Administrator lediglich neue Benutzer hinzufügen und bestehende Benutzer löschen. Änderungen am Passwort können alle Benutzer vornehmen. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{../04_Realisierung/images/userinterface/usermanagement.png}
+\caption{Benutzerverwaltung Admin}
+\end{figure}
 
 \newpage
 
