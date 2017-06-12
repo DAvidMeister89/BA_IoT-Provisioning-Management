@@ -206,7 +206,7 @@ Mit dem ''create new configuration'' Button öffnet sich ein neues Pop-up, in we
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/config.png}
+\includegraphics[scale=0.7]{../04_Realisierung/images/userinterface/config.png}
 \caption{Configuration Neu}
 \end{figure}
 
@@ -232,10 +232,132 @@ Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Va
 
 
 \subsection{Devices und Groups}
+Benutzer können auf dieser Seite einzelne Devices und Gruppen verwalten. Sie ist also sozusagen das Kernstück der Applikation, da viele Use-Cases in diesem Bereich abgedeckt werden.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/devices_start.png}
+\caption{Devices}
+\end{figure}
 
+\subsubsection{Komponentenverwaltung}
+Der Bereich der Komponentenverwaltung ist zu Beginn leer. Der Benutzer muss zuerst eine Gruppe oder ein Device selektieren, damit der entsprechende Inhalt geladen wird. Es gibt zwei verschiedene Komponentenverwaltungen, die Device- und die Gruppenverwaltung. Nachdem im Navigationsbereich link eine Gruppe/Device gewählt wurde, wird vom Server ein HTML Fragment angefordert und dargestellt.
 
+\subsubsection{Navigationsbaum}
+Auf der linken Seite befindet sich der Navigationsbaum. Darin befinden sich sämtliche Gruppen und Devices hierarchisch angeordnet. 
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.84]{../04_Realisierung/images/userinterface/componentstree.png}
+\caption{Komponentenbaum}
+\end{figure}
+
+Gruppen dürfen beliebig tief verschachtelt werden, sind jedoch einzigartig und haben höchstens eine direkte Elterngruppe. Es dürfen beliebig viele Root Gruppen bestehen. Diese erscheinen in der Navigation zuoberst (ohne aufklappen zu müssen), ansosten unterscheiden sie sich nicht von ''normalen'' Gruppen. 
+
+Devices entsprechen den Blattknoten, sie dürfen keine Kindsknoten enthalten. Devices dürfen aber bei beliebig vielen Gruppen als Kindsknoten existieren, somit hat der Benutzer maximale Freiheiten beim Verwalten seiner Devices.
+
+Der Navigationsbaum wurde mit Hilfe der gijgo Library implementiert. Gijgo ist eine JavaScript (jQuery) Library, welche aus Baumstrukturen aufklappbare Navigationen erstellt.
+
+\begin{lstlisting}[language=js]
+$('#tree').tree(
+	{
+		primaryKey : 'id',
+		uiLibrary : 'bootstrap',
+		dataSource : ctx + '/groups/getAll'
+	});
+\end{lstlisting}
+
+Die Verwendung der Library ist sehr simpel. Auf einem selektierten Div-Container kann die Funktion tree() ausgeführt werden. Als Datenquelle wird eine URL angegeben. Diese API liefert die Baumstruktur im JSON Format, welche von der Gijgo-Library direkt interpretiert wird.
+
+Anbei ist ein einfaches Beispiel einer Komponentenhierarchie.
+
+\begin{lstlisting}[language=json]
+[
+	{
+		"id": "groups/593e584eed204e174c2a0cc4",
+		"text": "ZH",
+		"children": 
+	  	[
+		  	{
+				"id": "devices/593e5845ed204e174c2a0cae",
+				"text": "chur_weather_23"
+			},
+			{
+				"id": "devices/593e5845ed204e174c2a0caf",
+				"text": "chur_weather_24"
+			}
+		]
+	}
+]
+\end{lstlisting}
+
+\subsection{Devices}
+Wählt man in der Navigation ein Device an, so wird eine Anfrage für das HTML Fragment für Devices gestartet. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/devicefragment_collapsed.png}
+\caption{Übersicht einzelnes Device}
+\end{figure}
+
+\subsubsection{Aktionen}
+Mit ''Delete Device'' wird das Device komplett von der Datenbank entfernt. Mit ''Group Memberships'' kann das Device unterschiedlichen Gruppen zugewiesen werden. ''Read All'' führt ein Lesevorgang über sämtliche verfügbaren Objekte (siehe weiter unten).
+
+\subsubsection{Allgemeine Informationen}
+Im Bereich der allgemeinen Informationen erhält der Benutzer nützliche Device-Details angezeigt, ebenfalls wird mittels Google Maps API die Location des Devices automatisch angezeigt.
+
+\subsubsection{Deviceobjekte}
+Die Deviceobjekte sind standardmässig zugeklappt. Die einzelnen Objekte sind jeweils eine aufklappbare Panels. Bei der Registration meldet ein Device dem LwM2M Server, welche Objekte es unterstützt. Die Panels werden, abhängig der unterstützten Objekte, dynamisch erzeugt. Mit dem ''Read Multiple'' Button werden sämtliche Felder des Objekts gelesen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/devicefragment.png}
+\caption{Anzeige Objektdetails}
+\end{figure}
+
+Sobald der Benutzer ein Panel anklickt, werden die darunterliegenden Attribute in einer dynamisch generierten Tabelle angezeigt. Zu Beginn sind noch keine Werte vorhanden. Es muss entweder pro Feld einzeln-, oder über den ''Read Multile''- respektive ''Read All''-Button vom Device gelesen werden.
+
+Auf der rechten Seite werden Buttons für die unterstützen Aktionen angezeigt. Jede Instance ID hat in der XML-Spezifikation hinterlegt, welche Aktionen verfügbar sind.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{../04_Realisierung/images/userinterface/rwe.png}
+\caption{RWE Buttons}
+\end{figure}
+
+\subsection{Groups}
+In der Gruppenansicht stehen dem Benutzer viele Funktionen für die Verwaltung von Devices und Groups zur Verfügung. In der Map-Übersicht sind alle Devices ersichtlich.
+
+\subsubsection{Group Members}
+Gruppenmitglieder können unter ''Group Members'' verwaltet werden. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{../04_Realisierung/images/userinterface/groupmembers.png}
+\caption{Gruppenmitglieder}
+\end{figure}
+
+Sowohl Devices, als auch Gruppen werden auf der linken Seite angezeigt, diese können hinzugefügt werden. Die Liste wird mittels Ajax-Anfrage vom Server abgerufen. Es wird ein Delta zwischen der Menge aller Komponenten und den aktuellen Mitgliedern erstellt.
+
+Auf der rechten Seite sind die Mitglieder aufgelistet, sobald ''OK'' gedrückt wird, wird eine Liste mit den angepassten Mitgliedern an den Server gesendet.
+
+Diese Verwaltung wurde mit Hilfe der Bootstrap-Duallist-Box Library implementiert. 
+\subsubsection{Group Memberships}
+Die Mitgliedschaft 
+
+\subsubsection{Add New Child Group}
+
+\subsubsection{Write Configuration}
+
+\subsubsection{Execute}
+
+\subsubsection{Write}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/groups.png}
+\caption{Gruppenansicht}
+\end{figure}
 
 
 
@@ -677,7 +799,7 @@ public class Device implements DeviceComponent {
 	public Device() {}
 \end{lstlisting}
 
-\subsection{Datenbanobjekt}
+\subsection{Datenbankobjekt}
 In der Datenbank wird jede Datenklasse als JSON-Objekt abgespeichert. Dieses beinhaltet alle Felder der Klasse, sowie eine generierte Id und eine Klassendefinition. Dadurch kann Spring das Objekt sehr einfach wieder zu einem Javaobject umwandeln und zur Verfügung stellen.
 
 Hier sieht man ein Device, wie es auf der Datenbank gespeichert sein kann. Alle Datumsformate werden automatisch in ISODate umgewandelt und alle Ids werden von String in ObjectId umgewandelt. Alle anderen Typen sind nativ unterstützt und müssen nicht weiter umgewandelt werden.
