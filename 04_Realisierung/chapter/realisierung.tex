@@ -242,7 +242,8 @@ Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Va
 \newpage
 
 \section{Controllers}
-Der Controller-Layer... %TODO
+\subsection{Allgemein}
+Mit dem Controller-Layer werden alle Routen und Web API Methoden definiert. Für dies wurde das Spring Framework mit der spring-webmvc (v4.3.7) und der spring-web (v4.3.7) Library verwendet. Das Spring Framework hat dabei viel Arbeit abgenommen und den grossen Teil bereits implementiert. Im Controller wurden daher nur noch die Daten aus dem Service-Layer geholt, mit der View verbunden und an den Client zurückgesendet.
 
 \subsection{Verwendete Annotations}
 \subsubsection{@Controller}
@@ -411,8 +412,44 @@ public void removeFromGroups(@PathVariable("id") String id, @RequestParam("value
 \newpage
 
 \section{Services}
-%TODO
+\subsection{Allgemein}
+Der Service-Layer ist das Kernstück der Web-Applikation. Die Services verbinden den LwM2M-Server, den Data-Layer und den Controller-Layer miteinander. 
+\subsection{@Service}
+Jede Service-Klasse wird mit der @Service Annotation deklariert. Dies ist für das Dependency Injection wichtig, damit Spring diese Service-Klassen findet, ohne jede Klasse einzeln als Bean zu definieren.
 
+Diese Annotation gehört bei jeder Service-Klasse vor den Klassennamen.
+\begin{lstlisting}[language=java]
+@Service
+public class DeviceService {
+...
+}
+\end{lstlisting}
+
+\subsection{DeviceService}
+
+\subsection{GroupService}
+
+\subsection{ConfigurationService}
+Der ConfigurationService beinhaltet all die Methoden, welche für die Configuration wichtig sind. Diese sind vor allem Add-, Save-, Remove- und Getter-Methoden. Da diese nicht weiter kompliziert oder speziell sind, werden sie hier nicht genauer dokumentiert.
+\subsection{UserService}
+Mit dem UserService werden nur sehr wenige Methoden implementiert. All diese sind sehr einfach und werden hier nicht speziell dokumentiert. Neben Add- und Remove-Methoden gibt es einfache Methoden um Passwörter und Usernamen zu überprüfen.
+\subsection{LocationService}
+Der LocationService bietet keine speziellen Methoden. Es sind im Grunde alles nur Getter, welche die Location der einzelnen Device, Gruppen oder aus allen Devices zurückgibt.
+\subsection{InfrastructureService}
+Der InfrastructureService bietet Methoden für den Start der Applikation an. Diese Methoden werden bei jedem Start ausgeführt und sorgen dafür, dass immer ein Admin-User, sowie die \_unassigned Gruppe vorhanden ist. Zusätzlich werden alle Devices entfernt, welche bei der letzten Benutzung gefunden und nie verwendet wurden. So hat man bei jedem Neustart der Applikation einen sauberen Start und keine Altlasten in der Datenbank.
+\begin{lstlisting}[language=java]
+public void startUpClean() {
+	if (!groupRepo.existsByName("_unassigned")) {
+		DeviceGroup unassigned = new DeviceGroup("_unassigned");
+		groupRepo.save(unassigned);
+	}
+	if (!managementUserRepository.existsByUsername("admin")) {
+		ManagementUser admin = new ManagementUser("admin", passwordEncoder.encode("adminadmin"));
+		managementUserRepository.save(admin);
+	}
+		deviceRepo.removeDeviceByAddedIsFalse();
+}
+\end{lstlisting}
 
 
 \newpage
@@ -423,14 +460,7 @@ Damit sich die LwM2M-Clients bei dem Management-Tool melden können, wird ein Lw
 
 \subsection{Leshan Server}
 \subsubsection{Adresse und Port}
-Der LwM2M-Server wird mit der Klasse ''LwM2MManagementServer'' erstellt. Im Default Konstruktor setzt man dazu den gewünschten Port und Adresse.
-Hier sieht man das Beispiel für den lokalen Start des Servers. Der Port 5683 ist dabei der Default Port von CoAP.
-\begin{lstlisting}[language=java]
-public LwM2MManagementServer() {
-		this.address = "127.0.0.1";
-		this.port = 5683;
-}
-\end{lstlisting}
+Der LwM2M-Server wird mit der Klasse ''LwM2MManagementServer'' erstellt. Als Default wird die Adresse ''127.0.0.1'' und der Port 5853 verwendet. Diese Angaben können aber vor dem Start in der LwM2MManagementServer-Klasse angepasst werden, damit der Server eine andere Adresse oder einen anderen Port erhält.
 \subsubsection{Object Models}
 Jeder Leshanserver benötigt Object Model definitionen. Diese werden als XML im Projektordner abgelegt und danach als File-Object eingebunden.
 Die Variable resource gibt dabei den Pfad zu den Models an:
@@ -529,6 +559,34 @@ public class ServerTaskExecutor {
 	}
 }
 \end{lstlisting}
+
+\subsection{LwM2MHandler}
+Mit dem LwM2MHandler wird die gesamte Kommunikation zwischen den LwM2M-Clients und dem LwM2M-Server durchgeführt. Dazu wurde eine Read-, Write- und Execute-Methode  erstellt. Diese Methoden erstellen den passenden Request und übergeben diesen dem Server. Der Server schickt diesen Response an den Client und wartet, bis ein Response zurück kommt. Dieser Response wird danach durch die Applikation verarbeitet. 
+
+Hier sieht man die Read-Methode. Die Write- und Execute-Methoden sind sehr ähnlich, es wird nur ein anderer Request und Response verwendet. Mit dem im Device hinterlegten Registration-Id wird die richtige Registration auf dem LwM2M-Server gefunden. Dieser sendet danach den Request an den Device und erwartet den Response. Bei einem Fehler wird ein Response mit einer Fehlermeldung erzeugt. Der Request wird danach in die Service-Klasse zurückgegeben.
+\begin{lstlisting}[language=java]
+public ReadResponse read(Device device, int objectId) {
+	LeshanServer server = lwM2MManagementServer.getServer();
+
+	Registration registration = server.getRegistrationService().getById(device.getRegId());
+	if (registration == null) {
+		return new ReadResponse(ResponseCode.NOT_FOUND, null, "Device is not reachable");
+	}
+
+	ReadRequest request = new ReadRequest(objectId);
+	ReadResponse response;
+
+	try {
+		response = server.send(registration, request);
+	} catch (InterruptedException e) {
+		response = new ReadResponse(ResponseCode.NOT_FOUND, null, "Device is not reachable");
+	}
+
+	return response;
+}
+\end{lstlisting}
+
+Die anderen Methoden sind nur Getter, welche Object Models zurückgeben oder sehr triviale Methoden, welche selbsterklärend sind.
 
 \newpage
 
@@ -647,9 +705,12 @@ Für das Login und die HTTPS Umleitungen wurden zwei Libraries von dem Spring Fr
 Diese sind spring-security-crypto (v4.2.2) und spring-security-oauth2 (v2.1.0). Bei der Crypto-Library wurde der Password-Endcoder verwendet, um alle Passwörter sicher in der Datenbank abzuspeichern. Die Oauth2-Library wurde für die HTTPS Umleitung verwendet und für das Loginformular.
 
 \subsection{Security Einstellungen}
-Alle Einstellungen im Bereich Security konnten im XML konfiguriert werden. Durch den Namespace ''sec'' werden die Routen abgesichert werden und die Login-Form definiert werden.
+Alle Einstellungen im Bereich Security werden in der Datei security-config.xml konfiguriert. Durch den Namespace ''sec'' werden die Routen abgesichert und die Login-Form definiert.
 
-Hier sieht man einen Ausschnitt aus dem XML. Man sieht das nur die /login und /logout für jeden aufrufbar ist. Alle anderen Routen sind durch das Login gesperrt. Auch wurde bei jeder Route requires-channel=''https'' hinterlegt, damit jede Route über HTTPS läuft. Die zwei letzten Zeilen definieren die Login- und Logout-URL.
+Hier sieht man einen Ausschnitt aus der security-config.xml Datei. Für jeden Eintrag wird das Pattern , der Access und Requires-channel definiert. Das Pattern bestimmt die Route, welche definiert werden soll. Dazu kann man eine fixe Route setzen, wie zum Beispiel ''/''. Wenn man auch noch Subrouten ansprechen möchte, kann man dies mit einem ''*'' für eine tiefere Stufe oder mit ''**'' für eine beliebig tiefe Route. 
+Mit dem Access Parameter kann der Zugriff gesteuert werden. mit permitAll kann jeder Benutzer auf die Route zugreifen. Möchte man die Route durch das Login absichern, gibt man isAuthenticated() an. Diese Methode ist im Spring Framework implementiert worden und checkt bei jedem Aufruf, ob der Benutzer berechtigt ist. Mit requires-channel gibt man an, ob die Route per http oder https erreichbar ist. Hier wurde alles auf https gestellt.
+
+Man sieht das nur die /login und /logout für jeden aufrufbar ist. Alle anderen Routen sind durch das Login gesperrt. Die zwei letzten Zeilen definieren die Login- und Logout-URL.
 \begin{lstlisting}[language=xml]
 <sec:http use-expressions="true">
 	<sec:intercept-url pattern="/login" access="permitAll" requires-channel="https"/>
@@ -665,7 +726,7 @@ Hier sieht man einen Ausschnitt aus dem XML. Man sieht das nur die /login und /l
 </sec:http>
 \end{lstlisting}
 
-Zusätzlich zu den Routen Einstellungen, wird auch ein Authentication-Manager benötigt. Dieser ist für die Passwortüberprüfung und Speicherung zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Zusätzlich wird der PasswordEndcoder definiert.
+Zusätzlich zu den Routen Einstellungen, wird auch ein Authentication-Manager benötigt. Dieser ist für die Passwortüberprüfung und Speicherung zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Damit das Password nicht in Klartext gespeichert wird, wird ein PasswortEncoder konfiguriert. Dieser kann direkt von Spring übernommen werden und verschlüsselt das Passtwort
 
 Hier sieht man die Umsetzung der Security Einstellungen. Als Authentication-Provider wurde der userService verwendet und als PasswordEndcoder der BCryptPasswordEncoder von dem Spring Framework.
 \begin{lstlisting}[language=xml]
@@ -697,7 +758,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
 	
 \subsection{Login Formular}
-Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Loginformular und als Action die Standardroute von Spring, für die Loginüberprüfung. Wenn man im XML nichts weiteres eingestellt hat, müssen alle Felder genau so wie im Beispiel bennant werden. Auch die Action der Form muss unbediengt auf j\_spring\_security\_check zeigen. Hier sieht man das vereinfachte JSP der Loginseite.
+Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Loginformular und als Action die Standardroute von Spring, für die Loginüberprüfung. Wenn man in der security-config.xml Dateu nichts weiteres eingestellt hat, müssen alle Felder genau so wie im Beispiel benannt werden. Auch die Action der Form muss auf j\_spring\_security\_check zeigen, damit im Spring Framework die richtige Methode ausgeführt wird. Hier sieht man das vereinfachte JSP der Loginseite.
 \begin{lstlisting}{language=html5}
 <form role="form" name='f' action='${pageContext.request.contextPath}/j_spring_security_check' method='POST'>
 	<input type="text" name="j_username" value='' placeholder="Username" required autofocus>
@@ -706,6 +767,11 @@ Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Logi
 </form>
 \end{lstlisting}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{../04_Realisierung/images/loginform.png}
+\caption{Login Formular}
+\end{figure}
 
 \newpage
 
