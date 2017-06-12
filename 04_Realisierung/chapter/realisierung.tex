@@ -27,12 +27,12 @@ Mittels JSTL werden in dieser Applikation folgende Aufgaben erfüllt:
 \end{itemize}
 
 In JSP Seiten wird JSTL mittels folgender Code-Zeile verwendet:
-\begin{lstlisting}
+\begin{lstlisting}[language=html5]
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 \end{lstlisting}
 
 Ein Loop durch eine Collection mit Hilfe von JSTP sieht folgendermassen aus:
-\begin{lstlisting}
+\begin{lstlisting}[language=html5]
 <c:forEach var="collection" items="${collection}">
 </c:forEach>
 \end{lstlisting}
@@ -52,7 +52,7 @@ Das Grid-System von Bootstrap teilt den sichtbaren Bereich in 12 Spalten auf. Je
 \item Large Desktops (min-width: 1200px)
 \end{itemize}
 Sämtlichen div-Containern wird angegeben, wieviele Spalten in welcher Bildschirmgrösse sie besetzen. Mit Bootstrap könnte dies folgendermassen aussehen: 
-\begin{lstlisting}[language=html]
+\begin{lstlisting}[language=html5]
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 </div>
 \end{lstlisting}
@@ -60,7 +60,7 @@ An diesem Beispiel besetzt dieser Div-Container auf mittelgrossen und grossen De
 
 \subsubsection{Navigation}
 Bootstrap liefert eine ''default-navbar''. Sämtliche Navigationslinks (Home, Device, Discovery, Configurations, User Panel) befinden sich in der Navigationsleiste. Die Navigationsleiste besetzt in jeder Bildschirmgrösse die gesamte Breite.
-\begin{lstlisting}[language=html]
+\begin{lstlisting}[language=html5]
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 </div>
 \end{lstlisting}
@@ -80,7 +80,7 @@ Da diese Navigationsleiste auf Smartphones schwierig zu bedienen ist, wird auf d
 Die Navigationsleisten sind auf jeder Seite am oberen Bildschirmrand fixiert, sodass bei allfälligem Scrollen die Navigation trotzdem sichtbar bleibt.
 
 Damit duplizierter Code auf jeder Seite verhindert wird, wird der gesamte HTML Code für die Navigation in ein eigenes JSP File ''menuFragment.jsp'' ausgelagert. Der Inhalt des JSP Files wird mittels 
-\begin{lstlisting}[language=html]
+\begin{lstlisting}[language=html5]
 <jsp:include page="../../views/menuFragment.jsp" />
 \end{lstlisting}
 serverseitig ins HTML gerendert.
@@ -91,7 +91,7 @@ Der gesamte Content Bereich ist auf jeder Seite unterschiedlich gestaltet. Die g
 Damit bei der Kommunikation mit dem Server das User Interface nicht blockiert wird, werden bei sämtlichen Server-Calls AJAX verwendet. AJAX versendet Nachrichten vom Client an den Servern asynchron. Im ''success'' Attribut kann eine Callback-Funktion hinterlegt werden, welche bei erfolgreicher Antwort ausgeführt wird.
 
 In dieser Applikation werden AJAX-Calls nach folgendem Schema ausgeführt:
-\begin{lstlisting}
+\begin{lstlisting}[language=js]
 $.ajax({
 	type : "GET/POST/DELETE",
 	url : ctx + "/resource/method",
@@ -118,7 +118,7 @@ An verschiedenen Stellen auf der Seite werden Pop-ups benötigt. In diesem Proje
 
 Der JavaScript Code für die Erstellung und Verwendung der Bootbox ist leicht verständlich.
 
-\begin{lstlisting}
+\begin{lstlisting}[language=js]
 bootbox.confirm({
 	size : "large",
 	title : "some title",
@@ -189,9 +189,50 @@ Die selektierten Werte in den Drop-Down-Listen werden dem Server beim Hinzufüge
 \subsubsection{Refresh/Clear}
 Mit dem Refresh Button wird die Seite neu geladen, damit frisch registrierte Devices angezeigt werden. Der Clear Button leert die Liste von Devices. Melden sich die Devices zu einem späteren Zeitpunkt nochmals, so tauchen sie in dieser Ansicht wieder auf.
 
+\subsection{Configuration}
+Benutzer können auf dieser Seite eigene Konfigurationen erstellen. Sämtliche schreibbaren LwM2M-Objekte können gesetzt werden. Nach der Erstellung einer Konfiguration kann sie auf neue Devices oder eine Devicegruppe geschrieben werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/config_overview.png}
+\caption{Configuration Übersicht}
+\end{figure}
+
+\subsubsection{Konfigurationslisten}
+Sämtliche erstellten Konfigurationen werden hier aufgelistet. Eine Konfiguration kann einzeln gelöscht und editiert werden.
+
+\subsubsection{Neue Konfiguration}
+Mit dem ''create new configuration'' Button öffnet sich ein neues Pop-up, in welchem der Benutzer eine neue Konfiguration erstellt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/config.png}
+\caption{Configuration Neu}
+\end{figure}
+
+Sowohl Name, als auch Description können frei gewählt werden. Beim selektieren der Object ID (linkes Drop-Down Menü) wird eine Ajax Anfrage an den Server gesendet. Als Antwort erhält man informationen über die beiden anderen Felder. Sind Multi-Instanzen nicht erlaubt, so bleibt das Zahlenfeld ausgegraut, die Daten für das rechte Drop-Down werden dynamisch gerendert, sind also abhängig von der links gewählten Object-ID. Das Value Feld kann frei beschrieben werden. Serverseitig werden Überprüfungen des Typs, sowie Character Escaping durchgeführt.
+
+Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Value als Configuration Item in einer Liste und es kann mit weiteren Einstellungen forgefahren werden. Sobald der Benutzer ''Save'' drückt, wird clientseitig ein JSON-formatiertes Konfigurationsobject erstellt und an den Server gesendet.
+
+\begin{lstlisting}[language=json]
+[
+  "Config_Chur_Temperatur_1", 
+  "Dies ist eine Beispielkonfiguration fuer Temperatursensoren", 
+  {
+	"Object Link": "3305/0/5806",
+	"Value": "5.5382"
+  }, 
+  {
+	"Object Link": "3201/0/5750",
+	"Value": "I/O"
+  }
+]
+\end{lstlisting}
+
+
 
 \subsection{Devices und Groups}
-\subsection{Configuration}
+
 
 
 
