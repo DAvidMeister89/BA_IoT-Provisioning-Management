@@ -196,13 +196,109 @@ Mit dem Refresh Button wird die Seite neu geladen, damit frisch registrierte Dev
 
 
 
+
+
+\newpage
+
 \section{Controllers}
-\subsection{Rest}
-\subsection{Web}
+Der Controller-Layer... %TODO
 
+\subsection{Verwendete Annotations}
+\subsubsection{@Controller}
+Die @Controller Annotation ist die Spring Bezeichnung für einen Web Controller. Diese Annotation wird direkt über dem Klassennamen platziert. Hier sieht man das Beispiel des DeviceWebController:
+\begin{lstlisting}[language=java]
+@Controller
+@RequestMapping("/devices")
+public class DeviceWebController {
+...
+}
+\end{lstlisting}
 
+Der Controller führt die zur Route passende Methoden aus, holt die Daten aus dem Service Layer und mappt diese auf das Model und gibt die View mit den Daten zurück. Dabei ist der Rückgabe immer der Name der View und wird als String an das Spring Framework übergeben.
+
+Dies ist ein Beispiel von der /groups/id Route. Als ersten Schritt wird die Gruppe aus dem Service-Layer geholt und dem Model hinzugefügt. Danach gibt man im Return-Wert die gewünschte View-Datei an. Hier im Beispiel ist dies die groupFragment.jsp Datei. Der ganze Rest wird durch Spring und der Template Engine erledigt.
+\begin{lstlisting}[language=java]
+@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+public String showGroupDetails(Model model, @PathVariable("id") String id) {
+	model.addAttribute("group", groupService.getGroup(id));
+	return "devices/groupFragment";
+}
+\end{lstlisting}
+\subsubsection{@RestController}
+Die zweite Controllerart ist der RestController. Auch diese Annotation wird direkt oberhalb des Klassennamens platziert. Im gegensatz zur @Controller Annotation gibt der RestController Daten im JSON-Format zurück. 
+
+Die Rückgabewerte werden von Spring automatisch in das JSON-Format umgewandelt und an den Client gesendet. Dies setzt voraus, dass der Rückgabetyp entweder eine get-Methode auf alle Felder besitzt oder ein einfacher Datentyp wie zum Beispiel String ist.
+Hier sieht man, wie eine Restmethode aussehen könnte. Es werden alle Gruppen aus dem Service-Layer geholt und als JSON an den Client gesendet.
+\begin{lstlisting}[language=java]
+@RequestMapping(value = "/list", method = RequestMethod.GET)
+public List<DeviceGroup> getGroupList() {
+	return groupService.getAllGroups();
+}
+\end{lstlisting}
+
+Das durch Spring generierte JSON sieht wie folgt aus:
+\begin{lstlisting}[language=json]
+[
+    {
+        "id": "593e57293f56e959e84339f9",
+        "name": "_unassigned",
+        "children": []
+    },
+    {
+        "id": "593e828a3f56e96a8b665fa8",
+        "name": "CH",
+        "children": [
+            {
+                "id": "593e82903f56e96a8b665fa9",
+                "name": "Luzern",
+                "children": []
+            }
+        ]
+    },
+    {
+        "id": "593e82903f56e96a8b665fa9",
+        "name": "Luzern",
+        "children": []
+    }
+]
+\end{lstlisting}
+
+\subsubsection{@RequestMapping}
+Durch das RequestMapping gibt man die Route und die Methode an, auf welche der Controller reagieren soll. Diese Annotation kann bei der Klasse, sowie bei jeder Methode angegeben werden. Gibt man das RequestMapping bei der Klasse an, gilt dieses für alle weiteren Methoden in der Klasse.
+
+Hier sieht man wie die Route /users/delete mit der Requestmethode POST definiert wird. Durch diese zwei Annotationen weiss Spring, dass diese Methode ausgeführt werden muss.
+\begin{lstlisting}[language=java]
+@RestController
+@RequestMapping("/users")
+public class UserRestController {
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String deleteUser(@RequestParam("username") String username) {}
+	...
+}
+\end{lstlisting}
+\subsubsection{@PathVariable}
+Um einer Route eine Pfadvariable zu hinterlegen, gibt es die PathVariable Annotation. Diese wird in der Parameterliste der Methode eingefügt, um die Werte aus der Route zu erhalten.
+
+In diesem Beispiel wurde eine Pfadvariable Id definiert. Dies geschieht durch die geschweiften Klammern. Um die Variable in der Methode benutzen zu können, wird die @PathVariable eingefügt. Dadurch nimmt Spring den Id-Teil der Route und wandelt es in diesem Beispiel zu einem String um. So kann man die Variable in der gesamtem Methode verwenden.
+\begin{lstlisting}[language=java]
+@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+public void removeGroup(@PathVariable("id") String id) {
+	groupService.deleteGroup(id);
+}
+\end{lstlisting}
+\subsubsection{@RequestParam}
+Um Request Parameter abzufangen, gibt es die @RequestParam Annotation. Durch diese können zum Beispiel Formulardaten abgefangen werden und der Methode zur Verfügung gestellt werden. Dazu werden alle zu erwarteten Request Parameter als Variable in der Parameterliste der Methode an.
+
+In diesem Beispiel wird eine List von Strings übergeben. Der Post muss den Parameter auch value nennen, damit Spring dies richtig erkennt. Wird alles korrekt übergeben, wandelt Spring die erhaltenen JSON-Daten in das gewünschte Format um.
+\begin{lstlisting}[language=java]
+@RequestMapping(value = "/{id}/removeFromGroups", method = RequestMethod.POST)
+public void removeFromGroups(@PathVariable("id") String id, @RequestParam("value") List<String> value) {
+	groupService.removeDeviceFromGroups(value, id);
+}
+\end{lstlisting}
+\subsection{Übersicht aller Routen}
 \begin{longtable}{ p{11cm} p{4cm} l}
-
 \hline 
 \multicolumn{1}{p{11cm}}{\textbf{URI}} & 
 \multicolumn{1}{p{4cm}}{\textbf{Method}} &  \\ \hline 
@@ -271,9 +367,10 @@ Mit dem Refresh Button wird die Seite neu geladen, damit frisch registrierte Dev
 
 
 
+\newpage
 
 \section{Services}
-
+%TODO
 
 
 
@@ -501,6 +598,73 @@ Hier sieht man ein Device, wie es auf der Datenbank gespeichert sein kann. Alle 
 	"dataMap" : {  } 
 }
 \end{lstlisting}
+
+\newpage
+
+\section{Login}
+Für das Login und die HTTPS Umleitungen wurden zwei Libraries von dem Spring Framework verwendet.
+Diese sind spring-security-crypto (v4.2.2) und spring-security-oauth2 (v2.1.0). Bei der Crypto-Library wurde der Password-Endcoder verwendet, um alle Passwörter sicher in der Datenbank abzuspeichern. Die Oauth2-Library wurde für die HTTPS Umleitung verwendet und für das Loginformular.
+
+\subsection{Security Einstellungen}
+Alle Einstellungen im Bereich Security konnten im XML konfiguriert werden. Durch den Namespace ''sec'' werden die Routen abgesichert werden und die Login-Form definiert werden.
+
+Hier sieht man einen Ausschnitt aus dem XML. Man sieht das nur die /login und /logout für jeden aufrufbar ist. Alle anderen Routen sind durch das Login gesperrt. Auch wurde bei jeder Route requires-channel=''https'' hinterlegt, damit jede Route über HTTPS läuft. Die zwei letzten Zeilen definieren die Login- und Logout-URL.
+\begin{lstlisting}[language=xml]
+<sec:http use-expressions="true">
+	<sec:intercept-url pattern="/login" access="permitAll" requires-channel="https"/>
+	<sec:intercept-url pattern="/logout" access="permitAll" requires-channel="https"/>
+	
+	<sec:intercept-url pattern="/" access="isAuthenticated()" requires-channel="https" />
+	<sec:intercept-url pattern="/*" access="isAuthenticated()" requires-channel="https" />
+	
+	...
+		
+	<sec:form-login login-page="/login" authentication-failure-url="/login?error=true" />
+	<sec:logout logout-success-url="/logout" />
+</sec:http>
+\end{lstlisting}
+
+Zusätzlich zu den Routen Einstellungen, wird auch ein Authentication-Manager benötigt. Dieser ist für die Passwortüberprüfung und Speicherung zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Zusätzlich wird der PasswordEndcoder definiert.
+
+Hier sieht man die Umsetzung der Security Einstellungen. Als Authentication-Provider wurde der userService verwendet und als PasswordEndcoder der BCryptPasswordEncoder von dem Spring Framework.
+\begin{lstlisting}[language=xml]
+<sec:authentication-manager>
+		<sec:authentication-provider
+			user-service-ref="userService">
+			<sec:password-encoder ref="passwordEncoder"></sec:password-encoder>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+	<bean id="userService" class="ch.hsr.smartmanager.service.applicationservices.UserService"></bean>
+\end{lstlisting}
+
+\subsection{Authentication-Provider}
+Damit Spring die Logindaten überprüfen kann, muss der User-Service das Interface UserDetailsService implementieren. Dies heisst es wird eine loadUserbyUsername-Methode benötigt. Spring ruft bei jedem Login diese Methode auf, holt den Benutzer von der Datenbank und checkt die Username/Password Kombination. Der Rest muss nicht implementiert werden, denn Spring erledigt die restlichen Schritte ohne weitere Implementierungen.
+\begin{lstlisting}[language=java]
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	ManagementUser user = userRepository.findByUsername(username.toLowerCase());
+	if (user == null) {
+		throw new UsernameNotFoundException(username);
+	} else {
+		return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+	}
+}
+\end{lstlisting}
+
+	
+\subsection{Login Formular}
+Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Loginformular und als Action die Standardroute von Spring, für die Loginüberprüfung. Wenn man im XML nichts weiteres eingestellt hat, müssen alle Felder genau so wie im Beispiel bennant werden. Auch die Action der Form muss unbediengt auf j\_spring\_security\_check zeigen. Hier sieht man das vereinfachte JSP der Loginseite.
+\begin{lstlisting}{language=html5}
+<form role="form" name='f' action='${pageContext.request.contextPath}/j_spring_security_check' method='POST'>
+	<input type="text" name="j_username" value='' placeholder="Username" required autofocus>
+	<input type="password" name="j_password" placeholder="Password" value="">
+	<button name="submit" type="submit" value="Login">Sign in</button>
+</form>
+\end{lstlisting}
+
 
 \newpage
 
