@@ -166,10 +166,6 @@ Mit all diesen Möglichkeiten bietet LwM2M eine grosse Abdeckung an Technologien
 \newpage
 
 \subsection{Client-Server Model}
-\begin{figure}[H]
-\includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/server_client_model.png}
-\caption{Client-Server-Model}
-\end{figure}
 Die drei zentralen Bestandteil des Protokolls sind der Bootstrap-Server, der LwM2M-Server und der LwM2M-Client. Der Bootstrap-Server ist für den Erstkontakt sowie die Erstkonfiguration zuständig. Die restliche Kommunikation läuft zwischen dem LwM2M-Server und dem LwM2M-Client. Ohne einen Bootstrap-Server kommunizieren die Geräte direkt mit dem LwM2M-Server.
 \subsubsection{Client}
 Der Client kann viele verschiedene Formen annehmen. Ein Beispiel wäre eine Linux Installation auf einem Raspberry Pi, welche einen Java LwM2M Client gestartet hat. An dem Raspberry Pi kann man nun mehrere Sensoren, wie Temperatur, Druck, etc. anschliessen und diese über den Client steuern. Es kann sich aber auch nur um einen kleinen Chip mit Sensor handeln, welcher ein C LwM2M Client beinhaltet. Client Umsetzungen gibt es dabei in den Programmiersprachen C und Java.
@@ -195,9 +191,8 @@ Durch den Einsatz von Bootstraping nimmt man sich viel Managementarbeit ab und h
 Eine klare Stärke des LwM2M-Protokolls sind die Object Models. Durch die Object Models werden alle Informationen eines Devices in einem strukturierten Model abgelegt, damit ein geregelter Zugriff auf alle Daten entsteht. Es wird zwischen Object, Instance und Ressource unterschieden. Eine Ressource ist zum Beispiel der Temperaturwert eines Temperatursensors. Eine zusätzliche Ressource könnte die dazugehörige Temperatureinheit sein. Mehrere solche Ressourcen werden zu einem Object Model zusammengefasst. Ein Device kann aber auch mehrere Temperatursensoren besitzen und hat so mehrere Instanzen des gleichen Objects.
 
 Um nun die Information zugreifbar zu machen, bekommt sie eine URL mit den drei oben beschriebenen angaben. Diese kann wie folgt aussehen.
-%TODO Bild einfügen
 \begin{figure}[H]
-%\includegraphics[scale=0.5]{}
+\includegraphics[scale=0.35]{../02_Analyse/images/lwm2m/url_example.png}
 \caption{Object Model URL}
 \end{figure}
 \subsubsection{Aufbau}
@@ -291,6 +286,12 @@ Als ersten Schritt sendet der Device eine Anfrage an den Bootstrap-Server. In di
 
 Wenn der Server eine neue Konfiguration, wie zum Beispiel neues Schlüsselmaterial, verteilen möchte, löscht der LwM2M-Server durch einen Delete wieder die Root-URL auf dem Client. Dadurch meldet sich der Client wieder beim Bootstrap-Server, um die neuen Daten zu erhalten. Dies nennt man den  Server imitierte Bootstrap-Vorgang.
 
+\subsubsection{Zero Touch Provisioning}
+Seit dem 26. Dezember 2016 gibt einen Internet-Draft mit dem Namen: DHCPv6 Options for LWM2M bootstrap information. Dieser Draft beschreibt ein Mechanismus, bei dem die LWM2M-Bootstrap-URI und/oder das LWM2M-Server-Zertifikat durch den DHCPv6-Server verteilt wird. Durch diesen Mechanismus wäre ein Zero Touch Provisioning sehr gut umsetzbar und man müsste keine weitere Einstellungen vornehmen. Sobald sich die Client beim DHCP melden, erhalten sie alle wichtigen Informationen um sich selbst zu konfigurieren oder die restlichen Konfigurationen vom richtigen Bootstrap-Server zu erhalten.
+
+Da dies aber erst ein Draft ist, wird diese Funktion noch auf sich warten lassen. \\
+\href{https://tools.ietf.org/html/draft-nalluri-dhc-dhcpv6-lwm2m-bootstrap-options-02}{DHCPv6 Options for LWM2M bootstrap information}
+
 \subsubsection{Registration - Allgemein}
 Wenn ein Client einen gültigen und erreichbaren LwM2M-Server hinterlegt hat, beginnt die Registrierungsphase. Bei der Registrierung wird dem Server bekanntgeben, welche Funktionen und Informationen der Client besitzt. Dies beinhaltet die Object Model URLs, Registrierungszeitpunkt, IP-Adresse, Port und noch weitere Angaben, die der Server von jedem Client benötigt. All diese Angaben werden vom Client immer wieder aktualisiert und an den Server gesendet. Dies geschieht meistens mehrmals pro Minute.
 
@@ -340,3 +341,10 @@ Bei jeder Änderung der Ressource erstellt der Client wieder ein neuer Response 
 Möchte der Server die Ressource nicht länger Überwachen, sendet der Server ein Reset zurück. Dieser Reset beinhaltet die letzte Changed Message ID. Hier im Beispiel sieht man dies ganz am Schluss der Grafik. So meldet sich der Server ab und erhält keine weiteren Notifikationen.
 
 \subsection{Fazit}
+Denkt man an die vielen verschiedenen Protokolle und die Managementfunktionen dieser Protokolle, merkt man schnell wie umständlich das Management werden kann. Durch LwM2M hat man einen durchdachten Standard, welche das Management enorm vereinfacht. Das Management kann jedes Device masseschneidert anpassen und verwalten. Durch die eindeutigen XML-Definitionen ist immer klar, was alles Möglich und erlaubt ist.
+
+Da LwM2M auf CoAP aufbaut, wurden viele Funktionen übernommen. Das Object Model kann einfach auf die CoAP-Ressourcen gemappt werden und dadurch werden die Pakete im Netzwerk sehr schlank.  Bei IoT-Netzwerken ist dies sehr wichtig, da die Pakete nicht immer über Leistungsfähige Netzwerke geschickt werden.
+
+Ein weiterer Vorteil des LwM2M-Protokolls sind die vielen Client- und Serverumsetzungen. Es gibt bereits mehrere in Java und C geschriebene Libraries, welche diesen Protokoll bereits umsetzen. Dabei sind auch grössere Communities, wie zum Beispiel die von Eclipse.
+
+Bei all den positiven Argumenten muss aber eines bedenkt werden. LwM2M ist noch mitten in der Entwicklung. Momentan gibt es noch eine überschaubare Anzahl an Firmen, welche die Entwicklung solcher IoT-Devices vorantreibt. Wie bei vielen anderen Protokollen muss sich daher zeigen, ob sich LwM2M als Standard für den Bereich Management durchsetzen kann, oder ob neue Protokolle entstehen, welche sich durchsetzen.
