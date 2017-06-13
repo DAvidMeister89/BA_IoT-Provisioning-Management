@@ -1,0 +1,15 @@
+\chapter*{Abstract}
+\section*{Ausgangslage}
+Das Internet of Things erfreut sich immer grösserer Beliebtheit. Unternehmensanwendungen mit einer grossen Anzahl Sensoren werden in Zukunft stark zunehmen. Bereits bei herkömmlichen Computersystemen stellt das Management eine grosse Herausforderung dar. IoT Devices dürften potenziell in einer noch deutlich grösseren Anzahl verbreitet sein als herkömmliche Geräte. 
+
+Unternehmen benötigen Lösungen, um eine regelrechte Flut von neuartigen Devices effizient und sicher administrieren zu können. In dieser Arbeit werden wichtige Management Aufgaben wie beispielsweise Bootstrapping, Konfiguration, Updates und Monitoring für IoT Systeme untersucht.
+\section*{Vorgehen/Technologien}
+Nach einer umfassenden Einarbeitung in IoT Technologien und Management Aufgaben mussten geeignete Kommunikationsprotokolle untersucht werden. Es stellte sich heraus, dass herkömmliche Protokolle wie HTTP im IoT Umfeld schlecht geeignet sind, da sie häufig nur über eingeschränkte Ressourcen wie Bandbreite und Rechenleistung verfügen. 
+
+Das von der Open Mobile Alliance (OMA) entwickelte Lightweight Machine-to-Machine (LwM2M) Protokoll verwendet unterhalb das Constrained Application Protocol (CoAP). CoAP arbeitet im Gegensatz zu HTTP über UDP und besitzt im Allgemeinen einen geringeren Protokoll Overhead, weshalb es sich im IoT Umfeld besser eignet. LwM2M wurde entwickelt, um standardisierte Zugriffe auf Device Informationen zu ermöglichen. Als nächstes wurde eine geeignete Architektur für eine Management Webapplikation evaluiert.
+\section*{Ergebnis}
+Aus dieser Bachelorarbeit ist die Management Webapplikation ''Smartmanager'' entstanden. Das Back-End wurde mit dem Java Spring Framework erstellt. Der LwM2M Server wurde mit der Eclipse Leshan Library implementiert, als Datenbank wurde MongoDB verwendet. 
+
+Mit dem ''Smartmanager'' können LwM2M Clients administriert werden und die integrierte Gruppenverwaltung ermöglicht Devices in selbst angelegte Hierarchien zu strukturieren. Ausserdem können Konfigurationen bestehend aus unterschiedlichen Schreiboperationen erstellt -, welche wiederum auf einzelne Geräte oder ganze Gruppen geschrieben werden können. 
+
+Dank der Verwendung des LwM2M Protokolls können eine grosse Anzahl an Management Aufgaben ausgeführt werden. Es bleibt zu hoffen, dass sich LwM2M zukünftig als Standard für das IoT Device Management durchsetzen wird um die einheitliche Verwaltung verschiedenster Geräte zu ermöglichen.

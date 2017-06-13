@@ -1,11 +1,25 @@
 \chapter{Realisierung}
-\section{Einführung}
-
-
-
-
+In diesem Kapitel werden die Realisierungen der Komponenten beschrieben. Es wird versucht, Konzepte und Problemlösungen zu erklären. Vereinzelt werden auch Codeausschnitte gezeigt, sofern diese relevant für das Verständnis sind.
 
 \section{User Interface}
+In diesem Abschnitt wird das User Interface gezeigt. Man erhält einen guten Überblick über Funktionalitäten und Aufbau des Front-Ends.
+%TODO Kapitel
+\subsection{Änderungen}
+Der erste Prototyp der Applikation wurde gemäss Mock-ups im Kapitel(3.3.3) erstellt. Beim Requirements- und Architekturreview am 24.04.2017 haben die Teammitglieder unter anderem Änderungen am Erscheinungsbild beschlossen. Durch den Einsatz des LwM2M Servers haben sich auch Anpassungen an der Seitenstruktur ergeben.
+
+Anbei die UI-relevanten Anpassungen:
+\begin{itemize}
+\item Hauptnavigation von linker Seite an den oberen Bildschirmrand verschoben
+\item Entfernen der Accountsettings aus der Hauptnavigation
+\item Hinzufügen des Links ''Configurations'' in die Hauptnavigation
+\item Verzicht von blauer Farbe am oberen Bildschirmrand, stattdessen schlichteres grau
+\item Begrüssungstext am Homebildschirm entfernt, stattdessen Dashboard mit wichtigen Informationen hinzugefügt
+\item Hinzufügen einer Navigation für Devices und Gruppen auf der ''Devices'' Seite
+\item Das ''Create Device'' Formular wurde entfernt
+\item Der ''Observe''-Button unter ''Devices'' wurde entfernt, da diese Funktion nicht implementiert wurde
+\item Dem ''Discovery'' wurden Drop-Down Menüs für Konfigurationen und Gruppen hinzugefügt
+\end{itemize}
+
 \subsection{Allgemein}
 In diesem Unterabschnitt werden die Konzepte erklärt, mit welchen das User Interface realisiert wurde. Das Webinterface wurde HTML, CSS und JavaScript erstellt und als unterstützende Library wurde Twitter Bootstrap verwendet.
 

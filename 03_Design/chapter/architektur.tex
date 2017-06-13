@@ -3,8 +3,7 @@ In diesem Kapitel wird die Software Architektur erarbeitet.
 Es soll sowohl die Problemdomäne abstrakt mittels Domänenmodell analysiert werden, als auch ein Klassendesign mittels Schichtendiagramm erarbeitet werden.
 
 \section{Systemübersicht}
-%TODO
-Bsdfsf
+In der folgenden Abbildung ist das System auf hoher Abstraktionsstufe zu sehen. Die Applikation ist über einen Web Browser bedienbar. Auf dem Management Server werden verschiedenstartige IoT Devices verwaltet. Der Management Server kommuniziert über TCP/IP mit den Devices. 
 
 \begin{figure}[H]
 \center
@@ -320,3 +319,87 @@ Die Applikation hat eine typische 3-Tier Architektur. Es wird ein Serverseitiges
 \center
 \includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Deployment Diagramm}
 \end{figure}
+
+\section{User Interface Entwurf}
+
+
+\subsection{Design}
+Das Projekt erhält eine möglichst einfach gehaltene Benutzeroberfläche. Durch die farbliche Trennung von Funktionen und fixen Bereichen für die Daten, soll die Oberfläche einfach und intuitiv gestaltet werden. Zusätzlich wird die Oberfläche responsiv aufgebaut, damit sie an unterschiedlichen Bildschirmgrössen verwendbar wird.
+
+Es wurden Mock-ups anhand von einfachen Handskizzen erstellt, um das aussehen und die Funktionen der Benutzeroberfläche zu planen.
+
+\subsection{Ansichten}
+\subsubsection{Startseite}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{../03_Design/images/home.png}
+	\caption{Startseite}
+	\end{center}
+\end{figure}
+Die Startseite zeigt dem Benutzer Hilfestellungen an und führt den Benutzer durch die ersten Schritte. Auf der Linken Seite befindet sich das Menu und eine Suche. Oben Rechts findet der Benutzer den Loginbereich und die Benutzerangaben.
+
+Beim Menu gibt es statische, sowie dynamische Einträge. Der Discoveryeintrag ist ein dynamischer Eintrag und zeigt die Anzahl gefundenen Geräte an.
+
+\subsubsection{Device List}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{../03_Design/images/devicelist.png}
+	\caption{Device List}
+	\end{center}
+\end{figure}
+In der Device Liste werden alle Devices angezeigt. Dazu wird zu jedem Device die jeweiligen Möglichkeiten als Button eingeblendet. So kann man ein Device betrachten, Anpassen, Löschen und sich mit dem Gerät verbinden. Zusätzlich werden die Daten, wie zum Beispiel Endpoint angezeigt.
+
+Oben rechts befindet sich der Button, um weitere Devices zu erstellen.
+\begin{description}
+\item [Show] Zeigt die Details zu einem Device an
+\item [Update] Führt zum Device Update Formular, damit das Device angepasst werden kann.
+\item [Delete] Button, der das Device aus der Applikation löscht
+\item [Connect] Button, um sich mit dem Gerät zu verbinden.
+\item [Create a new Device] Führt zur Create Device Ansicht.
+\end{description}
+
+
+\subsubsection{Create Device}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{../03_Design/images/createdevice.png}
+	\caption{Create Device}
+	\end{center}
+\end{figure}
+Bei der Create Device Ansicht kann ein neues Device erstellt werden. Dadurch wird das Device manuell erfasst und in der Datenbank abgelegt. Dies kann gemacht werden, wenn das Device nicht via Discovery gefunden worden ist.
+
+Je nach Combobox Auswahl passt sich das Formular an, um zum Beispiel auch Zertifikate hinterlegen zu können.
+
+\begin{description}
+\item [Erfassen / Update] Erstellt oder passt ein Device an
+\item [Abbrechen] Bricht den Device Create ab und führt zur Device List Ansicht
+\end{description}
+
+\subsubsection{Device Details}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{../03_Design/images/devicedetails.png}
+	\caption{Device Details}
+	\end{center}
+\end{figure}
+Alle wichtige Informationen eines Devices werden in dieser Übersicht angezeigt. Zu Jeder Ressource wird die Id, der Name und den aktuellen Wert angezeigt. Je nach Ressource passen sich die Möglichen Aktionen an. Dabei gibt es Observe, Read, Write und Execute. Bei Write wird ein zusätzliches Eingabefeld eingeblendet, um den gewünschten Wert eintragen zu können.
+
+\begin{description}
+\item [Observe] Startet ein Observer für die gewünschte Ressource.
+\item [Read] Liest die Ressource vom Device
+\item [Write] Schreibt den Wert in die Ressource und aktualisiert den Eintrag in der Datenbank
+\item [Execute] Führt einen Befehl auf dem Device aus
+\end{description}
+
+\subsubsection{Discover Device}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{../03_Design/images/devicediscover.png}
+	\caption{Device Details}
+	\end{center}
+\end{figure}
+Alle durch das Discovery gefundenen Devices werden in dieser Übersicht aufgelistet. Dazu werden direkt die wichtigen Daten angezeigt und man hat die Möglichkeit das gewünschte Device zur Applikation hinzuzufügen. Die Anzahl gefundenen Devices werden auf der Linken Seite im Menu angezeigt und passt sich dynamisch an.
+
+\begin{description}
+\item [Create] Erstellt für die ausgewählten Devices ein Deviceobjektauf der Datenbank
+\end{description}
