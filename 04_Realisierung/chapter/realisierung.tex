@@ -535,7 +535,10 @@ public void removeFromGroups(@PathVariable("id") String id, @RequestParam("value
 
 \section{Services}
 \subsection{Allgemein}
-Der Service-Layer ist das Kernstück der Web-Applikation. Die Services verbinden den LwM2M-Server, den Data-Layer und den Controller-Layer miteinander. 
+Der Service-Layer ist das Kernstück der Web-Applikation. Die Services verbinden den LwM2M-Server, den Data-Layer und den Controller-Layer miteinander. Der Controller muss immer über den Service-Layer, damit eine saubere Trennung der Schichten sichergestellt werden kann.
+
+In dieser Schicht wurden keine spezielle Libraries verwendet. Die meisten Methoden greifen auf die Repositories und löschen, finden oder fügen neue Objekte in der Datenbank hinzu. Die komplexeren Methoden, welche mehr Logik beinhalten, werden hier aufgeführt und kurz erklärt. 
+
 \subsection{@Service}
 Jede Service-Klasse wird mit der @Service Annotation deklariert. Dies ist für das Dependency Injection wichtig, damit Spring diese Service-Klassen findet, ohne jede Klasse einzeln als Bean zu definieren.
 
@@ -546,8 +549,23 @@ public class DeviceService {
 ...
 }
 \end{lstlisting}
-
 \subsection{DeviceService}
+In der DeviceService-Klasse beinhaltet alle Methoden, welche für die Device-Klasse benötigt wird. Sehr viele Methoden holen Daten von der Datenbank und geben diese in den Controller-Layer hoch.
+\subsubsection{Read-, Write-, Execute-Methoden}
+Damit der Controller-Layer immer über den DeviceService auf den LwM2M-Server zugreifen muss, sind diese Methoden im DeviceService hinterlegt. Die DeviceService-Klasse ist dabei für das holen des Devices und den Null-Check zuständig. Mit der ''saveMultipleValueToDevice'' Methode wird auch bei jedem Aufruf der akutelle Wert im Device abgespeichert. Hier sieht man das Read Beispiel.
+\begin{lstlisting}[language=java]
+public ReadResponse read(String id, int objectId) {
+	Device device = getDevice(id);
+
+	ReadResponse response = lwM2MHandler.read(device, objectId);
+
+	if (response != null) {
+		Device dev = saveMultipleValueToDevice(response, device, objectId);
+		updateDevice(dev);
+	}
+	return response;
+}
+\end{lstlisting}
 
 \subsection{GroupService}
 
