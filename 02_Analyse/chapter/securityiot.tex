@@ -102,7 +102,7 @@ Je nach Sensitivität der Cloud Applikation müssen Softwareentwickler ein erhö
 Wie bei herkömmlichen Servern muss auch bei Applikationsserver im IoT Bereich auf die Verfügbarkeit geachtet werden. Es gibt potenziell viele Vorfälle, welche die Verfügbarkeit beeinträchtigen könnten. Als wirksamste Methode empfiehlt sich eine redundante Auslegung der wichtigsten Komponenten.
 
 \section{User Devices}
-In diesem Unterkapitel werden Gefahren und Massnahmen für End User Devices behandelt. Über Geräte PC's, Notebooks, Tablets oder Smartphones werden IoT Services konsumiert. Für Unternehmen stellen sich seit dem ''bring-your-own-device''-Zeitalter die Herausforderung, dass nicht nur User Devices im Firmenbesitz auf interne Anwendungen zugreifen. Network Access Controll Systeme überprüfen Devices an einem Enforcement-Point diverse Attribute wie beispielsweise Virendefinitionen, bevor in den geschützten Bereich zugegriffen werden kann. Grundsätzlich unterscheiden sich die empfohlenen Security-Massnahmen für User Devices für IoT Anwendungen nicht von herkömmlichen Systemen, da potenzielle Schadensausmasse jedoch höher sind, sollten empfohlene Massnahmen konsequent umgesetzt werden.
+In diesem Unterkapitel werden Gefahren und Massnahmen für End User Devices behandelt. Über Geräte PC's, Notebooks, Tablets oder Smartphones werden IoT Services konsumiert. Für Unternehmen stellen sich seit dem ''bring-your-own-device''-Zeitalter die Herausforderung, dass nicht nur User Devices im Firmenbesitz auf interne Anwendungen zugreifen. Network Access Controll Systeme überprüfen diverse Attribute wie beispielsweise Virendefinitionen von Devices an einem Enforcement-Point , bevor in den geschützten Bereich zugegriffen werden kann. Grundsätzlich unterscheiden sich die empfohlenen Security-Massnahmen für User Devices für IoT Anwendungen nicht von herkömmlichen Systemen, da potenzielle Schadensausmasse jedoch höher sind, sollten empfohlene Massnahmen konsequent umgesetzt werden.
 
 \subsection{Client Applikationen}
 Unterschiedliche Arten von Client Applikationen sind für IoT Anwendungen denkbar. Herkömmlich installierte Desktop-Programme für Windows Betriebssysteme verlieren an Bedeutung. Web- und Mobil-Applikationen haben in den letzten Jahren stark zugenommen. 
@@ -111,14 +111,34 @@ Ein Benutzer muss sich an der Client-Anwendung authentisieren. Wie hinlänglich 
 
 Mobile Geräte werden oft verloren oder gestohlen. Sobald eine Session beendet wurde, sollte eine erneute Authentifizierung verlangt werden. Es sollte ein möglichst kurzes Session-Timeout gewählt werden, damit beim Vergessen des Logouts fremde Personen keinen Zugriff erhalten können.
 
-Viele Sicherheitsrelevante Überprüfungen von Anwendungen wie Input-Validierung müssen serverseitig implementiert werden, da man clientseitige Security-Checks leicht umgehen kann. Es gibt jedoch Angriffe wie Phishing oder DOM-basiertes Cross-Site-Scripting, welche selbst serverseitig nicht abgefangen werden können. 
+Viele Sicherheitsrelevante Überprüfungen von Anwendungen wie Input-Validierung müssen serverseitig implementiert werden, da man clientseitige Security-Checks leicht umgehen kann. Es gibt jedoch Angriffe wie Phishing oder social Engineer, welche selbst serverseitig nicht abgefangen werden können. Gegen solche Angriffe schützt man sich am besten mit Benutzerschulungen.
 
-\subsection{Betriebssysteme}
+\section{Management Server}
+In diesem Abschnitt wird Security für Management Server behandelt. Ziel dieses Projektes ist ein Prototyp eines Management Servers zu erstellen. Es ist wichtig, bereits vorgängig Security fest einzuplanen, da die Kosten für Security-Vorfälle mit der Zeit zunehmen.
 
+\subsection{Bedeutung}
+Management Server sind für Unternehmen sicherheitskritische Systeme. Sie gelten als besonders schützenswert, da viele Applikationen und ganze Geschäftsprozesse abhängig sein könnten. Ist der IoT Management Server kompromittiert, so erhält der Angreifer eine Komplettübersicht des gesamten IoT Systems eines Unternehmens. Als Angreifer könnte man dann beispielsweise versucht sein, Devices herunterzufahren, fehlerhafte Konfigurationen einzuspielen, oder sensitive Informationen zu gewinnen.
 
-\subsection{Benutzersensibilisierung}
+\subsection{User Interface}
+Zugriffe zum User Interface sollten kontrolliert werden. Es muss die Frage gestellt werden, ob Zugriffe aus dem Internet notwendig sind. Allenfalls könnten externe Benutzer über ein Virtual Private Network (VPN) zugreifen. Angreifer aus dem Internet hätten somit keinen direkten Zugriff ausserhalb des Firmennetzwerks.
 
-\section{Management Services}
+Da sensitive Informationen wie Kennwörter und weitere Daten übertragen werden, sollte der Netzwerkverkehr (auch firmenintern) verschlüsselt werden. Wird zum Beispiel ein Web Interface verwendet, so sollte jeglicher Verkehr über das TLS gesicherte HTTPS Protokoll geschehen. Unverschlüsselte Verbindungen dürfen nicht erlaubt werden.
+
+Inputvalidierung ist bei Applikationen enorm wichtig. Sicherheitsrelevante Validierungen müssen zwingend serverseitig implementiert werden. Durch saubere Input Validierungen werden häufige Angriffe wie Code Injection, XSS und CSRF Attacken verhindert.
+
+\subsection{Devicekommunikation}
+Der Management Server kommuniziert über eigene Sessions mit IoT Devices. Meldet sich ein IoT Device beim Management Server, so muss dieser zuerst überprüfen, ob das Device berechtigt ist, um mit dem Management Server zu kommunizieren. Auf dem Server könnte beispielsweise ein Passwort hinterlegt werden, welches neuen Devices bekannt sein muss. 
+
+Man könnte auf dem Server auch vertrauenswürdige Root Zertifikate hinterlegen. So könnten Clients, welche Zertifikate von einem dieser vertrauten Root Zertifikate ausgestellt erhalten haben auf den Management Server zugreifen. Der lokale Bootstrap Server könnte solche Clientzertifikate an die IoT Devices ausstellen.
+
+IoT Devices übermitteln unter Umständen sensitive Daten an den Management Server. Die Kommunikation muss deshalb verschlüsselt werden.
+
+\subsection{Server}
+Die Management Applikation sollte über ein sicheres Authentifizierungsverfahren verfügen. Für kritische Applikationen lohnt sich eine Zwei-Faktor-Authentifizierung. Viele Benutzer verwenden überall die selben Kennwörter oder schreiben sie sich auf, weshalb ein Verlust des Kennworts nicht sehr unwahrscheinlich ist. Durch eine zweite Authentifizierungshürde verbessert sich die Sicherheit markant.
+
+Bereitgestellte API's müssen geschützt sein. Nur authentifizierte Benutzer sollten zugreifen dürfen. Die Kommunikation über diese API's muss gesichert sein, dass keine schädlichen Daten übertragen werden können. 
+
+Auch für Management Server ist die Verfügbarkeit wichtig. Hardwarekomponenten sollten redundant vorhanden sein. Der Applikationsserver sollte regelmässig gesichert sein, sodass im Totalausfall duch einen Restore die Downtime möglichst kurz gehalten wird.
 
 
 
