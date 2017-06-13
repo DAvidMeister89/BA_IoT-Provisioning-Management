@@ -388,8 +388,10 @@ In der Benutzerverwaltung kann der eingeloggte User Änderungen an benutzerspezi
 \newpage
 
 \section{Controllers}
+In diesem Abschnitt wird die Implementiert der einzelnen Controller beschrieben sowie eine Erklärung der verwendeten Spring Funktionen.
+
 \subsection{Allgemein}
-Mit dem Controller-Layer werden alle Routen und Web API Methoden definiert. Für dies wurde das Spring Framework mit der spring-webmvc (v4.3.7) und der spring-web (v4.3.7) Library verwendet. Das Spring Framework hat dabei viel Arbeit abgenommen und den grossen Teil bereits implementiert. Im Controller wurden daher nur noch die Daten aus dem Service-Layer geholt, mit der View verbunden und an den Client zurückgesendet.
+Mit den Controllern werden alle Routen und Web API Methoden definiert. Für dies wurde das Spring Framework mit der spring-webmvc (v4.3.7) und der spring-web (v4.3.7) Library verwendet. Das Spring Framework hat dabei viel Arbeit abgenommen und den grossen Teil bereits implementiert. Im Controller wurden daher nur noch die Daten aus dem Service-Layer geholt, mit der View verbunden und an den Client zurückgesendet.
 
 \subsection{Verwendete Annotations}
 \subsubsection{@Controller}
@@ -552,12 +554,10 @@ public void removeFromGroups(@PathVariable("id") String id, @RequestParam("value
 \hline\caption{\textbf{Web API}}
 \end{longtable}
 
-
-
-
 \newpage
 
 \section{Services}
+In diesem Abschnitt wird die Implementierung aller Service-Klassen beschrieben und erklärt. Dazu werden Codebeispiele gezeigt, welche eine komplexere Logik besitzen. 
 \subsection{Allgemein}
 Der Service-Layer ist das Kernstück der Web-Applikation. Die Services verbinden den LwM2M-Server, den Data-Layer und den Controller-Layer miteinander. Der Controller muss immer über den Service-Layer, damit eine saubere Trennung der Schichten sichergestellt werden kann.
 
@@ -574,7 +574,8 @@ public class DeviceService {
 }
 \end{lstlisting}
 \subsection{DeviceService}
-In der DeviceService-Klasse beinhaltet alle Methoden, welche für die Device-Klasse benötigt wird. Sehr viele Methoden holen Daten von der Datenbank und geben diese in den Controller-Layer hoch.
+In der DeviceService-Klasse beinhaltet alle Methoden, welche für die Device-Klasse benötigt werden. Die meisten Methoden sind seine Getter oder führen einfache Datenbankabfragen aus. Bei vielen Methoden wird eine Datenbankabfrage gemacht und durch gewisse Checks abgesichert, bevor die Daten in der Datenbank gespeichert oder zurück an den Controller gegeben werden. Wirklich komplexe Methoden sind nur sehr wenige Vorhanden. Die Methoden, welche mehr Logik beinhalten, werden hier aufgeführt.
+
 \subsubsection{Read-, Write-, Execute-Methoden}
 Damit der Controller-Layer immer über den DeviceService auf den LwM2M-Server zugreifen muss, sind diese Methoden im DeviceService hinterlegt. Die DeviceService-Klasse ist dabei für das holen des Devices und den Null-Check zuständig. Mit der ''saveMultipleValueToDevice'' Methode wird auch bei jedem Aufruf der akutelle Wert im Device abgespeichert. Hier sieht man das Read Beispiel.
 \begin{lstlisting}[language=java]
@@ -591,7 +592,109 @@ public ReadResponse read(String id, int objectId) {
 }
 \end{lstlisting}
 
+\subsubsection{Add- und Remove im Management}
+Damit ein Device nach dem Disovery in das Management aufgenommen wird, wird eine Gruppe und wenn man möchte eine Configuration gesetzt. Damit ein Device ohne Angaben immer in mindestens einer Gruppe ist, wird dieser in die ''\_unassigned''-Gruppe verschoben. 
+
+Ob ein Device im Management angezeigt wird, entscheidet das Feld ''Added''. Dieses wird beim hinzufügen auf True gesetzt und beim Entfernen wieder auf False. So ist ein Device daher schon bei der Discovery in der Datenbank hinterlegt.
+\begin{lstlisting}[language=java]
+public void addToManagement(String[] deviceIds, String groupId, String configId) {
+	DeviceGroup group;
+	if (groupId.equals("_unassigned")) {
+		group = groupRepo.findByName("_unassigned");
+	} else {
+		group = groupRepo.findOne(groupId);
+	}
+
+	for (String id : deviceIds) {
+		Device device = deviceRepo.findOne(id);
+
+		if (!configId.equals("none")) {
+			configurationService.writeConfigurationToDevice(id, configId);
+		}
+		device.setAdded(true);
+	
+		deviceRepo.save(device);
+		groupService.addDeviceToGroup(group.getId(), id);
+	}
+}
+\end{lstlisting}
+
+\subsection{Change Membership}
+Eine der komplizierteren Methoden ist die ChangeMembership-Methode. Durch diese wird ein Device aus mehreren Gruppen entfernt und wieder hinzugefügt. Dazu muss jedes mal geprüft werden, ob der Device bereits in einer Gruppe ist, oder ob der Device am Schluss ohne Gruppe in der Datenbank vorzufinden ist. Dies wird durch Checks vermieden und die Devices kommen mindestens in die \_unassigned-Gruppe.
+\begin{lstlisting}[language=java]
+public void changeMembership(String id, JSONArray value) {
+	List<DeviceGroup> preGroups = groupService.listAllGroupsForGroup(id);
+	List<DeviceGroup> postGroups = convertJSONArrayToList(value);
+	Device device = getDevice(id);
+
+	saveGroupDifference(preGroups, postGroups, device);
+
+	DeviceGroup unassigned = groupService.findByName("_unassigned");
+	if (!postGroups.isEmpty() && postGroups.contains(unassigned)) {
+		groupService.removeDeviceFromGroup(unassigned.getId(), id);
+	}
+	if (postGroups.isEmpty()) {
+		groupService.addDeviceToGroup(unassigned.getId(), id);
+	}
+}
+\end{lstlisting}
+
 \subsection{GroupService}
+Der GroupService beinhaltet alle Logik, welche die Gruppenverwaltung betrifft. Durch die vielen Möglichkeiten Gruppen zu erstellen, zu verschachteln und neu zu verknüpfen, gibt es hier die komplexesten Logiken. Dies hat leider auch die Folge, das es viele Datenbankabfragen benötigte, wenn viele Gruppen betroffen waren. Sehr viele Methoden sind wie beim DeviceService wieder Getter oder sonstige normalen Datenbankabfragen.
+
+\subsubsection{AddGroupToGroup}
+Die AddGroupToGroup Methode ist für die Applikation die Aufwendigste. Es werden sehr viele Datenbankabfragen und Checks ausgeführt, da es keine inkonsistent geben darf. Bei jeder Gruppe wird überprüft, ob die gewünschte Child-Gruppe bereits als Vorfahren vorhanden ist. Auch die Parent-Gruppe muss diesen Check ausführen, da es sonst zu zirkulären Abhängigkeiten kommen kann. Auch darf eine Gruppe nur einmal als Child-Gruppe vorhanden sein. Dies wird auch jedes mal überprüft. 
+\begin{lstlisting}[language=java]
+private void addGroupToGroup(String parent, String child) {
+	DeviceGroup parentGroup = groupRepo.findOne(parent);
+	DeviceGroup childGroup = groupRepo.findOne(child);
+
+	if (childGroup.getName().equals("_unassigned")  ||
+		parentGroup.getName().equals("_unassigned") ||
+		isAncestor(parentGroup.getName(), childGroup.getName()) ||
+		isAncestor(childGroup.getName(), parentGroup.getName())) {
+			return;
+	}
+
+	DeviceGroup oldParentGroup = groupRepo.findByChildrenId(new ObjectId(childGroup.getId()));
+		
+	if (oldParentGroup != null) {
+		oldParentGroup.remove(childGroup);
+		groupRepo.save(oldParentGroup);
+	}
+	parentGroup.add(childGroup);
+	groupRepo.save(parentGroup);
+	groupRepo.save(childGroup);
+}
+\end{lstlisting}
+
+\subsubsection{findAllChildren}
+Eine weitere wichtige Methode im GroupService ist die findAllChildren Methoden. Diese wird bei jedem rekursiven ausführen von Methoden auf eine Gruppe ausgeführt. Möchte man zum Beispiel eine Konfiguration auf einer Gruppe der obersten Stufe ausführen, müssen alle unteren Devices gefunden werden. Dazu werden alle Child-Gruppen der gewünschten Gruppe gesucht und in jeder Gruppe werden alle Devices gesammelt. Diese werden dem Controller dann als Liste zurückgegeben, damit dieser Methoden mit diese Liste ausführen kann. 
+
+\begin{lstlisting}[language=java]
+
+public List<Device> findAllChildren(String id) {
+	List<Device> allChildrenDevices = new ArrayList<>();
+
+	DeviceGroup parentGroup = groupRepo.findOne(id);
+	List<String> childrenGroup = groupRepo.findAllChildren(parentGroup.getName());
+
+	childrenGroup.add(parentGroup.getName());
+
+	for (String name : childrenGroup) {
+		DeviceGroup group = groupRepo.findByName(name);
+
+		for (DeviceComponent device : group.getChildren()) {
+			if (device instanceof Device) {
+				allChildrenDevices.add((Device) device);
+			}
+		}
+	}
+	return allChildrenDevices;
+}
+\end{lstlisting}
+
+
 
 \subsection{ConfigurationService}
 Der ConfigurationService beinhaltet all die Methoden, welche für die Configuration wichtig sind. Diese sind vor allem Add-, Save-, Remove- und Getter-Methoden. Da diese nicht weiter kompliziert oder speziell sind, werden sie hier nicht genauer dokumentiert.
@@ -619,6 +722,8 @@ public void startUpClean() {
 \newpage
 
 \section{LwM2M-Server}
+In diesem Abschnitt wird erklärt wie der LwM2M-Server von Leshan eingesetzt wird und wie dieser gestartet und an eine Adresse gebunden wird. 
+
 \subsection{Allgemein}
 Damit sich die LwM2M-Clients bei dem Management-Tool melden können, wird ein LwM2M-Server benötigt. In diesem Projekt wurde der Leshan-Server in der Version 1.0.0 verwendet. Diese LwM2M Implementation beinhaltet eine Server- sowie eine Clientumsetzung des LwM2M-Protokolls. Entwickelt wird diese Library von dem Eclipse Project. Leshan baut auf der CoAP implementation Californium auf. Diese wurde von der ETH Zürich entwickelt und  gehört inzwischen auch zum Eclipse Project.
 
@@ -755,6 +860,7 @@ Die anderen Methoden sind nur Getter, welche Object Models zurückgeben oder seh
 \newpage
 
 \section{Database}
+In diesem Abschnitt wird die Anbindung der Datenbank, sowie die die Umsetzung der Repositoriers gezeigt. Auch wird erklärt, wie Custom Abfragen implementiert und ausgeführt werden. 
 \subsection{Allgemein}
 Als Datenbank wurde eine MongoDB in der Version 3.4.3 verwendet. Zusätzlich wurden die Pakete mongo-java-driver (v3.4.2), spring-data-jpa (v3.4.2) spring-data-mongodb (v1.11.1) sowie spring-data-commons (v1.13.1) verwendet. Dadurch konnten wir uns sehr viel Codearbeit ersparen, da wir so schon vorgefertigte Repositories eingebunden haben.
 
@@ -865,6 +971,9 @@ Hier sieht man ein Device, wie es auf der Datenbank gespeichert sein kann. Alle 
 \newpage
 
 \section{Login}
+In diesem Abschnitt wird der komplette Login- und Logout-Vorgang erklärt. Zusätzlich wird die HTTPS Implementation und die Routenzugriffsrestriktionen gezeigt.
+
+\subsection{Allgemein}
 Für das Login und die HTTPS Umleitungen wurden zwei Libraries von dem Spring Framework verwendet.
 Diese sind spring-security-crypto (v4.2.2) und spring-security-oauth2 (v2.1.0). Bei der Crypto-Library wurde der Password-Endcoder verwendet, um alle Passwörter sicher in der Datenbank abzuspeichern. Die Oauth2-Library wurde für die HTTPS Umleitung verwendet und für das Loginformular.
 
@@ -940,6 +1049,8 @@ Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Logi
 \newpage
 
 \subsection{Demo LwM2M-Client}
+%TODO Machen.
+In diesem kurzen Abschnitt wird der eingesetzte Democlient erklärt. Dieser wird nur bei der Präsentation eingesetzt.
 \subsection{Allgemein}
 Wie auch der Server, ist der LwM2M-Client mit der Leshan Library implementiert. 
 Raspberry Pi mit einem Arch Linux + Java Umgebung.
