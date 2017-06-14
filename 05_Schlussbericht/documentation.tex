@@ -3,16 +3,26 @@
 
 \begin{document}
 \input{../document_files/titlepage}
-\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{1}
-\tableofcontents
 
-\part{Einführung}
+\pagenumbering{gobble}
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\pagenumbering{arabic}
 \input{../05_Schlussbericht/chapter/aufgabenstellung}
 \input{../05_Schlussbericht/chapter/abstract}
 \input{../05_Schlussbericht/chapter/managementsummary}
 
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\pagenumbering{gobble}
 \part{Technischer Bericht}
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\pagenumbering{arabic}
 \input{../02_Analyse/chapter/EinfuehrungIoT}
 \input{../02_Analyse/chapter/ManagementIoTDevices}
 \input{../02_Analyse/chapter/kommunikation}
@@ -21,22 +31,28 @@
 \input{../03_Design/chapter/technologie_evaluation}
 \input{../03_Design/chapter/architektur}
 \input{../04_Realisierung/chapter/realisierung}
+\input{../04_Realisierung/chapter/testing}
 \input{../05_Schlussbericht/chapter/ergebnisse}
-\input{../05_Schlussbericht/chapter/ausblick}
-\input{../05_Schlussbericht/chapter/glossar}
+\input{../05_Schlussbericht/chapter/schlussfolgerungen}
 
+\pagenumbering{gobble}
 \part{Anhang}
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\pagenumbering{arabic}
 \input{../01_Projektplanung/chapter/projektplan}
 \input{../01_Projektplanung/chapter/risikomanagement}
 \input{../01_Projektplanung/chapter/zeitauswertung}
 \input{../05_Schlussbericht/chapter/installationsanleitung}
 \input{../05_Schlussbericht/chapter/benutzeranleitung}
 \input{../05_Schlussbericht/chapter/persberichte}
+\input{../05_Schlussbericht/chapter/glossar}
+
+\listoffigures
+\bibliography{../document_files/lit}
+
 \input{../05_Schlussbericht/chapter/eigenstaendigkeitserklaerung}
 \input{../05_Schlussbericht/chapter/vereinbarung}
 
-\bibliography{../document_files/lit}
-\newpage
-\listoffigures
-\newpage
 \end{document}

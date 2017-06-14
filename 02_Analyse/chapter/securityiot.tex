@@ -131,6 +131,12 @@ Der Management Server kommuniziert über eigene Sessions mit IoT Devices. Meldet
 
 Man könnte auf dem Server auch vertrauenswürdige Root Zertifikate hinterlegen. So könnten Clients, welche Zertifikate von einem dieser vertrauten Root Zertifikate ausgestellt erhalten haben auf den Management Server zugreifen. Der lokale Bootstrap Server könnte solche Clientzertifikate an die IoT Devices ausstellen.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{../02_Analyse/images/certificateauthentication.png}
+\caption{Authentisierung mit Zertifikaten}
+\end{figure}
+
 IoT Devices übermitteln unter Umständen sensitive Daten an den Management Server. Die Kommunikation muss deshalb verschlüsselt werden.
 
 \subsection{Server}

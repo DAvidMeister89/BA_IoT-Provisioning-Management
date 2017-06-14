@@ -1,14 +1,13 @@
 %
 % Base Document
 %
-
-\documentclass[11pt,oneside,a4paper,parskip,listof=numbered]{scrreprt}
+\documentclass[11pt,oneside,a4paper,parskip,listof=numbered,bibliography=totocnumbered]{scrreprt}
 \usepackage[inner=2.5cm,outer=2cm,top=2cm,bottom=2cm,includefoot]{geometry}
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{ngerman}
-\usepackage[nottoc,numbib]{tocbibind}
+%\usepackage[nottoc,numbib]{tocbibind}
 \usepackage{scrhack} 
 \usepackage{floatrow} 
 %
@@ -55,7 +54,9 @@
 \setlength{\parskip}{5pt plus -10pt minus -5pt}
 \titlespacing*{\chapter}{0pt}{0pt}{15pt}
 \setlength{\emergencystretch}{3em}
+
 \bibliographystyle{unsrtdin}
+\renewcommand{\bibname}{Quellenverzeichnis}
 
 \setlist[itemize]{noitemsep, topsep=0pt}
 

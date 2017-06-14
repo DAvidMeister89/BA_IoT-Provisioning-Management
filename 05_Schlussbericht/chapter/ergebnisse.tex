@@ -1,5 +1,4 @@
 \chapter{Ergebnisse}
-In diesem Kapitel sind die Projektergebnisse zusammengefasst. 
 \section{Analyse}
 In der Analyse wurde eine breite Einarbeitung in das IoT Themengebiet erarbeitet. Es hat sich gezeigt, dass sich IoT Devices in vieler Hinsicht von herkömmlichen PC's und Notebooks unterscheiden. Es sind neue Protokolle entstanden, um den eingeschränkten Verhältnissen im IoT Umfeld gerecht zu werden.
 
@@ -7,7 +6,13 @@ Wichtige Aufgaben des Device Managements wurden in Kapitel 2 erarbeitet. Durch d
 
 Mit LwM2M ist ein massgeschneidertes IoT Device Management Protokoll entstanden. Durch die Funktionen Bootstrapping, Registration, Resource-Access und Reporting können viele wichtige Device Management Aufgaben mit diesem Protokoll erledigt werden. Vor allem der standardisierte Ressourcenzugriff hat sich als wertvoll erwiesen. Es muss somit nicht mehr auf devicespezifische Implementierungen geachtet werden.
 
-Die Security Analyse hat gezeigt, dass zukünftig die Bedeutung der Sicherheit noch weiter steigen wird. Die unterschiedlichen Bereich im IoT Umfeld wurden analysiert und wichtige, sicherheitsrelevante Aspekte erarbeitet.       
-\section{Smartmanager}
+Die Security Analyse hat gezeigt, dass zukünftig die Bedeutung der Sicherheit noch weiter steigen wird. Die unterschiedlichen Bereiche im IoT Umfeld wurden analysiert und wichtige, sicherheitsrelevante Aspekte erarbeitet. Zu den bestehenden Gefahren von herkömmlichen IT-Infrastrukturen kommen neue Herausforderungen. Lösungsansätze für sicheres Bootstrapping und Authentisierung über Zertifikate wurden erarbeitet.    
 
-\section{Security}
+\section{Smartmanager}
+Mit dem ''Smartmanager'' ist ein funktionsfähiger Prototyp einer IoT Management Applikation entstanden. Als Basis für den LwM2M Server wurde die Eclipse Leshan Library verwendet. Das Web-Back-End wurde in Java mit dem Spring Framework realisiert. 
+
+Durch den Einsatz des LwM2M Protokolls können theoretisch viele unterschiedliche IoT Devices verwaltet werden. Das IoT Device muss dabei einen LwM2M Client installiert haben. Die Kommunikation mit LwM2M Clients gestaltet sich durch das standardisierte Ressourcenmodell leicht. Vom Client unterstützte Objekte und Ressourcen werden in dieser Applikation dynamisch angezeigt.
+
+LwM2M unterstützt mit ''Read'', ''Write'', ''Execute'' und ''Observe'' vier verschiedene Operationen. Die ersten drei Operationen sind implementiert, die ''Observe''-Funktion ist nicht verfügbar. Benutzer können Konfigurationen für Devices anlegen. Konfigurationselemente sind dabei Ressourcen, welche die LwM2M Write-Operation unterstützen. Benutzer haben die Möglichkeit, eine Gruppenstruktur für die Organisation zu erstellen. Somit können Devices in unterschiedliche Gruppen verteilt werden. Auf einer Discovery-Seite sind alle Devices ersichtlich, welche sich beim Management Server registriert haben und vom Benutzer noch nicht hinzugefügt worden sind. Beim Hinzufügen eines Devices kann vom Benutzer eine Gruppe und eine Konfiguration gesetzt werden.
+
+Durch die implementierte Gruppenstruktur können viele IoT Geräte effizient verwaltet werden. Möchte der Benutzer Aktionen auf vielen IoT Devices vornehmen, so kann er Konfigurationen, Write- und Execute-Operationen auf eine Gruppe anwenden. Detaillierte Feedbacks über vorgenommene Aktionen wurden implementiert, sodass der Benutzer über den Erfolg informiert wird.
