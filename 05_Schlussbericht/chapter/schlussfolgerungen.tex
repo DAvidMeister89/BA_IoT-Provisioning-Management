@@ -1,0 +1,33 @@
+\chapter{Schlussfolgerungen}
+\section{Ergebnisbewertung}
+\subsubsection{Positives}
+\begin{itemize}
+\item Erkenntnisreiche Analysen für IoT
+\item Grosser Funktionsumfang dank LwM2M Ressourcenmodell
+\item Potenziell breite Unterstützung für Devices dank standardisiertem LwM2M Protokoll
+\item Konfigurationen für Devices
+\item Hierarchische Gruppenverwaltung
+\item Ausführung von Operationen (Read, Write, Execute) auf Gruppenebene ermöglichen effizientes Management
+\end{itemize}
+
+\subsubsection{Negatives}
+\begin{itemize}
+\item Viele wichtige Sicherheitsaspekte nicht implementiert (Deviceauthentisierung, Verschlüsselung des CoAP Verkehrs, etc.)
+\item Testing zu wenig ausgereift (Unit Tests, Systemtests)
+\item Einige Teile des Codes müssten refactored werden (schwierig testbar)
+\end{itemize}
+
+\section{Ausblick}
+IoT Devicemanagement wird für viele Unternehmen ein Thema werden. Es ist erfreulich, dass die OMA mit LwM2M ein Protokoll entwickelt hat, um eine einheitliche Managementlösung für IoT Devices zu ermöglichen. Es bleibt zu hoffen, dass viele Hersteller im IoT Umfeld dieses Protokoll implementieren werden.
+
+Mit dem Smartmanager konnte ein funktionsfähiger Prototyp eines Device Management Servers entwickelt werden. Wie zu erwarten war, konnten in diesem Projekt zeitlich nicht alle wichtigen Aspekte berücksichtigt werden. Für die produktive Nutzung des Tools müssten wichtige Sicherheitsfeatures und Bootstrapping implementiert werden.
+
+Das Projektteam empfiehlt für die Weiterentwicklung folgende Massnahmen:
+\begin{itemize}
+\item Code Refactoring der gesamten Applikation für eine bessere Testbarkeit
+\item Performanceanalysen und gegebenfalls Leistungsoptimierungen
+\item Entkopplung des LwM2M Servers vom Management Server (eigenes Servlet)
+\item Implementierung eines Bootstrap Servers (Eclipse Leshan Library)
+\item Implementierung von Security-Features (CoAP Verschlüsselung und sicheres Bootstrapping)
+\item Verwendung eines JavaScript Frameworks für ein moderneres User Interface
+\end{itemize}
