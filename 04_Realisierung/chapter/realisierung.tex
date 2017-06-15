@@ -1063,14 +1063,21 @@ Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Logi
 \newpage
 
 \section{Demo LwM2M-Client}
-%TODO Machen.
-In diesem kurzen Abschnitt wird der eingesetzte Democlient erklärt. Dieser wird nur bei der Präsentation eingesetzt.
+In diesem kurzen Abschnitt wird der eingesetzte Democlient erklärt. Dieser wird bei der Schluss-Präsentation sowie bei der Bachelor-Ausstellung eingesetzt.
 \subsection{Allgemein}
-Wie auch der Server, ist der LwM2M-Client mit der Leshan Library implementiert. 
-Raspberry Pi mit einem Arch Linux + Java Umgebung.
-Temperatursensor und Lichtsensor.
-Democlient von Leshan übernommen und angepasst.
+Wie auch der Server, ist der LwM2M-Client mit der Leshan Library eingesetzt. Bei der Leshan Library gibt es bereits einen Demo-Client. Dieser wurde übernommen und für die Demoumgebung angepasst.
+\subsection{Aufbau}
+Als Hardware wird ein Raspberry Pi 3 verwendet. Auf dem Gerät wird ein schlankes Linux installiert sowie das Java Runtime Environment. Weitere Software wird nicht benötigt. Der Leshan-Democlient kann von Github bezogen werden. Der Client bekommt eine angepasste Location sowie die Definitionen für den Temperatursensor.
+\subsubsection{Temperatursensor}
+Bei dem Demo-Client wird ein Temperatursensor verwendet. Dieser wird wie folgt angeschlossen.
+Die Sensoren werden wie folgt an das Geräte angeschlossen:
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{../04_Realisierung/images/sensorconnection.png}
+\caption{Temperatur-Device Schema\cite{RaspBuild}}
+\end{figure}
 
+\newpage
 
 \section{Verwendete Libraries und Software}
 In diesem Kapitel werden alle verwendeten Libraries und Software mit den dazugehörigen Lizenzen aufgelistet.
@@ -1103,6 +1110,7 @@ hamcrest & BSD 2-clause \\
 \hline 
 JUnit & EDL 1.0 / EPL 1.0 \\ 
 \hline 
+json-path & Apache 2.0 \\  \hline
 \end{tabular} 
 \end{table}
 
