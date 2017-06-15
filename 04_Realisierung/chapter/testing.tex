@@ -41,6 +41,4 @@ Viele Methoden konnten nicht nur durch die ''.andExpect'' Variante getestet werd
 \caption{Testabdeckung}
 \end{figure}
 
-Durch die durchgeführten Integrationstests wurde eine Testabdeckung von 63.7\% erreicht. 
-
-Es war mit der Testumgebung nicht möglich einen LwM2M-Client zu simulieren. Dadurch konnten alle Methoden, welche auf LwM2M-Clients zugreifen, nicht getestet werden.
+Durch die durchgeführten Integrationstests wurde eine Testabdeckung von 63.7\% erreicht. Da es mit der Testumgebung nicht möglich war, einen LwM2M-Client zu simulieren, könnten viele Methoden nicht getestet werden. Das heisst alle read, write und execute Routen konnten nicht getestet werden. Deshalb ist die Testabdeckung beim lwm2mservice-Package so gering.
