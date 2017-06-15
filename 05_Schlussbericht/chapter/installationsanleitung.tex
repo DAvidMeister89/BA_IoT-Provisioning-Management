@@ -1,6 +1,6 @@
 \chapter{Installationsanleitung}
 Dies ist die Installationsanleitung für den Smartmanager. Der Smartmanager unterstützt eine Installation unter Linux sowie auch unter Windows. Ein Deployment in einer PaaS wird momentan noch nicht unterstützt. 
-\subsection{Benötigte Software}
+\section{Benötigte Software}
 Für die Installation der Applikation werden folgende Softwares benötigt:
 \begin{itemize}
 \item Java SE Runtime Environment Version 8
@@ -8,7 +8,7 @@ Für die Installation der Applikation werden folgende Softwares benötigt:
 \item Maven
 \item git
 \end{itemize}
-\subsection{Zertifikat Variante 1: PKI}
+\section{Zertifikat Variante 1: PKI}
 \subsubsection{Keystore erstellen}
 Als ersten Schritt erstellt man mit dem Keytool einen Keystore. Diese benötigt einen Alias und einen Pfad, indem er abgelegt wird. Dieser Pfad wird später für die Applikationskonfiguration benötigt.
   
@@ -46,7 +46,7 @@ Danach import man das erhaltene Zertifikat und gibt die Passwörter ein. Durch d
 \centering
 \includegraphics[scale=0.4]{../05_Schlussbericht/images/keystore5.png}
 \end{figure}
-\subsection{Zertifikat Variante 2: Self-Signed}
+\section{Zertifikat Variante 2: Self-Signed}
 Anstelle einer PKI kann man auch einfach ein Self-Signed Zertifikat erstellen. Durch diesen Befehl ist dies Möglich:
 \begin{figure}[H]
 \centering
@@ -57,7 +57,7 @@ Dies reicht aus, damit Tomcat auf das Zertifikat zugreifen kann.
 
 
 
-\subsection{Smartmanager}
+\section{Smartmanager}
 \subsubsection{Smartmanager herunterladen}
 Das Projekt befindet sich auf folgendem URL: \href{https://github.com/BA-Smartmanager/smartmanager}{https://github.com/BA-Smartmanager/smartmanager}
 
