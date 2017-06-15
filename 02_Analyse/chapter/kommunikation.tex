@@ -134,6 +134,8 @@ MQTT (Message Queue Telemetry Transport) ist ein von IBM entwickeltes Protokoll.
 Der Hauptverwendungszweck von MQTT ist vor allem der Austausch von Daten zwischen Geräten und Server (D2S).\cite{ProtPubSub} Da das Protokoll für die D2D Konnektivität entwickelt wurde, wird es auch in diesem Bereich eingesetzt. Die Vorteile liegen in Netzen mit vielen kleinen Geräten, welche wenig kommunizieren.\cite{ProtPubSubReason}
 
 Bei MQTT wird ein Broker verwendet. Der Sensor ''published'' seine Daten mit einem Topic und den Daten an den Broker. Dieser sendet die Nachricht an Subscriber des jeweiligen Topics.
+\newpage
+
 \subsubsection{AMQP}
 AMQP (Advanced Message Queuing Protocol) ist ein bekanntes und viel eingesetztes Protokoll. Das binäre Netzwerkprotokoll wird von vielen grossen Firmen\cite{ProtPubSubReason} entwickelt, wie zum Beispiel Microsoft oder auch Cisco. Seit 2010 ist die Version 1.0 als aktueller Standard im Einsatz.
 
@@ -292,10 +294,10 @@ Wenn der Server eine neue Konfiguration, wie zum Beispiel neues Schlüsselmateri
 Seit dem 26. Dezember 2016 gibt einen Internet-Draft mit dem Namen ''DHCPv6 Options for LWM2M bootstrap information''. Dieser Draft beschreibt ein Mechanismus, bei welchem die LwM2M-Bootstrap Informationen durch eine neue DHCPv6-Server Option verteilt wird. Durch diesen Mechanismus wäre ein Zero Touch Provisioning umsetzbar und man müsste keine weitere Einstellungen vornehmen. Sobald sich die Client beim DHCP melden, erhalten sie alle wichtigen Informationen um sich selbst zu konfigurieren oder die restlichen Konfigurationen vom richtigen Bootstrap-Server zu erhalten.
 
 \href{https://tools.ietf.org/html/draft-nalluri-dhc-dhcpv6-lwm2m-bootstrap-options-02}{https://tools.ietf.org/html/draft-nalluri-dhc-dhcpv6-lwm2m-bootstrap-options-02}
+\newpage
 
 \subsubsection{Registration - Allgemein}
 Wenn dem Client ein gültiger und erreichbarer LwM2M-Server hinterlegt wurde, beginnt die Phase der Registrierung. Bei der Registrierung wird dem Server bekanntgeben, welche Funktionen und Informationen der Client besitzt. Dies beinhaltet die Object Model URLs, Registrierungszeitpunkt, IP-Adresse, Port und noch weitere Angaben, die der Server von jedem Client benötigt. All diese Angaben werden vom Client immer wieder aktualisiert und an den Server gesendet. Dies geschieht meistens mehrmals pro Minute.
-\newpage
 \subsubsection{Registration - Ablauf}
 \begin{figure}[H]
 \includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/registration_diagram.png}
@@ -304,6 +306,7 @@ Wenn dem Client ein gültiger und erreichbarer LwM2M-Server hinterlegt wurde, be
 Die Registrierung wird immer vom Client aus initiiert. Dieser sendet seinem hinterlegtem LwM2M-Server einen POST-Request mit allen relevanten Daten. Sobald diese gesendet wurden, wartet der Client auf eine Antwort. Der Server checkt nun diese Daten und checkt auch gleichzeitig, ob der Client sich richtig authentifiziert hat. Sobald alle Daten korrekt sind, legt der Server eine Registrierung an.
 
 Nach einer gewissen Zeit meldet der Client ein Update an den Server. Durch einen PUT-Request auf die für ihn hinterlegte URL kann der Client die angepassten Daten an den Server senden. Wird ein Client heruntergefahren deregistriert sich dieser automatisch bei seinen Servern. Dazu sendet der Client ein Delete-Befehl auf seine URL auf dem Server und erhält ''Deleted'' als Antwort. 
+\newpage
 
 \subsubsection{Object / Ressource Access - Allgemein}
 Nach dem Registrieren kann der Server auf alle für ihn freigegebenen Daten zugreifen. Dies geschieht über vier definierten Anfragen Read, Write, Execute und Observe. Um neue Daten auf den Client zu senden, erlauben die Write und Execute Anfragen zusätzliche Daten. All diese Anfragen an den Client werden vom LwM2M-Server in ein CoAP Paket umgewandelt und so an den Client gesendet.
@@ -323,6 +326,8 @@ Auch der Execute-Befehl funktioniert ähnlich wie die anderen zwei Requests. Ans
 
 \subsubsection{Reporting - Allgemein}
 LwM2M bietet einen Observe-Befehl an. Dieser wird mit dem Reporting Interface beschrieben. Reporting bietet dabei die drei Funktionen, Observe, Notify und Cancel Observation an. Bei jeder Zustandsänderung der Ressource meldet sich der Client beim Server und sendet die neuen Daten. Der Server kann so stetig wechselnde Daten sehr einfach überwachen.
+\newpage
+
 \subsubsection{Reporting - Ablauf}
 Im Grunde wird hier ein normales Observer-Pattern umgesetzt. Der LwM2M-Server ist der Observer und der Client ist das Subject. Initiiert wird dieser Vorgang immer vom LwM2M-Server aus. 
 \begin{figure}[H]

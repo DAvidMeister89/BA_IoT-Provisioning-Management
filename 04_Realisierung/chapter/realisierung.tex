@@ -331,7 +331,7 @@ Mit ''Delete Device'' wird das Device komplett von der Datenbank entfernt. Mit '
 
 \subsubsection{Allgemeine Informationen}
 Im Bereich der allgemeinen Informationen erhält der Benutzer nützliche Device-Details angezeigt, ebenfalls wird mittels Google Maps API die Location des Devices automatisch angezeigt.
-
+\newpage
 \subsubsection{Deviceobjekte}
 Die Deviceobjekte sind standardmässig zugeklappt. Die einzelnen Objekte sind jeweils eine aufklappbare Panels. Bei der Registration meldet ein Device dem LwM2M Server, welche Objekte es unterstützt. Die Panels werden, abhängig der unterstützten Objekte, dynamisch erzeugt. Mit dem ''Read Multiple'' Button werden sämtliche Felder des Objekts gelesen.
 
@@ -350,6 +350,7 @@ Auf der rechten Seite werden Buttons für die unterstützen Aktionen angezeigt. 
 \includegraphics[scale=0.7]{../04_Realisierung/images/userinterface/rwe.png}
 \caption{RWE Buttons}
 \end{figure}
+\newpage
 
 \subsection{Groups}
 In der Gruppenansicht stehen dem Benutzer viele Funktionen für die Verwaltung von Devices und Groups zur Verfügung. In der Map-Übersicht sind alle Devices ersichtlich.
@@ -359,6 +360,7 @@ In der Gruppenansicht stehen dem Benutzer viele Funktionen für die Verwaltung v
 \includegraphics[scale=0.57]{../04_Realisierung/images/userinterface/groups.png}
 \caption{Gruppenansicht}
 \end{figure}
+\newpage
 
 \subsubsection{Group Members}
 Gruppenmitglieder können unter ''Group Members'' verwaltet werden. 
@@ -378,7 +380,9 @@ Diese Verwaltung wurde mit Hilfe der Bootstrap-Duallist-Box Library implementier
 Die Mitgliedschaft der Gruppe wird über diesen Button verwaltet. Eine Gruppe kann nur über eine Gruppenzugehörigkeit gleichzeitig verfügen. Die Mitgliedschafsverwaltung wird ebenfalls über die Bootstrap-Duallist-Box Library implementiert.
 
 \subsubsection{Add New Child Group}
-Mit dieser Funktion kann der Gruppe eine neue Kindsgruppe hinzugefügt werden. Serverseitig wird überprüft, ob der Gruppenname bereits existiert.
+Mit dieser Funktion kann der Gruppe eine neue Kindsgruppe hinzugefügt werden. Serverseitig wird überprüft, ob der Gruppenname bereits existiert.\\
+\newpage
+
 \subsubsection{Write Configuration}
 Zuvor erstellte Konfigurationen können auf Gruppenebene verteilt werden. Alle definierten Schreiboperationen werden auf alle Nachfahren verteilt. Nach erfolgter Konfiguration erhält der Benutzer eine Response vom Server und wird über den Erfolg der Schreiboperationen benachrichtigt. Die Response wird auf dem Server generiert und dem Client im HTML Format ausgeliefert.
 
@@ -387,6 +391,7 @@ Zuvor erstellte Konfigurationen können auf Gruppenebene verteilt werden. Alle d
 \includegraphics[scale=0.6]{../04_Realisierung/images/userinterface/configresults.png}
 \caption{Konfigurationsantwort}
 \end{figure}
+\newpage
 
 \subsubsection{Execute}
 Execute Funktionen wie beispielsweise einen Neustart können auf Gruppenebene ausgeführt werden. Betroffen sind sämtliche Nachfahren der Gruppe. Execute Funktionen definieren sich in den XML-Models mit der Operation ''E''.
@@ -401,6 +406,7 @@ Nach der Auswahl des linken Felds (Object ID) wird eine Anfrage an den Server ge
 
 \subsubsection{Write}
 Die Write Funktion ist identisch zu der Write Configuration Funktion, mit dem einzigen Unterschied, nur ein Konfigurationselement zu senden. Es muss somit nicht eine Konfiguration erstellt werden, der zu beschreibende Wert kann direkt definiert werden.
+\newpage
 
 \subsection{User Management}
 In der Benutzerverwaltung kann der eingeloggte User Änderungen an benutzerspezifischen Attributen vornehmen. Momentan kann der Administrator lediglich neue Benutzer hinzufügen und bestehende Benutzer löschen. Änderungen am Passwort können alle Benutzer vornehmen. 
@@ -440,6 +446,8 @@ public String showGroupDetails(Model model, @PathVariable("id") String id) {
 	return "devices/groupFragment";
 }
 \end{lstlisting}
+\newpage
+
 \subsubsection{@RestController}
 Die zweite Controllerart ist der RestController. Auch diese Annotation wird direkt oberhalb des Klassennamens platziert. Im gegensatz zur @Controller Annotation gibt der RestController Daten im JSON-Format zurück. 
 
@@ -513,6 +521,8 @@ public void removeFromGroups(@PathVariable("id") String id, @RequestParam("value
 	groupService.removeDeviceFromGroups(value, id);
 }
 \end{lstlisting}
+\newpage
+
 \subsection{Übersicht aller Routen}
 \begin{longtable}{ p{11cm} p{4cm} l}
 \hline 
@@ -599,6 +609,8 @@ public class DeviceService {
 ...
 }
 \end{lstlisting}
+\newpage
+
 \subsection{DeviceService}
 In der DeviceService-Klasse beinhaltet alle Methoden, welche für die Device-Klasse benötigt werden. Die meisten Methoden sind seine Getter oder führen einfache Datenbankabfragen aus. Bei vielen Methoden wird eine Datenbankabfrage gemacht und durch gewisse Checks abgesichert, bevor die Daten in der Datenbank gespeichert oder zurück an den Controller gegeben werden. Wirklich komplexe Methoden sind nur sehr wenige Vorhanden. Die Methoden, welche mehr Logik beinhalten, werden hier aufgeführt.
 
@@ -667,6 +679,7 @@ public void changeMembership(String id, JSONArray value) {
 
 \subsection{GroupService}
 Der GroupService beinhaltet alle Logik, welche die Gruppenverwaltung betrifft. Durch die vielen Möglichkeiten Gruppen zu erstellen, zu verschachteln und neu zu verknüpfen, gibt es hier die komplexesten Logiken. Dies hat leider auch die Folge, das es viele Datenbankabfragen benötigte, wenn viele Gruppen betroffen waren. Sehr viele Methoden sind wie beim DeviceService wieder Getter oder sonstige normalen Datenbankabfragen.
+\newpage
 
 \subsubsection{AddGroupToGroup}
 Die AddGroupToGroup Methode ist für die Applikation die Aufwendigste. Es werden sehr viele Datenbankabfragen und Checks ausgeführt, da es keine inkonsistent geben darf. Bei jeder Gruppe wird überprüft, ob die gewünschte Child-Gruppe bereits als Vorfahren vorhanden ist. Auch die Parent-Gruppe muss diesen Check ausführen, da es sonst zu zirkulären Abhängigkeiten kommen kann. Auch darf eine Gruppe nur einmal als Child-Gruppe vorhanden sein. Dies wird auch jedes mal überprüft. 
@@ -721,6 +734,7 @@ public List<Device> findAllChildren(String id) {
 \end{lstlisting}
 
 
+\newpage
 
 \subsection{ConfigurationService}
 Der ConfigurationService beinhaltet all die Methoden, welche für die Configuration wichtig sind. Diese sind vor allem Add-, Save-, Remove- und Getter-Methoden. Da diese nicht weiter kompliziert oder speziell sind, werden sie hier nicht genauer dokumentiert.
@@ -763,6 +777,8 @@ Die Variable resource gibt dabei den Pfad zu den Models an:
 private Resource resource = new ClassPathResource("ch/hsr/smartmanager/resources/models/");
 \end{lstlisting}
 Jedes Object Model, welches sich in diesem Pfad befindet wird von dem Server geladen und kann vom Server dargestellt werden. Benötigt man weitere Object Modelle, hinterlegt man diese in diesem Ordner und starten den Smartmanager neu. Schon hat man die neuste Definition beim Server hinterlegt.
+\newpage
+
 \subsubsection{Create Methode}
 Damit der Server bei jedem Start von Spring mitgestartet wird, wurde eine createServer-Methode erstellt und mit der Annotation @PostConstruct versehen. Für das erstellen des Servers wurde der LeshanServerBuilder verwendet. Dies ist eine einfache Möglichkeit einen Server zu erstellen und diesen danach zu starten.
 
@@ -798,7 +814,8 @@ public void createServer() {
 	serverTaskExecutor.doIt(this.server);
 }
 \end{lstlisting}
- 
+ \newpage
+
 \subsection{RegistrationListener}
 Der LeshanServer hat einen Registrierungsdienst, welche auf neue Anfragen hört. Um einen Zugriff auf diesen zu erhalten, muss man einen neuen RegistrationListener implementieren. Dieser erweitert danach den Standardlistener und gibt dadurch Zugriff auf die Registred-, Unregistred- und Update-Methoden. So kann das Gerät direkt nach der Registrierung im Management erfasst werden. 
 
@@ -831,6 +848,7 @@ public class RegistrationListenerImpl {
 	}
 }
 \end{lstlisting}
+\newpage
 
 \subsection{Server TaskExecutor}
 Um den Server zu Starten, wird ein TaskExecutor von dem Spring Framework verwendet. Dazu wird ein Thread erzeugt und in diesem wird der Server durch server.start() gestartet. Der Thread wird danach dem TaskExecutor übergeben und gestartet.
@@ -854,6 +872,7 @@ public class ServerTaskExecutor {
 	}
 }
 \end{lstlisting}
+\newpage
 
 \subsection{LwM2MHandler}
 Mit dem LwM2MHandler wird die gesamte Kommunikation zwischen den LwM2M-Clients und dem LwM2M-Server durchgeführt. Dazu wurde eine Read-, Write- und Execute-Methode  erstellt. Diese Methoden erstellen den passenden Request und übergeben diesen dem Server. Der Server schickt diesen Response an den Client und wartet, bis ein Response zurück kommt. Dieser Response wird danach durch die Applikation verarbeitet. 
@@ -907,6 +926,7 @@ Spring unterstützt bereits vorgefertigte Repositories. Um diese einzubinden, mu
 \begin{lstlisting}[language=xml]
 <mongo:repositories base-package="ch.hsr.smartmanager.data.repositories" />
 \end{lstlisting}
+\newpage
 
 \subsubsection{Library Methoden}
 Pro Datanklasse, welche gespeichert werden soll, wird ein Interface erstellt. Dieses Interface extended das Interface MongoRepository. Dadurch erhält man viele Methoden, wie zum Beispiel findOne() oder save() und muss diese nicht selbst implementieren. Dieses Interface muss nach einem Schema benannt werden. Und zwar beginnt sie immer mit dem Datenklassenname und wird mit ''Repository'' erweitert. Hier sieht man ein Beispiel des DeviceRepository. Wichtig ist dabei die Annotation @Repository, damit Spring dieses Interface findet. 
@@ -938,6 +958,7 @@ public interface DeviceRepositoryCustom {
 \end{lstlisting}
 
 Danach erstellt man eine Klasse mit dem Namen <Datenklassennamen>RepositoryImpl und implementiert die einzelnen Methoden. Dazu verwendet man die Klasse MongoTemplate, um die vorgefertigten Methoden, wie zum Beispiel Remove oder Save, einsetzen zu können. Durch die Query-Klasse kann man jede Abfrage abbilden und so nach spezielleren Kriterien filtern, anstelle von nur einzelnen Felder.
+\newpage
 
 Hier sieht man ein Beispiel Query, welche alle Devices entfernt, bei denen Added False ist. 
 \begin{lstlisting}[language=java]
@@ -972,6 +993,7 @@ public class Device implements DeviceComponent {
 	
 	public Device() {}
 \end{lstlisting}
+\newpage
 
 \subsection{Datenbankobjekt}
 In der Datenbank wird jede Datenklasse als JSON-Objekt abgespeichert. Dieses beinhaltet alle Felder der Klasse, sowie eine generierte Id und eine Klassendefinition. Dadurch kann Spring das Objekt sehr einfach wieder zu einem Javaobject umwandeln und zur Verfügung stellen.
@@ -1026,6 +1048,7 @@ Man sieht das nur die /login und /logout für jeden aufrufbar ist. Alle anderen 
 \end{lstlisting}
 
 Zusätzlich zu den Routen Einstellungen, wird auch ein Authentication-Manager benötigt. Dieser ist für die Passwortüberprüfung und Speicherung zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Damit das Password nicht in Klartext gespeichert wird, wird ein PasswortEncoder konfiguriert. Dieser kann direkt von Spring übernommen werden und verschlüsselt das Passtwort
+\newpage
 
 Hier sieht man die Umsetzung der Security Einstellungen. Als Authentication-Provider wurde der userService verwendet und als PasswordEndcoder der BCryptPasswordEncoder von dem Spring Framework.
 \begin{lstlisting}[language=xml]
@@ -1054,6 +1077,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 	}
 }
 \end{lstlisting}
+\newpage
 
 	
 \subsection{Login Formular}
@@ -1144,6 +1168,7 @@ sb-admin-2	&	MIT License	 \\ \hline
 Bootstrap Dual Listbox	&	Apache License 2	 \\ \hline
 \end{tabular} 
 \end{table}
+\newpage
 
 \subsection{Entwicklungssoftware}
 Alle für die Entwicklung verwendeten Tools und Software wird hier aufgelistet.

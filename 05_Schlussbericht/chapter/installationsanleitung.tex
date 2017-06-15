@@ -18,6 +18,8 @@ Nun wird man nach einem Passwort gefragt. Dieses wird auch für die spätere App
 \centering
 \includegraphics[scale=0.65]{../05_Schlussbericht/images/keystore1.png}
 \end{figure}
+\newpage
+
 Danach gibt man alle wichtig Informationen zum Zertifikat an. Diese Informationen müssen alle stimmen, da diese an die ''Certificate Authority'' weitergegeben werden. Dies kann am Schluss mit ''Ja'' bestätigt werden.
 \begin{figure}[H]
 \centering
@@ -56,6 +58,7 @@ Anstelle einer PKI kann man auch einfach ein Self-Signed Zertifikat erstellen. D
 
 Dies reicht aus, damit Tomcat auf das Zertifikat zugreifen kann.
 
+\newpage
 
 
 \section{Smartmanager}
@@ -71,7 +74,6 @@ In dieser Datei kann die LwM2M-Server Adresse und die MongoDB-URL anpassen. Weit
 \begin{lstlisting}[language=xml]
 <property name="address" value="127.0.0.1" />
 <property name="port" value="5683"></property>
-		
 <mongo:db-factory id="mongoDbFactory" client-uri="mongodb://localhost/smartmanager" />
 \end{lstlisting}
 
@@ -83,7 +85,6 @@ Um die Software zu builden, gibt im Ordner ''smartmanager'' ''mvn clean install'
 Im Tomcat Installationsverzeichnis befindet sich im Ordner ''conf'' die Datei server.xml. In dieser sucht man nach den Connector Tags und fügt folgende hinzu.
 \begin{lstlisting}[language=xml]
 <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
-
 <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
 	maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
 	clientAuth="false" sslProtocol="TLS" keystoreFile="</yout/keystore/path/.keystore>"
