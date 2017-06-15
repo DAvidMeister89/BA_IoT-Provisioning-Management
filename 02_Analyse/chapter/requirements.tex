@@ -1,15 +1,15 @@
 \chapter{Requirements}
 \section{Allgemeine Beschreibung}
 \subsection{Produktperspektive}
-Mit Internet of Things sind eine Vielzahl neuartiger Devices entstanden. Während in herkömmlichen Netzwerken hauptsächlich Personal Computer, Notebooks, Server usw. verwaltet werden mussten, so bringen IoT Devices den IT-Abteilungen neue Herausforderungen. Zum einen dürfte die Anzahl Geräte gegenüber herkömmlichen Computer deutlich ansteigen, zum anderen sind IoT Devices in Sachen Funktionalität und Rechenleistung, sowie auch der Netzwerkbandbreite deutlich beschränkt. 
+Mit Internet of Things sind eine Vielzahl neuartiger Devices entstanden. Während in herkömmlichen Netzwerken hauptsächlich Personal Computer, Notebooks, Server usw. verwaltet werden mussten, so bringen IoT-Devices den IT-Abteilungen neue Herausforderungen. Zum einen dürfte die Anzahl Geräte gegenüber herkömmlichen Computer deutlich ansteigen, zum anderen sind IoT-Devices in Sachen Funktionalität und Rechenleistung, sowie auch der Netzwerkbandbreite deutlich beschränkt. 
 
-Mit diesem Projekt soll ein Prototyp einer Management Applikation bereitgestellt werden, um eine grosse Anzahl unterschiedlicher IoT Devices administrieren zu können. 
+Mit diesem Projekt soll ein Prototyp einer Management Applikation bereitgestellt werden, um eine grosse Anzahl unterschiedlicher IoT-Devices administrieren zu können. 
 \subsection{Produktfunktionen}
-Die Applikation soll den Benutzern erlauben, IoT Geräte zu verwalten. Die Aufgaben reichen vom Discovery von Devices über die Konfigurationsverwaltung und Softwareverteilung bis zu Backup und Restore. Ausserdem sollen Management-relevante Kommandos auf Devices ausgeführt- und Security Aspekte beachtet werden. Die Details zu den Produktfunktionen sind den Use Cases zu entnehmen.
+Die Applikation soll den Benutzern erlauben, IoT-Geräte zu verwalten. Die Aufgaben reichen vom Discovery von Devices über die Konfigurationsverwaltung und Softwareverteilung bis zu Backup und Restore. Ausserdem sollen Management-relevante Kommandos auf Devices ausgeführt- und Security Aspekte beachtet werden. Die Details zu den Produktfunktionen sind den Use Cases zu entnehmen.
 
 \subsection{Benutzer Charakteristik}
 \label{sec:benutzercharakteristik}
-Zielpersonen der Applikation sind Betreiber von IoT Devices. Dies können im Enterprise Umfeld IT-Mitarbeiter in operationeller Funktion-, oder auch Softwareentwickler für IoT Applikationen sein. Heimanwender können bei entsprechenden Kenntnissen ebenfalls zur Zielgruppe gehören. Es werden solide Grundkenntnisse in TCP/IP Netzwerken sowie Verständnis der verwendeten IoT Architekturen und Devices vorausgesetzt. Es werden ausserdem Grundkenntnisse des LwM2M Protokolls empfohlen. 
+Zielpersonen der Applikation sind Betreiber von IoT-Devices. Dies können im Enterprise Umfeld IT-Mitarbeiter in operationeller Funktion-, oder auch Softwareentwickler für IoT-Applikationen sein. Heimanwender können bei entsprechenden Kenntnissen ebenfalls zur Zielgruppe gehören. Es werden solide Grundkenntnisse in TCP/IP Netzwerken sowie Verständnis der verwendeten IoT-Architekturen und Devices vorausgesetzt. Es werden ausserdem Grundkenntnisse des LwM2M Protokolls empfohlen. 
 \section{Use Cases}
 \label{sec:usecases}
 \subsection{Use Cases Diagramm}
@@ -283,10 +283,10 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
 In diesem Kapitel werden die nicht funktionalen Anforderungen des Projekts gemäss ISO/IEC 9126 Norm behandelt. Es werden für das Projekt wichtige Merkmale wie Interoperabilität, Effizienz, Benutzbarkeit und Sicherheit werden aufgeführt. 
 
 \subsection{Interoperabilität}
-Bei Interoperabilitäten muss auf drei unterschiedliche Bereiche geachtet werden. Zum einen müssen IoT Devices mit dem Server kommunizieren können, zum anderen die Benutzer selbst. Zusätzlich muss die Applikation auf unterschiedlichen Betriebssystemen installiert werden können.
+Bei Interoperabilitäten muss auf drei unterschiedliche Bereiche geachtet werden. Zum einen müssen IoT-Devices mit dem Server kommunizieren können, zum anderen die Benutzer selbst. Zusätzlich muss die Applikation auf unterschiedlichen Betriebssystemen installiert werden können.
 
 \begin{itemize}
-\item IoT Devices mit installiertem LwM2M Client (Version 1.0) müssen unterstützt werden
+\item IoT-Devices mit installiertem LwM2M Client (Version 1.0) müssen unterstützt werden
 \item Clients mit Webbrowsern (Google Chrome >Version 50, Mozilla Firefox >Version45) müssen unterstützt werden
 \item Die Applikation soll auf aktuellen Windows-Betriebssystemen (>Windows 7) und aktuellen Linux Betriebssystemen lauffähig sein. 
 \end{itemize}
@@ -297,8 +297,8 @@ Durch die vielseitigen Aufgaben muss auf die Parallelität geachtet werden. Es w
 \begin{itemize}
 \item Mindestens 5 Benutzer sollen gleichzeitig angemeldet sein können
 \item Die Antwortzeiten vom Server an Clients dürfen unterschiedlich sein  
-\item Ist keine Kommunikation mit dem IoT Device nötig, so muss der Server dem Client innerhalb einer Sekunde (exkl. Round-Trip-Time) antworten
-\item Muss ein Server vor der Antwort mit einem IoT Device kommunizieren, so kann keine Antwortzeit garantiert werden. Spätestens nach 1 Minute muss dem Benutzer ein Fehler angezeigt werden
+\item Ist keine Kommunikation mit dem IoT-Device nötig, so muss der Server dem Client innerhalb einer Sekunde (exkl. Round-Trip-Time) antworten
+\item Muss ein Server vor der Antwort mit einem IoT-Device kommunizieren, so kann keine Antwortzeit garantiert werden. Spätestens nach 1 Minute muss dem Benutzer ein Fehler angezeigt werden
 \item Mindestens 95\% aller Anfragen an den Server müssen korrekt (erwartetes Ergebnis) beantwortet werden
 \item Die gestellten Anforderungen müssen bei einer Last von 1000 Devices, 200 Gruppen und 5 gleichzeitigen Benutzern erfüllt werden
 \end{itemize}
@@ -331,12 +331,12 @@ Sämtliche Teile der Software sollen möglichst modular und lose gekoppelt aufge
 \end{itemize}
 
 \subsection{Sicherheit}
-Da die Applikation über das Internet erreichbar ist, muss die Applikationssicherheit gewährleistet sein. Eine Kompromittierung der Management Plattform könnte die gesamte IoT Landschaft eines Unternehmens beeinträchtigen.
+Da die Applikation über das Internet erreichbar ist, muss die Applikationssicherheit gewährleistet sein. Eine Kompromittierung der Management Plattform könnte die gesamte IoT-Landschaft eines Unternehmens beeinträchtigen.
 
 \begin{itemize}
 \item Benutzer kommunizieren verschlüsselt mit dem Server
 \item Nur authentifizierte Benutzer können die Applikation benutzen
 \item Das Session-Timeout beträgt maximal 15 Minuten
-\item IoT Devices kommunizieren verschlüsselt mit dem Server
-\item Nur authentifizierte IoT Devices können mit dem Management Server kommunizieren
+\item IoT-Devices kommunizieren verschlüsselt mit dem Server
+\item Nur authentifizierte IoT-Devices können mit dem Management Server kommunizieren
 \end{itemize}

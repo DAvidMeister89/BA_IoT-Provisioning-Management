@@ -148,9 +148,9 @@ bootbox.confirm({
 Als ''message''-Attribut kann ein String oder auch HTML Code eingefügt werden.  Beim ''Callback''-Attribut kann eine Callback-Funktion hinterlegt werden. Diese wird ausgeführt, wenn das Pop-up Fenster geschlossen wird. Die if-Abfrage stellt sicher, dass der darinliegende Code nur ausgeführt wird, wenn ''OK'' auf geklickt wird.
 
 \subsubsection{Google Maps API}
-An verschiedenen Stellen auf der Seite werden Devices auf Google Maps Karten angezeigt. Dies gibt dem Benutzer eine schnelle Übersicht der Lokalitäten der IoT Devices.
+An verschiedenen Stellen auf der Seite werden Devices auf Google Maps Karten angezeigt. Dies gibt dem Benutzer eine schnelle Übersicht der Lokalitäten der IoT-Devices.
 
-Über die JavaScript-Funktion ''initMap()'' wird die (leere) Map geladen. Danach werden über die Funktion ''getLocations()'' die Locations der benötigten IoT Devices vom Server abgefragt. Über die ''insertLocations()''-Funktion werden die Punkte auf der Map eingezeichnet.
+Über die JavaScript-Funktion ''initMap()'' wird die (leere) Map geladen. Danach werden über die Funktion ''getLocations()'' die Locations der benötigten IoT-Devices vom Server abgefragt. Über die ''insertLocations()''-Funktion werden die Punkte auf der Map eingezeichnet.
 
 \subsection{Home}
 Die Home-Seite dient als Einstiegspunkt und Übersichtsseite. Dem Benutzer sollen Informationen über die Applikation und die verwaltete Infrastruktur angezeigt werden.
@@ -174,7 +174,7 @@ In diesem Bereich werden dem Benutzer folgende vier Informationen auf den ersten
 Sind Devices nicht mehr erreichbar, muss dies dem Benutzer mitgeteilt werden. Hat sich ein Device mehr als 30 Minuten nicht mehr beim Server gemeldet, so erscheint es in dieser Tabelle. Klickt der Benutzer auf ''Delete'' respektive ''Delete All'', so werden die JavaScript Funktionen ''deleteUnreachableDevice(id, name)'' und ''deleteAllUnreachableDevices()'' ausgeführt. Über eine AJAX-Anfrage werden die entsprechenden Serverpfade aufgerufen.
 
 \subsubsection{Übersichtskarte}
-Auf dieser Übersichtskarte werden alle im Device gespeicherten Locations von IoT Devices angezeigt.
+Auf dieser Übersichtskarte werden alle im Device gespeicherten Locations von IoT-Devices angezeigt.
 
 \newpage
 \subsection{Discovery}
@@ -873,7 +873,7 @@ Die anderen Methoden sind nur Getter, welche Object Models zurückgeben oder seh
 
 \newpage
 
-\section{Database}
+\section{Datenbank}
 In diesem Abschnitt wird die Anbindung der Datenbank, sowie die die Umsetzung der Repositoriers gezeigt. Auch wird erklärt, wie Custom Abfragen implementiert und ausgeführt werden. 
 \subsection{Allgemein}
 Als Datenbank wurde eine MongoDB in der Version 3.4.3 verwendet. Zusätzlich wurden die Pakete mongo-java-driver (v3.4.2), spring-data-jpa (v3.4.2) spring-data-mongodb (v1.11.1) sowie spring-data-commons (v1.13.1) verwendet. Dadurch konnten wir uns sehr viel Codearbeit ersparen, da wir so schon vorgefertigte Repositories eingebunden haben.

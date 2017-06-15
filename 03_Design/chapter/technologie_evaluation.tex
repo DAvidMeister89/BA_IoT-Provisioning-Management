@@ -10,7 +10,7 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \item Gute Dokumentation und Unterstützung durch die Community
 \item Einfache Bedienung und schnelle Einarbeitung
 \item Performance / Skalierbarkeit
-\item Libraries für IoT Kommunikationsprotokolle
+\item Libraries für IoT-Kommunikationsprotokolle
 \item Kenntnisse der Programmiersprache
 \end{itemize}
 
@@ -32,7 +32,7 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \tabitem Schwache Objektorientierung (kein Polymorphismus, Duck-Typing, etc.)\\ \hline
 \textbf{Spring MVC}\newline
 \includegraphics[width=0.25\columnwidth]{../03_Design/images/spring_logo.png}
-& Spring MVC wird verwendet um dynamische Webseiten mit Java Servlets zu erstellen. Dependency Injection und aspektorientierte Programmierung sind ebenfalls unterstützt. Konfigurationen über XML und Java Annotations unterstützen den Entwickler beim Erstellen von MVC Web-Applikationen. Die Library-Unterstützung für IoT spezifische Kommunikationsprotokolle wie beispielsweise CoAP sind bei Java EE hervorragend. Java unterstützt sowohl Multi-Threading, als auch non-blocking I/O. Gleichzeitige Verbindungen zu Devices könnten in eigene Threads ausgelagert werden, um nicht das gesamte Back-End zu blockieren.
+& Spring MVC wird verwendet um dynamische Webseiten mit Java Servlets zu erstellen. Dependency Injection und aspektorientierte Programmierung sind ebenfalls unterstützt. Konfigurationen über XML und Java Annotations unterstützen den Entwickler beim Erstellen von MVC Web-Applikationen. Die Library-Unterstützung für IoT-spezifische Kommunikationsprotokolle wie beispielsweise CoAP sind bei Java EE hervorragend. Java unterstützt sowohl Multi-Threading, als auch non-blocking I/O. Gleichzeitige Verbindungen zu Devices könnten in eigene Threads ausgelagert werden, um nicht das gesamte Back-End zu blockieren.
 \newline
 \newline
 \textbf{Vorteile} \newline
@@ -49,7 +49,7 @@ Die Entscheidung des Frameworks für das Back-End ist von grosser Tragweite. Heu
 \end{longtable}
 
 \subsection{Skalierbarkeit}
-Da potenziell viele Devices über die Applikation verwaltet werden könnten ist die Skalierbarkeit von grosser Bedeutung. Die Art der Verbindungen unterscheiden sich. Während die Anzahl gleichzeitiger Verbindungen über das Front-End zum Server (concurrent users) sehr gering sein wird, besteht die Möglichkeit, dass hunderte oder gar tausende IoT Devices verbunden sind.
+Da potenziell viele Devices über die Applikation verwaltet werden könnten ist die Skalierbarkeit von grosser Bedeutung. Die Art der Verbindungen unterscheiden sich. Während die Anzahl gleichzeitiger Verbindungen über das Front-End zum Server (concurrent users) sehr gering sein wird, besteht die Möglichkeit, dass hunderte oder gar tausende IoT-Devices verbunden sind.
 
 Es besteht jedoch nicht die Notwendigkeit, dass während der Nutzungsdauer alle diese Verbindungen aufgebaut und offen gehalten werden. Es ist damit zu rechnen, dass niemals mehr als 100 gleichzeitige Verbindungen zu unterschiedlichen Devices existieren. 
 
@@ -60,7 +60,7 @@ Ausschlaggebend für die Auswahl von Spring MVC ist die zugrundeliegende Program
 
 \newpage
 \section{Front-End}
-Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersichtliche Weise die Interaktion ermöglichen. Es sollen einerseits neue Geräte hinzugefügt werden, andererseits bestehende Geräte verwaltet oder überwacht werden. Potenziell könnten eine grosse Anzahl solcher IoT Devices vorliegen, weshalb diese übersichtlich gruppiert werden sollen.
+Das Front-End der Applikation muss dem Benutzer auf eine einfache und übersichtliche Weise die Interaktion ermöglichen. Es sollen einerseits neue Geräte hinzugefügt werden, andererseits bestehende Geräte verwaltet oder überwacht werden. Potenziell könnten eine grosse Anzahl solcher IoT-Devices vorliegen, weshalb diese übersichtlich gruppiert werden sollen.
 
 \subsection{Kriterien}
 \begin{itemize}

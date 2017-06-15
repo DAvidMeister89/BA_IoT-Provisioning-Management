@@ -1,6 +1,6 @@
 \chapter{Kommunikation}
 \section{Architektur}
-Man könnte ein IoT System in vier wichtige Gruppen unterteilen: \cite{IoTNetworks}
+Man könnte ein IoT-System in vier wichtige Gruppen unterteilen: \cite{IoTNetworks}
 \begin{itemize}
 \item Dinge (things)
 \item das lokale Netzwerk
@@ -10,13 +10,13 @@ Man könnte ein IoT System in vier wichtige Gruppen unterteilen: \cite{IoTNetwor
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{../02_Analyse/images/iot_system_overview_by_micrium.png}
-\caption{IoT Systemübersicht\cite{IoTOverview}}
+\caption{IoT-Systemübersicht\cite{IoTOverview}}
 \end{figure}
 Grundsätzlich scheint die Architektur vertraut. Smart Objects kommunizieren über ein lokales Netzwerk mit Diensten im Internet.
 
 Bisher konnten Geräte wie Laptops, PCs und Smartphones beinahe einheitlich mit dem Internet verbunden werden; entweder verkabelt über Ethernet oder drahtlos über ein lokales WLAN oder mobile Netze wie UMTS und LTE. Die Endgeräte verfügten jeweils über viel Rechenleistung, Speicher und ein leistungsfähiges Betriebssystem mit einem vollständig implementierten TCP/IP Stack. 
 
-In einem IoT System muss man von einer grossen Anzahl an Geräten mit Sensoren ausgehen. Manchmal verfügen diese Geräte über eine extrem niedrige Bandbreite, wenig Speicher und Rechenleistung \cite{CiscoIoTArchitecture}.
+In einem IoT-System muss man von einer grossen Anzahl an Geräten mit Sensoren ausgehen. Manchmal verfügen diese Geräte über eine extrem niedrige Bandbreite, wenig Speicher und Rechenleistung \cite{CiscoIoTArchitecture}.
 
 Die Kommunikation erfolgt oft nicht vertikal der Architektur, sondern auch horizontal auf derselben Ebene. Sensordevices können beispielsweise miteinander kommunizieren oder Cloud Services Daten der Sensoren untereinander austauschen.
 \subsection{Wireless Sensor Netzwerke}
@@ -24,7 +24,7 @@ Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{../02_Analyse/images/iot_wsn_lan_overview_by_micrium.png}
-\caption{IoT WSN\cite{IoTWSN}}
+\caption{IoT-WSN\cite{IoTWSN}}
 \end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
 
@@ -64,12 +64,12 @@ Sobald sich die Sensordaten auf einem Server befinden, können diese auf bekannt
 
 \newpage
 
-\section{IoT Kommunikationsprotokolle}
+\section{IoT-Kommunikationsprotokolle}
 Seit der Entstehung des Internets werden für unterschiedliche Aufgaben Kommunikationsprotokolle entwickelt. Eine grosse Herausforderung war stets die Interoperabilität zwischen Geräten unterschiedlicher Hersteller. Standardisierungsgremien wie die International Standards Organization (ISO) und die Internet Engineering Task Force (IETF) haben in den vergangenen Jahrzehnten Richtlinien und Standardisierung von Kommunikationsprotokollen veröffentlicht. 
 
 Mit zunehmender Popularität des Internets der Dinge sind eine unüberschaubare Menge an proprietären und offenen Kommunikationsprotokollen entstanden. In der Geschichte des Internets hat sich gezeigt, dass sich langfristig nur offene Protokolle durchsetzen werden \cite{Obermaier14}, proprietäre Protokolle hingegen werden aufgrund der fehlenden Interoperabilität niemals eine breite Verwendung finden.
 \subsection{Anforderungen}
-Bereits heute zeichnen sich die populärsten IoT Kommunikationsprotokolle ab. Um zu verstehen weshalb-, und vor allem in welchen Szenarien welches Protokoll eingesetzt wird respektive werden sollte, muss man sich mit den unterschiedlichen Anforderungen vertraut machen.
+Bereits heute zeichnen sich die populärsten IoT-Kommunikationsprotokolle ab. Um zu verstehen weshalb-, und vor allem in welchen Szenarien welches Protokoll eingesetzt wird respektive werden sollte, muss man sich mit den unterschiedlichen Anforderungen vertraut machen.
 
 Die typischen bekannten Fragen nach der Verbreitung/Unterstützung und Skalierbarkeit stellen sich auch hier. Ebenfalls muss auf die mutmassliche Datenmenge geachtet werden. So dürfte eine vergleichsweise hohe Datenmenge für Geräte, welche über einen direkten, verkabelten Internetzugang verfügen, kein Problem darstellen, während Geräte in einem Mesh-betriebenen WSN wohl über deutlich weniger Bandbreite verfügen dürften.
 
@@ -84,18 +84,18 @@ Request/Response ist das wohl bekannteste Pattern. Ein Client fordert mittels ei
 \subsubsection{HTTP}
 In den 1990er Jahren wurde HTTP verwendet um statische HTML-Dokumente übers Internet abzurufen. Bis heute hat sich die grundsätzliche Funktion von HTTP nicht verändert. HTTP bietet über seine Methoden ein umfangreiches Interface für die Request/Response Kommunikation zwischen Clients und Servern über das Internet. 
 
-Aufgrund seiner hohen Verbreitung, Standardisierung und Unterstützung ist HTTP auch im IoT Umfeld beliebt. Für fast jede Programmiersprache und Laufzeitumgebung existieren Libraries, was das Entwickeln sehr angenehm macht. HTTP eignet sich jedoch nicht für alle Anwendungsfälle im IoT Bereich. Für jeden Request wird der gesamte HTTP (und darunterliegende) Header benötigt. Zusätzlich ist das Protokoll textbasiert, was mit dem zusätzlichen, grossen Overhead eine erhebliche Datenmenge bedeuten könnte. Für Endgeräte an Mobilen Netzwerken könnte dies ungeeignet sein \cite{Obermaier15}.
+Aufgrund seiner hohen Verbreitung, Standardisierung und Unterstützung ist HTTP auch im IoT-Umfeld beliebt. Für fast jede Programmiersprache und Laufzeitumgebung existieren Libraries, was das Entwickeln sehr angenehm macht. HTTP eignet sich jedoch nicht für alle Anwendungsfälle im IoT-Bereich. Für jeden Request wird der gesamte HTTP (und darunterliegende) Header benötigt. Zusätzlich ist das Protokoll textbasiert, was mit dem zusätzlichen, grossen Overhead eine erhebliche Datenmenge bedeuten könnte. Für Endgeräte an Mobilen Netzwerken könnte dies ungeeignet sein \cite{Obermaier15}.
 
 In der Version 1, respektive 1.1 gibt es mit HTTP keine Möglichkeit, echte Push-Meldungen zu versenden. Bei Push-Meldungen sendet der Server eine Response (besser: Nachricht) an den Client ohne vorgängigen Request. In der Version 2 von HTTP sind echte Push-Meldungen vorgesehen, jedoch gibt es wenige Implementation und Erfahrungswerte damit.
 \subsubsection{CoAP}
 \label{sec:iotkomm}
 Das Constrained Application Protocol (CoAP) implementiert wie HTTP das Request/Response Pattern \cite{Obermaier15}. Mit CoAP existiert ein massgeschneidertes IoT-Protokoll, welches nach dem REST Paradigma konzipiert wurde. HTTP ist schwergewichtig, hat einen grossen Overhead und generiert damit hohe Datenmengen. Ausserdem ist vor jeder Session den für TCP benötigten 3-Way Handshake nötig. 
  
-CoAP wurde entwickelt, um diesen Schwächen von HTTP entgegenzuwirken. Bei sogenannten Low-Power and Lossy Networks (LLN's) sind die Nodes im Vergleich zu herkömmlichen Computersystemen sehr eingeschränkt, was die Verwendung von HTTP schwierig gestaltet. CoAP bietet grundsätzlich folgende Features:\cite{RFC7252}
+CoAP wurde entwickelt, um diesen Schwächen von HTTP entgegenzuwirken. Bei sogenannten Low-Power and Lossy Networks (LLNs) sind die Nodes im Vergleich zu herkömmlichen Computersystemen sehr eingeschränkt, was die Verwendung von HTTP schwierig gestaltet. CoAP bietet grundsätzlich folgende Features:\cite{RFC7252}
 \begin{itemize}
 \item Request/Response Kommunikation zwischen Endpoints	
 \item Discovery von Services und Ressourcen
-\item URI's und Media Types
+\item URIs und Media Types
 \item Kompatibilität mit HTTP
 \item Multicast Support
 \item sehr kleiner Overhead (Header von 4 Byte)
@@ -111,7 +111,7 @@ CoAP kann Peer-to-Peer zwischen Devices eingesetzt werden, aber auch zwischen De
 \caption{CoAP Architektur \cite{Shelby14}}
 \end{figure}
   
-Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSN's eingesetzt \cite{Obermaier15}. 
+Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSNs eingesetzt \cite{Obermaier15}. 
 
 \subsection{Publish/Subscribe}
 Beim Publish/Subscribe Pattern gibt es einen Sender (Publisher) und einen Empfänger (Subscriber). Der Empfänger hört auf gewisse Themen (Topics). Dies kann nur ein Thema sein oder auch viele Verschiedene. Der Sender kategorisiert seine Nachrichten in Themen und sendet diese zu den jeweiligen Empfänger. Der Sender und der Empfänger wissen aber nichts voneinander. Sie senden oder hören nur im Netzwerk, ob eine für sie interessante Nachricht angekommen ist. Durch die einfache Verknüpfung von Publisher und Subscriber, eignet sich dieses Verfahren sehr gut im IoT-Bereich. Die Sensoren sind die Publisher, sie liefern zum Beispiel Temperaturdaten in die richtige Kategorie. Alle Server/Clouddienste, welche sich für Temperaturdaten interessieren, können auf diese Kategorie hören. Durch die einfache Handhabung skaliert dieses Pattern sehr gut.
