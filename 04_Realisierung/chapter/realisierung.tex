@@ -1046,7 +1046,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 	
 \subsection{Login Formular}
 Für das Login wurde eine neue login.jsp Datei erstellt. Diese enthält das Loginformular und als Action die Standardroute von Spring, für die Loginüberprüfung. Wenn man in der security-config.xml Dateu nichts weiteres eingestellt hat, müssen alle Felder genau so wie im Beispiel benannt werden. Auch die Action der Form muss auf j\_spring\_security\_check zeigen, damit im Spring Framework die richtige Methode ausgeführt wird. Hier sieht man das vereinfachte JSP der Loginseite.
-\begin{lstlisting}{language=html5}
+\begin{lstlisting}[language=html5]
 <form role="form" name='f' action='${pageContext.request.contextPath}/j_spring_security_check' method='POST'>
 	<input type="text" name="j_username" value='' placeholder="Username" required autofocus>
 	<input type="password" name="j_password" placeholder="Password" value="">
