@@ -16,7 +16,7 @@ konzeptionellen, theoretischen und einen praktischen Anteil.
 \caption{\textbf{Teammitglieder}}
 \end{table} 
 
-Das Projekt wird von Prof. Beat Stettler und Urs Baumann betreut und benotet. Experte und Gegenleser sind zur Zeit noch nicht bekannt.
+Das Projekt wird von Prof. Beat Stettler und Urs Baumann betreut und benotet.
 \section{Management Abläufe}
 \subsection{Zeitbudget}
 Der Projektstart ist am Montag, dem 20. Februar 2017. \\
@@ -56,7 +56,7 @@ Die Dauer eines Iterationszyklus beträgt jeweils eine Woche.
 \centering
     \begin{tabular}{@{} p{3cm} l l l@{}}\toprule    
     {Iteration} & {Inhalt} & {Start} & {Ende}\\ \midrule
-    Initialisierung 1 & Kickoff Meeting, Projektplanung, Infrastruktur & 20.02.2017 & 26.02.2017\\
+    Initialisierung 1 & Kickoff Meeting, Projektplanung, Infrastruktur & 20.02.2017 & 26.02.2017\\ \addlinespace
     Analyse 1 & IoT Analyse Allgemein & 27.02.2017 & 05.03.2017\\ \addlinespace
     Analyse 2 & IoT Analyse Allgemein & 06.03.2017 & 12.03.2017\\ \addlinespace
     Analyse 3 & Sensoren Analyse technisch \& Evaluation & 13.03.2017 & 19.03.2017\\ \addlinespace
@@ -65,21 +65,21 @@ Die Dauer eines Iterationszyklus beträgt jeweils eine Woche.
     Design 2 & Prototyp programmieren & 03.04.2017  & 09.04.2017\\ \addlinespace
     Design 3 & Prototyp programmieren & 10.04.2017  & 16.04.2017\\ \addlinespace
     Design 4 & Requirements- und Architektur Review & 17.04.2017  & 23.04.2017\\ \addlinespace
-    Realisierung 1 & - & 24.04.2017  & 30.04.2017\\ \addlinespace
-    Realisierung 2 & - & 01.05.2017  & 07.05.2017\\ \addlinespace
-    Realisierung 3 & - & 08.05.2017  & 14.05.2017\\ \addlinespace
-    Realisierung 4 & - & 15.05.2017  & 21.05.2017\\ \addlinespace
-    Realisierung 5 & - & 22.05.2017  & 28.05.2017\\ \addlinespace
-    Realisierung 6 & - & 29.05.2017  & 04.06.2017\\ \addlinespace
-    Abschluss 1 & - &  05.06.2017 & 11.06.2017\\ \addlinespace
-    Abschluss 2 & - &  12.06.2017 & 16.06.2017\\ \addlinespace
+    Realisierung 1 & Implementation & 24.04.2017  & 30.04.2017\\ \addlinespace
+    Realisierung 2 & Implementation & 01.05.2017  & 07.05.2017\\ \addlinespace
+    Realisierung 3 & Implementation & 08.05.2017  & 14.05.2017\\ \addlinespace
+    Realisierung 4 & Implementation & 15.05.2017  & 21.05.2017\\ \addlinespace
+    Realisierung 5 & Implementation & 22.05.2017  & 28.05.2017\\ \addlinespace
+    Realisierung 6 & Refactoring / Bugfixing & 29.05.2017  & 04.06.2017\\ \addlinespace
+    Abschluss 1 & Dokumentation &  05.06.2017 & 11.06.2017\\ \addlinespace
+    Abschluss 2 & Dokumentation &  12.06.2017 & 16.06.2017\\ \addlinespace
     \bottomrule
     \end{tabular}
 \caption{\textbf{Projekt Iterationen}}
 \end{table}
 
 \begin{landscape}
-\subsection{Arbeitspakete (Tickets)}
+\subsection{Arbeitspakete}
 \begin{longtable}{ p{5.5cm} p{8cm} l l p{1cm} p{1cm} }
 
 \hline 
@@ -112,9 +112,23 @@ Auswahl Frameworks & Frameworks für Front- \& Backend sowie Datenbank analysier
 Prototyp & Erstellung eines Prototypen über alle Softwareschichten & Design 2-4 & Alle & 90 & 128\\ \addlinespace
 
 \textbf{Realisierung}&&&&\\ \addlinespace
-- & - & - & - & - & -\\ \addlinespace
+Anpassungen Architektur  & Anpassungen Architektur gem. Reviews & Realisierung 1 & Alle & 30 & 22\\ \addlinespace
+Erstellung Views  & Seitenaufbau mit verschiedenen Views aufgebaut & Realisierung 1 & Alle & 10 & 14\\ \addlinespace
+Gruppenverwaltung implementieren & Navigationsbaum, Gruppen CRUD etc. & Realisierung 2-4 & Alle & 53 & 58\\ \addlinespace
+Deviceverwaltung implementieren & Anzeige, Kommunikation & Realisierung 2-4 & Alle & 47 & 37\\ \addlinespace
+Discovery implementieren & Implementieren Device Discovery & Realisierung 3, 5 & Alle & 14 & 16\\ \addlinespace
+Konfigurationsverwaltung implementieren & Implementieren Konfigurationsverwaltung & Realisierung 4-5 & Alle & 27 & 26\\ \addlinespace
+Login + User Management implementieren & Login + User Management implementieren implementieren & Realisierung 5 & Alle & 10 & 13\\ \addlinespace
+Dashboard implementieren & Login + User Management implementieren implementieren & Realisierung 5-6 & Alle & 18 & 19\\ \addlinespace
+Devicemap implementieren & Implementierung Google Map & Realisierung 5 & Alle & 4 & 6\\ \addlinespace
+Testing & Integrationstests & Realisierung 6, Abschluss 1 & Alle & 16 & 15\\ \addlinespace
+Refactoring & Struktur- und Codeanpassungen & Realisierung 6, Abschluss 1 & Alle & 32 & 36\\ \addlinespace
+Bugfixing & Beheben von Softwarefehlern & Realisierung 6 & Alle & 8 & 18\\ \addlinespace
+Testclient aufsetzen & LwM2M Testclient aufbauen & Realisierung 6 & Alle & 4 & 5\\ \addlinespace
+
 \textbf{Abschluss}&&&&\\ \addlinespace
-- & - & - & - & - & -\\ \addlinespace
+Schlussbericht erstellen & Schlussbericht erstellen und abgeben & Abschluss 1-2 & Alle & 100 & 138\\ \addlinespace
+Anleitungen erstellen & Benutzer- und Installationsanleitung erstellen & Abschluss 2 & Alle & 12 & 9\\ \addlinespace
 
 
 \addlinespace
