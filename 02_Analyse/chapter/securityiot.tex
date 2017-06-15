@@ -70,7 +70,7 @@ Im Gegensatz zu herkömmlichen Geräten, bei denen die Identität beispielsweise
 \subsubsection{Verschlüsselung}
 Weder das HTTP-, noch das CoAP-Protokoll haben eine eigene Verschlüsselung des Payloads vorgesehen. Seit langer Zeit wird für HTTP SSL, respektive TLS verwendet, um die Kommunikation zwischen zwei Devices zu verschlüsseln. TLS verschlüsselt die gesamten Pakete in der Applikationsschicht, Protokolle unterhalb der Applikationsschicht sind weiterhin im Klartext verfügbar. 
 
-IoT Devices arbeiten häufig mit CoAP anstatt HTTP. Wie in Kapitel (insert Reference here) beschrieben, arbeitet CoAP im Gegensatz zu HTTP mit UDP anstatt TCP. TLS selbst benötigt jedoch TCP als Transportprotokoll, weshalb sich dieses Verfahren also nicht für CoAP eignet.
+IoT Devices arbeiten häufig mit CoAP anstatt HTTP. Wie in Kapitel \ref{sec:iotkomm} beschrieben, arbeitet CoAP im Gegensatz zu HTTP mit UDP anstatt TCP. TLS selbst benötigt jedoch TCP als Transportprotokoll, weshalb sich dieses Verfahren also nicht für CoAP eignet.
 
 Aus diesen Gründen musste ein neues Verschlüsselungsprotokoll DTLS (Datagram Transport Layer Security) entwickelt werden, welches ''TLS'' über UDP ermöglicht. Die Unterschiede von TLS zu DTLS sind gering. Einfach betrachtet erledigen die Protokolle die gleichen Aufgaben.
 
