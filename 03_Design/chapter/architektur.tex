@@ -44,7 +44,7 @@ Im Presentation-Layer gibt es Web-Controller und Rest-Controller. Die Web-Contro
 
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
     {Packagename} & {Beschreibung}\\ \midrule
     webcontrollers & Alle HTML-Inhalte werden durch die Web-Controller ausgeliefert. Dazu werden die Daten aus dem Service-Layer geholt.\\       
     restcontrollers & Die Rest-Controller führen Methoden auf dem Service-Layer aus und geben die Resultate als JSON zurück an den Client. \\
@@ -84,7 +84,7 @@ Der Service-Layer beinhaltet die Klassen, welche für die Verarbeitung der Daten
 
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
     {Packagename} & {Beschreibung}\\ \midrule
     applicationservice & Dieses Package beinhaltet die Klassen, welche die Devices oder Groups erstellen, anpassen usw. \\       
     lwm2mservices & Dieses Package beinhaltet alle Kommunikationsrelevanten Klassen, um mit den Devices Daten auszutauschen. \\
@@ -95,7 +95,7 @@ Der Service-Layer beinhaltet die Klassen, welche für die Verarbeitung der Daten
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
      DeviceService & Holt und speichert die Devices von dem Data-Layer und verarbeitet die Änderungen  \\       
      GroupService & Zugriff auf den Data-Layer. Liest und schreibt alle Groups.  \\       
@@ -119,7 +119,7 @@ Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benö
 \subsubsection{Packagestruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
     {Packagename} & {Beschreibung}\\ \midrule
     repositories & Zugriffsmethoden auf die Datenbank. Eigene sowie durch die Library ausgelieferte Methoden. \\       
     \bottomrule
@@ -129,7 +129,7 @@ Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benö
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
-    \begin{tabular}{@{}l p{14.1cm} @{}}\toprule    
+    \begin{tabular}{@{}l p{11.9cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
     Device & Device ist eine Datenklasse, welche alle Daten von einem Device beinhaltet.\\
     DeviceGroup & In der Datenklasse DeviceGroup, werden alle Gruppen verwaltet, damit das Composite-Pattern umgesetzt werden kann.\\
@@ -144,11 +144,11 @@ Da der Data-Layer die unterste Schicht ist, gibt es nur eine Verbindung zur Date
 
 \newpage
 
-\section{Komponentendiagramm}
+\section{Deployment}
 Die Applikation hat eine typische 3-Tier Architektur. Es wird ein Serverseitiges Templating verwendet. Alle Daten werden daher auf dem Server verarbeitet und als HTML an den Client gesendet. Die Daten werden in einer Datenbank persistiert.
 \begin{figure}[H]
 \center
-\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Komponentendiagramm}
+\includegraphics[scale=0.6]{../03_Design/images/architekturuebersicht}\caption{Deployment}
 \end{figure}
 
 \section{User Interface Entwurf}

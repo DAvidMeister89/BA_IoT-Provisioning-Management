@@ -19,6 +19,7 @@ Bisher konnten Geräte wie Laptops, PCs und Smartphones beinahe einheitlich mit 
 In einem IoT-System muss man von einer grossen Anzahl an Geräten mit Sensoren ausgehen. Manchmal verfügen diese Geräte über eine extrem niedrige Bandbreite, wenig Speicher und Rechenleistung \cite{CiscoIoTArchitecture}.
 
 Die Kommunikation erfolgt oft nicht vertikal der Architektur, sondern auch horizontal auf derselben Ebene. Sensordevices können beispielsweise miteinander kommunizieren oder Cloud Services Daten der Sensoren untereinander austauschen.
+\newpage
 \subsection{Wireless Sensor Netzwerke}
 Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich verstreut sind, bietet sich ein Wireless Sensor Network (WSN) an. In einem WSN werden die Sensoren nicht direkt mit dem Internet verbunden. Die Daten werden drahtlos von Teilnehmer zu Teilnehmer versendet. Muss ein Datenpaket in ein entferntes Netzwerk wie das Internet, so wird ein Gateway oder Edge Node benötigt.
 \begin{figure}[H]
@@ -27,38 +28,39 @@ Bei einer Vielzahl von verbundenen Sensoren, welche über einen grossen Bereich 
 \caption{IoT-WSN\cite{IoTWSN}}
 \end{figure}
 WSN Nodes sind typischerweise günstig im Einkauf. Sie können mit sehr wenig Leistung betrieben werden, dies ermöglicht den Batteriebetrieb. Durch diese Eigenschaften können WSN Nodes einfach, schnell und in sehr grosser Anzahl bereitgestellt werden. 
-
+\newpage
 \section{Kommunikationsmodelle}
 Internet of Things verbindet Objekte aus der realen Welt miteinander. Um Objekte aus der Realität in die virtuelle Welt zu transformieren, werden Sensoren verwendet. Es gilt nun, diese Sensoren mit dem Internet zu verbinden.
 
 Um unterschiedliche Bedürfnisse abzudecken, sind verschiedene Arten der Kommunikation entstanden. Die mit Sensoren ausgestatteten Geräte können sich in ihrer Weise, mit dem Internet zu kommunizieren stark unterscheiden.
-
 \subsection{Device-to-Device}
 Beim Device-to-Device Kommunikationsmodell kommunizieren mehrere Teilnehmer direkt miteinander (Peer-to-Peer). In diesem Szenario kommunizieren unterschiedliche Glühbirnen drahtlos mit einem Lichtschalter. Denkbar wären sämtliche Anwendungsgebiete aus dem \glqq Smart Home\grqq -Bereich. Kommunikation mit dem Internet ist nicht zwingend notwendig. Eine grosse Herausforderung besteht darin, dass mehrere Teilnehmer unterschiedlicher Hersteller miteinander interagieren können. Dazu müssen die Teilnehmer denselben Protokoll-Stack implementieren. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{../02_Analyse/images/device-to-device.png}
+\includegraphics[scale=0.7]{../02_Analyse/images/device-to-device.png}
 \caption{Device-to-Device Kommunikation}
 \end{figure}
+\newpage
+
 \subsection{Device-to-Cloud}
 Die Gerätehersteller bieten für ihre End-User Cloud-Dienste im Internet an. Die Sensorgeräte kommunizieren direkt End-to-End über TCP/IP mit dem jeweiligen Cloud-Dienst. Die Benutzer können über eine Mobile App oder eine Webseite auf die jeweiligen Sensordaten zugreifen. Häufig wird aufgrund proprietärer Kommunikationsprotokolle ein Vendor-lock-in betrieben. Dies erschwert die Interoperabilität von Sensoren unterschiedlicher Hersteller \cite{RoseEldridgeChapin15}.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{../02_Analyse/images/device-to-cloud.png}
+\includegraphics[scale=0.7]{../02_Analyse/images/device-to-cloud.png}
 \caption{Device-to-Cloud Kommunikation}
 \end{figure}
 \subsection{Device-to-Gateway}
 Anstatt einer Ende-zu-Ende Kommunikation zwischen Sensoren und Servern wird in diesem Modell ein Gateway zwischen diesen Komponenten eingesetzt. Sensoren kommunizieren somit nicht direkt mit einem Server. Auf diese Art und Weise können eine grosse Anzahl Sensoren mit Internetdiensten verbunden werden ohne dass die Sensoren selbst über einen direkten Internetzugriff verfügen. Der Gateway muss somit über eine Schnittstelle verfügen, damit Dienste im Internet indirekt mit den Sensoren kommunizieren können. Aus Sicht des Diensts ist es irrelevant, wie der Gateway mit den Sensoren kommuniziert.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{../02_Analyse/images/device-to-gateway.png}
+\includegraphics[scale=0.7]{../02_Analyse/images/device-to-gateway.png}
 \caption{Device-to-Gateway Kommunikation}
 \end{figure}
 \subsection{Back-End Data-Sharing}
 Sobald sich die Sensordaten auf einem Server befinden, können diese auf bekannte Weise anderen zur Verfügung gestellt werden. Beispielsweise könnte man den Zustand eines Sensors als JSON Objekt über eine REST-Schnittstelle abfragen. Ein weiterer Serviceprovider muss somit nicht mehr direkt mit den Sensoren kommunizieren. Da Sensordevices oft über limitierte Möglichkeiten verfügen, grössere Datenmengen bereitzustellen, verringert man mit dieser Art der Kommunikation die Anzahl Abfragen auf den Sensordevices. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{../02_Analyse/images/backend-data-sharing.png}
+\includegraphics[scale=0.7]{../02_Analyse/images/backend-data-sharing.png}
 \caption{Backend-Data-Sharing Kommunikation}
 \end{figure}
 
@@ -74,11 +76,12 @@ Bereits heute zeichnen sich die populärsten IoT-Kommunikationsprotokolle ab. Um
 Die typischen bekannten Fragen nach der Verbreitung/Unterstützung und Skalierbarkeit stellen sich auch hier. Ebenfalls muss auf die mutmassliche Datenmenge geachtet werden. So dürfte eine vergleichsweise hohe Datenmenge für Geräte, welche über einen direkten, verkabelten Internetzugang verfügen, kein Problem darstellen, während Geräte in einem Mesh-betriebenen WSN wohl über deutlich weniger Bandbreite verfügen dürften.
 
 Weitere Anforderungen wären Realtime Kommunikation, Stromverbrauch, Sicherheit und Network Address Translation (NAT) \cite{Obermaier15}.
+\newpage
 \subsection{Request/Response}
 Request/Response ist das wohl bekannteste Pattern. Ein Client fordert mittels eines Requests eine Response von einem Service an. Der Service hört auf einkommende Requests, verarbeitet diese und antwortet (Response) den aufrufenden Clients. Request/Response Kommunikation skaliert schlecht, deshalb sollte beim Versenden einer Meldung an viele Teilnehmer auf ein anderes Pattern zurückgegriffen werden. 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{../02_Analyse/images/request-response.png}
+\includegraphics[scale=0.7]{../02_Analyse/images/request-response.png}
 \caption{Request/Response Kommunikation \cite{ReqRes}}
 \end{figure}
 \subsubsection{HTTP}
@@ -87,6 +90,7 @@ In den 1990er Jahren wurde HTTP verwendet um statische HTML-Dokumente übers Int
 Aufgrund seiner hohen Verbreitung, Standardisierung und Unterstützung ist HTTP auch im IoT-Umfeld beliebt. Für fast jede Programmiersprache und Laufzeitumgebung existieren Libraries, was das Entwickeln sehr angenehm macht. HTTP eignet sich jedoch nicht für alle Anwendungsfälle im IoT-Bereich. Für jeden Request wird der gesamte HTTP (und darunterliegende) Header benötigt. Zusätzlich ist das Protokoll textbasiert, was mit dem zusätzlichen, grossen Overhead eine erhebliche Datenmenge bedeuten könnte. Für Endgeräte an Mobilen Netzwerken könnte dies ungeeignet sein \cite{Obermaier15}.
 
 In der Version 1, respektive 1.1 gibt es mit HTTP keine Möglichkeit, echte Push-Meldungen zu versenden. Bei Push-Meldungen sendet der Server eine Response (besser: Nachricht) an den Client ohne vorgängigen Request. In der Version 2 von HTTP sind echte Push-Meldungen vorgesehen, jedoch gibt es wenige Implementation und Erfahrungswerte damit.
+\newpage
 \subsubsection{CoAP}
 \label{sec:iotkomm}
 Das Constrained Application Protocol (CoAP) implementiert wie HTTP das Request/Response Pattern \cite{Obermaier15}. Mit CoAP existiert ein massgeschneidertes IoT-Protokoll, welches nach dem REST Paradigma konzipiert wurde. HTTP ist schwergewichtig, hat einen grossen Overhead und generiert damit hohe Datenmengen. Ausserdem ist vor jeder Session den für TCP benötigten 3-Way Handshake nötig. 
@@ -112,6 +116,7 @@ CoAP kann Peer-to-Peer zwischen Devices eingesetzt werden, aber auch zwischen De
 \end{figure}
   
 Durch die massgeschneiderten Features für IoT wird CoAP hauptsächlich in WSNs eingesetzt \cite{Obermaier15}. 
+\newpage
 
 \subsection{Publish/Subscribe}
 Beim Publish/Subscribe Pattern gibt es einen Sender (Publisher) und einen Empfänger (Subscriber). Der Empfänger hört auf gewisse Themen (Topics). Der Sender kategorisiert seine Nachrichten in Themen und sendet diese zu den jeweiligen Empfängern. Sender und der Empfänger wissen nichts voneinander,  sie senden oder hören nur im Netzwerk, ob eine für sie interessante Nachricht angekommen ist. Durch die einfache Verknüpfung von Publisher und Subscriber, eignet sich dieses Verfahren sehr gut im IoT-Bereich. Die Sensoren sind die Publisher, sie liefern zum Beispiel Temperaturdaten in die richtige Kategorie. Alle Server/Clouddienste, welche sich für Temperaturdaten interessieren, können auf diese Kategorie hören. Durch die einfache Handhabung skaliert dieses Pattern sehr gut.
@@ -120,7 +125,7 @@ In der folgenden Grafik sieht man das Publish and Subscribe Pattern. Der Publish
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{../02_Analyse/images/publishsubscribe.png}
+\includegraphics[scale=0.55]{../02_Analyse/images/publishsubscribe.png}
 \caption{Publish and Subscribe Pattern\cite{PublishSubscribePattern}}
 \end{figure}
 \subsubsection{MQTT}
@@ -181,6 +186,7 @@ Um ein ''factory bootstrap'' zu vermeiden, hat LwM2M einen Bootstrap-Server. Die
 \includegraphics[scale=0.5]{../02_Analyse/images/lwm2m/server_client_model.png}
 \caption{Client-Server-Model}
 \end{figure}
+\newpage
 \subsection{Object Model}
 Eine klare Stärke des LwM2M-Protokolls sind die Object Models. Durch die Object Models werden alle Informationen eines Devices in einem strukturierten Modell abgelegt, damit ein geregelter Zugriff auf alle Daten entsteht. Es wird zwischen Objekt, Instanz und Ressource unterschieden. Eine Ressource ist zum Beispiel der Temperaturwert eines Temperatursensors. Eine zusätzliche Ressource könnte die dazugehörige Temperatureinheit sein. Mehrere solche Ressourcen werden zu einem Object Model zusammengefasst. Ein Device kann aber auch mehrere Temperatursensoren besitzen und hat so mehrere Instanzen des gleichen Objects.
 
@@ -289,7 +295,7 @@ Seit dem 26. Dezember 2016 gibt einen Internet-Draft mit dem Namen ''DHCPv6 Opti
 
 \subsubsection{Registration - Allgemein}
 Wenn dem Client ein gültiger und erreichbarer LwM2M-Server hinterlegt wurde, beginnt die Phase der Registrierung. Bei der Registrierung wird dem Server bekanntgeben, welche Funktionen und Informationen der Client besitzt. Dies beinhaltet die Object Model URLs, Registrierungszeitpunkt, IP-Adresse, Port und noch weitere Angaben, die der Server von jedem Client benötigt. All diese Angaben werden vom Client immer wieder aktualisiert und an den Server gesendet. Dies geschieht meistens mehrmals pro Minute.
-
+\newpage
 \subsubsection{Registration - Ablauf}
 \begin{figure}[H]
 \includegraphics[scale=0.4]{../02_Analyse/images/lwm2m/registration_diagram.png}

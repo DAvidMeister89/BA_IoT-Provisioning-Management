@@ -9,7 +9,7 @@ Die Applikation soll den Benutzern erlauben, IoT-Geräte zu verwalten. Die Aufga
 
 \subsection{Benutzer Charakteristik}
 \label{sec:benutzercharakteristik}
-Zielpersonen der Applikation sind Betreiber von IoT-Devices. Dies können im Enterprise Umfeld IT-Mitarbeiter in operationeller Funktion-, oder auch Softwareentwickler für IoT-Applikationen sein. Heimanwender können bei entsprechenden Kenntnissen ebenfalls zur Zielgruppe gehören. Es werden solide Grundkenntnisse in TCP/IP Netzwerken sowie Verständnis der verwendeten IoT-Architekturen und Devices vorausgesetzt. Es werden ausserdem Grundkenntnisse des LwM2M Protokolls empfohlen. 
+Zielpersonen der Applikation sind Betreiber von IoT-Devices. Dies können im Enterprise Umfeld IT-Mitarbeiter in operationeller Funktion-, oder auch Softwareentwickler für IoT-Applikationen sein. Heimanwender können bei entsprechenden Kenntnissen ebenfalls zur Zielgruppe gehören. Es werden solide Grundkenntnisse in TCP/IP Netzwerken sowie Verständnis der verwendeten IoT-Architekturen und Devices vorausgesetzt. Es werden ausserdem Grundkenntnisse des LwM2M-Protokolls empfohlen. 
 \section{Use Cases}
 \label{sec:usecases}
 \subsection{Use Cases Diagramm}
@@ -19,7 +19,7 @@ Zielpersonen der Applikation sind Betreiber von IoT-Devices. Dies können im Ent
 \end{figure}
 
 \subsection{Aktoren}
-Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Dieser bewirtschaftet die Applikation und verwaltet alle Devices und Benutzer. Als Sekundärer Aktor werden die einzelnen Devices gezählt.
+Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Dieser bewirtschaftet die Applikation und verwaltet alle Devices und Benutzer. Als sekundärer Aktor werden die einzelnen Devices gezählt.
 \newpage
 \subsection{Beschreibungen (Casual)}
 \subsubsection{Login User}
@@ -76,6 +76,7 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
  \hline 
  \textbf{Extensions} & -\\ \hline 
  \end{longtable}
+ \newpage
 
 \subsubsection{Group CRUD}
 \mbox{}
@@ -132,11 +133,11 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
   \\ \hline 
  \textbf{Main Success Scenario} & 
   \textbf{Create:}\newline
-  1. UC 06: Discover Device
+  1. UC 06: Discover Device \newline
  \textbf{Read:}\newline
   1. Benutzer navigiert zur Geräteübersicht \newline
   2. Device details werden angezeigt \newline
-  3. Benutzer wählt Objekt und klickt ''Read''.
+  3. Benutzer wählt Objekt und klickt ''Read''.\newline
  \textbf{Update:}\newline
   1. Benutzer navigiert zur Geräteübersicht \newline
   2. Benutzer passt Geräteinformationen an. \newline
@@ -149,7 +150,7 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
 	-
   \\ \hline 
 \end{longtable}
-
+\newpage
 \subsubsection{Manage Components Hierarchy}
 \mbox{}
 \begin{longtable}{| p{4cm} | p{11.7cm} |}
@@ -185,7 +186,7 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
  \hline
  \textbf{ID} & 06\\ \hline 
  \textbf{Name} & Discover Device\\ \hline 
- \textbf{Beschreibung} & Der Benutzer möchte ein- oder meherere Devices finden. Endpunkt des Devices ist dem Benutzer unbekannt. Gefundene Devices sollen dem Benutzer aufgelistet werden. \\ \hline 
+ \textbf{Beschreibung} & Der Benutzer möchte ein- oder mehrere Devices finden. Endpunkt des Devices ist dem Benutzer unbekannt. Gefundene Devices sollen dem Benutzer aufgelistet werden. \\ \hline 
  \textbf{Preconditions} &  
   \tabitem Applikation gestartet \newline
   \tabitem Benutzer eingeloggt
@@ -222,7 +223,7 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
   3. Benutzer speichert Konfiguration
  \\ \hline 
  \textbf{Extensions} & 
-  4. Fehlermeldung wird angezeigt
+  4. Fehlermeldung wird angezeigt 	 \\ \hline 
 
  \end{longtable}
 
@@ -236,12 +237,11 @@ Der Benutzer der Applikation ist in diesem System der einzige primäre Aktor. Di
  \textbf{Name} & Perform Operation\\ \hline 
  \textbf{Beschreibung} & Operationen (Read, Write, Execute) auf Device(s) ausführen \\ \hline 
  \textbf{Preconditions} & 
-  \tabitem Applikation gestartet\newline
-  \tabitem Benutzer ist eingeloggt \\ \hline
-  \tabitem Device(s) erfasst 
- \textbf{Postconditions} & \newline
-	-
- \\ \hline
+  \tabitem Applikation gestartet \newline
+  \tabitem Benutzer ist eingeloggt \newline
+  \tabitem Device(s) erfasst \newline
+  \\ \hline
+ \textbf{Postconditions} & 	-  \\ \hline
  \textbf{Main Success Scenario} &
   1. Benutzer selektiert betreffendes Device oder Gruppe \newline
   2. Operation (Read, Write, Execute) wird gewählt \newline
@@ -286,16 +286,16 @@ In diesem Kapitel werden die nicht funktionalen Anforderungen des Projekts gemä
 Bei Interoperabilitäten muss auf drei unterschiedliche Bereiche geachtet werden. Zum einen müssen IoT-Devices mit dem Server kommunizieren können, zum anderen die Benutzer selbst. Zusätzlich muss die Applikation auf unterschiedlichen Betriebssystemen installiert werden können.
 
 \begin{itemize}
-\item IoT-Devices mit installiertem LwM2M Client (Version 1.0) müssen unterstützt werden
-\item Clients mit Webbrowsern (Google Chrome >Version 50, Mozilla Firefox >Version45) müssen unterstützt werden
-\item Die Applikation soll auf aktuellen Windows-Betriebssystemen (>Windows 7) und aktuellen Linux Betriebssystemen lauffähig sein. 
+\item IoT-Devices mit installiertem LwM2M-Client (Version 1.0) müssen unterstützt werden
+\item Clients mit Webbrowsern (Google Chrome >Version 50, Mozilla Firefox >Version 45) müssen unterstützt werden
+\item Die Applikation soll auf aktuellen Windows-Betriebssystemen (> Windows 7) und aktuellen Linux Betriebssystemen lauffähig sein. 
 \end{itemize}
 
 \subsection{Effizienz}
 Durch die vielseitigen Aufgaben muss auf die Parallelität geachtet werden. Es werden durchaus zeitintensive Tasks ausgeführt, welche potenziell die Applikation über längere Zeit blockieren könnten.
 
 \begin{itemize}
-\item Mindestens 5 Benutzer sollen gleichzeitig angemeldet sein können
+\item Mindestens fünf Benutzer sollen gleichzeitig angemeldet sein können
 \item Die Antwortzeiten vom Server an Clients dürfen unterschiedlich sein  
 \item Ist keine Kommunikation mit dem IoT-Device nötig, so muss der Server dem Client innerhalb einer Sekunde (exkl. Round-Trip-Time) antworten
 \item Muss ein Server vor der Antwort mit einem IoT-Device kommunizieren, so kann keine Antwortzeit garantiert werden. Spätestens nach 1 Minute muss dem Benutzer ein Fehler angezeigt werden

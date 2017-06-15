@@ -20,6 +20,8 @@ Anbei die UI-relevanten Anpassungen:
 \item Dem ''Discovery'' wurden Drop-Down Menüs für Konfigurationen und Gruppen hinzugefügt
 \end{itemize}
 
+ \newpage
+
 \subsection{Allgemein}
 In diesem Unterabschnitt werden die Konzepte erklärt, mit welchen das User Interface realisiert wurde. Das Webinterface wurde HTML, CSS und JavaScript erstellt und als unterstützende Library wurde Twitter Bootstrap verwendet.
 
@@ -50,6 +52,7 @@ Ein Loop durch eine Collection mit Hilfe von JSTP sieht folgendermassen aus:
 <c:forEach var="collection" items="${collection}">
 </c:forEach>
 \end{lstlisting}
+ \newpage
 
 \subsubsection{Seitenlayout}
 Das Seitenlayout ist grundsätzlich sehr einfach. Die Navigation erfolgt am oberen Rand der Seite. Der gesamte Seiteninhalt befindet sich im Content-Bereich. 
@@ -71,6 +74,7 @@ Sämtlichen div-Containern wird angegeben, wieviele Spalten in welcher Bildschir
 </div>
 \end{lstlisting}
 An diesem Beispiel besetzt dieser Div-Container auf mittelgrossen und grossen Desktops die Hälfte-, auf Tablets und Smartphones die gesamte Bildschirmbreite. Somit wird ein responsives Layout umgesetzt, dass die Applikation sowohl von mobilen-, als auch von Desktop Devices gut nutzbar ist.
+ \newpage
 
 \subsubsection{Navigation}
 Bootstrap liefert eine ''default-navbar''. Sämtliche Navigationslinks (Home, Device, Discovery, Configurations, User Panel) befinden sich in der Navigationsleiste. Die Navigationsleiste besetzt in jeder Bildschirmgrösse die gesamte Breite.
@@ -100,6 +104,7 @@ Damit duplizierter Code auf jeder Seite verhindert wird, wird der gesamte HTML C
 serverseitig ins HTML gerendert.
 \subsubsection{Content}
 Der gesamte Content Bereich ist auf jeder Seite unterschiedlich gestaltet. Die gesamte Breite von 12 Spalteneinheiten kann verwendet werden.
+ \newpage
 
 \subsubsection{Asynchronous JavaScript and XML AJAX}
 Damit bei der Kommunikation mit dem Server das User Interface nicht blockiert wird, werden bei sämtlichen Server-Calls AJAX verwendet. AJAX versendet Nachrichten vom Client an den Servern asynchron. Im ''success'' Attribut kann eine Callback-Funktion hinterlegt werden, welche bei erfolgreicher Antwort ausgeführt wird.
@@ -146,6 +151,8 @@ bootbox.confirm({
 \end{lstlisting} 
 
 Als ''message''-Attribut kann ein String oder auch HTML Code eingefügt werden.  Beim ''Callback''-Attribut kann eine Callback-Funktion hinterlegt werden. Diese wird ausgeführt, wenn das Pop-up Fenster geschlossen wird. Die if-Abfrage stellt sicher, dass der darinliegende Code nur ausgeführt wird, wenn ''OK'' auf geklickt wird.
+ \newpage
+
 
 \subsubsection{Google Maps API}
 An verschiedenen Stellen auf der Seite werden Devices auf Google Maps Karten angezeigt. Dies gibt dem Benutzer eine schnelle Übersicht der Lokalitäten der IoT-Devices.
@@ -169,6 +176,7 @@ In diesem Bereich werden dem Benutzer folgende vier Informationen auf den ersten
 \item Anzahl registrierter Benutzer
 \item Server Uptime in Stunden
 \end{itemize}
+ \newpage
 
 \subsubsection{Nicht erreichbare Devices}
 Sind Devices nicht mehr erreichbar, muss dies dem Benutzer mitgeteilt werden. Hat sich ein Device mehr als 30 Minuten nicht mehr beim Server gemeldet, so erscheint es in dieser Tabelle. Klickt der Benutzer auf ''Delete'' respektive ''Delete All'', so werden die JavaScript Funktionen ''deleteUnreachableDevice(id, name)'' und ''deleteAllUnreachableDevices()'' ausgeführt. Über eine AJAX-Anfrage werden die entsprechenden Serverpfade aufgerufen.
@@ -202,6 +210,7 @@ Die selektierten Werte in den Drop-Down-Listen werden dem Server beim Hinzufüge
 
 \subsubsection{Refresh/Clear}
 Mit dem Refresh Button wird die Seite neu geladen, damit frisch registrierte Devices angezeigt werden. Der Clear Button leert die Liste von Devices. Melden sich die Devices zu einem späteren Zeitpunkt nochmals, so tauchen sie in dieser Ansicht wieder auf.
+ \newpage
 
 \subsection{Configuration}
 Benutzer können auf dieser Seite eigene Konfigurationen erstellen. Sämtliche schreibbaren LwM2M-Objekte können gesetzt werden. Nach der Erstellung einer Konfiguration kann sie auf neue Devices oder eine Devicegruppe geschrieben werden.
@@ -214,16 +223,16 @@ Benutzer können auf dieser Seite eigene Konfigurationen erstellen. Sämtliche s
 
 \subsubsection{Konfigurationslisten}
 Sämtliche erstellten Konfigurationen werden hier aufgelistet. Eine Konfiguration kann einzeln gelöscht und editiert werden.
+ \newpage
 
 \subsubsection{Neue Konfiguration}
 Mit dem ''create new configuration'' Button öffnet sich ein neues Pop-up, in welchem der Benutzer eine neue Konfiguration erstellt.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.7]{../04_Realisierung/images/userinterface/config.png}
+\includegraphics[scale=0.6]{../04_Realisierung/images/userinterface/config.png}
 \caption{Configuration Neu}
 \end{figure}
-
 Sowohl Name, als auch Description können frei gewählt werden. Beim selektieren der Object ID (linkes Drop-Down Menü) wird eine Ajax Anfrage an den Server gesendet. Als Antwort erhält man informationen über die beiden anderen Felder. Sind Multi-Instanzen nicht erlaubt, so bleibt das Zahlenfeld ausgegraut, die Daten für das rechte Drop-Down werden dynamisch gerendert, sind also abhängig von der links gewählten Object-ID. Das Value Feld kann frei beschrieben werden. Serverseitig werden Überprüfungen des Typs, sowie Character Escaping durchgeführt.
 
 Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Value als Configuration Item in einer Liste und es kann mit weiteren Einstellungen forgefahren werden. Sobald der Benutzer ''Save'' drückt, wird clientseitig ein JSON-formatiertes Konfigurationsobject erstellt und an den Server gesendet.
@@ -256,6 +265,7 @@ Benutzer können auf dieser Seite einzelne Devices und Gruppen verwalten. Sie is
 
 \subsubsection{Komponentenverwaltung}
 Der Bereich der Komponentenverwaltung ist zu Beginn leer. Der Benutzer muss zuerst eine Gruppe oder ein Device selektieren, damit der entsprechende Inhalt geladen wird. Es gibt zwei verschiedene Komponentenverwaltungen, die Device- und die Gruppenverwaltung. Nachdem im Navigationsbereich link eine Gruppe/Device gewählt wurde, wird vom Server ein HTML Fragment angefordert und dargestellt.
+ \newpage
 
 \subsubsection{Navigationsbaum}
 Auf der linken Seite befindet sich der Navigationsbaum. Darin befinden sich sämtliche Gruppen und Devices hierarchisch angeordnet. 
@@ -282,6 +292,7 @@ $('#tree').tree(
 \end{lstlisting}
 
 Die Verwendung der Library ist sehr simpel. Auf einem selektierten Div-Container kann die Funktion tree() ausgeführt werden. Als Datenquelle wird eine URL angegeben. Diese API liefert die Baumstruktur im JSON Format, welche von der Gijgo-Library direkt interpretiert wird.
+ \newpage
 
 Anbei ist ein einfaches Beispiel einer Komponentenhierarchie.
 
@@ -304,6 +315,7 @@ Anbei ist ein einfaches Beispiel einer Komponentenhierarchie.
 	}
 ]
 \end{lstlisting}
+ \newpage
 
 \subsection{Devices}
 Wählt man in der Navigation ein Device an, so wird eine Anfrage für das HTML Fragment für Devices gestartet. 
