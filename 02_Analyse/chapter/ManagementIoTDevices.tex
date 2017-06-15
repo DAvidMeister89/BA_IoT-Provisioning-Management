@@ -91,26 +91,3 @@ IoT-Geräte sollte jahrelang im Einsatz sein. Doch Hersteller könnten Konkurs g
 Durch die vielen Software Updates bei der hohen Anzahl an Geräten, ist man ohne automatische Softwareverteilung überfordert. Von Hand kann diese hohe Anzahl an Geräte kaum bewältigt werden. Mit einer Softwareverteilung würde man den gewünschten Softwarestand freigeben, die Managementumgebung verteilt diese automatisch auf die jeweiligen Sensoren. Bei Problemen wird der Administrator benachrichtigt und kann eingreifen.
 
 Bei der grossen Anzahl von Updates darf das Netzwerk nicht vernachlässigen werden. Bedenkt man, dass IoT-Netzwerke für geringere Bandbreite ausgelegt sind, muss unbedient auf die Datenmenge geachtet werden. Bei vielen Geräten könnte ein solches Netzwerk überlastet werden wenn man allen Geräten gleichzeitig ein Update schickt.
-\subsection{Security Management}
-\subsubsection{Bedeutung von Security Management}
-Betrachtet man die Definition nach FCAPS, behandelt Security Management zum Beispiel um Access Logs, Security Alarm/Event Reporting, Data Privacy, und Selective Resource Access.
-
-Access Logs sind eine hilfreiche Massnahme um bei bei Angriffen zu sehen, wer auf das System zugegriffen hat. Mehr Sicherheit schafft man mit Access Logs zwar nicht, aber dafür ist man in der Forensikanalyse dankbar um diese Informationen.
-
-Bei einem Angriff hilft der Security Alarm und das Event Reporting. Um nicht alles von Hand überprüfen zu müssen gibt es Warnsysteme, die bei einem Angriff sofort eine Meldung ausgeben. Hat man, wie im IoT-Bereich, mehrere Tausend oder gar Millionen von Geräten, so ist man auf solche Systeme angewiesen.
-
-Nicht nur all die Systeme müssen den Datenschutz beachten, sondern auch die Managementumgebung. Es nützt alles nichts, wenn man den Verkehr zwischen den Geräten absichert, aber danach alle Daten unverschlüsselt im Management vorliegen. Daher muss das Security Management im Bereich Datenschutz nicht nur die Geräte, sondern auch sich selbst absichern.
-
-Die Access Rights gehören zu einem wichtigen Bestandteil des Security Managements. Bei jedem Gerät muss man genau definieren können, wer auf was Zugriff hat. Dies muss bei vielen Geräten möglichst vereinfacht werden. Man stelle sich vor, man müsste bei all seinen Sensoren jeden Einzeln konfigurieren. Dies wäre eine unmögliche Aufgabe.
-\subsubsection{Security Management im Bereich IoT}
-Sicherheit ist im IoT-Bereich in den letzten Jahren immer wichtiger geworden. Viele Hersteller wollen das Gerät so schnell wie möglich auf den Markt bringen und achten nicht auf die Sicherheit. Laut einer Studie von HP gab es bei den meisten Produkten schwerwiegende Sicherheitsbedenken.\cite{SecOverview} Doch das Security Management kann hier nur ansatzweise helfen.
-
-Viele Geräte unterstützen gar keine grosse Sicherheitsfeatures, welche man in einem Management verwalten könnte. Doch man sollte möglichst viele Faktoren in das Security Management einbauen. Wie stellt man nun sicher, dass nur die Berechtigten Personen die Daten bekommen. Wie kann man bei all den Geräten sicher sein, dass keine Daten sonst wo abfliessen und in Fremde Hände geraten. Bei all den verschiedenen Hersteller wird es sicher keinen Standard geben, der für alle Geräte angewendet werden kann.
-
-Wie schon mehrmals erwähnt, sind IoT-Geräte nicht gerade Hochleistungscomputer. Daher wird es schwerer grosse Schlüssel auszutauschen, da diese doch eine gewisse Rechenpower benötigen oder eine lange Zeit für die Berechnung benötigen. So ist ein grosser Schlüsselaustausch nicht das Optimale Verfahren um die Geräte abzusichern. Doch man möchte ja trotzdem eine sichere Übertragungsmethode haben.
-
-Die Vielfalt an Geräten bringt auch eine grosse Angriffsfläche mit sich. Man ist an mehreren Punkten angreifbar und kann nicht alles abdecken. Was macht man nun, wen ein Gerät oder sogar ein gesamtes Netzwerk von Sensoren übernommen wird. Da man meist nicht Vorort sein kann, muss daher für dieses Szenario eine Lösung vorhanden sein. 
-
-Eine Möglichkeit von Securitymanagement sind die Black- und Whitelists. Doch bei einer solch grosser Anzahl Geräten kann dies schnell unübersichtlich werden. Doch das Problem gehört nicht nur in das Management, sondern kann auch auf das Netzwerk erweitert werden. All die Geräte wollen ja auch durch die Firewall und diese Regeln müssen dynamisch mit dem Management zusammen angepasst werden. Manuell ist dies gar nicht mehr möglich.
-
-Seit längerer Zeit ist es klar das IoT-Botnetze gerne für DDoS-Angriffe genutzt werden. So können mehrere tausend kleinere Geräte eine grosse Last erzeugen und andere Webdienste attackieren. Vor diesen Botnetzen muss man sich absichern, damit nicht man nicht all seine Sensoren und Geräte gekapert werden. 
