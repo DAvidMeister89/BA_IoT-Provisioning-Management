@@ -41,6 +41,7 @@ Ab dem Zeitpunkt der Erreichbarkeit des Netzwerks unterscheiden sich manuelles u
 \item Authentisierung durch biometrische Merkmale (z.B. Fingerprint, Handvene)
 \end{itemize}
 Nicht alle Verfahren eignen sich für die Authentisierung von Devices. Ein Gerät selbst verfügt über keine biometrischen Merkmale, höchstens der Benutzer, welcher versucht das Gerät bereitzustellen. Ein Shared Secret in Form eines Passworts oder eine Chain-of-Trust mit Zertifikaten eignen sich für die Device Authentisierung besser. 
+
 \newpage
 \subsubsection{IoT-Provisioning} IoT-Devices sollten vor der produktiven Nutzung in einem definierten Prozess bereitgestellt werden. IoT-Devices befinden sich häufig nicht in einer standardisierten Büroumgebung wie zum Beispiel Notebooks und Drucker. Mögliche Standorte sind Lagerhallen, Produktionsstätten oder auch andere Orte im Freien. Oft ist es nicht möglich solche Geräte an das Stromnetz anzuschliessen, deshalb werden diese über Batterien oder einen Akku gespiesen. Die Netzwerk- und Internetverbindung wird über ein Wireless-Mesh-Netzwerk realisiert. In einem ersten Schritt muss ein Device mit einem Netzwerk verbunden werden. Es ist weitgehend bekannt, dass eine grosse Vielfalt an Devices existieren. Manche von ihnen enthalten ein einfaches User Interface, andere nicht. So unterscheidet sich das Ausrollen von IoT-Geräten von herkömmlichen PCs und Laptops indem man nicht direkt über das geräteeigene UI Einstellungen vornehmen kann. Ein Management von IoT-Devices muss also unterschiedliche Anforderungen abdecken. Es könnten sowohl Geräte im herkömmlichen Sinne über eine direkte Internetverbindungen provisioniert werden, als auch neuartige Geräte, welche an ein Low-Power \& Lossy Network (LLN) angeschlossen sind.     
 
@@ -60,7 +61,7 @@ Die Aufgaben des Konfigurationsmanagements sind immens wichtig. Bei fehlerhaften
 
 \subsection{Monitoring und Diagnose}
 \subsubsection{Monitoring allgemein}
-Das Hauptziel des Monitorings ist das proaktive Überwachen der Devices. Dadurch verringert sich nicht nur die Zeit, die benötigt wird um den Fehler zu erkennen, sondern auch die benötigte Reparaturzeit. Ein weiteres Ziel ist das Erkennen von Mustern. So können all die gesammelten Daten zusammengefügt- und die Muster analysiert werden, Dies führt zu einer besseren Früherkennung. Zukünftige Probleme können so besser erkannt- und schneller behoben werden
+Das Hauptziel des Monitorings ist das proaktive Überwachen der Devices. Dadurch verringert sich nicht nur die Zeit, die benötigt wird um den Fehler zu erkennen, sondern auch die benötigte Reparaturzeit. Ein weiteres Ziel ist das Erkennen von Mustern. So können all die gesammelten Daten zusammengefügt- und die Muster analysiert werden, Dies führt zu einer besseren Früherkennung. Zukünftige Probleme können so besser erkannt- und schneller behoben werden.
 \cite{MonZiele}
 
 \subsubsection{Monitoring im IoT-Bereich}
@@ -76,7 +77,7 @@ Ein Bestandteil des Maintenance-Managements ist das Asset-Management. Beim Asset
 
 Heutige Geräte werden mit einem Softwarestand ausgeliefert, bei denen noch Fehler vorhanden sein könnten. Daher veröffentlichen Gerätehersteller ständig neue Updates und Patches, um neue Funktionen und Sicherheitsupdates einzuspielen. Ohne ein Update-Management wäre diese Aufgabe für so viele Geräte unmöglich. Daher ist eine zentrale Verwaltung unbedingt nötig. 
 \subsubsection{Maintenance und Update im IoT-Bereich}
-Da es bei IoT-Geräten häufig um Sensoren handelt, welche auch im freien Gelände platziert werden können, ist ein Wartungsmanagement sehr wichtig. Solche Sensoren sind der Umwelt erschwerteren Bedingungen ausgesetzt als normale PCs oder Netzwerkgeräte.
+Da es bei IoT-Geräten häufig um Sensoren handelt, welche auch im freien Gelände platziert werden können, ist ein Wartungsmanagement sehr wichtig. Solche Sensoren sind der Umwelt erschwerten Bedingungen ausgesetzt als normale PCs oder Netzwerkgeräte.
 
 Ohne ein ausgereiftes Management, kann diese Menge aber nicht gewartet werden. So soll das Management eine Empfehlung geben, wann die Batterie auszutauschen ist, oder wann der Sensor nicht mehr die gewünschte Genauigkeit liefert. So weiss der Techniker genau, wann welche Sensoren/Geräte ausgetauscht werden müssen.
 
@@ -86,4 +87,4 @@ IoT-Geräte sollte jahrelang im Einsatz sein. Doch Hersteller könnten Konkurs g
 
 Durch die vielen Software Updates bei der hohen Anzahl an Geräten, ist man ohne automatische Softwareverteilung überfordert. Von Hand kann diese hohe Anzahl an Geräte kaum bewältigt werden. Mit einer Softwareverteilung würde man den gewünschten Softwarestand freigeben, die Managementumgebung verteilt diese automatisch auf die jeweiligen Sensoren. Bei Problemen wird der Administrator benachrichtigt und kann eingreifen.
 
-Bei der grossen Anzahl von Updates darf das Netzwerk nicht vernachlässigen werden. Bedenkt man, dass IoT-Netzwerke für geringere Bandbreite ausgelegt sind, muss unbedient auf die Datenmenge geachtet werden. Bei vielen Geräten könnte ein solches Netzwerk überlastet werden wenn man allen Geräten gleichzeitig ein Update schickt.
+Bei der grossen Anzahl von Updates darf das Netzwerk nicht vernachlässigen werden. Bedenkt man, dass IoT-Netzwerke für geringere Bandbreite ausgelegt sind, muss unbedingt auf die Datenmenge geachtet werden. Bei vielen Geräten könnte ein solches Netzwerk überlastet werden wenn man allen Geräten gleichzeitig ein Update schickt.
