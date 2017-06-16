@@ -26,7 +26,7 @@ Danach gibt man alle wichtig Informationen zum Zertifikat an. Diese Informatione
 \includegraphics[scale=0.65]{../05_Schlussbericht/images/keystore2.png}
 \end{figure}
 
-Zum Schluss wird nun noch ein Password verlangt, welches für dieses Zertifikat gilt. Dies muss das gleiche Password wie für den Store sein, da Tomcat sonst nicht auf das Zertifikat zugreifen kann.
+Zum Schluss wird nun noch ein Passwort verlangt, welches für dieses Zertifikat gilt. Dies muss das gleiche Passwort wie für den Store sein, da Tomcat sonst nicht auf das Zertifikat zugreifen kann.
 
 \subsubsection{CSR erstellen}
 Als nächsten Schritt wird der Certificate Signing Request erstellt. Dazu gibt man folgenden Befehl ein:
@@ -78,7 +78,7 @@ In dieser Datei kann die LwM2M-Server Adresse und die MongoDB-URL anpassen. Weit
 \end{lstlisting}
 
 \subsubsection{Builden}
-Um die Software zu builden, gibt im Ordner ''smartmanager'' ''mvn clean install'' ein. Diese generiert ein Ordner target und darin befindet sich eine .war-Datei. Diese wird später in den Tomcat-Ordner kopiert. Am besten bennent man diese .war-Datei in ''smartmanager.war'' um, da dieser Name die URL direkt beeinflusst.
+Um die Software zu builden, gibt im Ordner ''smartmanager'' ''mvn clean install'' ein. Diese generiert ein Ordner target und darin befindet sich eine .war-Datei. Diese wird später in den Tomcat-Ordner kopiert. Am besten benennt man diese .war-Datei in ''smartmanager.war'' um, da dieser Name die URL direkt beeinflusst.
 
 \subsection{Tomcat}
 \subsubsection{Konfigurieren}
