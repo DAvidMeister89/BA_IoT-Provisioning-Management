@@ -3,9 +3,9 @@
 In diesem Kapitel ist das Testing der Applikation beschrieben. Auf Unit-Tests wurde verzichtet, da ohne aufwendiges Refactoring der bestehende Code sehr schwierig zu testen ist. Stattdessen werden Integrationstests verwendet, um das Zusammenspiel der Klassen über die verschiedenen Softwareschichten zu testen.
 
 \subsubsection{Verwendete Libraries}
-Für die Tests wurde neben Junit auch die Libraries von dem Spring Framework verwendet. Das Spring Framework erstellt die Mocks der Webumgebung und sorgt dafür, dass alle Einstellungen übernommen werden.
+Für die Tests wurde neben Junit auch die Libraries von dem Spring Framework verwendet. Das Spring Framework erstellt die Mocks der Web-Umgebung und sorgt dafür, dass alle Einstellungen übernommen werden.
 
-Damit die Testumgebung auf alle Beans der Produktiven-Umgebung zugreifen kann, werden bei jeder Klasse folgende Annotations hinzugefügt:
+Damit die Testumgebung auf alle Beans der Produktiven-Umgebung zugreifen kann, werden bei jeder Test-Klasse folgende Annotations hinzugefügt:
 \begin{lstlisting}[language=java]
 @WebAppConfiguration
 @ActiveProfiles("dev")
@@ -23,7 +23,7 @@ Hier sieht man ein Beispiel, wie die Testdatenbank angebunden wird und wie man d
 \end{lstlisting}
 
 \subsubsection{Beispieltest}
-Bei jedem Test wird die MockMvc-Klasse verwendet. Diese schickt Anfragen an den Webserver und wartet auf den Response. Mit ''.andExpect'' kann dieser Response nun geprüft werden. In diesem Beispiel wird das Response Json auf den Inhalt von Feldern geprüft.
+Bei jedem Test wird die MockMvc-Klasse verwendet. Diese schickt Anfragen an den Webserver und wartet auf den Response. Mit ''.andExpect'' kann dieser Response nun geprüft werden. In diesem Beispiel wird die JSON-Response auf den Inhalt von Feldern geprüft.
 \begin{lstlisting}[language=java]
 @Test
 public void listAllGroups() throws Exception {
@@ -34,7 +34,7 @@ public void listAllGroups() throws Exception {
 }
 \end{lstlisting}
 
-Viele Methoden konnten nicht nur durch die ''.andExpect'' Variante getestet werden. Diese wurden mit den von Junit angebotenen Methoden getestet.
+Viele Methoden konnten nicht nur durch die ''.andExpect''-Variante getestet werden. Diese wurden mit den von Junit angebotenen Methoden getestet.
 \subsection{Testabdeckung}
 \begin{figure}[H]
 \centering
