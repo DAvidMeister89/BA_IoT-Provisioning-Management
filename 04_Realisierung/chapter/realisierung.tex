@@ -39,7 +39,7 @@ Mittels JSTL werden in dieser Applikation folgende Aufgaben erfüllt:
 \begin{itemize}
 \item HTML Fragmente in bestehende Container laden
 \item if/else Abfragen für Darstellungen
-\item Loop durch Collections im Model für die Darstellung von mehreren Objekten
+\item Loop durch Collections im Modell für die Darstellung von mehreren Objekten
 \end{itemize}
 
 In JSP Seiten wird JSTL mittels folgender Code-Zeile verwendet:
@@ -124,7 +124,7 @@ $.ajax({
 });
 \end{lstlisting}
 
-Falls der Server mit einem Fehler antwortet, wird die Callback-Funktion im ''error''-Attribut ausgeführt. Der Benutzer wird dabei auf die Haupt-Seite umgeleitet und erhält eine Error-Meldung angezeigt.
+Falls der Server mit einem Fehler antwortet, wird die Callback-Funktion im ''error''-Attribut ausgeführt. Der Benutzer wird dabei auf die Hauptseite umgeleitet und erhält eine Error-Meldung angezeigt.
 
 \subsubsection{Bootbox}
 An verschiedenen Stellen auf der Seite werden Pop-ups benötigt. In diesem Projekt wird die JavaScript Library ''Bootbox'' von Bootboxjs.com verwendet.
@@ -171,7 +171,7 @@ Die Home-Seite dient als Einstiegspunkt und Übersichtsseite. Dem Benutzer solle
 \subsubsection{Überblick}
 In diesem Bereich werden dem Benutzer folgende vier Informationen auf den ersten Blick angezeigt:
 \begin{itemize}
-\item Gesamtanzahl erfasster Devices im System
+\item Gesamtzahl erfasster Devices im System
 \item Anzahl Devices im Discovery (noch nicht verwaltet)
 \item Anzahl registrierter Benutzer
 \item Server Uptime in Stunden
@@ -235,7 +235,7 @@ Mit dem ''create new configuration'' Button öffnet sich ein neues Pop-up, in we
 \end{figure}
 Sowohl Name, als auch Description können frei gewählt werden. Beim selektieren der Object ID (linkes Drop-Down Menü) wird eine Ajax Anfrage an den Server gesendet. Als Antwort erhält man informationen über die beiden anderen Felder. Sind Multi-Instanzen nicht erlaubt, so bleibt das Zahlenfeld ausgegraut, die Daten für das rechte Drop-Down werden dynamisch gerendert, sind also abhängig von der links gewählten Object-ID. Das Value Feld kann frei beschrieben werden. Serverseitig werden Überprüfungen des Typs, sowie Character Escaping durchgeführt.
 
-Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Value als Configuration Item in einer Liste und es kann mit weiteren Einstellungen forgefahren werden. Sobald der Benutzer ''Save'' drückt, wird clientseitig ein JSON-formatiertes Konfigurationsobject erstellt und an den Server gesendet.
+Nachdem der Benutzer den Plus-Button geklickt hat, erscheinen Object Link und Value als Configuration Item in einer Liste und es kann mit weiteren Einstellungen fortgefahren werden. Sobald der Benutzer ''Save'' drückt, wird clientseitig ein JSON-formatiertes Konfigurationsobject erstellt und an den Server gesendet.
 
 \begin{lstlisting}[language=json]
 [
@@ -276,7 +276,7 @@ Auf der linken Seite befindet sich der Navigationsbaum. Darin befinden sich säm
 \caption{Komponentenbaum}
 \end{figure}
 
-Gruppen dürfen beliebig tief verschachtelt werden, sind jedoch einzigartig und haben höchstens eine direkte Elterngruppe. Es dürfen beliebig viele Root Gruppen bestehen. Diese erscheinen in der Navigation zuoberst (ohne aufklappen zu müssen), ansosten unterscheiden sie sich nicht von ''normalen'' Gruppen. 
+Gruppen dürfen beliebig tief verschachtelt werden, sind jedoch einzigartig und haben höchstens eine direkte Elterngruppe. Es dürfen beliebig viele Root Gruppen bestehen. Diese erscheinen in der Navigation zuoberst (ohne aufklappen zu müssen), ansonsten unterscheiden sie sich nicht von ''normalen'' Gruppen. 
 
 Devices entsprechen den Blattknoten, sie dürfen keine Kindsknoten enthalten. Devices dürfen aber bei beliebig vielen Gruppen als Kindsknoten existieren, somit hat der Benutzer maximale Freiheiten beim Verwalten seiner Devices.
 
@@ -341,9 +341,9 @@ Die Deviceobjekte sind standardmässig zugeklappt. Die einzelnen Objekte sind je
 \caption{Anzeige Objektdetails}
 \end{figure}
 
-Sobald der Benutzer ein Panel anklickt, werden die darunterliegenden Attribute in einer dynamisch generierten Tabelle angezeigt. Zu Beginn sind noch keine Werte vorhanden. Es muss entweder pro Feld einzeln-, oder über den ''Read Multile''- respektive ''Read All''-Button vom Device gelesen werden.
+Sobald der Benutzer ein Panel anklickt, werden die darunterliegenden Attribute in einer dynamisch generierten Tabelle angezeigt. Zu Beginn sind noch keine Werte vorhanden. Es muss entweder pro Feld einzeln-, oder über den ''Read Multiple''- respektive ''Read All''-Button vom Device gelesen werden.
 
-Auf der rechten Seite werden Buttons für die unterstützen Aktionen angezeigt. Jede Instance ID hat in der XML-Spezifikation hinterlegt, welche Aktionen verfügbar sind.
+Auf der rechten Seite werden Buttons für die unterstützten Aktionen angezeigt. Jede Instance ID hat in der XML-Spezifikation hinterlegt, welche Aktionen verfügbar sind.
 
 \begin{figure}[H]
 \centering
@@ -438,7 +438,7 @@ public class DeviceWebController {
 
 Der Controller führt die zur Route passenden Methoden aus, fragt die Daten vom Service Layer ab, speichert diese in das Model und gibt die View mit den Daten zurück. Dabei ist die Rückgabe immer der Name der View und wird als String an das Spring Framework übergeben.
 
-Dies ist ein Beispiel der Route /groups/id. Als erster Schritt wird die Gruppe aus dem Service-Layer abgerufen und dem Model hinzugefügt. Danach gibt man im Return-Wert die gewünschte View-Datei an. Hier im Beispiel ist dies die ''groupFragment.jsp'' Datei.
+Dies ist ein Beispiel der Route /groups/id. Als erster Schritt wird die Gruppe aus dem Service-Layer abgerufen und dem Modell hinzugefügt. Danach gibt man im Return-Wert die gewünschte View-Datei an. Hier im Beispiel ist dies die ''groupFragment.jsp'' Datei.
 \begin{lstlisting}[language=java]
 @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 public String showGroupDetails(Model model, @PathVariable("id") String id) {
@@ -615,7 +615,7 @@ public class DeviceService {
 In der DeviceService-Klasse beinhaltet alle Methoden, welche für die Device-Klasse benötigt werden. Die meisten Methoden sind Getter oder führen einfache Datenbankabfragen aus. Bei vielen Methoden wird eine Datenbankabfrage gemacht und durch gewisse Checks abgesichert, bevor die Daten in der Datenbank gespeichert oder an den Controller zurückgegeben werden. Komplexe Methoden sind nur sehr wenige vorhanden. Die Methoden, welche mehr Logik beinhalten, werden hier aufgeführt.
 
 \subsubsection{Read-, Write-, Execute-Methoden}
-Damit der Controller-Layer immer über den DeviceService auf den LwM2M-Server zugreifen muss, sind diese Methoden im DeviceService hinterlegt. Die DeviceService-Klasse ist dabei für Abfragen auf Devices zuständig. Mit der ''saveMultipleValueToDevice''-Methode wird auch bei jedem Aufruf der akutelle Wert im Device abgespeichert. Hier sieht man das Read Beispiel.
+Damit der Controller-Layer immer über den DeviceService auf den LwM2M-Server zugreifen muss, sind diese Methoden im DeviceService hinterlegt. Die DeviceService-Klasse ist dabei für Abfragen auf Devices zuständig. Mit der ''saveMultipleValueToDevice''-Methode wird auch bei jedem Aufruf der akutelle Wert im Device gespeichert. Hier sieht man das Read Beispiel.
 \begin{lstlisting}[language=java]
 public ReadResponse read(String id, int objectId) {
 	Device device = getDevice(id);
@@ -782,7 +782,7 @@ Jedes Object Model, welches sich in diesem Pfad befindet, wird vom Server gelade
 \subsubsection{Create Methode}
 Für das erstellen des Servers wurde der ''LeshanServerBuilder'' verwendet. Dies ist eine einfache Möglichkeit einen Server zu erstellen und diesen danach zu starten.
 
-Hier ist die Implementation der createServer-Methode ersichtlich. Als ersten Schritt fügt man eine Adresse und einen Port hinzu. Nun können die oben erwähnten Object Models geladen und hinterlegt werden. Diese werden vom dem LwM2mModelProvider verwaltet.
+Hier ist die Implementation der createServer-Methode ersichtlich. Als ersten Schritt fügt man eine Adresse und einen Port hinzu. Nun können die oben erwähnten Object Models geladen und hinterlegt werden. Diese werden von dem LwM2mModelProvider verwaltet.
 
 Diese Angaben reichen bereits um einen Standardserver zu erstellen. Es wird noch ein RegistrationListener hinzugefügt. Der Server wird nun einem TaskExecuter übergeben, um ihn zu starten.
 
@@ -919,7 +919,7 @@ Für die Anbindung der Datenbank wurde das Spring Framework verwendet. In der de
 	<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 </bean>
 \end{lstlisting}
-Diese Angaben reichen dem Spring Framework bereits aus, um die Datenbankverbindung herzustellen. Möchte man nun den Pfad der Datenbank auf einen Cloud-Service wechseln, gibt man eifach eine andere Client-Uri an.
+Diese Angaben reichen dem Spring Framework bereits aus, um die Datenbankverbindung herzustellen. Möchte man nun den Pfad der Datenbank auf einen Cloud-Service wechseln, gibt man einfach eine andere Client-Uri an.
 
 \subsection{Repositories}
 Spring unterstützt bereits vorgefertigte Repositories. Um diese einzubinden, muss man in der ''smartmanager-servlet.xml'' einen ''mongo:repositories''-Eintrag hinterlegen. In diesem wird das Package, in welchem die Repository-Klassen und Interfaces liegen, hinterlegt.
@@ -929,7 +929,7 @@ Spring unterstützt bereits vorgefertigte Repositories. Um diese einzubinden, mu
 \newpage
 
 \subsubsection{Library Methoden}
-Pro Datanklasse, welche gespeichert werden soll, wird ein Interface erstellt. Dieses Interface extended das Interface MongoRepository. Dadurch erhält man viele Methoden, wie zum Beispiel findOne() oder save() und muss diese nicht selbst implementieren. Dieses Interface muss nach einem Schema benannt werden. Und zwar beginnt sie immer mit dem Datenklassenname und wird mit ''Repository'' erweitert. Hier sieht man ein Beispiel des DeviceRepository. Wichtig ist dabei die Annotation @Repository, damit Spring dieses Interface findet. 
+Pro Datenklasse, welche gespeichert werden soll, wird ein Interface erstellt. Dieses Interface extended das Interface MongoRepository. Dadurch erhält man viele Methoden, wie zum Beispiel findOne() oder save() und muss diese nicht selbst implementieren. Dieses Interface muss nach einem Schema benannt werden. Und zwar beginnt sie immer mit dem Datenklassenname und wird mit ''Repository'' erweitert. Hier sieht man ein Beispiel des DeviceRepository. Wichtig ist dabei die Annotation @Repository, damit Spring dieses Interface findet. 
 \begin{lstlisting}[language=java]
 @Repository
 public interface DeviceRepository extends MongoRepository<Device, String>, DeviceRepositoryCustom {
@@ -1022,7 +1022,7 @@ Hier ist ein Device ersichtlich, wie es auf der Datenbank gespeichert sein könn
 In diesem Abschnitt wird der komplette Login- und Logout-Vorgang erklärt. Zusätzlich wird die HTTPS Implementation und die Routenzugriffsrestriktionen gezeigt.
 
 \subsection{Allgemein}
-Für das Login und die HTTPS-Umleitungen wurden die zwei Libraries spring-security-crypto (v4.2.2) und spring-security-oauth2 (v2.1.0) verwendet. Bei der Crypto-Library wurde der Password-Endcoder verwendet, um alle Passwörter sicher in der Datenbank abzuspeichern. Die Oauth2-Library wurde für die HTTPS-Umleitung und für das Loginformular verwendet.
+Für das Login und die HTTPS-Umleitungen wurden die zwei Libraries spring-security-crypto (v4.2.2) und spring-security-oauth2 (v2.1.0) verwendet. Bei der Crypto-Library wurde der Password-Encoder verwendet, um alle Passwörter sicher in der Datenbank abzuspeichern. Die Oauth2-Library wurde für die HTTPS-Umleitung und für das Loginformular verwendet.
 
 \subsection{Security Einstellungen}
 Alle Einstellungen im Bereich Security werden in der Datei ''security-config.xml'' konfiguriert. Durch den Namespace ''sec'' werden die Routen abgesichert und die Login-Form definiert.
@@ -1046,10 +1046,10 @@ Man sieht das nur die /login und /logout für jeden aufrufbar ist. Alle anderen 
 </sec:http>
 \end{lstlisting}
 
-Ein Authentication-Manager wird zusätzlich zu den Routen Einstellungen benötigt. Dieser ist für die Überprüfung und Speicherung des Passworts zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Damit das Password nicht in Klartext gespeichert wird, wird ein PasswortEncoder konfiguriert. Dieser fügt das Passwort einen Salt-Wert hinzu und speichert einen Hash-Wert davon.
+Ein Authentication-Manager wird zusätzlich zu den Routen Einstellungen benötigt. Dieser ist für die Überprüfung und Speicherung des Passworts zuständig. Als Authentication-Provider gibt man seine Service-Klasse an, welche für die Logins zuständig ist. Damit das Passwort nicht in Klartext gespeichert wird, wird ein PasswortEncoder konfiguriert. Dieser fügt das Passwort einen Salt-Wert hinzu und speichert einen Hash-Wert davon.
 \newpage
 
-Hier sieht man die Umsetzung der Security Einstellungen. Als Authentication-Provider wurde der ''userService'' verwendet und als PasswordEndcoder der ''BCryptPasswordEncoder'' von dem Spring Framework.
+Hier sieht man die Umsetzung der Security Einstellungen. Als Authentication-Provider wurde der ''userService'' verwendet und als PasswordEncoder der ''BCryptPasswordEncoder'' von dem Spring Framework.
 \begin{lstlisting}[language=xml]
 <sec:authentication-manager>
 		<sec:authentication-provider
@@ -1098,7 +1098,7 @@ Für das Login wurde eine neue ''login.jsp''-Datei erstellt. Diese enthält das 
 \newpage
 
 \section{Demo LwM2M-Client}
-In diesem kurzen Abschnitt wird der eingesetzte Democlient erklärt. Dieser wird bei der Schluss-Präsentation sowie bei der Ausstellung eingesetzt.
+In diesem kurzen Abschnitt wird der eingesetzte Democlient erklärt. Dieser wird bei der Schlusspräsentation sowie bei der Ausstellung eingesetzt.
 \subsection{Allgemein}
 Wie auch der Server, ist der LwM2M-Client mit der Leshan-Library eingesetzt. Bei der Leshan-Library gibt es bereits einen Demo-Client. Dieser wurde übernommen und für die Demoumgebung angepasst.
 \subsection{Aufbau}
@@ -1177,7 +1177,7 @@ Alle für die Entwicklung verwendeten Tools und Software wird hier aufgelistet.
 \textbf{Software} & \textbf{Beschreibung} \\ 
 \hline 
 Eclipse	&	IDE für die Entwicklung des Back-End	 \\ \hline
-java	&	Programmiersprache, welche im Back-End eingsetzt worden ist	 \\ \hline
+java	&	Programmiersprache, welche im Back-End einsetzt worden ist	 \\ \hline
 Git	&	Versionskontrollsystem	 \\ \hline
 Maven	&	Softwareprojekt Management Tool	 \\ \hline
 MongoDB	&	 dokumentenorientierte NoSQL-Datenbank,	 \\ \hline
